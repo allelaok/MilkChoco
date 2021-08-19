@@ -1,4 +1,4 @@
-start, resultScene 케케케케
+start, resultScene 케케케케 zzzzzz
 ------------------
 시작화면
 
