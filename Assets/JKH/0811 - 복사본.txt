@@ -1,4 +1,4 @@
-start, resultScene
+start, resultScene 크크크크
 
 ------------------
 시작화면
