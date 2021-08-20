@@ -390,11 +390,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732682b9dbfb21145ad3be35a9e8c513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePos: {fileID: 667223798}
   firePos1: {fileID: 1770133864}
   firePos2: {fileID: 1000295506}
   firePos3: {fileID: 1381387254}
   firePos4: {fileID: 657722522}
+  firePos5: {fileID: 667223798}
   bulletFactory: {fileID: 1567225535894517873, guid: 757cac991ff6ad049b19afecdec2c527, type: 3}
   gunSpeed: 0.2
   shotGunSpeed: 1

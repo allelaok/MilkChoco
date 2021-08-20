@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class KH_PlayerFire : MonoBehaviour
 {
-    public GameObject firePos;
     public GameObject firePos1;
     public GameObject firePos2;
     public GameObject firePos3;
     public GameObject firePos4;
+    public GameObject firePos5;
     public GameObject bulletFactory;
-    public float gunSpeed = 0.2f; //일반총 연사속도
-    public float shotGunSpeed = 1f; //샷건 연사속도
+    public float gunDuration = 0.2f; //일반총 연사속도
+    public float shotGunDuration = 1f; //샷건 연사속도
     public float currTime = 0; //발사시간
     // Start is called before the first frame update
     void Start()
@@ -31,10 +31,10 @@ public class KH_PlayerFire : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             currTime += Time.deltaTime;
-            if (gunSpeed <= currTime)
+            if (gunDuration <= currTime)
             {
                 GameObject bullet = Instantiate(bulletFactory);
-                bullet.transform.position = firePos.transform.position;
+                bullet.transform.position = firePos1.transform.position; //이거 방향 바꾸어야함
                 Destroy(bullet, 3);
                 currTime = 0;
             }
@@ -46,35 +46,39 @@ public class KH_PlayerFire : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             currTime += Time.deltaTime;
-            if (shotGunSpeed<= currTime)
+            if (shotGunDuration <= currTime)
             {
-                GameObject bullet1 = Instantiate(bulletFactory);
-                GameObject bullet2 = Instantiate(bulletFactory);
-                GameObject bullet3 = Instantiate(bulletFactory);
-                GameObject bullet4 = Instantiate(bulletFactory);
-                GameObject bullet5 = Instantiate(bulletFactory);
-                bullet1.transform.position = firePos.transform.position;
-                bullet2.transform.position = firePos1.transform.position;
-                bullet3.transform.position = firePos2.transform.position;
-                bullet4.transform.position = firePos3.transform.position;
-                bullet5.transform.position = firePos4.transform.position;
-                bullet1.transform.rotation = firePos.transform.rotation;
-                bullet2.transform.rotation = firePos1.transform.rotation;
-                bullet3.transform.rotation = firePos2.transform.rotation;
-                bullet4.transform.rotation = firePos3.transform.rotation;
-                bullet5.transform.rotation = firePos4.transform.rotation;
-                currTime = 0;
-                Destroy(bullet1, 3);
-                Destroy(bullet2, 3);
-                Destroy(bullet3, 3);
-                Destroy(bullet4, 3);
-                Destroy(bullet5, 3);
+                var bList = new List<GameObject>();
+                bList.Add(Instantiate(bulletFactory));
+                bList.Add(Instantiate(bulletFactory));
+                bList.Add(Instantiate(bulletFactory));
+                bList.Add(Instantiate(bulletFactory));
+                bList.Add(Instantiate(bulletFactory));
 
-                //반복문이 왜 생각이 안날까 ^_^
-                //for (int i=0; i<5; i++)
-                //{
-                //    GameObject 
-                //}
+                var pos = new List<Vector3>();
+                pos.Add(firePos1.transform.position);
+                pos.Add(firePos2.transform.position);
+                pos.Add(firePos3.transform.position);
+                pos.Add(firePos4.transform.position);
+                pos.Add(firePos5.transform.position);
+
+                var rot = new List<Quaternion>();
+                rot.Add(firePos1.transform.rotation);
+                rot.Add(firePos2.transform.rotation);
+                rot.Add(firePos3.transform.rotation);
+                rot.Add(firePos4.transform.rotation);
+                rot.Add(firePos5.transform.rotation);
+                currTime = 0;
+
+
+                //반복문이 왜 생각이 안날까 ^_ ^
+                for (int i = 0; i < 5; i++)
+                {
+                    var b = bList[i];
+                    b.transform.position = pos[i];
+                    b.transform.rotation = rot[i];
+                    Destroy(b, 3f);
+                }
 
 
             }
