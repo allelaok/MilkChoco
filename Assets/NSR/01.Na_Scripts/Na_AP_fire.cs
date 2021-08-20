@@ -6,7 +6,7 @@ using UnityEngine;
 public class Na_AP_fire : MonoBehaviour
 {
     public GameObject bulletF;
-    public GameObject aimingPoint;
+    public Transform aimingPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class Na_AP_fire : MonoBehaviour
         {
             GameObject bullet = Instantiate(bulletF);
             bullet.transform.forward = aimingPoint.transform.forward;
-            bullet.transform.position = aimingPoint.transform.position;
+            bullet.transform.position = aimingPoint.position;
         }
         
     }
