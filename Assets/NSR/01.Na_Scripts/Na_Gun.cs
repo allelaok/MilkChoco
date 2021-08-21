@@ -10,14 +10,15 @@ public class Na_Gun : MonoBehaviour
     Vector3 direction;
 
     public float firePower = 50f;
+    public float fireTime = 0.1f;
     float currTime;
-    public float fireTime = 0.5f;
 
-    public AudioClip audioClip;
+    public GameObject LineF;
 
     // Start is called before the first frame update
     void Start()
     {
+        currTime = fireTime;
 
     }
 
@@ -32,19 +33,38 @@ public class Na_Gun : MonoBehaviour
         RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo))
         {
+            LineRenderer lr = null;
             if (hitInfo.transform.gameObject.tag == "Enemy")
             {
+
+                
+
                 currTime += Time.deltaTime;
                 if(currTime > fireTime)
                 {
-                    print(hitInfo.transform.gameObject.name);
+                    GameObject line = Instantiate(LineF);
+                    lr = line.GetComponent<LineRenderer>();
+                    lr.SetPosition(0, transform.position);
+                    lr.SetPosition(1, hitInfo.point);
+                    Destroy(line, 0.1f);
+
                     AudioSource audio = GetComponent<AudioSource>();
                     audio.Play();
+
                     currTime = 0;
                 }
-                
+
             }
+            else
+            {
+
+                currTime = fireTime;
+            }
+            if(lr != null)
+            lr.SetPosition(1, hitInfo.point);
         }
 
     }
+
+   
 }
