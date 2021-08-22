@@ -226,7 +226,7 @@ MonoBehaviour:
   aimingPoint: {fileID: 141306753}
   firePower: 50
   fireTime: 0.15
-  audioClip: {fileID: 0}
+  LineF: {fileID: 0}
 --- !u!82 &816828307
 AudioSource:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 241846465}
   - component: {fileID: 241846466}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Na_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
