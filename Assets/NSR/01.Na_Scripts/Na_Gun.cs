@@ -6,7 +6,7 @@ public class Na_Gun : MonoBehaviour
 {
     public Transform aimingPoint;   //발사되는 지점
 
-    public float firePower = 50f;   //총의 세기
+    public float firePower = 10f;   //총의 세기
     public float fireTime = 0.1f;   // 연사속도
     float currTime;
 
@@ -47,6 +47,9 @@ public class Na_Gun : MonoBehaviour
 
                     AudioSource audio = GetComponent<AudioSource>(); //오디오 소스를 가져와
                     audio.Play();                                    //플레이
+
+                    hitInfo.transform.gameObject.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+                  
 
                     currTime = 0;      //현재시간은 0으로 
                 }
