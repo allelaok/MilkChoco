@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KH_Bullet : MonoBehaviour
 {
-    public float speed = 6.0f;
+    public float speed = 15.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +14,7 @@ public class KH_Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.forward * speed * Time.deltaTime;
+        transform.position += transform.forward * speed * Time.deltaTime;
+        //Destroy(gameObject, 1.5f);
     }
 }
