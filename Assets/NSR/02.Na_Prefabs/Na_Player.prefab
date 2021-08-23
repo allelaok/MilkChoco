@@ -224,9 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimingPoint: {fileID: 141306753}
-  firePower: 50
+  firePower: 10
   fireTime: 0.15
-  LineF: {fileID: 0}
+  LineF: {fileID: 9000005372274157056, guid: 75c98663713912a4d95aaf48eef709dd, type: 3}
 --- !u!82 &816828307
 AudioSource:
   m_ObjectHideFlags: 0
