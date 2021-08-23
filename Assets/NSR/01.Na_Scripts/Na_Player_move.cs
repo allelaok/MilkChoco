@@ -49,7 +49,7 @@ public class Na_Player_move : MonoBehaviour
             jumpCount = 0;
         }
 
-        if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(1))
+        if (Input.GetButtonDown("Jump"))
         {
             if (jumpCount < MaxJumpCount)
             {
