@@ -6,22 +6,28 @@ using UnityEngine;
 public class KH_EnemyFire : MonoBehaviour
 {
     float currTime;
-    float gunDuration = 0.2f;
+    float gunDuration = 0.2f; //총 공속
+    float EnemySpeed = 4.0f;
+    float attackRange = 15.0f;
     public GameObject bulletFactory;
     public GameObject firePos;
     public GameObject target;
-    public float rotSpeed = 5;
+    public GameObject pos1;
+    public GameObject pos2;
+    public float rotSpeed = 2;
+    
     //CharacterController cc; //이동하는거 안씀 아직.ㅎ
     // Start is called before the first frame update
 
     //열거형
     enum EnemyState
     {
-        Idle,
-        Detect,
-        Attack,
-        Damage,
-        Die
+        Idle, //평시 -> Move
+        Move, //평소이동, 범위안에들어올떄 움직이며 감시모드
+        Detect, //감시모드 
+        Attack, //공격모드
+        Damage, //피격 당했을때
+        Die //죽는다
     }
     EnemyState m_state= EnemyState.Idle;
     void Start()
@@ -40,6 +46,9 @@ public class KH_EnemyFire : MonoBehaviour
             case EnemyState.Idle:
                 Idle();
                 break;
+            case EnemyState.Move:
+                Move();
+                break;
             case EnemyState.Detect:
                 Detect();
                 break;
@@ -55,14 +64,66 @@ public class KH_EnemyFire : MonoBehaviour
         }
     }
 
+    public float IdleDelayTime = 2.0f;    
+
     private void Idle()
     {
-       
+        currTime += Time.deltaTime;
+        if (currTime > IdleDelayTime)
+        {
+            m_state = EnemyState.Move;
+            currTime = 0;
+        }
+    }
+
+    private void Move()
+    {
+        //일정 좌표 두개를 왔다리 갔다리 한다
+
+        //Pos1,2로가는 방향 및 정규화
+        Vector3 EnemyPos = transform.position; //내위치
+        Vector3 pos1Pos = pos1.transform.position;
+        
+        Vector3 pos2Pos = pos2.transform.position;
+        Vector3 dirToPos1 = pos1.transform.position - transform.position; //pos1을 바라보는 방향
+        Vector3 dirToPos2 = pos2.transform.position - transform.position;
+        dirToPos1.Normalize();
+        dirToPos2.Normalize();
+        //enemy가 pos1로 향한다
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirToPos1),
+                rotSpeed * Time.deltaTime); //몸을돌린다
+        transform.position += dirToPos1 * EnemySpeed * Time.deltaTime; //pos1방향으로이동한다
+        //몸돌리는데 걸리는 시간??????/
+
+        //만약 enemy의 위치가 pos1이라면
+
+        if (transform.position== pos1.transform.position)
+        {
+            //캐릭터의 몸을 pos2방향으로 몸을 돌린다 
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirToPos2),
+                rotSpeed * Time.deltaTime);
+            //캐릭터가 pos2로 향한다
+            transform.position += dirToPos2 * EnemySpeed * Time.deltaTime;
+            if (transform.position == pos2.transform.position)
+            {
+                return;  //이거 뭐써야함???? 계속 와리가리쳐야하는데
+            }
+        }
+
+        //만약 player가 범위안으로 들어온다면?        
+        Vector3 dir = target.transform.position - transform.position;
+        float distance = dir.magnitude;
+        if (distance < attackRange)
+        {
+            //Detect로 넘어간다
+            m_state = EnemyState.Detect;
+        }
     }
 
     private void Detect()
     {
-        throw new NotImplementedException();
+        print("Detect");
     }
 
     private void Attack()
