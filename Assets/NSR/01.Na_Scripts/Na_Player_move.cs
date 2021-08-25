@@ -34,14 +34,14 @@ public class Na_Player_move : MonoBehaviour
         dir.Normalize();
 
 
-        Jump();
+        Jump(out dir.y);
 
         cc.Move(dir * speed * Time.deltaTime);
 
     }
 
 
-    void Jump()
+    void Jump(out float dirY)
     {
         if (cc.isGrounded)
         {
@@ -59,7 +59,7 @@ public class Na_Player_move : MonoBehaviour
 
 
         }
-        dir.y = yVelocity;
+        dirY = yVelocity;
         yVelocity += gravity * Time.deltaTime;
 
 
