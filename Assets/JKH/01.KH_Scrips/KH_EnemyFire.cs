@@ -15,6 +15,9 @@ public class KH_EnemyFire : MonoBehaviour
     public GameObject pos1;
     public GameObject pos2;
     public float rotSpeed = 2;
+    public Transform aimingPoint; //발사포인트
+    public float fireTime = 0.1f; //연사속도
+    public GameObject LineF; //총알발사라인(임시)
     
     //CharacterController cc; //이동하는거 안씀 아직.ㅎ
     // Start is called before the first frame update
@@ -120,10 +123,23 @@ public class KH_EnemyFire : MonoBehaviour
             m_state = EnemyState.Detect;
         }
     }
-
+    //임시
+    int layer = 1 << LayerMask.NameToLayer("");
     private void Detect()
     {
         print("Detect");
+        Ray ray = new Ray();    //레이 생성
+        ray.origin = aimingPoint.transform.position;    //레이 위치 
+        ray.direction = aimingPoint.transform.forward;  //레이 방향
+        RaycastHit hitInfo; //레이닿은변수 가져오기
+                            //Ray에 충돌 하고 싶은 Layer 나중에 적기
+
+        //Ray를 발사시켜서 어딘가에 부딪혔다면
+        if (Physics.Raycast(ray, out hitInfo, 100, layer))
+        {
+
+        }
+
     }
 
     private void Attack()
