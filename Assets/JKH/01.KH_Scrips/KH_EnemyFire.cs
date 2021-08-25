@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,17 @@ public class KH_EnemyFire : MonoBehaviour
     public float rotSpeed = 5;
     //CharacterController cc; //이동하는거 안씀 아직.ㅎ
     // Start is called before the first frame update
+
+    //열거형
+    enum EnemyState
+    {
+        Idle,
+        Detect,
+        Attack,
+        Damage,
+        Die
+    }
+    EnemyState m_state= EnemyState.Idle;
     void Start()
     {
         //cc = GetComponent<CharacterController>();
@@ -20,7 +32,52 @@ public class KH_EnemyFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyShot();
+        //enemyShot();
+        print("현재 상태: " + m_state);
+
+        switch (m_state)
+        {
+            case EnemyState.Idle:
+                Idle();
+                break;
+            case EnemyState.Detect:
+                Detect();
+                break;
+            case EnemyState.Attack:
+                Attack();
+                break;
+            case EnemyState.Damage:
+                Damage();
+                break;
+            case EnemyState.Die:
+                Die();
+                break;
+        }
+    }
+
+    private void Idle()
+    {
+       
+    }
+
+    private void Detect()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Attack()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Damage()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Die()
+    {
+        throw new NotImplementedException();
     }
 
     void enemyShot()
@@ -74,18 +131,6 @@ public class KH_EnemyFire : MonoBehaviour
         //만약 일정범위 밖에 있다면 
         //원상태(정찰모드)로 바꾼다
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
