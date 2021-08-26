@@ -17,7 +17,7 @@ public class KH_PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector3 dirH = transform.right * h;
-        Vector3 dirV = transform.right * v;
+        Vector3 dirV = transform.forward * v;
         Vector3 dir= dirH + dirV;
         dir.Normalize();
         transform.position += dir * speed * Time.deltaTime;
