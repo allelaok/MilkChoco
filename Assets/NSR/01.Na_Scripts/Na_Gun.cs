@@ -4,40 +4,33 @@ using UnityEngine;
 
 public class Na_Gun : MonoBehaviour
 {
-    // �ѽ��� �ʿ� �Ӽ�
-    public Transform aimingPoint;   // ���� �߻��Ǵ� ��ġ -> ī�޶�
+    
+    public Transform aimingPoint;   
 
-    public float firePower = 10f;   // ���� ����
-    public float fireTime = 0.1f;   // ���� �ӵ�
+    public float firePower = 10f;   
+    public float fireTime = 0.1f;   
     float currTime;
-    public float crossroad = 30;    // ���Ÿ�
-    public float reboundPower = 0.2f;   // �ݵ� ����
-    float startReboundPower;
-    Vector3 aimPos;
-    Vector3 startAimPos;
-    public float weight = 1;    // �� ����
+    public float crossroad = 30;    
+    public float reboundPower = 0.2f;   
+    public float reboundTime = 30f;
+    public float weight = 1;   
 
-    public GameObject LineF;    // �Ѿ� ����
+    public GameObject LineF;   
 
-    // ������ �ʿ� �Ӽ�
-    public int maxFire = 20;    // źâ ũ��
-    int fireCount;  // �Ѿ� ����
-    public float reloadTime = 3;    // ������ �ð�
+
+    public int maxFire = 20;    
+    int fireCount; 
+    public float reloadTime = 3;   
     float reloadCurrTime;
 
-    public float scope = 30; // ���ذ�
+    public float scope = 50; 
 
 
 
     void Start()
     {
-        currTime = fireTime;    // �����ð��� �߻��ð����� �ʱ�ȭ -> ���ʹ̰� ���̿� �������� �ٷ� ���� ����
-        fireCount = maxFire;    // �Ѿ˰��� źâũ���� �ʱ�ȭ
-
-        startAimPos = aimingPoint.localPosition;
-        aimPos = startAimPos;
-
-        startReboundPower = reboundPower;
+        currTime = fireTime;   
+        fireCount = maxFire;  
 
         Na_Player_move playerMove = GetComponentInParent<Na_Player_move>();
         playerMove.speed -= weight;
@@ -48,21 +41,22 @@ public class Na_Gun : MonoBehaviour
         if (fireCount > 0)
         {
             Fire();
-
+            
         }
         else
         {
             Reload();
         }
 
-        Rebound(); // �ݵ����� ���� ���� ��ġ��
 
+        Rebound();
 
-        Scope();    // ���ذ�
+        Scope();
+
 
     }
 
-    // �ѽ���
+
     void Fire()
     {
         Ray ray = new Ray();
@@ -82,45 +76,44 @@ public class Na_Gun : MonoBehaviour
                 currTime += Time.deltaTime;
                 if (currTime > fireTime)
                 {
-                    GameObject line = Instantiate(LineF);   // �Ѿ˱���
+                    GameObject line = Instantiate(LineF);   
                     lr = line.GetComponent<LineRenderer>();
-                    lr.SetPosition(0, transform.position);  // ������ ������
-                    lr.SetPosition(1, hitInfo.point);   // ������ ����
+                    lr.SetPosition(0, transform.position); 
+                    lr.SetPosition(1, hitInfo.point);  
                     Destroy(line, 0.1f);
 
-                    AudioSource audio = GetComponent<AudioSource>();  // �ѼҸ�
+                    AudioSource audio = GetComponent<AudioSource>();  
                     audio.Play();
 
-                    hitInfo.transform.gameObject.GetComponent<Na_Enemy_hp>().Damaged(firePower); // �� hp ����
+                    hitInfo.transform.gameObject.GetComponent<Na_Enemy_hp>().Damaged(firePower);
 
-                    aimingPoint.Translate(new Vector3(-1,1,0) * reboundPower); // ī�޶� �ݵ�
+                    aimingPoint.Translate(new Vector3(-1,1,0) * reboundPower); 
 
 
-                    fireCount--; // źâ�� �Ѿ� ����
+                    fireCount--;
 
                     currTime = 0;
                 }
 
             }
-
             else
             {
                 currTime = fireTime;
             }
 
             if (lr != null)
-                lr.SetPosition(1, hitInfo.point);   // �Ѿ� ���� ���� ���� ����
+                lr.SetPosition(1, hitInfo.point);   
         }
     }
 
-    // �ݵ� �� ���ڸ���
+
     void Rebound()
     {
-        aimingPoint.localPosition = Vector3.Lerp(aimingPoint.localPosition, aimPos, Time.deltaTime * 10.0f); //������ ��ġ�� Lerp�� õõ�� �ǵ�����.
+        aimingPoint.localPosition = Vector3.Lerp(aimingPoint.localPosition, new Vector3(0, 6, -15), Time.deltaTime * reboundTime); 
     }
 
 
-    // ������
+
     void Reload()
     {
         reloadCurrTime += Time.deltaTime;
@@ -132,21 +125,21 @@ public class Na_Gun : MonoBehaviour
         }
     }
 
-    // ���ذ�
+
     void Scope()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            aimingPoint.localPosition = startAimPos + Vector3.forward * scope;
-            aimPos = startAimPos + Vector3.forward * scope;
-            reboundPower = startReboundPower + scope * 0.01f;
+            Camera.main.fieldOfView -= scope;
+            reboundTime += scope;
+            reboundPower += scope * 0.05f;
         }
 
         if (Input.GetMouseButtonUp(1))
         {
-            aimingPoint.localPosition = startAimPos;
-            aimPos = startAimPos;
-            reboundPower = startReboundPower;
+            Camera.main.fieldOfView += scope;
+            reboundTime -= scope;
+            reboundPower -= scope * 0.05f;
         }
     }
 
