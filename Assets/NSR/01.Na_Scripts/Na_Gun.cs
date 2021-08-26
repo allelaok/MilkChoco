@@ -100,5 +100,10 @@ public class Na_Gun : MonoBehaviour
         }
     }
 
+    void Rebound()
+    {
+
+    }
+
 
 }

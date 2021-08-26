@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &303713177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 159615938, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+  m_PrefabInstance: {fileID: 653485386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &638748662
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +236,10 @@ PrefabInstance:
       propertyPath: firePower
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 816828303, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+      propertyPath: aimingPoint
+      value: 
+      objectReference: {fileID: 303713177}
     - target: {fileID: 5461052779654786451, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: m_Name
       value: Player
