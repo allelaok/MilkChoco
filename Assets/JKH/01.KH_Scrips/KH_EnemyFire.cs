@@ -19,6 +19,7 @@ public class KH_EnemyFire : MonoBehaviour
     public float fireTime = 0.1f; //연사속도
     public GameObject LineF; //총알발사라인(임시)
     
+    
     //CharacterController cc; //이동하는거 안씀 아직.ㅎ
     // Start is called before the first frame update
 
@@ -79,40 +80,63 @@ public class KH_EnemyFire : MonoBehaviour
         }
     }
 
+    public Transform wayPoint1;
+    public Transform wayPoint2;
+    public Transform currentWayPoint;
     private void Move()
     {
         //일정 좌표 두개를 왔다리 갔다리 한다
 
         //Pos1,2로가는 방향 및 정규화
-        Vector3 EnemyPos = transform.position; //내위치
-        Vector3 pos1Pos = pos1.transform.position;
-        
-        Vector3 pos2Pos = pos2.transform.position;
-        Vector3 dirToPos1 = pos1.transform.position - transform.position; //pos1을 바라보는 방향
-        Vector3 dirToPos2 = pos2.transform.position - transform.position;
-        dirToPos1.Normalize();
-        dirToPos2.Normalize();
-        //enemy가 pos1로 향한다
+        //Vector3 EnemyPos = transform.position; //내위치        
+        //Vector3 dirToPos1 = pos1.transform.position - transform.position; //pos1을 바라보는 방향
+        //Vector3 dirToPos2 = pos2.transform.position - transform.position;
+        //float EnemyPos1Distance = dirToPos1.magnitude;
+        //float EnemyPos2Distance = dirToPos2.magnitude;
+        //float Distance = EnemyPos1Distance - EnemyPos2Distance;
+        //float DistanceAbs = Mathf.Abs(Distance);
+        //dirToPos1.Normalize();
+        //dirToPos2.Normalize();
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirToPos1),
-                rotSpeed * Time.deltaTime); //몸을돌린다
-        transform.position += dirToPos1 * EnemySpeed * Time.deltaTime; //pos1방향으로이동한다
-        //몸돌리는데 걸리는 시간??????/
+        //1. 첫번째 웨이포인트와 오브젝트의 거리를 계산한다
+        //2. 거리가 일정이하가 되면 웨이포인트를 전환한다.
+        //3. 오브젝트의 방향을 돌리고 두번째 웨이포인트를 향해 이동한다.
+        //4. 거리가 일정 이하가 되면 웨이포인트를 전환한다.
 
-        //만약 enemy의 위치가 pos1이라면
-
-        if (transform.position== pos1.transform.position)
+        var distance2 = Vector3.Distance(gameObject.transform.position, currentWayPoint.position);
+        Debug.Log(distance2);
+        if (Vector3.Distance(gameObject.transform.position, wayPoint1.position) <= 1f)
         {
-            //캐릭터의 몸을 pos2방향으로 몸을 돌린다 
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirToPos2),
-                rotSpeed * Time.deltaTime);
-            //캐릭터가 pos2로 향한다
-            transform.position += dirToPos2 * EnemySpeed * Time.deltaTime;
-            if (transform.position == pos2.transform.position)
-            {
-                
-            }
+            Debug.Log("2");
+            currentWayPoint = wayPoint2;
         }
+
+        if(Vector3.Distance(gameObject.transform.position, wayPoint2.position) <= 1f)
+        {
+            Debug.Log("1");
+            currentWayPoint = wayPoint1;
+        }
+
+        var wayPointDir = currentWayPoint.transform.position - transform.position; //gameObject.transform.position
+        wayPointDir.Normalize();
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(wayPointDir), rotSpeed * Time.deltaTime); //pos1쪽으로 몸을돌린다
+        transform.position += wayPointDir * EnemySpeed * Time.deltaTime; //pos1방향으로이동한다\
+
+        //if (EnemyPos1Distance > EnemyPos2Distance)
+        //{
+        //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirToPos1),
+        //        rotSpeed * Time.deltaTime); //pos1쪽으로 몸을돌린다
+        //    transform.position += dirToPos1 * EnemySpeed * Time.deltaTime; //pos1방향으로이동한다
+        //}
+        //else
+        //{
+        //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirToPos2),
+        //        rotSpeed * Time.deltaTime);
+        //    transform.position += dirToPos2 * EnemySpeed * Time.deltaTime;
+
+        //}
+
 
         //만약 player가 범위안으로 들어온다면?        
         Vector3 dir = target.transform.position - transform.position;
@@ -126,25 +150,35 @@ public class KH_EnemyFire : MonoBehaviour
     //임시
     //int layer = 1 << LayerMask.NameToLayer("");
     private void Detect()
+
     {
-        //print("Detect");
-        //Ray ray = new Ray();    //레이 생성
-        //ray.origin = aimingPoint.transform.position;    //레이 위치 
-        //ray.direction = aimingPoint.transform.forward;  //레이 방향
-        //RaycastHit hitInfo; //레이닿은변수 가져오기
-        //                    //Ray에 충돌 하고 싶은 Layer 나중에 적기
+        print("Detect");
+        Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
+            rotSpeed * Time.deltaTime); //몸을돌린다
+        Ray ray = new Ray();    //레이 생성
+        ray.origin = aimingPoint.transform.position;    //레이 위치 
+        ray.direction = aimingPoint.transform.forward;  //레이 방향
+        RaycastHit hitInfo; //레이닿은변수 가져오기
+        if (Physics.Raycast(ray, out hitInfo, 100))
+        {
+            if (hitInfo.transform.gameObject.tag == "Player")
+            {
+                m_state = EnemyState.Attack;
+            }
+        }
 
         ////Ray를 발사시켜서 어딘가에 부딪혔다면
         //if (Physics.Raycast(ray, out hitInfo, 100, layer))
         //{
 
-        //}
+            //}
 
     }
 
     private void Attack()
     {
-        throw new NotImplementedException();
+        print("공격모드");
     }
 
     private void Damage()
