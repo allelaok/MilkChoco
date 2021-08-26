@@ -229,12 +229,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 816828303, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-      propertyPath: crossroad
-      value: 30
+      propertyPath: scope
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 816828303, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-      propertyPath: firePower
-      value: 1
+      propertyPath: weight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 816828303, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+      propertyPath: crossroad
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 816828303, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: aimingPoint
@@ -381,15 +385,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8812584344871575897, guid: 74f896e3616cd22469cca3cbdf813387, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8812584344871575897, guid: 74f896e3616cd22469cca3cbdf813387, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8812584344871575897, guid: 74f896e3616cd22469cca3cbdf813387, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 38.9
       objectReference: {fileID: 0}
     - target: {fileID: 8812584344871575897, guid: 74f896e3616cd22469cca3cbdf813387, type: 3}
       propertyPath: m_LocalRotation.w
@@ -510,7 +514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541431630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 20}
   m_LocalScale: {x: 50, y: 1, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
@@ -667,6 +671,18 @@ PrefabInstance:
     - target: {fileID: 5294752962024616661, guid: a003c2e2917a04a47b036a98529c587b, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294752963208091357, guid: a003c2e2917a04a47b036a98529c587b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294752963208091357, guid: a003c2e2917a04a47b036a98529c587b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294752963208091357, guid: a003c2e2917a04a47b036a98529c587b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a003c2e2917a04a47b036a98529c587b, type: 3}
