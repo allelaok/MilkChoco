@@ -104,7 +104,7 @@ public class KH_EnemyFire : MonoBehaviour
         //4. 거리가 일정 이하가 되면 웨이포인트를 전환한다.
 
         var distance2 = Vector3.Distance(gameObject.transform.position, currentWayPoint.position);
-        Debug.Log(distance2);
+        //Debug.Log(distance2);
         if (Vector3.Distance(gameObject.transform.position, wayPoint1.position) <= 1f)
         {
             Debug.Log("2");
