@@ -24,10 +24,13 @@ public class SM_Enemy_A : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
+    public Vector3 rand_dir;
     // Start is called before the first frame update
     void Start()
     {
         cc = GetComponent<CharacterController>();
+    //    rand_dir.x = Random.Range(-1.0f, 1.0f);
+    //    rand_dir.y = Random.Range(-1.0f, 1.0f);
     }
 
     // Update is called once per frame
@@ -67,21 +70,20 @@ public class SM_Enemy_A : MonoBehaviour
     public float rotSpeed = 5;
 
     //필요속성 : 공격범위
-    public float attackRange = 2;
+    
 
 
 
-    public float idleDelayTime = 2;
+    public float detectRange;
     float currentTime;
     private void Idle()
     {
-        // 일정 시간이 지나면 상태를 Move로 전환
-        currentTime += Time.deltaTime;
-       
-        if (currentTime > idleDelayTime)
+        m_state = EnemyState.Idle;
+
+        float distance = Vector3.Distance(target.transform.position, transform.position);
+        if (distance < detectRange)
         {
-            m_state = EnemyState.Move;
-            currentTime = 0;
+           m_state = EnemyState.Move;
         }
     }
 
@@ -101,30 +103,31 @@ public class SM_Enemy_A : MonoBehaviour
 
         //공격범위 안에 들어가면 상태를 공격으로 전환
         float distance = Vector3.Distance(target.transform.position, transform.position);
-        if (attackRange > distance)
+        if (distance < attackRange)
         {
             m_state = EnemyState.Attack;
         }
     }
 
     public float attackDelayTime = 2;
+    public float attackRange = 2;
+   
 
     private void Attack()
     {
 
         // 일정시간에 한번씩 공격
         currentTime += Time.deltaTime;
-        
-        if (currentTime > attackDelayTime)
+
+        if (currentTime > attackDelayTime)
         {
-            
-            print("Attack");
-            currentTime = 0;
+            anim.SetBool("isAttack", true);
+
         }
 
         // 타겟이 공격 범위를 벗어나면 상태를 Move로 전환
         float distance = Vector3.Distance(target.transform.position, transform.position);
-        if (distance > attackRange)
+        if (distance > attackRange + 2)
         {
             m_state = EnemyState.Move;
         }
