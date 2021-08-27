@@ -168,11 +168,19 @@ public class KH_EnemyFire : MonoBehaviour
             }
         }
 
+        Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
+        float distance = dir.magnitude; //거리 계산
+        if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
+        {
+            
+            m_state = EnemyState.Move; //이러면 Move로 넘어간다
+        }
+
         ////Ray를 발사시켜서 어딘가에 부딪혔다면
         //if (Physics.Raycast(ray, out hitInfo, 100, layer))
         //{
 
-            //}
+        //}
 
     }
 
