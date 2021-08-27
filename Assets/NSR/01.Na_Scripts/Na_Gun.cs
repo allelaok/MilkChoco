@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Na_Gun : MonoBehaviour
 {
@@ -23,7 +24,9 @@ public class Na_Gun : MonoBehaviour
     public float reloadTime = 3;   
     float reloadCurrTime;
 
-    public float scope = 50; 
+    public float scope = 50;
+
+    Text bulletCountUI;
 
 
 
@@ -34,6 +37,9 @@ public class Na_Gun : MonoBehaviour
 
         Na_Player_move playerMove = GetComponentInParent<Na_Player_move>();
         playerMove.speed -= weight;
+
+        bulletCountUI = GameObject.Find("BulletCount").GetComponent<Text>();
+
     }
 
     void Update()
@@ -41,10 +47,11 @@ public class Na_Gun : MonoBehaviour
         if (fireCount > 0)
         {
             Fire();
-            
+            bulletCountUI.text = "총알개수 : " + fireCount;
         }
         else
         {
+            bulletCountUI.text = "장전중...";
             Reload();
         }
 
@@ -53,7 +60,8 @@ public class Na_Gun : MonoBehaviour
 
         Scope();
 
-
+        
+       
     }
 
 
