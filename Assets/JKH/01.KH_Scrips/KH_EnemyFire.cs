@@ -17,7 +17,7 @@ public class KH_EnemyFire : MonoBehaviour
     public float rotSpeed = 2;
     public Transform aimingPoint; //발사포인트
     public float fireTime = 0.1f; //연사속도
-    public GameObject LineF; //총알발사라인(임시)
+    public GameObject LineRay; //총알발사라인(임시)
     
     
     //CharacterController cc; //이동하는거 안씀 아직.ㅎ
@@ -153,7 +153,7 @@ public class KH_EnemyFire : MonoBehaviour
 
     {
         print("Detect");
-        Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향
+        Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
             rotSpeed * Time.deltaTime); //몸을돌린다
         Ray ray = new Ray();    //레이 생성
@@ -168,17 +168,66 @@ public class KH_EnemyFire : MonoBehaviour
             }
         }
 
+        Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
+        float distance = dir.magnitude; //거리 계산
+        if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
+        {
+            
+            m_state = EnemyState.Move; //이러면 Move로 넘어간다
+        }
+
         ////Ray를 발사시켜서 어딘가에 부딪혔다면
         //if (Physics.Raycast(ray, out hitInfo, 100, layer))
         //{
 
-            //}
+        //}
 
     }
 
     private void Attack()
     {
-        print("공격모드");
+        Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
+            rotSpeed * Time.deltaTime); //몸을돌린다
+
+        Ray ray = new Ray();
+        ray.origin = aimingPoint.position;
+        ray.direction = aimingPoint.forward;
+
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo, 100))
+        {
+            LineRenderer lr = null;
+
+
+            if (hitInfo.transform.gameObject.tag == "Player")
+            {
+
+                currTime += Time.deltaTime;
+                if (currTime > fireTime)
+                {
+                    GameObject line = Instantiate(LineRay);  
+                    lr = line.GetComponent<LineRenderer>();
+                    lr.SetPosition(0, transform.position);  
+                    lr.SetPosition(1, hitInfo.point);   
+                    Destroy(line, 0.1f);                              
+                    currTime = 0;
+                }
+
+            }
+
+            else
+            {
+                currTime = fireTime;
+            }
+
+            if (lr != null)
+                lr.SetPosition(1, hitInfo.point);   
+        }
+
+
+
     }
 
     private void Damage()
