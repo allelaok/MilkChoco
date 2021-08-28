@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class KH_PlayerMove : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public GameObject milkPos;
+    public float speed = 10.0f;
+    public float speedUP=20;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,12 @@ public class KH_PlayerMove : MonoBehaviour
         dir.Normalize();
         transform.position += dir * speed * Time.deltaTime;
 
+        Vector3 dis = transform.position - milkPos.transform.position;
+        float distance = dis.magnitude;
+        if (distance < speedUP)
+        {
+            transform.position += dir * speed* 2 * Time.deltaTime;
+        }
 
     }
 }
