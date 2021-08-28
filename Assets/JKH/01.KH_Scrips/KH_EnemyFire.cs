@@ -211,7 +211,8 @@ public class KH_EnemyFire : MonoBehaviour
                     lr = line.GetComponent<LineRenderer>();
                     lr.SetPosition(0, transform.position);  
                     lr.SetPosition(1, hitInfo.point);   
-                    Destroy(line, 0.1f);                              
+                    Destroy(line, 0.1f);
+                    hitInfo.transform.gameObject.GetComponent<KH_Player_hp>().Damaged(10);
                     currTime = 0;
                 }
 
