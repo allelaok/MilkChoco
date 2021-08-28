@@ -9,7 +9,7 @@ public class Na_Player_move : MonoBehaviour
 
     public float jumpPower = 3f;
     float yVelocity;
-    public float gravity = -7f;
+    public float gravity = 7f;
     Vector3 dir;
 
     int jumpCount;
@@ -60,7 +60,7 @@ public class Na_Player_move : MonoBehaviour
 
         }
         dirY = yVelocity;
-        yVelocity += gravity * Time.deltaTime;
+        yVelocity -= gravity * Time.deltaTime;
 
 
     }

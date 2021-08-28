@@ -109,6 +109,7 @@ public class Na_Gun : MonoBehaviour
                 currTime = fireTime;
             }
 
+
             if (lr != null)
                 lr.SetPosition(1, hitInfo.point);   
         }
