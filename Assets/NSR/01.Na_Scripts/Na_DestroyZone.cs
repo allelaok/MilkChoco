@@ -33,7 +33,8 @@ public class Na_DestroyZone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        enemyCamera.SetActive(false);
+        player.SetActive(true);
     }
 
     // Update is called once per frame
