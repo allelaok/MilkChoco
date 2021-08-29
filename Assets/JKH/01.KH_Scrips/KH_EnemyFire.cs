@@ -43,7 +43,7 @@ public class KH_EnemyFire : MonoBehaviour
     void Update()
     {
         //enemyShot();
-        print("현재 상태: " + m_state);
+        //print("현재 상태: " + m_state);
 
         switch (m_state)
         {
@@ -107,13 +107,13 @@ public class KH_EnemyFire : MonoBehaviour
         //Debug.Log(distance2);
         if (Vector3.Distance(gameObject.transform.position, wayPoint1.position) <= 1f)
         {
-            Debug.Log("2");
+            //Debug.Log("2");
             currentWayPoint = wayPoint2;
         }
 
         if(Vector3.Distance(gameObject.transform.position, wayPoint2.position) <= 1f)
         {
-            Debug.Log("1");
+            //Debug.Log("1");
             currentWayPoint = wayPoint1;
         }
 
@@ -152,7 +152,7 @@ public class KH_EnemyFire : MonoBehaviour
     private void Detect()
 
     {
-        print("Detect");
+        //print("Detect");
         Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
             rotSpeed * Time.deltaTime); //몸을돌린다
