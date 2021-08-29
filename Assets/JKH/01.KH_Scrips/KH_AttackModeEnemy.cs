@@ -6,22 +6,27 @@ public class KH_AttackModeEnemy : MonoBehaviour
 {
     public Transform posLeft;
     public Transform posRight;
+    public Transform posMid;
+    public Transform posMidL;
+    public Transform posMidR;
     public Transform posGoal;
     public float enemySpeed = 3;
     public float rotSpeed = 3;
-    int rand;
+    int randStart1;
+    int randStartMid1;
     // Start is called before the first frame update
     void Start()
     {
-        rand = Random.Range(0, 2);
+        
+        randStart1 = Random.Range(2, 3);
+        randStartMid1 = Random.Range(0, 2);
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {        
 
-        if (rand == 0)
+        if (randStart1 == 0)
         {
             print("왼");
             var distance2 = Vector3.Distance(transform.position, posLeft.position);
@@ -52,7 +57,7 @@ public class KH_AttackModeEnemy : MonoBehaviour
 
         }
 
-        if(rand==1)
+        if(randStart1 == 1)
         {
             print("오");
             var distance2 = Vector3.Distance(gameObject.transform.position, posRight.position);
@@ -63,11 +68,6 @@ public class KH_AttackModeEnemy : MonoBehaviour
                 posRight = posGoal;
             }
 
-            //if (Vector3.Distance(gameObject.transform.position, posGoal.position) <= 1f)
-            //{
-            //    Debug.Log("1");
-            //    currentWayPoint = wayPoint1;
-            //}
 
             var wayPointDir = posRight.transform.position - transform.position; //gameObject.transform.position
             wayPointDir.Normalize();
@@ -75,13 +75,44 @@ public class KH_AttackModeEnemy : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(wayPointDir), rotSpeed * Time.deltaTime); //pos1쪽으로 몸을돌린다
             transform.position += wayPointDir * enemySpeed * Time.deltaTime; //pos1방향으로이동한다\
 
+        }
 
-            //Vector3 rightDir = posLeft.transform.position - transform.position;
-            //rightDir.Normalize();
-            //우측방향으로 이동
-            //transform.position += rightDir * enemySpeed * Time.deltaTime;
-            //지점에도달한다면
-            //도착지점으로 이동한다
+        if (randStart1 == 2) 
+        {
+            print("중간");
+            var distance2 = Vector3.Distance(gameObject.transform.position, posMid.position);
+
+            if (Vector3.Distance(gameObject.transform.position, posMid.position) <= 1f)
+            {
+                if (randStartMid1 == 0)
+                {
+                    posMid = posMidL;
+                    if (Vector3.Distance(gameObject.transform.position, posMid.position) <= 1f)
+                    {
+                        posMid= posGoal;                        
+                        
+                    }
+                    
+                }
+                if (randStartMid1 == 1)
+                {
+                    posMid = posMidR;
+                    if (Vector3.Distance(gameObject.transform.position, posMid.position) <= 1f)
+                    {
+                        posMid = posGoal;                        
+                    }
+
+                    
+                }
+                //posMid = posGoal;
+                
+            }
+
+            var wayPointDir = posMid.transform.position - transform.position; 
+            wayPointDir.Normalize();
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(wayPointDir), rotSpeed * Time.deltaTime); 
+            transform.position += wayPointDir * enemySpeed * Time.deltaTime; 
         }
     }
 }
