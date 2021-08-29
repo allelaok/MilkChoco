@@ -27,7 +27,7 @@ public class Na_Player_milk1 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(isMilk == null)
+        if (isMilk == null)
         {
             if (other.gameObject.tag == "Milk")
             {
@@ -44,7 +44,28 @@ public class Na_Player_milk1 : MonoBehaviour
                 isMilk = null;
             }
         }
-      
-    
+
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isMilk == null)
+        {
+            if (collision.gameObject.tag == "Milk")
+            {
+                isMilk = collision.gameObject;
+            }
+        }
+        else
+        {
+            if (collision.gameObject.name.Contains("MilkContainer"))
+            {
+                milkContainer[milkCount].SetActive(true);
+                milkCount++;
+                Destroy(isMilk.gameObject);
+                isMilk = null;
+            }
+        }
     }
 }

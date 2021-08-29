@@ -84,35 +84,36 @@ public class Na_Gun : MonoBehaviour
                 currTime += Time.deltaTime;
                 if (currTime > fireTime)
                 {
-                    GameObject line = Instantiate(LineF);   
+                    GameObject line = Instantiate(LineF);
                     lr = line.GetComponent<LineRenderer>();
-                    lr.SetPosition(0, transform.position); 
-                    lr.SetPosition(1, hitInfo.point);  
+                    lr.SetPosition(0, transform.position);
+                    lr.SetPosition(1, hitInfo.point);
                     Destroy(line, 0.1f);
 
-                    AudioSource audio = GetComponent<AudioSource>();  
+                    AudioSource audio = GetComponent<AudioSource>();
                     audio.Play();
 
                     hitInfo.transform.gameObject.GetComponent<Na_Enemy_hp>().Damaged(firePower);
 
-                    aimingPoint.Translate(new Vector3(-1,1,0) * reboundPower); 
+                    aimingPoint.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
 
                     fireCount--;
 
                     currTime = 0;
                 }
+                
 
             }
-            else
-            {
-                currTime = fireTime;
-            }
-
+            //else
+            //{
+            //    currTime = fireTime;
+            //}
 
             if (lr != null)
                 lr.SetPosition(1, hitInfo.point);   
         }
+        
     }
 
 
@@ -141,14 +142,14 @@ public class Na_Gun : MonoBehaviour
         {
             Camera.main.fieldOfView -= scope;
             reboundTime += scope;
-            reboundPower += scope * 0.05f;
+            reboundPower += scope * 0.02f;
         }
 
         if (Input.GetMouseButtonUp(1))
         {
             Camera.main.fieldOfView += scope;
             reboundTime -= scope;
-            reboundPower -= scope * 0.05f;
+            reboundPower -= scope * 0.02f;
         }
     }
 
