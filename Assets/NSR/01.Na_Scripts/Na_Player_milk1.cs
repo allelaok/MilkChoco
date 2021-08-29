@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Na_Player_milk1 : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class Na_Player_milk1 : MonoBehaviour
         milkCntUI.text = milkCount + "/4";
         if (isMilk != null)
         isMilk.transform.position = milkPos.position;
+
+        if(milkCount == 4)
+        {
+            SceneManager.LoadScene("Na_EndScene");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
