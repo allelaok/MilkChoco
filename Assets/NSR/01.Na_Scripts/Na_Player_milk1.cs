@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Na_Player_milk1 : MonoBehaviour
 {
@@ -11,23 +13,30 @@ public class Na_Player_milk1 : MonoBehaviour
     public GameObject[] milkContainer;
 
     int milkCount;
+    public Text milkCntUI;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        milkCntUI.text = 0 + "/4";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isMilk != null)
+        milkCntUI.text = milkCount + "/4";
+        if (isMilk != null)
         isMilk.transform.position = milkPos.position;
+
+        if(milkCount == 4)
+        {
+            SceneManager.LoadScene("Na_EndScene");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(isMilk == null)
+        if (isMilk == null)
         {
             if (other.gameObject.tag == "Milk")
             {
@@ -44,7 +53,8 @@ public class Na_Player_milk1 : MonoBehaviour
                 isMilk = null;
             }
         }
-      
-    
+
+
     }
+
 }

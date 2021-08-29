@@ -13,6 +13,7 @@ public class Na_HpBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Camera.main)
         transform.forward = Camera.main.transform.forward;
     }
 }
