@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KH_Player_hp : MonoBehaviour
 {
-    float currHP;
+    public float currHP;
     public float maxHP = 100;
     public Image hpUI;
     // Start is called before the first frame update
@@ -27,7 +27,8 @@ public class KH_Player_hp : MonoBehaviour
 
         if (currHP <= 0) //currHp가 0이라면 
         {
-            Destroy(gameObject); //파괴한다
+            gameObject.SetActive(false);
+            Na_DestroyZone.instance.playerDie = true;
         }
     }
 }

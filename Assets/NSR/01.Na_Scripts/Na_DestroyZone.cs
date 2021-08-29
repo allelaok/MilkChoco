@@ -9,13 +9,15 @@ public class Na_DestroyZone : MonoBehaviour
     public GameObject player;
 
     float currTime = 0;
-    float respawnTime = 10f;
+    float respawnTime = 3f;
 
     public bool playerDie;
 
     public Transform playerPos;
 
-    public GameObject enemyCamera;
+    //public GameObject gun;
+
+    //public GameObject enemyCamera;
 
 
     private void Awake()
@@ -33,7 +35,7 @@ public class Na_DestroyZone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyCamera.SetActive(false);
+        //enemyCamera.SetActive(false);
         player.SetActive(true);
     }
 
@@ -43,16 +45,18 @@ public class Na_DestroyZone : MonoBehaviour
         if (playerDie)
         {
             currTime += Time.deltaTime;
-            if(currTime > respawnTime)
+            if(currTime > respawnTime - 1)
             {
-                enemyCamera.SetActive(false);
-                player.SetActive(true);
+                //enemyCamera.SetActive(false);
                 player.transform.position = playerPos.position;
                 
+                //gun.SetActive(true);
+                
+                
             }
-            if (currTime > respawnTime + 1)
+            if (currTime > respawnTime)
             {
-              
+                player.SetActive(true);
                 playerDie = false;
                 currTime = 0;
             }
@@ -61,8 +65,11 @@ public class Na_DestroyZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        enemyCamera.SetActive(true);
+        //enemyCamera.SetActive(true);
         player.SetActive(false);
+
+
+        //gun.SetActive(false);
         playerDie = true;
 
     }

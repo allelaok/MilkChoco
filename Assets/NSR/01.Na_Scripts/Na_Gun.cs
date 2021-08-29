@@ -10,7 +10,7 @@ public class Na_Gun : MonoBehaviour
 
     public float firePower = 10f;   
     public float fireTime = 0.1f;   
-    float currTime;
+    public float currTime;
     public float crossroad = 30;    
     public float reboundPower = 0.2f;   
     public float reboundTime = 30f;
