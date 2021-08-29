@@ -6,10 +6,13 @@ public class Na_Jump : MonoBehaviour
 {
     public float jumpForce = 500;
 
-    bool isPlayer;
+    bool playerJump;
 
     GameObject player;
     CharacterController cc;
+
+    float currTime;
+    float jumpTime = 1.5f;
     
 
     // Start is called before the first frame update
@@ -21,10 +24,18 @@ public class Na_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPlayer)
+        if (playerJump)
         {
             cc = player.GetComponent<CharacterController>();
             cc.Move(Vector3.up * jumpForce * Time.deltaTime);
+
+            currTime += Time.deltaTime;
+            if(currTime > jumpTime)
+            {
+                playerJump = false;
+                currTime = 0;
+            }
+            
         }
     }
 
@@ -32,7 +43,7 @@ public class Na_Jump : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            isPlayer = true;
+            playerJump = true;
             player = other.gameObject;
         }
     }

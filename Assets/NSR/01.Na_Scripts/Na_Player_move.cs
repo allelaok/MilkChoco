@@ -10,7 +10,7 @@ public class Na_Player_move : MonoBehaviour
     public float jumpPower = 3f;
     float yVelocity;
     public float gravity = 7f;
-    Vector3 dir;
+    public Vector3 dir;
 
     int jumpCount;
     public int MaxJumpCount = 1;
@@ -24,6 +24,11 @@ public class Na_Player_move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (cc.isGrounded)
+        {
+            print("¶¥");
+        }
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
@@ -47,6 +52,7 @@ public class Na_Player_move : MonoBehaviour
         {
             yVelocity = 0;
             jumpCount = 0;
+            
         }
 
         if (Input.GetButtonDown("Jump"))
