@@ -20,9 +20,10 @@ public class KH_AttackEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print("ว๖ป๓ลย: " + i);
         dir = pos[i + 1].position - pos[i].position;
         dir.Normalize();
-        print(i);
+        
 
         Vector3 distance = transform.position - pos[i + 1].position;
         if (distance.magnitude < 0.1f)
