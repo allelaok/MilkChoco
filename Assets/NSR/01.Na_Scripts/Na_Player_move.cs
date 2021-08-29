@@ -24,10 +24,7 @@ public class Na_Player_move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cc.isGrounded)
-        {
-            print("¶¥");
-        }
+    
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");

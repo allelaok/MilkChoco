@@ -6,9 +6,10 @@ public class Na_Jump : MonoBehaviour
 {
     public float jumpForce = 500;
 
-    bool playerJump;
+    bool isJump;
 
-    GameObject player;
+    GameObject obj;
+    
     CharacterController cc;
 
     float currTime;
@@ -24,15 +25,15 @@ public class Na_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerJump)
+        if (isJump)
         {
-            cc = player.GetComponent<CharacterController>();
+            cc = obj.GetComponent<CharacterController>();
             cc.Move(Vector3.up * jumpForce * Time.deltaTime);
 
             currTime += Time.deltaTime;
             if(currTime > jumpTime)
             {
-                playerJump = false;
+                isJump = false;
                 currTime = 0;
             }
             
@@ -41,10 +42,10 @@ public class Na_Jump : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
         {
-            playerJump = true;
-            player = other.gameObject;
+            isJump = true;
+            obj = other.gameObject;
         }
     }
 }
