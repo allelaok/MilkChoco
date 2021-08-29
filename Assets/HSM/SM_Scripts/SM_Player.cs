@@ -9,6 +9,7 @@ public class SM_Player : MonoBehaviour
 
     CharacterController cc;
 
+
     //점프파워
     public float jumpPower = 5;
 
@@ -18,14 +19,19 @@ public class SM_Player : MonoBehaviour
     //중력
     float gravity = -20;
 
-    
+    public float jumpForce = 400;
+    public float jumpZoneForce = 5;
 
-    
-    // Start is called before the first frame update
-    void Start()
+    bool isJumpZone = false;
+
+    Rigidbody rb;
+
+
+    // Start is called before the first frame update
+    void Start()
     {
         cc = GetComponent<CharacterController>();
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -68,6 +74,12 @@ public class SM_Player : MonoBehaviour
 
             }
 
+            if (isJumpZone)
+            {
+                rb.AddForce(transform.up * speed * jumpForce);
+                isJumpZone = false;
+            }
+
             //dirY에 y속도를 넣는다.
             dirY = yVelocity;
 
@@ -75,6 +87,14 @@ public class SM_Player : MonoBehaviour
             yVelocity += gravity * Time.deltaTime;
 
             
+        }
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "SM_JumpZone")
+        {
+            isJumpZone = true;
         }
     }
 }
