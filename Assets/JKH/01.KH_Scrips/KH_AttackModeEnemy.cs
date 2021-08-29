@@ -89,18 +89,23 @@ public class KH_AttackModeEnemy : MonoBehaviour
                     posMid = posMidL;
                     if (Vector3.Distance(gameObject.transform.position, posMid.position) <= 1f)
                     {
-                        posMid= posGoal;
+                        posMid= posGoal;                        
+                        
                     }
+                    
                 }
                 if (randStartMid1 == 1)
                 {
                     posMid = posMidR;
                     if (Vector3.Distance(gameObject.transform.position, posMid.position) <= 1f)
                     {
-                        posMid = posGoal;
+                        posMid = posGoal;                        
                     }
+
+                    
                 }
                 //posMid = posGoal;
+                
             }
 
             var wayPointDir = posMid.transform.position - transform.position; 
