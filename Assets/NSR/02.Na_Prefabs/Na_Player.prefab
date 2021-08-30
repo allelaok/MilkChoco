@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -897, y: 391}
+  m_AnchoredPosition: {x: -897, y: 443.8}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1728907352
@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 6619113450728589097}
   - component: {fileID: 6619113450728589098}
   - component: {fileID: 1158091462473278072}
+  - component: {fileID: 5461052779001333978}
   m_Layer: 0
   m_Name: Na_Player
   m_TagString: Player
@@ -151,6 +152,7 @@ MonoBehaviour:
   speed: 9
   jumpPower: 3
   gravity: 7
+  dir: {x: 0, y: 0, z: 0}
   MaxJumpCount: 1
 --- !u!114 &6619113450728589098
 MonoBehaviour:
@@ -186,6 +188,20 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   milkCntUI: {fileID: 1728907351}
+--- !u!114 &5461052779001333978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158091462473278075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f829a3cac5ec7584bb06a9aa7f44728d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  hpUI: {fileID: 2163882466661511416}
 --- !u!1 &2163882466661511418
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -460,7 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimingPoint: {fileID: 6619113450639049770}
   firePower: 10
-  fireTime: 0.5
+  fireTime: 0.2
   crossroad: 100
   reboundPower: 0.2
   reboundTime: 30

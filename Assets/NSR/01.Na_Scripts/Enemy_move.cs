@@ -15,44 +15,48 @@ public class Enemy_move : MonoBehaviour
 
     CharacterController cc;
 
+    bool isJump = false;
+
     // Start is called before the first frame update
     void Start()
     {
         i = 0;
-
         cc = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        dir = pos[i + 1].position - pos[i].position;
-        dir.Normalize();
-
         print(i);
 
-        //Vector3 distance = transform.position - pos[i + 1].position;
-        //if (distance.magnitude < 0.1f)
-        //{
-        //    i++;
-        //}
-
-        if (i >= pos.Length - 1)
+        if (isJump == false)
+        {
+            dir = pos[i + 1].position - pos[i].position;
+            dir.Normalize();
+            
+        }
+        else
         {
             dir = Vector3.forward;
+            isJump = false;
         }
 
-
-        cc.Move(Vector3.down * gravity * Time.deltaTime);
-
+       
         transform.position += dir * speed * Time.deltaTime;
+    
+        cc.Move(Vector3.down * gravity * Time.deltaTime);       
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Pos")
         {
+            i++;                                 
+        }
+        else if(other.gameObject.tag == "Jump")
+        {
             i++;
+            isJump = true;
         }
     }
 }
