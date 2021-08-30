@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class Na_Gun : MonoBehaviour
 {
     
-    public Transform aimingPoint;   
+    public Transform aimingPoint;
+    public Transform myCamera;
 
     public float firePower = 10f;   
-    public float fireTime = 0.1f;   
+    public float fireTime = 0.2f;   
     float currTime;
     public float crossroad = 30;    
     public float reboundPower = 0.2f;   
@@ -95,7 +96,7 @@ public class Na_Gun : MonoBehaviour
 
                     hitInfo.transform.gameObject.GetComponent<Na_Enemy_hp>().Damaged(firePower);
 
-                    aimingPoint.Translate(new Vector3(-1, 1, 0) * reboundPower);
+                    myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
 
                     fireCount--;
@@ -105,10 +106,14 @@ public class Na_Gun : MonoBehaviour
                 
 
             }
-            //else
-            //{
-            //    currTime = fireTime;
-            //}
+            else
+            {
+                currTime += Time.deltaTime;
+                if(currTime > 0.1f)
+                {
+                    currTime = fireTime;
+                }
+            }
 
             if (lr != null)
                 lr.SetPosition(1, hitInfo.point);   
@@ -119,7 +124,7 @@ public class Na_Gun : MonoBehaviour
 
     void Rebound()
     {
-        aimingPoint.localPosition = Vector3.Lerp(aimingPoint.localPosition, new Vector3(0, 6, -15), Time.deltaTime * reboundTime); 
+        myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, new Vector3(0, 6, -15), Time.deltaTime * reboundTime); 
     }
 
 
