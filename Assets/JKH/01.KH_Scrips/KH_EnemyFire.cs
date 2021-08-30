@@ -212,7 +212,7 @@ public class KH_EnemyFire : MonoBehaviour
                     lr.SetPosition(0, transform.position);  
                     lr.SetPosition(1, hitInfo.point);   
                     Destroy(line, 0.1f);
-                    hitInfo.transform.gameObject.GetComponent<KH_Player_hp>().Damaged(10);
+                    hitInfo.transform.gameObject.GetComponent<KH_Player_hp>().Damaged(.5f);
                     currTime = 0;
                 }
 
