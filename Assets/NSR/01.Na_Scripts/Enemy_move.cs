@@ -31,20 +31,35 @@ public class Enemy_move : MonoBehaviour
 
         if (isJump == false)
         {
-            dir = pos[i + 1].position - pos[i].position;
+            dir = pos[i + 1].position - transform.position;
             dir.Normalize();
-            
+
         }
         else
         {
-            dir = Vector3.forward;
-            isJump = false;
+            dir = transform.forward;
+            if (cc.isGrounded)
+            {
+                i++;
+                isJump = false;
+
+            }
         }
 
-       
-        transform.position += dir * speed * Time.deltaTime;
-    
-        cc.Move(Vector3.down * gravity * Time.deltaTime);       
+        
+
+        if(i < pos.Length - 1)
+        {
+            cc.Move(Vector3.down * gravity * Time.deltaTime);
+            transform.position += dir * speed * Time.deltaTime;
+        }
+        else
+        {
+            isJump = true;
+        }
+
+        transform.forward = dir;
+         
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,8 +70,13 @@ public class Enemy_move : MonoBehaviour
         }
         else if(other.gameObject.tag == "Jump")
         {
-            i++;
+            
             isJump = true;
+        }
+
+        if (other.gameObject.name.Contains("ChocoContainer"))
+        {
+            i = 0;
         }
     }
 }
