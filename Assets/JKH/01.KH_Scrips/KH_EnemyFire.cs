@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class KH_EnemyFire : MonoBehaviour
 {
     float currTime;
@@ -18,6 +19,7 @@ public class KH_EnemyFire : MonoBehaviour
     public Transform aimingPoint; //발사포인트
     public float fireTime = 0.1f; //연사속도
     public GameObject LineRay; //총알발사라인(임시)
+    public Animator animator;
     
     
     //CharacterController cc; //이동하는거 안씀 아직.ㅎ
