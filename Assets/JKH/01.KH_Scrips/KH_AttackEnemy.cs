@@ -25,11 +25,11 @@ public class KH_AttackEnemy : MonoBehaviour
         dir.Normalize();
         
 
-        Vector3 distance = transform.position - pos[i + 1].position;
-        if (distance.magnitude < 0.1f)
-        {
-            i++;
-        }
+        //Vector3 distance = transform.position - pos[i + 1].position;
+        //if (distance.magnitude < 0.1f)
+        //{
+        //    i++;
+        //}
 
         if (i >= pos.Length - 1)
         {
@@ -44,6 +44,7 @@ public class KH_AttackEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Pos")
         {
+            //Debug.Log("!!");
             i++;
         }
     }
