@@ -27,8 +27,7 @@ public class Enemy_move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(i);
-
+       
         if (isJump == false)
         {
             dir = pos[i + 1].position - transform.position;
