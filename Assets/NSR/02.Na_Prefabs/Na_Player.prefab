@@ -241,17 +241,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e562f3361670bd4ab57e9842b9b70c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimingPoint: {fileID: 1473394119802423970}
   speed: 7
   jumpPower: 3
   gravity: 7
-  dir: {x: 0, y: 0, z: 0}
   MaxJumpCount: 1
   currHP: 0
   maxHP: 100
-  hpUI: {fileID: 0}
-  milkPos: {fileID: 0}
-  milkContainer: []
-  milkCntUI: {fileID: 0}
+  hpUI: {fileID: 2163882466661511416}
+  milkPos: {fileID: 6619113450749347451}
+  milkContainer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  milkCntUI: {fileID: 1728907351}
+  respawnTime: 10
 --- !u!1 &2163882466661511418
 GameObject:
   m_ObjectHideFlags: 0

@@ -10547,9 +10547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78b35c8d30d6124e814f4073b66020f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5461052779001333977}
   playerDie: 0
-  playerPos: {fileID: 1449000428}
 --- !u!65 &1702063100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13649,55 +13647,31 @@ PrefabInstance:
       value: Na_Player
       objectReference: {fileID: 0}
     - target: {fileID: 6207526286711467331, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-      propertyPath: hpUI
+      propertyPath: milkContainer.Array.data[0]
       value: 
-      objectReference: {fileID: 6619113450317097638}
+      objectReference: {fileID: 783468156}
     - target: {fileID: 6207526286711467331, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-      propertyPath: milkPos
+      propertyPath: milkContainer.Array.data[1]
       value: 
-      objectReference: {fileID: 6619113450317097635}
+      objectReference: {fileID: 120629074}
     - target: {fileID: 6207526286711467331, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-      propertyPath: milkCntUI
+      propertyPath: milkContainer.Array.data[2]
       value: 
-      objectReference: {fileID: 6619113450317097637}
+      objectReference: {fileID: 1789721152}
     - target: {fileID: 6207526286711467331, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-      propertyPath: aimingPoint
+      propertyPath: milkContainer.Array.data[3]
       value: 
-      objectReference: {fileID: 6619113450317097636}
+      objectReference: {fileID: 1153306177}
+    - target: {fileID: 6619113450489872487, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+      propertyPath: weight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6619113450489872487, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+      propertyPath: myCamera
+      value: 
+      objectReference: {fileID: 918121885}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
---- !u!4 &6619113450317097635 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6619113450749347451, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-  m_PrefabInstance: {fileID: 6619113450317097634}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6619113450317097636 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1473394119802423970, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-  m_PrefabInstance: {fileID: 6619113450317097634}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6619113450317097637 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1728907351, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-  m_PrefabInstance: {fileID: 6619113450317097634}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6619113450317097638 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2163882466661511416, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-  m_PrefabInstance: {fileID: 6619113450317097634}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6947262525080991943
 GameObject:
   m_ObjectHideFlags: 0

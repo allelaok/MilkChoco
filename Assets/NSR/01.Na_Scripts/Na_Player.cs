@@ -15,6 +15,20 @@ using UnityEngine.SceneManagement;
 
 public class Na_Player : MonoBehaviour
 {
+    public static Na_Player instace;
+
+    private void Awake()
+    {
+        if(instace == null)
+        {
+            instace = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // 필요속성 : AimingPoint
     public Transform aimingPoint;
 
@@ -44,28 +58,38 @@ public class Na_Player : MonoBehaviour
     int milkCount;
     public Text milkCntUI;
 
-    //우유를 리스폰 하고싶다.
-    // 필요속성 : 우유 처음 위치
+    //플레이어를 리스폰 하고싶다.
+    //우유가 있다면 우유도
+    // 필요속성 : 플레이어 처음 위치, 우유 처음 위치, 현재시간, 리스폰 시간
     Vector3 startMilkPos;
     Vector3 startPlayerPos;
+    float currTime;
+    public float respawnTime = 10f;
+
+    bool isDie;
 
     // Start is called before the first frame update
     void Start()
     {
         // 플레이어의 CharacterController 를 가져온다
-        cc = GetComponent<CharacterController>();
-        // 우유개수 text 초기화
-        milkCntUI.text = 0 + "/4";
+        cc = GetComponent<CharacterController>();        
         // 플레이어의 처음 위치 저장
         startPlayerPos = transform.position;
+        //  현재 hp 를 최대 hp로 초기화
+        currHP = maxHP;
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isDie)
+            return;
 
+        Camera.main.transform.position = aimingPoint.position;
+        Camera.main.transform.forward = aimingPoint.forward;
         Move();
-
         Milk();
     }
 
@@ -120,24 +144,32 @@ public class Na_Player : MonoBehaviour
     }
 
     // Damage 를 받으면 hp를 깎고 싶다.
-    public void Damaged(float damage)
+    public void Damaged(float damage, GameObject enemyCamPos)
     {
         currHP -= damage; //HP감소한다
         hpUI.fillAmount = currHP / maxHP; //HP percentage
 
         if (currHP <= 0) //currHp가 0이라면 
         {
-
+            Camera.main.transform.position = enemyCamPos.transform.position;
             Die();
         }
     }
 
     // 죽으면 리스폰 하고 싶다. 
     // 우유도
-    void Die()
+    public void Die()
     {
-        transform.position = startPlayerPos;
-        Respawn();
+        
+        isDie = true;
+
+        // 일정 시간이 지나면 리스폰
+        currTime += Time.deltaTime;
+        if(currTime > respawnTime)
+        {
+            Respawn();
+            currTime = 0;
+        }      
 
         if (isMilk != null)
         {
@@ -148,7 +180,11 @@ public class Na_Player : MonoBehaviour
 
     void Respawn()
     {
+        transform.position = startPlayerPos;
         Camera.main.transform.position = aimingPoint.position;
+        //  현재 hp 를 최대 hp로 초기화
+        currHP = maxHP;
+        isDie =  false;
     }
 
     // 우유를 먹고 milkContainer 에 넣고싶다.
@@ -171,7 +207,7 @@ public class Na_Player : MonoBehaviour
             if (other.gameObject.tag == "Milk")
             {
                 isMilk = other.gameObject;
-                startMilkPos = isMilk.transform.position;
+                startMilkPos = other.gameObject.transform.position;
             }
         }
         else
