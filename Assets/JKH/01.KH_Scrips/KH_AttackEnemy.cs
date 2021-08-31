@@ -9,6 +9,7 @@ public class KH_AttackEnemy : MonoBehaviour
     public float speed = 5;
     int i;
     public float gravity = 1;
+    bool isJump = false;
     CharacterController cc;
     // Start is called before the first frame update
     void Start()
