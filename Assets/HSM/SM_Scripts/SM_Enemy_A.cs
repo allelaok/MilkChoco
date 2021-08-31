@@ -103,7 +103,7 @@ public class SM_Enemy_A : MonoBehaviour
 
         //공격범위 안에 들어가면 상태를 공격으로 전환
         float distance = Vector3.Distance(target.transform.position, transform.position);
-        if (distance < attackRange)
+        if (distance +1 < attackRange)
         {
             m_state = EnemyState.Attack;
         }
@@ -130,6 +130,7 @@ public class SM_Enemy_A : MonoBehaviour
         if (distance > attackRange + 2)
         {
             m_state = EnemyState.Move;
+            anim.SetBool("isAttack", false);
         }
     }
 
