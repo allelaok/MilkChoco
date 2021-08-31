@@ -105,6 +105,8 @@ public class KH_EnemyFire : MonoBehaviour
         //3. 오브젝트의 방향을 돌리고 두번째 웨이포인트를 향해 이동한다.
         //4. 거리가 일정 이하가 되면 웨이포인트를 전환한다.
 
+        animator.SetBool("Move", true);
+
         var distance2 = Vector3.Distance(gameObject.transform.position, currentWayPoint.position);
         //Debug.Log(distance2);
         if (Vector3.Distance(gameObject.transform.position, wayPoint1.position) <= 1f)
@@ -147,6 +149,7 @@ public class KH_EnemyFire : MonoBehaviour
         {
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
+            animator.SetBool("Move", false);
         }
     }
     //임시
