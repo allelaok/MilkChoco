@@ -21,32 +21,75 @@ public class KH_AttackEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("현상태: " + i);
-        dir = pos[i + 1].position - pos[i].position;
-        dir.Normalize();
-        
+        //print("현상태: " + i);
+        //dir = pos[i + 1].position - transform.position;
+        //dir.Normalize();
 
-        //Vector3 distance = transform.position - pos[i + 1].position;
-        //if (distance.magnitude < 0.1f)
+
+        ////Vector3 distance = transform.position - pos[i + 1].position;
+        ////if (distance.magnitude < 0.1f)
+        ////{
+        ////    i++;
+        ////}
+
+        //if (i >= pos.Length - 1)
         //{
-        //    i++;
+        //    dir = Vector3.forward;
         //}
 
-        if (i >= pos.Length - 1)
+
+        //cc.Move(Vector3.down * gravity * Time.deltaTime);
+        //transform.position += dir * speed * Time.deltaTime;
+
+        if (isJump == false)
         {
-            dir = Vector3.forward;
+            dir = pos[i + 1].position - transform.position;
+            dir.Normalize();
+
+        }
+        else
+        {
+            dir = transform.forward;
+            if (cc.isGrounded)
+            {
+                i++;
+                isJump = false;
+
+            }
         }
 
 
-        cc.Move(Vector3.down * gravity * Time.deltaTime);
-        transform.position += dir * speed * Time.deltaTime;
+
+        if (i < pos.Length - 1)
+        {
+            cc.Move(Vector3.down * gravity * Time.deltaTime);
+            transform.position += dir * speed * Time.deltaTime;
+        }
+        else
+        {
+            isJump = true;
+        }
+
+        transform.forward = dir;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Pos")
         {
-            //Debug.Log("!!");
-            i++;
+            if (other.gameObject.tag == "Pos")
+            {
+                i++;
+            }
+            else if (other.gameObject.tag == "Jump")
+            {
+
+                isJump = true;
+            }
+
+            if (other.gameObject.name.Contains("ChocoContainer"))
+            {
+                i = 0;
+            }
         }
     }
 }
