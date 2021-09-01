@@ -41,7 +41,7 @@ public class SM_Enemy_A : MonoBehaviour
         // 피격 테스트
         if(Input.GetKeyDown(KeyCode.K))
         {
-            OnHit(transform.forward * -1);
+            OnDamageProcess(transform.forward * -1);
         }
 
         switch (m_state)
@@ -142,18 +142,23 @@ public class SM_Enemy_A : MonoBehaviour
 
     // 일정시간 기다렸다가 상태를 Idle 로 전환
     public float damageDelayTime = 2;
-
+    public float knockbackSpeed = 10;
     private void Damaged()
     {
-        // 일정시간에 한번씩 공격
-        m_state = EnemyState.Damage;
-        anim.SetBool("isDamaged", true);
+        // 넉백 이동처리
+        transform.position = Vector3.Lerp(transform.position, knockbackPos, knockbackSpeed * Time.deltaTime);
 
-
+        // 넉벡이 다 되면 상태를 Idle로 전환
+        float distance = Vector3.Distance(transform.position, knockbackPos);
+        if(distance < 0.1f)
+        {
+            transform.position = knockbackPos;
+            m_state = EnemyState.Idle;
+        }
     }
 
     float maxHp = 3;
-   
+    Vector3 knockbackPos;
     public void OnDamageProcess(Vector3 shootDirection)
     {
         maxHp--;
@@ -165,26 +170,15 @@ public class SM_Enemy_A : MonoBehaviour
         else
         {
             shootDirection.y = 0;
-            transform.position += shootDirection * 2;
+            // 넉백
+            // P = P0 + vt;
+            knockbackPos = transform.position + shootDirection * 3;
             m_state = EnemyState.Damage;
-            anim.SetBool("isDamaged", true);
+            anim.SetTrigger("Damage");
         }
     }
     private void Die()
     {
 
-    }
-
-
-    // 총에 맞았을 때 호출될 함수
-    public void OnHit(Vector3 knockbackDir)
-    {
-        HitProcess();
-    }
-
-    // 처리할 함수(죽고싶다.)
-    public void HitProcess()
-    {
-        Destroy(gameObject);
     }
 }
