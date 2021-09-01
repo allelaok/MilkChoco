@@ -5315,8 +5315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453992b32feb6c449a7d620c74ce35e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 1211145342}
 --- !u!1 &1105566984
 GameObject:
   m_ObjectHideFlags: 0
@@ -5634,17 +5632,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166117908}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1211145342 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7696916355036102117, guid: b087774608aa3834c8c648ed35bf6416, type: 3}
-  m_PrefabInstance: {fileID: 1850919615664055159}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1242295937
 GameObject:
   m_ObjectHideFlags: 0
@@ -10600,6 +10587,10 @@ PrefabInstance:
     - target: {fileID: 4011631868349648905, guid: b087774608aa3834c8c648ed35bf6416, type: 3}
       propertyPath: detectRange
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011631868349648905, guid: b087774608aa3834c8c648ed35bf6416, type: 3}
+      propertyPath: knockbackSpeed
+      value: 18.17
       objectReference: {fileID: 0}
     - target: {fileID: 4011631868349648905, guid: b087774608aa3834c8c648ed35bf6416, type: 3}
       propertyPath: attackDelayTime
