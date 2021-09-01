@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 // 플레이어 W, S, A, D 로 이동하고 싶다.
 // 플레이어 스페이스바로 점프하고 싶다.
 // 1단 점프를 하고싶다.
-// Damage 를 받으면 hp를 깎고 싶다.
+// Damage 를 받으면 hp를 깎고 싶다. UI 도 표현하고 싶다.
 // hp가 0이하면 죽이고 싶다.
-// 우유를 먹고 milkContainer 에 넣고싶다.
+// 우유를 먹고 milkContainer 에 넣고 싶다.
 
 public class Na_Player : MonoBehaviour
 {
@@ -67,6 +67,7 @@ public class Na_Player : MonoBehaviour
     public float respawnTime = 10f;
 
     bool isDie;
+    GameObject enemyCam;
 
     // Start is called before the first frame update
     void Start()
@@ -85,12 +86,18 @@ public class Na_Player : MonoBehaviour
     void Update()
     {
         if (isDie)
-            return;
-
-        Camera.main.transform.position = aimingPoint.position;
-        Camera.main.transform.forward = aimingPoint.forward;
-        Move();
-        Milk();
+        {
+            Die();
+                      
+        }
+        else
+        {
+            Camera.main.transform.position = aimingPoint.position;
+            Camera.main.transform.forward = aimingPoint.forward;
+            Move();
+            Milk();
+        }
+            
     }
 
  
@@ -151,8 +158,9 @@ public class Na_Player : MonoBehaviour
 
         if (currHP <= 0) //currHp가 0이라면 
         {
-            Camera.main.transform.position = enemyCamPos.transform.position;
-            Die();
+            enemyCam = enemyCamPos;
+            //Camera.main.transform.position = enemyCamPos.transform.position;
+            isDie = true;
         }
     }
 
@@ -160,8 +168,9 @@ public class Na_Player : MonoBehaviour
     // 우유도
     public void Die()
     {
-        
-        isDie = true;
+
+        Camera.main.transform.position = enemyCam.transform.position;
+        Camera.main.transform.forward = enemyCam.transform.forward;
 
         // 일정 시간이 지나면 리스폰
         currTime += Time.deltaTime;
@@ -181,10 +190,10 @@ public class Na_Player : MonoBehaviour
     void Respawn()
     {
         transform.position = startPlayerPos;
-        Camera.main.transform.position = aimingPoint.position;
         //  현재 hp 를 최대 hp로 초기화
         currHP = maxHP;
         isDie =  false;
+        enemyCam = null;
     }
 
     // 우유를 먹고 milkContainer 에 넣고싶다.
