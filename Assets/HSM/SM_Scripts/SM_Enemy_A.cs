@@ -38,6 +38,12 @@ public class SM_Enemy_A : MonoBehaviour
     {
         print("현재상태 : " + m_state);
         
+        // 피격 테스트
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            OnHit(transform.forward * -1);
+        }
+
         switch (m_state)
         {
 
@@ -54,7 +60,7 @@ public class SM_Enemy_A : MonoBehaviour
                 break;
 
             case EnemyState.Damage:
-                Damage();
+                Damaged();
                 break;
 
             case EnemyState.Die:
@@ -137,16 +143,11 @@ public class SM_Enemy_A : MonoBehaviour
     // 일정시간 기다렸다가 상태를 Idle 로 전환
     public float damageDelayTime = 2;
 
-    private void Damage()
+    private void Damaged()
     {
-        // 일정시간에 한번씩 공격
-        currentTime += Time.deltaTime;
-        
-        if (currentTime > damageDelayTime)
-        {
-            m_state = EnemyState.Idle;
-            currentTime = 0;
-        }
+        // 일정시간에 한번씩 공격
+        m_state = EnemyState.Damage;
+        anim.SetBool("isDamaged", true);
 
 
     }
@@ -166,10 +167,24 @@ public class SM_Enemy_A : MonoBehaviour
             shootDirection.y = 0;
             transform.position += shootDirection * 2;
             m_state = EnemyState.Damage;
+            anim.SetBool("isDamaged", true);
         }
     }
     private void Die()
     {
 
+    }
+
+
+    // 총에 맞았을 때 호출될 함수
+    public void OnHit(Vector3 knockbackDir)
+    {
+        HitProcess();
+    }
+
+    // 처리할 함수(죽고싶다.)
+    public void HitProcess()
+    {
+        Destroy(gameObject);
     }
 }
