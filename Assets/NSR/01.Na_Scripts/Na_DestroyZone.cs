@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Na_DestroyZone : MonoBehaviour
 {
-    public bool playerDie;
+    bool isFallen;
+    Vector3 camPos;
 
     // Start is called before the first frame update
     void Start()
@@ -15,9 +16,10 @@ public class Na_DestroyZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerDie)
-        {         
-            Na_Player.instace.Die();
+        if (isFallen)
+        {
+            Camera.main.transform.position = camPos;
+            Na_Player.instace.Respawn();
         }
     }
 
@@ -25,7 +27,8 @@ public class Na_DestroyZone : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            playerDie = true;
+            isFallen = true;
+            camPos = Camera.main.transform.position;
         }    
     }
 }
