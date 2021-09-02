@@ -229,5 +229,5 @@ public class Na_Player : MonoBehaviour
                 isMilk = null;
             }
         }
-    }
+    } 
 }
