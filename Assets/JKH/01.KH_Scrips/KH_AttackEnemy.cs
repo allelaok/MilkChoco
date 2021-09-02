@@ -16,11 +16,15 @@ public class KH_AttackEnemy : MonoBehaviour
     {
         i = 0;
         cc = GetComponent<CharacterController>();
+        startEnemyPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Choco();
+
+        //-------------------------------------------------------------------------------------------------------------
         //print("현상태: " + i);
         //dir = pos[i + 1].position - transform.position;
         //dir.Normalize();
@@ -72,6 +76,8 @@ public class KH_AttackEnemy : MonoBehaviour
 
         transform.forward = dir;
     }
+    Vector3 startChocoPos;
+    Vector3 startEnemyPos;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Pos")
@@ -90,6 +96,46 @@ public class KH_AttackEnemy : MonoBehaviour
             {
                 i = 0;
             }
+        }
+        //===========
+
+        if(isChoco == null)
+        {
+            if (other.gameObject.tag == "Choco")
+            {
+                isChoco = other.gameObject;
+                startChocoPos = isChoco.transform.position;
+            }
+        }
+        else
+        {
+            if (other.gameObject.name.Contains("ChocoContainer"))
+            {
+                chocoContainer[chocoCount].SetActive(true);
+                chocoCount++;
+                Destroy(isChoco.gameObject);
+                isChoco = null;
+            }
+        }
+
+    }
+
+    // 필요속성 : 우유위치, 우유, milkContainer, 우유개수, 우유개수UI
+    public Transform chocoPos;
+    GameObject isChoco;
+    public GameObject[] chocoContainer;
+    int chocoCount;
+   
+    
+
+    void Choco()
+    {
+        if (isChoco != null)
+            isChoco.transform.position = chocoPos.position;
+
+        if (chocoCount == 4)
+        {
+            print("chocoMax");
         }
     }
 }
