@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class KH_StartSceneM : MonoBehaviour
 {
@@ -15,9 +16,9 @@ public class KH_StartSceneM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //OnclickStart();
     }
-    public void OnclickStart()
+    public void OnClickStart()
     {
         SceneManager.LoadScene("KH_Scene");
     }
