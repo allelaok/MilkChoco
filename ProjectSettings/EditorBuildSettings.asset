@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/JKH/04.KH_Scenes/KH_StartScene.unity
+    guid: 5181c6a056525e046b6ee6aba496b05e
+  - enabled: 1
+    path: Assets/JKH/04.KH_Scenes/KH_Scene.unity
+    guid: fc4b843481238074289c047ccbcfe438
+  - enabled: 1
     path: Assets/GameScene.unity
     guid: e619706742b937347a387363905bb31a
   m_configObjects: {}

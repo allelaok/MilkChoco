@@ -243,7 +243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35347059}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 40.1, z: 127.8}
+  m_LocalPosition: {x: 1.9, y: 40.1, z: 131.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 917437130}
@@ -720,6 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff49187ac461c75448e8774e63831351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yVelocity: 0
   pos:
   - {fileID: 594618846}
   - {fileID: 552146449}
@@ -728,8 +729,12 @@ MonoBehaviour:
   - {fileID: 1836563758}
   speed: 9
   gravity: 15
+  jumpForwardSpeed: 10
   chocoPos: {fileID: 0}
   chocoContainer: []
+  jumpCount: 0
+  MaxJumpCount: 1
+  jumpZonePower: 15
 --- !u!143 &172896132
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1217,11 +1222,11 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366569459}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 98a47f1cd28823f4b8ab7f52d3d506fb, type: 3}
   m_Controller: {fileID: 9100000, guid: d3e4d896fcd80894188433012d97519a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1710,27 +1715,13 @@ GameObject:
   - component: {fileID: 451101947}
   - component: {fileID: 451101946}
   - component: {fileID: 451101945}
-  - component: {fileID: 451101944}
   m_Layer: 0
   m_Name: Jump (2)
-  m_TagString: Jump
+  m_TagString: JumpZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &451101944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451101943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e08784e1623c3b4080ceecc31897814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 60
 --- !u!65 &451101945
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2480,27 +2471,13 @@ GameObject:
   - component: {fileID: 657372898}
   - component: {fileID: 657372897}
   - component: {fileID: 657372896}
-  - component: {fileID: 657372895}
   m_Layer: 0
   m_Name: Jump (4)
-  m_TagString: Jump
+  m_TagString: JumpZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &657372895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 657372894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e08784e1623c3b4080ceecc31897814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 60
 --- !u!65 &657372896
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2824,7 +2801,7 @@ GameObject:
   - component: {fileID: 798201789}
   m_Layer: 0
   m_Name: Jumps
-  m_TagString: Untagged
+  m_TagString: JumpZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3021,6 +2998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff49187ac461c75448e8774e63831351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yVelocity: 0
   pos:
   - {fileID: 917437130}
   - {fileID: 1773598233}
@@ -3046,10 +3024,14 @@ MonoBehaviour:
   - {fileID: 1696547646}
   - {fileID: 1208853925}
   - {fileID: 1722419310}
-  speed: 25
-  gravity: 15
+  speed: 7
+  gravity: 1
+  jumpForwardSpeed: 18.37
   chocoPos: {fileID: 1452266579}
   chocoContainer: []
+  jumpCount: 0
+  MaxJumpCount: 1
+  jumpZonePower: 0.77
 --- !u!143 &821671217
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3556,7 +3538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917437129}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.35, z: 83}
+  m_LocalPosition: {x: 0, y: 1.34, z: 83}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1773598233}
@@ -4417,14 +4399,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff49187ac461c75448e8774e63831351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yVelocity: 0
   pos:
   - {fileID: 594618846}
   - {fileID: 552146449}
   - {fileID: 605103517}
   speed: 6
   gravity: 18
+  jumpForwardSpeed: 10
   chocoPos: {fileID: 0}
   chocoContainer: []
+  jumpCount: 0
+  MaxJumpCount: 1
+  jumpZonePower: 15
 --- !u!33 &1137353246
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5638,7 +5625,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387068816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.98, y: 0.5, z: -36}
+  m_LocalPosition: {x: -29.98, y: 0.5, z: -4.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6133,27 +6120,13 @@ GameObject:
   - component: {fileID: 1496719804}
   - component: {fileID: 1496719803}
   - component: {fileID: 1496719802}
-  - component: {fileID: 1496719801}
   m_Layer: 0
   m_Name: Jump
-  m_TagString: Jump
+  m_TagString: JumpZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1496719801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496719800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e08784e1623c3b4080ceecc31897814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 60
 --- !u!65 &1496719802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6242,27 +6215,13 @@ GameObject:
   - component: {fileID: 1525584396}
   - component: {fileID: 1525584395}
   - component: {fileID: 1525584394}
-  - component: {fileID: 1525584393}
   m_Layer: 0
   m_Name: Jump (1)
-  m_TagString: Jump
+  m_TagString: JumpZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1525584393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525584392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e08784e1623c3b4080ceecc31897814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 60
 --- !u!65 &1525584394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6756,27 +6715,13 @@ GameObject:
   - component: {fileID: 1670580901}
   - component: {fileID: 1670580900}
   - component: {fileID: 1670580899}
-  - component: {fileID: 1670580898}
   m_Layer: 0
   m_Name: Jump (3)
-  m_TagString: Jump
+  m_TagString: JumpZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1670580898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670580897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e08784e1623c3b4080ceecc31897814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 60
 --- !u!65 &1670580899
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6960,27 +6905,13 @@ GameObject:
   - component: {fileID: 1691007160}
   - component: {fileID: 1691007159}
   - component: {fileID: 1691007158}
-  - component: {fileID: 1691007157}
   m_Layer: 0
   m_Name: Jump (5)
-  m_TagString: Jump
+  m_TagString: JumpZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1691007157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1691007156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e08784e1623c3b4080ceecc31897814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 60
 --- !u!65 &1691007158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9298,6 +9229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff49187ac461c75448e8774e63831351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yVelocity: 0
   pos:
   - {fileID: 1631696962}
   - {fileID: 1961226934}
@@ -9317,8 +9249,12 @@ MonoBehaviour:
   - {fileID: 1954860476}
   speed: 15
   gravity: 15
+  jumpForwardSpeed: 10
   chocoPos: {fileID: 0}
   chocoContainer: []
+  jumpCount: 0
+  MaxJumpCount: 1
+  jumpZonePower: 15
 --- !u!224 &6998333630475261934
 RectTransform:
   m_ObjectHideFlags: 0
