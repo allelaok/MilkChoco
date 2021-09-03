@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SM_Player : MonoBehaviour
 {
+   
 
     public float speed = 5;
 
     CharacterController cc;
 
+    Animator anim;
 
     //점프파워
     public float jumpPower = 5;
@@ -32,6 +34,7 @@ public class SM_Player : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -90,11 +93,7 @@ public class SM_Player : MonoBehaviour
         }
         
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "SM_JumpZone")
-        {
-            isJumpZone = true;
-        }
-    }
+
+  
+       
 }
