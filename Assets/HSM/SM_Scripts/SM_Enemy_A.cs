@@ -43,7 +43,7 @@ public class SM_Enemy_A : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("현재상태 : " + m_state);
+        //print("현재상태 : " + m_state);
         
         // 피격 테스트
         if(Input.GetKeyDown(KeyCode.K))
@@ -67,7 +67,7 @@ public class SM_Enemy_A : MonoBehaviour
                 break;
 
             case EnemyState.Damage:
-                Damaged();
+                Damage();
                 break;
 
             case EnemyState.Die:
@@ -96,7 +96,8 @@ public class SM_Enemy_A : MonoBehaviour
         float distance = Vector3.Distance(target.transform.position, transform.position);
         if (distance < detectRange)
         {
-           m_state = EnemyState.Move;
+            m_state = EnemyState.Move;
+            anim.SetTrigger("isWalk");
         }
     }
 
@@ -106,7 +107,6 @@ public class SM_Enemy_A : MonoBehaviour
         Vector3 dir = target.transform.position - transform.position;
         dir.Normalize();
         dir.y = 0;
-        anim.SetBool("isWalk",true);
 
         // 2. P = PO + vt
         cc.SimpleMove(dir * speed);
@@ -120,6 +120,7 @@ public class SM_Enemy_A : MonoBehaviour
         if (distance +1 < attackRange)
         {
             m_state = EnemyState.Attack;
+            currentTime = attackDelayTime;
         }
     }
 
@@ -129,18 +130,35 @@ public class SM_Enemy_A : MonoBehaviour
 
     bool isAttackCheck = false;
     float elaspedAttackTime;
+
+    bool isAttackToWalk = false;
     private void Attack()
     {
+        // Move 로 상태 전환 해야 할때
+        if (isAttackToWalk)
+        {
+            // -> 일정시간 기다렸다가 전환
+            currentTime += Time.deltaTime;
+            if(currentTime > 2)
+            {
+                isAttackToWalk = false;
+
+                m_state = EnemyState.Move;
+                anim.SetTrigger("isWalk");
+            }
+            return;
+        }
 
         // 일정시간에 한번씩 공격
         currentTime += Time.deltaTime;
 
-        // 공격애니메이션이 진행중이지 않고, 대시간보다 경과시간이 커지면
+        // 공격애니메이션이 진행중이지 않고, 대기시간보다 경과시간이 커지면
         if (isAttackCheck == false && currentTime > attackDelayTime)
         {
-            anim.SetBool("isAttack",true);
+            anim.SetTrigger("isAttack");
             currentTime = 0;
             isAttackCheck = true;
+            print("Attack");
         }
         // 공격애니메이션이 진행중
         if (isAttackCheck)
@@ -164,28 +182,44 @@ public class SM_Enemy_A : MonoBehaviour
             float distance = Vector3.Distance(target.transform.position, transform.position);
             if (distance > attackRange + 2)
             {
-                m_state = EnemyState.Move;
-                anim.SetBool("isWalk", true);
+                isAttackToWalk = true;
+                
             }
         }
     }
+    bool IsKnockbackFinish = false;
+    float elaspedDamagedTime = 2;
 
-    
-
-    private void Damaged()
+    private void Damage()
     {
-        // 넉백 이동처리
-        transform.position = Vector3.Lerp(transform.position, knockbackPos, knockbackSpeed * Time.deltaTime);
-
-        // 넉벡이 다 되면 상태를 Idle로 전환
-        float distance = Vector3.Distance(transform.position, knockbackPos);
-        if (distance < 0.1f)
+        // 넉잭 중이라면
+        if (IsKnockbackFinish == false)
         {
-            transform.position = knockbackPos;
-            new WaitForSeconds(damageDelayTime);
-            m_state = EnemyState.Idle;
+            transform.position = Vector3.Lerp(transform.position, knockbackPos, knockbackSpeed * Time.deltaTime);
+            // 피격을 받는 도중에는 피격 애니메이션을 보여주고 싶다.
+            float distance = Vector3.Distance(transform.position, knockbackPos);
 
+
+            // 1. 넉백이 끝나면
+            if (distance < 0.1f)
+            {
+                transform.position = knockbackPos;
+                IsKnockbackFinish = true;
+                
+            }
         }
+
+        // 2. 피격 대기 시간만큼 기다리고 싶다.
+        if (IsKnockbackFinish)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime > elaspedDamagedTime)
+            {
+                currentTime = 0;
+                m_state = EnemyState.Idle;
+            }
+        }
+        
     }
     public float damageDelayTime = 2;
     public float knockbackSpeed = 10;
@@ -203,6 +237,7 @@ public class SM_Enemy_A : MonoBehaviour
     //    m_state = EnemyState.Idle;
 
     //}
+    
 
     float maxHp = 5;
     Vector3 knockbackPos;
@@ -217,16 +252,21 @@ public class SM_Enemy_A : MonoBehaviour
         }
         else
         {
-            shootDirection.y = 0;
+            
+            shootDirection.y = 0;
             // 넉백
             // P = P0 + vt;
             knockbackPos = transform.position + shootDirection * 5;
             m_state = EnemyState.Damage;
             anim.SetTrigger("Damage");
-            
+            IsKnockbackFinish = false;
+            currentTime = 0;
+
 
         }
     }
+
+
     public float downSpeed = 2;
     private void Die()
     {
