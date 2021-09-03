@@ -396,7 +396,7 @@ public class Na_Player : MonoBehaviour
         }
         else
         {
-            if (other.gameObject.name.Contains("MilkContainer"))
+            if (other.gameObject.name.Contains("ChocoContainer"))
             {
                 milkContainer[milkCount].SetActive(true);
                 milkCount++;

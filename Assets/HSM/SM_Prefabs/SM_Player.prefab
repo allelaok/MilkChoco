@@ -63,8 +63,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d265bb761c90e07418ee89fac01b0795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimingPoint: {fileID: 0}
+  myCamera: {fileID: 0}
+  firePower: 10
+  fireTime: 0.2
+  crossroad: 30
+  reboundPower: 0.2
+  reboundTime: 30
+  weight: 1
+  LineF: {fileID: 0}
+  maxFire: 20
+  reloadTime: 3
+  scope: 50
   speed: 5
   jumpPower: 5
+  jumpForce: 400
+  jumpZoneForce: 5
 --- !u!1001 &6146650566249346554
 PrefabInstance:
   m_ObjectHideFlags: 0
