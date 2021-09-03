@@ -37,7 +37,7 @@ public class Na_Gun : MonoBehaviour
         fireCount = maxFire;  
 
         Na_Player_move playerMove = GetComponentInParent<Na_Player_move>();
-        playerMove.speed -= weight;
+        Na_Player.instace.speed -= weight;
 
         bulletCountUI = GameObject.Find("BulletCount").GetComponent<Text>();
 

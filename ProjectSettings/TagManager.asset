@@ -10,7 +10,7 @@ TagManager:
   - Milk
   - Choco
   - Pos
-  - Jump
+  - JumpZone
   layers:
   - Default
   - TransparentFX

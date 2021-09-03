@@ -67,7 +67,7 @@ public class Enemy_move : MonoBehaviour
         {
             i++;                                 
         }
-        else if(other.gameObject.tag == "Jump")
+        else if(other.gameObject.tag == "JumpZone")
         {
             
             isJump = true;

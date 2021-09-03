@@ -9,12 +9,27 @@ using UnityEngine.SceneManagement;
 // 플레이어 W, S, A, D 로 이동하고 싶다.
 // 플레이어 스페이스바로 점프하고 싶다.
 // 1단 점프를 하고싶다.
-// Damage 를 받으면 hp를 깎고 싶다.
+// Damage 를 받으면 hp를 깎고 싶다. UI 도 표현하고 싶다.
 // hp가 0이하면 죽이고 싶다.
-// 우유를 먹고 milkContainer 에 넣고싶다.
+// 우유를 먹고 milkContainer 에 넣고 싶다.
+// 점프대와 부딪히면 높이 점프하고싶다.
 
 public class Na_Player : MonoBehaviour
 {
+    public static Na_Player instace;
+
+    private void Awake()
+    {
+        if(instace == null)
+        {
+            instace = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // 필요속성 : AimingPoint
     public Transform aimingPoint;
 
@@ -26,10 +41,10 @@ public class Na_Player : MonoBehaviour
     public float jumpPower = 3f;
     float yVelocity;
     public float gravity = 7f;
-    Vector3 dir;
+    public Vector3 dir;
 
     // 필요속성 : 점프횟수, 최대 점프 가능 횟수
-    int jumpCount;
+    public int jumpCount;
     public int MaxJumpCount = 1;
 
     // 필요속성 : 현재hp, 최대hp, hpUI
@@ -44,32 +59,65 @@ public class Na_Player : MonoBehaviour
     int milkCount;
     public Text milkCntUI;
 
-    //우유를 리스폰 하고싶다.
-    // 필요속성 : 우유 처음 위치
+    //플레이어를 리스폰 하고싶다.
+    //우유가 있다면 우유도
+    // 필요속성 : 플레이어 처음 위치, 우유 처음 위치, 현재시간, 리스폰 시간
     Vector3 startMilkPos;
     Vector3 startPlayerPos;
+    float currTime;
+    public float respawnTime = 10f;
+
+    public bool isDie;
+    GameObject enemyCam;
+
+    bool isJumpZone;
+    float jumpZonePower = 8f;
+
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         // 플레이어의 CharacterController 를 가져온다
-        cc = GetComponent<CharacterController>();
-        // 우유개수 text 초기화
-        milkCntUI.text = 0 + "/4";
+        cc = GetComponent<CharacterController>();        
         // 플레이어의 처음 위치 저장
         startPlayerPos = transform.position;
+        //  현재 hp 를 최대 hp로 초기화
+        currHP = maxHP;
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        Move();
-
-        Milk();
+        if (isDie)
+        {
+            Respawn();
+        }
+        else
+        {          
+            Move();
+            Milk();
+        }
+            
     }
 
- 
+    private void LateUpdate()
+    {
+        if (isDie)
+        {
+            Camera.main.transform.position = enemyCam.transform.position;
+            Camera.main.transform.forward = enemyCam.transform.forward;
+        }
+        else
+        {
+            Camera.main.transform.position = aimingPoint.position;
+            Camera.main.transform.forward = aimingPoint.forward;            
+        }
+    }
+
+
 
     // 플레이어 W, S, A, D 로 이동하고 싶다.
     // 필요속성 : 속도, CharacterController
@@ -86,7 +134,17 @@ public class Na_Player : MonoBehaviour
 
         Jump(out dir.y);
 
+        if(h + v > 0)
+        {
+            anim.SetTrigger("Walk");
+        }
+        else
+        {
+            anim.SetTrigger("Idle");
+        }
+
         cc.Move(dir * speed * Time.deltaTime);
+        
     }
 
     // 플레이어 스페이스바로 점프하고 싶다.
@@ -94,7 +152,7 @@ public class Na_Player : MonoBehaviour
 
     // 1단 점프를 하고싶다.
     // 필요속성 : 점프횟수, 최대 점프 가능 횟수
-    void Jump(out float dirY)
+    public void Jump(out float dirY)
     {
         if (cc.isGrounded)
         {
@@ -110,9 +168,14 @@ public class Na_Player : MonoBehaviour
                 yVelocity = jumpPower;
                 jumpCount++;
             }
-
-
         }
+        if (isJumpZone)
+        {
+            yVelocity = jumpZonePower;
+            jumpCount++;
+            isJumpZone = false;
+        }
+
         dirY = yVelocity;
         yVelocity -= gravity * Time.deltaTime;
 
@@ -120,15 +183,16 @@ public class Na_Player : MonoBehaviour
     }
 
     // Damage 를 받으면 hp를 깎고 싶다.
-    public void Damaged(float damage)
+    public void Damaged(float damage, GameObject enemyCamPos)
     {
         currHP -= damage; //HP감소한다
         hpUI.fillAmount = currHP / maxHP; //HP percentage
 
         if (currHP <= 0) //currHp가 0이라면 
         {
-
-            Die();
+            enemyCam = enemyCamPos;
+            //Camera.main.transform.position = enemyCamPos.transform.position;
+            isDie = true;
         }
     }
 
@@ -136,19 +200,33 @@ public class Na_Player : MonoBehaviour
     // 우유도
     void Die()
     {
-        transform.position = startPlayerPos;
+        //Camera.main.transform.position = enemyCam.transform.position;
+        //Camera.main.transform.forward = enemyCam.transform.forward;
         Respawn();
+
+        
+    }
+
+    // 일정 시간이 지나면 리스폰
+    public void Respawn()
+    {
+        currTime += Time.deltaTime;
+        if (currTime > respawnTime)
+        {
+            transform.position = startPlayerPos;
+            //  현재 hp 를 최대 hp로 초기화
+            currHP = maxHP;
+            isDie = false;
+            enemyCam = null;
+
+            currTime = 0;
+        }
 
         if (isMilk != null)
         {
             isMilk.transform.position = startMilkPos;
             isMilk = null;
         }
-    }
-
-    void Respawn()
-    {
-        Camera.main.transform.position = aimingPoint.position;
     }
 
     // 우유를 먹고 milkContainer 에 넣고싶다.
@@ -171,7 +249,7 @@ public class Na_Player : MonoBehaviour
             if (other.gameObject.tag == "Milk")
             {
                 isMilk = other.gameObject;
-                startMilkPos = isMilk.transform.position;
+                startMilkPos = other.gameObject.transform.position;
             }
         }
         else
@@ -184,5 +262,17 @@ public class Na_Player : MonoBehaviour
                 isMilk = null;
             }
         }
-    }
+
+        // 점프대와 부딪히면 높이 점프하고싶다.
+        if(other.gameObject.tag == "JumpZone")
+        {
+            isJumpZone = true;
+        }
+
+        if (other.gameObject.name.Contains("FallZone"))
+        {
+            jumpCount++;
+        }     
+    } 
+
 }
