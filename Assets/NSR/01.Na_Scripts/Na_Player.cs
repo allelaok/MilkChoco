@@ -138,10 +138,7 @@ public class Na_Player : MonoBehaviour
         {
             anim.SetTrigger("Walk");
         }
-        else
-        {
-            anim.SetTrigger("Idle");
-        }
+       
 
         cc.Move(dir * speed * Time.deltaTime);
         
