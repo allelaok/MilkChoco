@@ -16,6 +16,11 @@ public class Na_DestroyZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    private void LateUpdate()
+    {
         if (isFallen)
         {
             Camera.main.transform.position = camPos;

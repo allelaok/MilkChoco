@@ -13,6 +13,8 @@ using UnityEngine.SceneManagement;
 // hp가 0이하면 죽이고 싶다.
 // 우유를 먹고 milkContainer 에 넣고 싶다.
 // 점프대와 부딪히면 높이 점프하고싶다.
+// 에너미에 에임을 맞추면 공격하고싶다.
+// 죽으면 10초를 세고 싶다.
 
 public class Na_Player : MonoBehaviour
 {
@@ -75,6 +77,30 @@ public class Na_Player : MonoBehaviour
 
     Animator anim;
 
+    // 필요속성 : 에임포인트, 세기, 사거리, 반동, 무게, 슛라인, 재장전, 조준경, 총알개수 등    
+    public Transform myCamera;
+
+    public float firePower = 10f;
+    public float fireTime = 0.2f;
+    public float crossroad = 30;
+    public float reboundPower = 0.2f;
+    public float reboundTime = 30f;
+    public float weight = 1;
+
+    public GameObject LineF;
+
+
+    public int maxFire = 20;
+    int fireCount;
+    public float reloadTime = 3;
+    float reloadCurrTime;
+
+    public float scope = 50;
+
+    Text bulletCountUI;
+
+    float reCurrTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +112,14 @@ public class Na_Player : MonoBehaviour
         currHP = maxHP;
 
         anim = GetComponentInChildren<Animator>();
+
+        currTime = fireTime;
+        fireCount = maxFire;
+
+        Na_Player_move playerMove = GetComponentInParent<Na_Player_move>();
+        Na_Player.instace.speed -= weight;
+
+        bulletCountUI = GameObject.Find("BulletCount").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -94,26 +128,29 @@ public class Na_Player : MonoBehaviour
         if (isDie)
         {
             Respawn();
+            Camera.main.transform.position = enemyCam.transform.position;
+            Camera.main.transform.forward = enemyCam.transform.forward;
         }
         else
         {          
             Move();
             Milk();
+            Attack();
         }
-            
+
     }
 
     private void LateUpdate()
     {
         if (isDie)
         {
-            Camera.main.transform.position = enemyCam.transform.position;
-            Camera.main.transform.forward = enemyCam.transform.forward;
+            //Camera.main.transform.position = enemyCam.transform.position;
+            //Camera.main.transform.forward = enemyCam.transform.forward;
         }
         else
         {
             Camera.main.transform.position = aimingPoint.position;
-            Camera.main.transform.forward = aimingPoint.forward;            
+            Camera.main.transform.forward = aimingPoint.forward;
         }
     }
 
@@ -134,10 +171,10 @@ public class Na_Player : MonoBehaviour
 
         Jump(out dir.y);
 
-        if(h + v > 0)
-        {
-            anim.SetTrigger("Walk");
-        }
+        //if(h + v > 0)
+        //{
+        //    anim.SetTrigger("Walk");
+        //}
        
 
         cc.Move(dir * speed * Time.deltaTime);
@@ -195,28 +232,21 @@ public class Na_Player : MonoBehaviour
 
     // 죽으면 리스폰 하고 싶다. 
     // 우유도
-    void Die()
-    {
-        //Camera.main.transform.position = enemyCam.transform.position;
-        //Camera.main.transform.forward = enemyCam.transform.forward;
-        Respawn();
-
-        
-    }
 
     // 일정 시간이 지나면 리스폰
     public void Respawn()
     {
-        currTime += Time.deltaTime;
-        if (currTime > respawnTime)
+        reCurrTime += Time.deltaTime;
+
+        if (reCurrTime > respawnTime)
         {
+           
             transform.position = startPlayerPos;
             //  현재 hp 를 최대 hp로 초기화
-            currHP = maxHP;
-            isDie = false;
+            currHP = maxHP;            
             enemyCam = null;
-
-            currTime = 0;
+            reCurrTime = 0;
+            isDie = false;
         }
 
         if (isMilk != null)
@@ -224,6 +254,25 @@ public class Na_Player : MonoBehaviour
             isMilk.transform.position = startMilkPos;
             isMilk = null;
         }
+    }
+
+    void Attack()
+    {
+        if (fireCount > 0)
+        {
+            Fire();
+            bulletCountUI.text = "총알개수 : " + fireCount;
+        }
+        else
+        {
+            bulletCountUI.text = "장전중...";
+            Reload();
+        }
+
+
+        Rebound();
+
+        Scope();
     }
 
     // 우유를 먹고 milkContainer 에 넣고싶다.
@@ -236,6 +285,102 @@ public class Na_Player : MonoBehaviour
         if (milkCount == 4)
         {
             SceneManager.LoadScene("Na_EndScene");
+        }
+    }
+
+    void Fire()
+    {
+        Ray ray = new Ray();
+        ray.origin = aimingPoint.position;
+        ray.direction = aimingPoint.forward;
+
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo, crossroad))
+        {
+            LineRenderer lr = null;
+
+
+            if (hitInfo.transform.gameObject.tag == "Enemy")
+            {
+
+                currTime += Time.deltaTime;
+                if (currTime > fireTime)
+                {
+                    GameObject line = Instantiate(LineF);
+                    lr = line.GetComponent<LineRenderer>();
+                    lr.SetPosition(0, transform.position);
+                    lr.SetPosition(1, hitInfo.point);
+                    Destroy(line, 0.1f);
+
+                    AudioSource audio = GetComponent<AudioSource>();
+                    audio.Play();
+
+                    hitInfo.transform.gameObject.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+
+                    //int rdx = UnityEngine.Random.Range(1, 2);
+                    //int rdy = UnityEngine.Random.Range(1, 2);
+                    //int rdz = UnityEngine.Random.Range(1, 2);
+
+                    myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
+
+
+                    fireCount--;
+
+                    currTime = 0;
+                }
+
+
+            }
+            else
+            {
+                currTime += Time.deltaTime;
+                if (currTime > 0.1f)
+                {
+                    currTime = fireTime;
+                }
+            }
+
+            if (lr != null)
+                lr.SetPosition(1, hitInfo.point);
+        }
+
+    }
+
+
+    void Rebound()
+    {
+        myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, new Vector3(0, 6, -15), Time.deltaTime * reboundTime);
+    }
+
+
+
+    void Reload()
+    {
+        reloadCurrTime += Time.deltaTime;
+        if (reloadCurrTime > reloadTime)
+        {
+            fireCount = maxFire;
+            currTime = fireTime;
+            reloadCurrTime = 0;
+        }
+    }
+
+
+    void Scope()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Camera.main.fieldOfView -= scope;
+            reboundTime += scope;
+            reboundPower += scope * 0.02f;
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            Camera.main.fieldOfView += scope;
+            reboundTime -= scope;
+            reboundPower -= scope * 0.02f;
         }
     }
 
