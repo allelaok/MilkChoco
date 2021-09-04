@@ -11,6 +11,7 @@ TagManager:
   - Choco
   - Pos
   - JumpZone
+  - ChocoContainer
   layers:
   - Default
   - TransparentFX

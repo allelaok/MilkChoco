@@ -53,7 +53,7 @@ public class KH_AttackEnemy : MonoBehaviour
         dir.y = y;
         cc.Move(dir);
 
-        //Choco();
+        Choco();
         #region memo
         //-------------------------------------------------------------------------------------------------------------
         //print("현상태: " + i);
@@ -117,6 +117,7 @@ public class KH_AttackEnemy : MonoBehaviour
 
             if (other.gameObject.name.Contains("ChocoContainer"))
             {
+                //다른 캐릭로 바꾼다..?
                 i = 0;
             }
         }
@@ -126,14 +127,19 @@ public class KH_AttackEnemy : MonoBehaviour
         {
             if (other.gameObject.tag == "Choco")
             {
+                print("초코먹음");
                 isChoco = other.gameObject;
-                startChocoPos = isChoco.transform.position;
+                startChocoPos = other.gameObject.transform.position;
+                //startChocoPos = isChoco.transform.position;
             }
         }
-        else
+        if (isChoco != null)
         {
+            print("초코먹방중");
+            //if (other.gameObject.tag =="ChocoContainer")
             if (other.gameObject.name.Contains("ChocoContainer"))
             {
+                print("초코야미야미야미야미");
                 chocoContainer[chocoCount].SetActive(true);
                 chocoCount++;
                 Destroy(isChoco.gameObject);
@@ -143,7 +149,7 @@ public class KH_AttackEnemy : MonoBehaviour
 
         if (other.gameObject.tag == "JumpZone")
         {
-            print("JJJ");
+            //print("JJJ");
             isJumpZone = true;
             isJump = true;
         }
@@ -178,7 +184,7 @@ public class KH_AttackEnemy : MonoBehaviour
     {
         if (cc.isGrounded)
         {
-            print("땅");
+            //print("땅");
             yVelocity = 0;
             //jumpCount = 0;
 
@@ -186,7 +192,7 @@ public class KH_AttackEnemy : MonoBehaviour
         
         if (isJumpZone)
         {
-            print("뛰어");
+            //print("뛰어");
             yVelocity = jumpZonePower;
             //jumpCount++;
             isJumpZone = false;
