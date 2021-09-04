@@ -7,19 +7,29 @@ public class Na_Damage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ColorBack();
+        iTween.ColorTo(gameObject, iTween.Hash(
+          "a", 0f,
+          "time", 0f
+
+            ));
+        //ColorA();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Na_Player.instace.isDie) return;
+
+        //ColorBack();
+        if (Input.GetMouseButtonDown(0))
         ColorA();
     }
 
     void ColorA()
     {
         iTween.ColorTo(gameObject, iTween.Hash(
-        "a", 0.8f,
+        "a", 1f,
         "time", 0.15f,
 
         "oncompletetarget", gameObject,
@@ -31,8 +41,7 @@ public class Na_Damage : MonoBehaviour
     {
         iTween.ColorTo(gameObject, iTween.Hash(
           "a", 0f,
-          "time", 0.15f
-
-            ));
+          "time", 0.3f
+           ));
     }
 }
