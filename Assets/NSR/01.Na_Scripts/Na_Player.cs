@@ -95,10 +95,12 @@ public class Na_Player : MonoBehaviour
       
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
+        Dodge(ref v);
 
         Vector3 dirH = transform.right * h;
         Vector3 dirV = transform.forward * v;
 
+        
         dir = dirH + dirV;
         dir.Normalize();
 
@@ -106,7 +108,6 @@ public class Na_Player : MonoBehaviour
             dir = dodgeVecor;
 
         Jump(out dir.y);
-        Dodge();
 
         anim.SetBool("isWalk", dirH + dirV != Vector3.zero);
        
@@ -169,7 +170,7 @@ public class Na_Player : MonoBehaviour
     float currDodgeTime;
     public float dodgeCoolTime = 10;
     Vector3 dodgeVecor;
-    void Dodge()
+    void Dodge(ref float v)
     {
 
         if (dodgeCount < MaxDodgeCount)
@@ -182,6 +183,9 @@ public class Na_Player : MonoBehaviour
                 isDodge = true;
                 Invoke("DodgeOut", 1.5f);
                 dodgeCount++;
+                v = 1;
+
+
             }
         }
         else
@@ -319,6 +323,8 @@ public class Na_Player : MonoBehaviour
     Text bulletCountUI;
     void Attack()
     {
+        if (isSwap) return;
+
         if (fireCount > 0)
         {
             // 자동 발사
