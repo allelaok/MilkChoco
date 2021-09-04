@@ -9,7 +9,7 @@ public class KH_AttackEnemy : MonoBehaviour
     public float yVelocity;
     //public float gravity = 7f;
     //public Vector3 dir;
-
+    public Transform[] enemyStart;
     public Transform[] pos;
     Vector3 dir;
     public float speed = 5;
