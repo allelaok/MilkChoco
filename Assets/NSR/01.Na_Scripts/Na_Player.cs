@@ -43,7 +43,7 @@ public class Na_Player : MonoBehaviour
         //  현재 hp 를 최대 hp로 초기화
         currHP = maxHP;
 
-        currTime = fireTime;
+        fireCurrTime = fireTime - 0.2f;
         fireCount = maxFire;
      
         speed -= weight;
@@ -344,6 +344,7 @@ public class Na_Player : MonoBehaviour
     public float weight = 1;
     public Transform myCamera;
     public GameObject enemy;
+    float fireCurrTime;
     void Fire()
     {
         // 반동 후 원래 위치로
@@ -360,8 +361,8 @@ public class Na_Player : MonoBehaviour
             {
                 enemy = hitInfo.transform.gameObject;
 
-                currTime += Time.deltaTime;
-                if (currTime > fireTime)
+                fireCurrTime += Time.deltaTime;
+                if (fireCurrTime > fireTime)
                 {
                     if(weaponIdx == 0)
                     {
@@ -378,20 +379,22 @@ public class Na_Player : MonoBehaviour
                         
                         fireCount--;
                         enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+
+                        anim.SetTrigger("doShot");
                     }
                     else
                     {
                         anim.SetTrigger("doSwing");
-                    }                   
-                    currTime = 0;
+                    }
+                    fireCurrTime = 0;
                 }
             }
             else
             {
-                currTime += Time.deltaTime;
-                if (currTime > 0.1f)
+                fireCurrTime += Time.deltaTime;
+                if (fireCurrTime > 0.1f)
                 {
-                    currTime = fireTime;
+                    fireCurrTime = fireTime - 0.2f;
                 }
             }
 
@@ -429,7 +432,7 @@ public class Na_Player : MonoBehaviour
 
 
     // 단거리 무기 공격
-    void SwingAttack()
+    public void SwingAttack()
     {
         enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
     }

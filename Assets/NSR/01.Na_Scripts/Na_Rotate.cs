@@ -36,7 +36,7 @@ public class Na_Rotate : MonoBehaviour
                 return;
         }
 
-        x = Mathf.Clamp(x, -30, 30);
+        x = Mathf.Clamp(x, -50, 30);
 
         transform.localEulerAngles = new Vector3(-x, y, 0);
     }
