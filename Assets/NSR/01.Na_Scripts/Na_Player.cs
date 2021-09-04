@@ -52,6 +52,11 @@ public class Na_Player : MonoBehaviour
 
         // damage 투명도 0을로
         iTween.ColorTo(damage, iTween.Hash("a", 0f,"time", 0f));
+
+        equipWeapon = weapons[0];
+        equipWeapon.SetActive(true);
+
+
     }
 
     // Update is called once per frame
@@ -75,7 +80,7 @@ public class Na_Player : MonoBehaviour
             Milk();
             Attack();
 
-            ChangeWeapon();
+            Swap();
         }
 
     }
@@ -89,6 +94,7 @@ public class Na_Player : MonoBehaviour
     public Vector3 dir;   
     void Move()
     {
+      
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
@@ -118,14 +124,18 @@ public class Na_Player : MonoBehaviour
     int jumpCount;
     int MaxJumpCount = 1;
     bool isJumpZone;
-    float jumpZonePower = 8f;    
+    float jumpZonePower = 8f;
+    bool isJump;
     void Jump(out float dirY)
     {
+
+        isJump = true;
         if (cc.isGrounded)
         {
             yVelocity = 0;
             jumpCount = 0;
             anim.SetBool("isJump", false);
+            isJump = false;
 
         }
 
@@ -163,6 +173,7 @@ public class Na_Player : MonoBehaviour
     Vector3 dodgeVecor;
     void Dodge()
     {
+
         if (dodgeCount < MaxDodgeCount)
         {
             if (Input.GetKeyDown(KeyCode.LeftShift) && cc.isGrounded)
@@ -196,9 +207,39 @@ public class Na_Player : MonoBehaviour
     // 필요속성 : 무기 배열
     public GameObject[] weapons;
     public bool[] hasWeapon;
-    void ChangeWeapon()
-    {
+    GameObject equipWeapon;
+    int weaponIdx;
+    bool isSwap;
 
+    void Swap()
+    {
+        if (isJump || isDodge) return;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (weaponIdx > 0.5f)
+            {
+                weaponIdx = 0;
+            }
+            else
+            {
+                weaponIdx = 1;
+            }
+
+            equipWeapon.SetActive(false);
+            equipWeapon = weapons[weaponIdx];
+            equipWeapon.SetActive(true);
+
+            anim.SetTrigger("doSwap");
+            Invoke("SwapOut", 0.4f);
+
+            isSwap = true;
+        }        
+    }
+
+    void SwapOut()
+    {
+        isSwap = false;
     }
 
     // Damage 를 받으면 hp를 깎고 싶다.
