@@ -29,8 +29,12 @@ public class Na_Rotate : MonoBehaviour
 
         if(onV)
         x += v * rotSpeed * Time.deltaTime;
-        if(onH)
-        y += h * rotSpeed * Time.deltaTime;
+        if (onH)
+        {
+            y += h * rotSpeed * Time.deltaTime;
+            if (Na_Player.instace.isDodge)
+                return;
+        }
 
         x = Mathf.Clamp(x, -30, 30);
 
