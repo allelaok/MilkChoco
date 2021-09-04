@@ -22,15 +22,21 @@ public class Na_Rotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Na_Player.instace.isDie) return;
+
         float h = Input.GetAxis("Mouse X");
         float v = Input.GetAxis("Mouse Y");
 
         if(onV)
         x += v * rotSpeed * Time.deltaTime;
-        if(onH)
-        y += h * rotSpeed * Time.deltaTime;
+        if (onH)
+        {
+            y += h * rotSpeed * Time.deltaTime;
+            if (Na_Player.instace.isDodge)
+                return;
+        }
 
-        x = Mathf.Clamp(x, -30, 30);
+        x = Mathf.Clamp(x, -50, 30);
 
         transform.localEulerAngles = new Vector3(-x, y, 0);
     }
