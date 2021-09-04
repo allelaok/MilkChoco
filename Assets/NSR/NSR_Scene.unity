@@ -1087,8 +1087,8 @@ Transform:
   m_LocalPosition: {x: -0.27, y: 3.21, z: -2.03}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
-  - {fileID: 644421476}
   - {fileID: 803160470}
+  - {fileID: 644421476}
   m_Father: {fileID: 1019473053}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3960,7 +3960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2285952976136801637, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2285952976136801637, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6870,7 +6870,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1873072230472789115, guid: c2ec4bfd1a6491c49a0c34b8dc3a7639, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1873072230472789115, guid: c2ec4bfd1a6491c49a0c34b8dc3a7639, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8223,8 +8223,8 @@ MonoBehaviour:
   isDodge: 0
   dodgeCoolTime: 10
   weapons:
-  - {fileID: 644421475}
   - {fileID: 803160469}
+  - {fileID: 644421475}
   hasWeapon: 
   currHP: 0
   maxHP: 100
@@ -8239,12 +8239,13 @@ MonoBehaviour:
   aimingPoint: {fileID: 5740221146659299328}
   LineF: {fileID: 9000005372274157056, guid: 75c98663713912a4d95aaf48eef709dd, type: 3}
   firePower: 10
-  fireTime: 0.2
+  fireTime: 2
   crossroad: 30
   reboundPower: 0.5
   reboundTime: 30
   weight: 1
   myCamera: {fileID: 918121885}
+  enemy: {fileID: 0}
   scope: 50
   milkContainer:
   - {fileID: 783468156}

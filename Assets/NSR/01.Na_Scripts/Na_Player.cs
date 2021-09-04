@@ -75,11 +75,9 @@ public class Na_Player : MonoBehaviour
         }
         else
         {
-            Move();
-            
+            Move();            
             Milk();
             Attack();
-
             Swap();
         }
 
@@ -217,12 +215,13 @@ public class Na_Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (weaponIdx > 0.5f)
+            if (weaponIdx == 1)
             {
                 weaponIdx = 0;
             }
             else
             {
+                fireTime = 1;
                 weaponIdx = 1;
             }
 
@@ -344,46 +343,48 @@ public class Na_Player : MonoBehaviour
     public float reboundTime = 30f;
     public float weight = 1;
     public Transform myCamera;
+    public GameObject enemy;
     void Fire()
     {
         // 반동 후 원래 위치로
         myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, new Vector3(0, 6, -15), Time.deltaTime * reboundTime);
+        LineRenderer lr = null;
 
         Ray ray = new Ray();
         ray.origin = aimingPoint.position;
         ray.direction = aimingPoint.forward;
         RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo, crossroad))
-        {
-            LineRenderer lr = null;
-
-
+        {          
             if (hitInfo.transform.gameObject.tag == "Enemy")
             {
+                enemy = hitInfo.transform.gameObject;
 
                 currTime += Time.deltaTime;
                 if (currTime > fireTime)
                 {
-                    GameObject line = Instantiate(LineF);
-                    lr = line.GetComponent<LineRenderer>();
-                    lr.SetPosition(0, transform.position);
-                    lr.SetPosition(1, hitInfo.point);
-                    Destroy(line, 0.1f);
+                    if(weaponIdx == 0)
+                    {
+                        GameObject line = Instantiate(LineF);
+                        lr = line.GetComponent<LineRenderer>();
+                        lr.SetPosition(0, transform.position);
+                        lr.SetPosition(1, hitInfo.point);
+                        Destroy(line, 0.1f);
 
-                    AudioSource audio = GetComponent<AudioSource>();
-                    audio.Play();
+                        AudioSource audio = GetComponent<AudioSource>();
+                        audio.Play();
 
-                    hitInfo.transform.gameObject.GetComponent<Na_Enemy_hp>().Damaged(firePower);
-
-                    myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
-
-
-                    fireCount--;
-
+                        myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
+                        
+                        fireCount--;
+                        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+                    }
+                    else
+                    {
+                        anim.SetTrigger("doSwing");
+                    }                   
                     currTime = 0;
                 }
-
-
             }
             else
             {
@@ -397,7 +398,6 @@ public class Na_Player : MonoBehaviour
             if (lr != null)
                 lr.SetPosition(1, hitInfo.point);
         }
-
     }
     void Reload()
     {
@@ -427,6 +427,14 @@ public class Na_Player : MonoBehaviour
         }
     }
 
+
+    // 단거리 무기 공격
+    void SwingAttack()
+    {
+        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+    }
+
+    
 
     // 우유를 먹고 milkContainer 에 넣고싶다.
     public GameObject[] milkContainer;
