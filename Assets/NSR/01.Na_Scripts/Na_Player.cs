@@ -70,8 +70,9 @@ public class Na_Player : MonoBehaviour
         if (isDie)
         {
             Respawn();
+            //transform.position = startPos.position;
             currTime += Time.deltaTime;
-            if(currTime > respawnTime)
+            if (currTime > respawnTime - 1)
             {
                 transform.position = startPos.position;
                 currTime = 0;
@@ -315,20 +316,25 @@ public class Na_Player : MonoBehaviour
     public Transform startPos;
     float currTime;
     [HideInInspector]
-    public float respawnTime = 10f;
+    float respawnTime = 10f;
     float reCurrTime;
     public Transform milkPos;
     GameObject isMilk;
+    public Text dieCount;
     public void Respawn()
     {
         reCurrTime += Time.deltaTime;
+        int count = 10 - (int)reCurrTime;
+        dieCount.text = "" + count;
         if (reCurrTime > respawnTime)
         {
             //  현재 hp 를 최대 hp로 초기화
             currHP = maxHP;            
             //enemyCam = null;
             reCurrTime = 0;
+            count = 0;
             isDie = false;
+
         }
         if (isMilk != null)
         {
