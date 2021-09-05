@@ -856,7 +856,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  enemyStart: []
+  enemyStart:
+  - {fileID: 1974329041}
+  - {fileID: 1164886754}
+  - {fileID: 964877105}
+  - {fileID: 1072933225}
   pos:
   - {fileID: 594618846}
   - {fileID: 552146449}
@@ -4090,7 +4094,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  enemyStart: []
+  enemyStart:
+  - {fileID: 1974329041}
+  - {fileID: 1164886754}
+  - {fileID: 964877105}
+  - {fileID: 1072933225}
   pos:
   - {fileID: 917437130}
   - {fileID: 1773598233}
@@ -9757,7 +9765,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  enemyStart: []
+  enemyStart:
+  - {fileID: 1974329041}
+  - {fileID: 1164886754}
+  - {fileID: 964877105}
+  - {fileID: 1072933225}
   pos:
   - {fileID: 1955963449}
   - {fileID: 870345251}
@@ -10886,7 +10898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1974329041
 Transform:
   m_ObjectHideFlags: 0
@@ -12408,7 +12420,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  enemyStart: []
+  enemyStart:
+  - {fileID: 1974329041}
+  - {fileID: 1164886754}
+  - {fileID: 964877105}
+  - {fileID: 1072933225}
   pos:
   - {fileID: 1631696962}
   - {fileID: 1961226934}

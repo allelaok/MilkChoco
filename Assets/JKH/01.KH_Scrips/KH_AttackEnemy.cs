@@ -9,28 +9,49 @@ public class KH_AttackEnemy : MonoBehaviour
     public float yVelocity;
     //public float gravity = 7f;
     //public Vector3 dir;
-    public Transform[] enemyStart;
+    public GameObject[] enemyStart; //enemy 배열(4개)
+    //public List<GameObject> Enemies;
     public Transform[] pos;
+    
     Vector3 dir;
     public float speed = 5;
-    int i;
+    int i;    
     public float gravity = 1;
     bool isJump = false;
     CharacterController cc;
     // Start is called before the first frame update
     void Start()
     {
+        Numshuffle();
         i = 0;
         cc = GetComponent<CharacterController>();
         startEnemyPos = transform.position;
+        //print(enemyStart.Length);
     }
 
+    void Numshuffle()
+    {
+        for(int k = 0; k < 3; k++)
+        {
+            int rand1 = Random.Range(0, enemyStart.Length);
+            int rand2 = Random.Range(0, enemyStart.Length);
+            swap(rand1, rand2);
+        }
+        
+    }
+
+    void swap(int m, int n)
+    {
+        GameObject temp = enemyStart[m];
+        enemyStart[m] = enemyStart[n];
+        enemyStart[n] = temp;
+    }
     public float jumpForwardSpeed = 10;
     float localSpeed;
     // Update is called once per frame
     void Update()
     {
-
+        //print("애너미 수:"+ Enemies);
         if (cc.isGrounded)
         {
             //i++;
@@ -44,9 +65,9 @@ public class KH_AttackEnemy : MonoBehaviour
         dir.Normalize();
         dir.y = 0;
         float y = 0;
-        print("local speed 111111111111111 " + localSpeed);
+        //print("local speed 111111111111111 " + localSpeed);
         Jump(out y);
-        print("local speed --------------> " + localSpeed);
+        //print("local speed --------------> " + localSpeed);
 
         dir *= localSpeed * Time.deltaTime;
         //Debug.DrawLine(transform.position, transform.position + dir * 100, Color.red);
