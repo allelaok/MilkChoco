@@ -37,7 +37,7 @@ public class KH_GameManager : MonoBehaviour
         print(numbers[3]);
 
         enemyStart[numbers[i]].SetActive(true);
-        i++;
+        //i++;
     }
 
     void shuffle()

@@ -901,7 +901,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 0.87
+  jumpZonePower: 1.05
 --- !u!143 &172896132
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1895,6 +1895,7 @@ MonoBehaviour:
   - {fileID: 1072933224}
   num1: 0
   num2: 0
+  i: 0
 --- !u!4 &390029103
 Transform:
   m_ObjectHideFlags: 0
@@ -4205,7 +4206,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 1.2
+  jumpZonePower: 1.4
 --- !u!143 &821671217
 CharacterController:
   m_ObjectHideFlags: 0

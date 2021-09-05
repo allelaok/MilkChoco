@@ -90,7 +90,7 @@ public class KH_AttackEnemy : MonoBehaviour
         dir *= localSpeed * Time.deltaTime;
         //Debug.DrawLine(transform.position, transform.position + dir * 100, Color.red);
         dir.y = y;
-        cc.Move(dir);
+        cc.Move(dir*Time.deltaTime);
 
         Choco();
         #region memo
@@ -183,6 +183,14 @@ public class KH_AttackEnemy : MonoBehaviour
                 chocoCount++;
                 Destroy(isChoco.gameObject);
                 isChoco = null;
+
+                //먹으면 해당 enemy getactive false 하고 그다음 enemy 실행한다 i++
+                int i = KH_GameManager.instance.i;
+                KH_GameManager.instance.enemyStart[i].SetActive(false);
+                i++;
+                KH_GameManager.instance.enemyStart[i].SetActive(true);
+
+                //그리고 만약에 다 채운다면 패배 Scene꺼낸다...
             }
         }
 
