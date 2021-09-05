@@ -26,12 +26,12 @@ public class KH_AttackEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        print(numbers[2]);
-        shuffle();
-        print(numbers[0]);
-        print(numbers[1]);
-        print(numbers[2]);
-        print(numbers[3]);
+        //print(numbers[2]);
+        //shuffle();
+        //print(numbers[0]);
+        //print(numbers[1]);
+        //print(numbers[2]);
+        //print(numbers[3]);
 
 
         i = 0;
@@ -67,7 +67,7 @@ public class KH_AttackEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        shuffle();
+        //shuffle();
 
         //print("애너미 수:"+ Enemies);
         if (cc.isGrounded)
