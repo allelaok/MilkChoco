@@ -4,12 +4,27 @@ using UnityEngine;
 
 public class KH_GameManager : MonoBehaviour
 {
+    public static KH_GameManager instance;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     //Shuffle, Swap을 위한 필요속성
     public GameObject[] enemyStart; //enemy 배열(4개)
     int[] numbers = { 0, 1, 2, 3 }; //순서 
     public int num1;
     public int num2;
-    int i = 0;
+    public int i = 0;
 
 
     // Start is called before the first frame update

@@ -35,6 +35,8 @@ public class KH_EnemyHP : MonoBehaviour
         {
             // instance로만든다
             // get Compomponent
+            int i = KH_GameManager.instance.i;
+            KH_GameManager.instance.enemyStart[i].SetActive(false);
         }
     }
 
