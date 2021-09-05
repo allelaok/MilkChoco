@@ -857,6 +857,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yVelocity: 0
   enemyStart: []
+  num1: 0
+  num2: 0
   pos:
   - {fileID: 594618846}
   - {fileID: 552146449}
@@ -1845,6 +1847,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389436318}
   m_CullTransparentMesh: 1
+--- !u!1 &390029101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 390029103}
+  - component: {fileID: 390029102}
+  m_Layer: 0
+  m_Name: KH_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &390029102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390029101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec5f98a3d2b92148bf616dbc2c9ac73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyStart:
+  - {fileID: 1974329040}
+  - {fileID: 1164886753}
+  - {fileID: 964877104}
+  - {fileID: 1072933224}
+  num1: 0
+  num2: 0
+--- !u!4 &390029103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390029101}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &396001466
 GameObject:
   m_ObjectHideFlags: 0
@@ -4091,6 +4143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yVelocity: 0
   enemyStart: []
+  num1: 0
+  num2: 0
   pos:
   - {fileID: 917437130}
   - {fileID: 1773598233}
@@ -5934,6 +5988,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yVelocity: 0
   enemyStart: []
+  num1: 0
+  num2: 0
   pos:
   - {fileID: 594618846}
   - {fileID: 552146449}
@@ -9758,6 +9814,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yVelocity: 0
   enemyStart: []
+  num1: 0
+  num2: 0
   pos:
   - {fileID: 1955963449}
   - {fileID: 870345251}
@@ -10886,7 +10944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1974329041
 Transform:
   m_ObjectHideFlags: 0
@@ -12409,6 +12467,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yVelocity: 0
   enemyStart: []
+  num1: 0
+  num2: 0
   pos:
   - {fileID: 1631696962}
   - {fileID: 1961226934}

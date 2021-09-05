@@ -10,7 +10,7 @@ public class KH_AttackEnemy : MonoBehaviour
     //public float gravity = 7f;
     //public Vector3 dir;
     public GameObject[] enemyStart; //enemy ¹è¿­(4°³)
-    int[] numbers= new int[4];
+    int[] numbers = { 0, 1, 2, 3 };
     public int num1;
     public int num2;
     //public List<GameObject> Enemies;
@@ -19,15 +19,20 @@ public class KH_AttackEnemy : MonoBehaviour
     Vector3 dir;
     public float speed = 5;
     int i;
-    int k;
+    //int k;
     public float gravity = 1;
     bool isJump = false;
     CharacterController cc;
     // Start is called before the first frame update
     void Start()
     {
+        print(numbers[2]);
         shuffle();
-        print(numbers);
+        print(numbers[0]);
+        print(numbers[1]);
+        print(numbers[2]);
+        print(numbers[3]);
+
 
         i = 0;
         cc = GetComponent<CharacterController>();
@@ -36,18 +41,21 @@ public class KH_AttackEnemy : MonoBehaviour
     }
     void shuffle()
     {
-        for(int j=0; i < 10; i++)
+        for(int i=0; i < 10; i++)
         {
+            int[] numbers = { 0, 1, 2, 3 };
+
             int nums1 = Random.Range(0, numbers.Length);
             int nums2 = Random.Range(0, numbers.Length);
 
-            Swap(num1, num2);
+            Swap(nums1, nums2);
         }
         
     }
 
     void Swap(int m,int n)
     {
+
         int temp = numbers[m];
         numbers[m] = numbers[n];
         numbers[n] = temp;
