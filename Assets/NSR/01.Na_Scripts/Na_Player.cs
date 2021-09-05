@@ -46,22 +46,24 @@ public class Na_Player : MonoBehaviour
         //  현재 hp 를 최대 hp로 초기화
         currHP = maxHP;
 
-        fireCurrTime = fireTime - 0.2f;
+        fireCurrTime = fireTime - 0.5f;
         fireCount = maxFire;
-     
+
         speed -= weight;
 
         bulletCountUI = GameObject.Find("BulletCount").GetComponent<Text>();
 
-        // damage 투명도 0을로
-        iTween.ColorTo(damage, iTween.Hash("a", 0f,"time", 0f));
+        // damage 투명도 으로
+        iTween.ColorTo(damage, iTween.Hash("a", 0f, "time", 0f));
 
-        equipWeapon = weapons[0];
-        equipWeapon.SetActive(true);
+        weapons[0].SetActive(true);
 
         y = transform.localEulerAngles.y;
 
         Hats[Na_Center.instance.chIdx].SetActive(true);
+
+        line.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -87,6 +89,10 @@ public class Na_Player : MonoBehaviour
             Swap();
             Rotate();
         }
+
+        lr = line.GetComponent<LineRenderer>();
+        lr.SetPosition(0, Gun.transform.position);
+        lr.SetPosition(1, hitInfo.point);
 
     }
 
@@ -232,34 +238,32 @@ public class Na_Player : MonoBehaviour
     // 무기를 바꾸고 싶다.
     // 필요속성 : 무기 배열
     public GameObject[] weapons;
-    GameObject equipWeapon;
     int weaponIdx;
     bool isSwap;
     void Swap()
     {
         if (isJump || isDodge) return;
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (weaponIdx == 1)
             {
+                weapons[0].SetActive(true);
+                weapons[1].SetActive(false);
                 weaponIdx = 0;
             }
-            else
+            else if (weaponIdx == 0)
             {
-                fireTime = 1;
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(true);
                 weaponIdx = 1;
             }
-
-            equipWeapon.SetActive(false);
-            equipWeapon = weapons[weaponIdx];
-            equipWeapon.SetActive(true);
 
             anim.SetTrigger("doSwap");
             Invoke("SwapOut", 0.4f);
 
             isSwap = true;
-        }        
+        }     
     }
 
     void SwapOut()
@@ -373,7 +377,7 @@ public class Na_Player : MonoBehaviour
 
     // 필요속성 : 에임포인트, 세기, 사거리, 반동, 무게, 슛라인, 재장전, 조준경, 총알개수 등    
     public Transform aimingPoint;
-    public GameObject LineF;
+    public GameObject line;
     [HideInInspector]
     public float firePower = 10f;
     [HideInInspector]
@@ -389,18 +393,21 @@ public class Na_Player : MonoBehaviour
     [HideInInspector]
     public GameObject enemy;
     float fireCurrTime;
+    public GameObject Gun;
+    RaycastHit hitInfo;
     void Fire()
     {
         // 반동 후 원래 위치로
         myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, new Vector3(0, 6, -15), Time.deltaTime * reboundTime);
-        LineRenderer lr = null;
+        //LineRenderer lr = null;
 
         Ray ray = new Ray();
         ray.origin = aimingPoint.position;
         ray.direction = aimingPoint.forward;
-        RaycastHit hitInfo;
+        
         if (Physics.Raycast(ray, out hitInfo, crossroad))
-        {          
+        {
+
             if (hitInfo.transform.gameObject.tag == "Enemy")
             {
                 enemy = hitInfo.transform.gameObject;
@@ -410,19 +417,19 @@ public class Na_Player : MonoBehaviour
                 {
                     if(weaponIdx == 0)
                     {
-                        GameObject line = Instantiate(LineF);
-                        lr = line.GetComponent<LineRenderer>();
-                        lr.SetPosition(0, transform.position);
-                        lr.SetPosition(1, hitInfo.point);
-                        Destroy(line, 0.1f);
+                        //GameObject line = Instantiate(LineF);
+                        //lr = line.GetComponent<LineRenderer>();
+                        //lr.SetPosition(0, Gun.transform.position);
+                        //lr.SetPosition(1, hitInfo.point);
+                        //Destroy(line, 0.1f);
 
-                        AudioSource audio = GetComponent<AudioSource>();
-                        audio.Play();
+                        //AudioSource audio = GetComponent<AudioSource>();
+                        //audio.Play();
 
-                        myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
+                        //myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
                         
-                        fireCount--;
-                        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+                        //fireCount--;
+                        //enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
 
                         anim.SetTrigger("doShot");
                     }
@@ -438,14 +445,36 @@ public class Na_Player : MonoBehaviour
                 fireCurrTime += Time.deltaTime;
                 if (fireCurrTime > 0.1f)
                 {
-                    fireCurrTime = fireTime - 0.2f;
+                    fireCurrTime = fireTime - 0.5f;
                 }
             }
 
-            if (lr != null)
-                lr.SetPosition(1, hitInfo.point);
+            //if (lr != null)
+            //    lr.SetPosition(1, hitInfo.point);
         }
     }
+
+    LineRenderer lr;
+    public void Shot()
+    {
+        line.SetActive(true);
+
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.Play();
+
+        myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
+
+        fireCount--;
+        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+
+        Invoke("ShotOut", 0.2f);
+    }
+
+    void ShotOut()
+    {
+        line.SetActive(false);
+    }
+
     void Reload()
     {
         reloadCurrTime += Time.deltaTime;
@@ -458,6 +487,7 @@ public class Na_Player : MonoBehaviour
     }
     [HideInInspector]
     public float scope = 50;
+    int i = 5;
     void Scope()
     {
         if (Input.GetMouseButtonDown(1))
@@ -465,6 +495,10 @@ public class Na_Player : MonoBehaviour
             Camera.main.fieldOfView -= scope;
             reboundTime += scope;
             reboundPower += scope * 0.02f;
+            rotSpeed -= scope * i;
+            GameObject cam = GameObject.Find("CameraHinge");
+            Na_Rotate camRot =  cam.GetComponent<Na_Rotate>();
+            camRot.rotSpeed -= scope * i;
         }
 
         if (Input.GetMouseButtonUp(1))
@@ -472,6 +506,10 @@ public class Na_Player : MonoBehaviour
             Camera.main.fieldOfView += scope;
             reboundTime -= scope;
             reboundPower -= scope * 0.02f;
+            rotSpeed += scope * i;
+            GameObject cam = GameObject.Find("CameraHinge");
+            Na_Rotate camRot = cam.GetComponent<Na_Rotate>();
+            camRot.rotSpeed += scope * i;
         }
     }
 
