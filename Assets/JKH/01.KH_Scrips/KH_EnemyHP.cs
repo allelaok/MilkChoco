@@ -33,7 +33,8 @@ public class KH_EnemyHP : MonoBehaviour
         //만약에 현재 HP가 0보다 같거나 작으면
         if (currHP <= 0)
         {
-            KH_GameManager EnemyInfo=GameObject.Find("")
+            // instance로만든다
+            // get Compomponent
         }
     }
 
