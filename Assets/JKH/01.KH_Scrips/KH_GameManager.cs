@@ -60,10 +60,18 @@ public class KH_GameManager : MonoBehaviour
         int temp = numbers[m];
         numbers[m] = numbers[n];
         numbers[n] = temp;
-    } 
+    }
+
+    public bool isChoco;
     // Update is called once per frame
     void Update()
     {
-        
+        if (isChoco)
+        {
+            enemyStart[numbers[i]].SetActive(false);
+            i++;
+            enemyStart[numbers[i]].SetActive(true);
+            isChoco = false;
+        }
     }
 }
