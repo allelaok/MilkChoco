@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cae3f9537776dea41855a724b56dd2c9
+guid: b3fdc85f36d17394bb6000c91d29982e
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -704,33 +704,33 @@ ModelImporter:
       - path: 
         weight: 1
       - path: Bone_Body
-        weight: 0
+        weight: 1
       - path: Bone_Body/Body
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Neck
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Neck/Bone_Head
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Neck/Bone_Head/Bone_Head_end
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Neck/Bone_Head/Head
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Shoulder_L
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Shoulder_L/Bone_Arm_L
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Shoulder_L/Bone_Arm_L/Bone_Arm_L_end
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Shoulder_L/Bone_Arm_L/LeftHand
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Shoulder_R
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Shoulder_R/Bone_Arm_R
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Shoulder_R/Bone_Arm_R/Bone_Arm_R_end
-        weight: 0
+        weight: 1
       - path: Bone_Body/Bone_Shoulder_R/Bone_Arm_R/RightHand
-        weight: 0
+        weight: 1
       - path: Bone_Leg_L
         weight: 1
       - path: Bone_Leg_L/Bone_Foot_L
