@@ -9,10 +9,10 @@ public class KH_AttackEnemy : MonoBehaviour
     public float yVelocity;
     //public float gravity = 7f;
     //public Vector3 dir;
-    public GameObject[] enemyStart; //enemy 배열(4개)
-    int[] numbers = { 0, 1, 2, 3 };
-    public int num1;
-    public int num2;
+    //public GameObject[] enemyStart; //enemy 배열(4개)
+    //int[] numbers = { 0, 1, 2, 3 };
+    //public int num1;
+    //public int num2;
     //public List<GameObject> Enemies;
     public Transform[] pos;
     
@@ -56,9 +56,9 @@ public class KH_AttackEnemy : MonoBehaviour
     void Swap(int m,int n)
     {
 
-        int temp = numbers[m];
-        numbers[m] = numbers[n];
-        numbers[n] = temp;
+        //int temp = numbers[m];
+        //numbers[m] = numbers[n];
+        //numbers[n] = temp;
     }
 
     

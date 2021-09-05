@@ -856,9 +856,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  enemyStart: []
-  num1: 0
-  num2: 0
   pos:
   - {fileID: 594618846}
   - {fileID: 552146449}
@@ -4142,9 +4139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  enemyStart: []
-  num1: 0
-  num2: 0
   pos:
   - {fileID: 917437130}
   - {fileID: 1773598233}
@@ -4172,7 +4166,7 @@ MonoBehaviour:
   - {fileID: 1722419310}
   speed: 7
   gravity: 1
-  jumpForwardSpeed: 12
+  jumpForwardSpeed: 10.5
   chocoPos: {fileID: 1452266579}
   chocoContainer:
   - {fileID: 1137087133}
@@ -4181,7 +4175,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 1.1
+  jumpZonePower: 1.2
 --- !u!143 &821671217
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5987,9 +5981,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  enemyStart: []
-  num1: 0
-  num2: 0
   pos:
   - {fileID: 594618846}
   - {fileID: 552146449}
@@ -9813,9 +9804,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  enemyStart: []
-  num1: 0
-  num2: 0
   pos:
   - {fileID: 1955963449}
   - {fileID: 870345251}
@@ -9857,7 +9845,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 0.87
+  jumpZonePower: 0.99
 --- !u!143 &1762416442
 CharacterController:
   m_ObjectHideFlags: 0
@@ -12466,9 +12454,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yVelocity: 0
-  enemyStart: []
-  num1: 0
-  num2: 0
   pos:
   - {fileID: 1631696962}
   - {fileID: 1961226934}
