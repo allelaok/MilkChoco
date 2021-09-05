@@ -14,6 +14,7 @@ using UnityEngine.SceneManagement;
 // 에너미에 에임을 맞추면 공격하고싶다.
 // 플레이어 애니메이션을 넣어주고 싶다.
 // 무기를 바꾸고 싶다.
+// 캐릭터 idex 를 받아서 모자를 쓰고싶다.
 
 public class Na_Player : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class Na_Player : MonoBehaviour
 
     Animator anim;
 
+    public GameObject[] Hats;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +59,9 @@ public class Na_Player : MonoBehaviour
         equipWeapon = weapons[0];
         equipWeapon.SetActive(true);
 
+        y = transform.localEulerAngles.y;
 
+        Hats[Na_Center.instance.chIdx].SetActive(true);
     }
 
     // Update is called once per frame
@@ -79,6 +84,7 @@ public class Na_Player : MonoBehaviour
             Milk();
             Attack();
             Swap();
+            Rotate();
         }
 
     }
@@ -87,8 +93,10 @@ public class Na_Player : MonoBehaviour
 
     // 플레이어 W, S, A, D 로 이동하고 싶다.
     // 필요속성 : 속도, CharacterController, 방향
+    [HideInInspector]
     public float speed = 7f;
     CharacterController cc;
+    [HideInInspector]
     public Vector3 dir;   
     void Move()
     {
@@ -117,9 +125,9 @@ public class Na_Player : MonoBehaviour
 
     // 플레이어 스페이스바로 1단 점프하고 싶다.
     // 필요속성 : 점프파워, 중력, y속도, 점프횟수, 최대 점프 가능 횟수
-    public float jumpPower = 3f;
+    float jumpPower = 3f;
     float yVelocity;
-    public float gravity = 7f;
+    float gravity = 7f;
     int jumpCount;
     int MaxJumpCount = 1;
     bool isJumpZone;
@@ -164,10 +172,12 @@ public class Na_Player : MonoBehaviour
     }
 
     // LeftShift 를 누르면 슬라이딩 하고싶다.
+    [HideInInspector]
     public bool isDodge;
     int dodgeCount;
     int MaxDodgeCount = 1;
     float currDodgeTime;
+    [HideInInspector]
     public float dodgeCoolTime = 10;
     Vector3 dodgeVecor;
     void Dodge(ref float v)
@@ -205,14 +215,29 @@ public class Na_Player : MonoBehaviour
         isDodge = false;
     }
 
+    public float rotSpeed = 2000f;
+    float y;
+    void Rotate()
+    {
+        float h = Input.GetAxis("Mouse X");
+
+        if (isDie || isDodge) return;
+        y += h * rotSpeed * Time.deltaTime;
+
+        transform.localEulerAngles = new Vector3(0, y, 0);
+    }
+
+
+   
+
+
+
     // 무기를 바꾸고 싶다.
     // 필요속성 : 무기 배열
     public GameObject[] weapons;
-    public bool[] hasWeapon;
     GameObject equipWeapon;
     int weaponIdx;
     bool isSwap;
-
     void Swap()
     {
         if (isJump || isDodge) return;
@@ -247,10 +272,12 @@ public class Na_Player : MonoBehaviour
 
     // Damage 를 받으면 hp를 깎고 싶다.
     // 필요속성 : 현재hp, 최대hp, hpUI, damage
-    public float currHP;
+    float currHP;
+    [HideInInspector]
     public float maxHP = 100;
     public Image hpUI;
     public GameObject damage;
+    [HideInInspector]
     public bool isDie;
     public void Damaged(float damage, GameObject enemyCamPos)
     {
@@ -291,7 +318,8 @@ public class Na_Player : MonoBehaviour
     Vector3 startMilkPos;
     public Transform startPos;
     float currTime;
-    public float respawnTime = 3f;
+    [HideInInspector]
+    public float respawnTime = 10f;
     float reCurrTime;
     public Transform milkPos;
     GameObject isMilk;
@@ -316,8 +344,10 @@ public class Na_Player : MonoBehaviour
 
 
     // 에너미 공격
+    [HideInInspector]
     public int maxFire = 20;
     int fireCount;
+    [HideInInspector]
     public float reloadTime = 3;
     float reloadCurrTime;
     Text bulletCountUI;
@@ -341,14 +371,20 @@ public class Na_Player : MonoBehaviour
 
     // 필요속성 : 에임포인트, 세기, 사거리, 반동, 무게, 슛라인, 재장전, 조준경, 총알개수 등    
     public Transform aimingPoint;
-    public GameObject LineF; 
+    public GameObject LineF;
+    [HideInInspector]
     public float firePower = 10f;
+    [HideInInspector]
     public float fireTime = 0.2f;
+    [HideInInspector]
     public float crossroad = 30;
+    [HideInInspector]
     public float reboundPower = 0.2f;
-    public float reboundTime = 30f;
+    float reboundTime = 30f;
+    [HideInInspector]
     public float weight = 1;
     public Transform myCamera;
+    [HideInInspector]
     public GameObject enemy;
     float fireCurrTime;
     void Fire()
@@ -418,6 +454,7 @@ public class Na_Player : MonoBehaviour
             reloadCurrTime = 0;
         }
     }
+    [HideInInspector]
     public float scope = 50;
     void Scope()
     {
