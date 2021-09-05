@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//************방 어 형 적 군************
 public class KH_EnemyFire : MonoBehaviour
 {
     float currTime;

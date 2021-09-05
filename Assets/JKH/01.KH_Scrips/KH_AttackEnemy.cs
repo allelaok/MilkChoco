@@ -9,28 +9,67 @@ public class KH_AttackEnemy : MonoBehaviour
     public float yVelocity;
     //public float gravity = 7f;
     //public Vector3 dir;
-
+    //public GameObject[] enemyStart; //enemy 배열(4개)
+    //int[] numbers = { 0, 1, 2, 3 };
+    //public int num1;
+    //public int num2;
+    //public List<GameObject> Enemies;
     public Transform[] pos;
+    
     Vector3 dir;
     public float speed = 5;
     int i;
+    //int k;
     public float gravity = 1;
     bool isJump = false;
     CharacterController cc;
     // Start is called before the first frame update
     void Start()
     {
+        //print(numbers[2]);
+        //shuffle();
+        //print(numbers[0]);
+        //print(numbers[1]);
+        //print(numbers[2]);
+        //print(numbers[3]);
+
+
         i = 0;
         cc = GetComponent<CharacterController>();
         startEnemyPos = transform.position;
+        //print(enemyStart.Length);
+    }
+    void shuffle()
+    {
+        for(int i=0; i < 10; i++)
+        {
+            int[] numbers = { 0, 1, 2, 3 };
+
+            int nums1 = Random.Range(0, numbers.Length);
+            int nums2 = Random.Range(0, numbers.Length);
+
+            Swap(nums1, nums2);
+        }
+        
     }
 
+    void Swap(int m,int n)
+    {
+
+        //int temp = numbers[m];
+        //numbers[m] = numbers[n];
+        //numbers[n] = temp;
+    }
+
+    
     public float jumpForwardSpeed = 10;
     float localSpeed;
     // Update is called once per frame
     void Update()
     {
+        //shuffle();
 
+        //print("애너미 수:"+ Enemies);
         if (cc.isGrounded)
         {
             //i++;
@@ -44,16 +83,16 @@ public class KH_AttackEnemy : MonoBehaviour
         dir.Normalize();
         dir.y = 0;
         float y = 0;
-        print("local speed 111111111111111 " + localSpeed);
+        //print("local speed 111111111111111 " + localSpeed);
         Jump(out y);
-        print("local speed --------------> " + localSpeed);
+        //print("local speed --------------> " + localSpeed);
 
         dir *= localSpeed * Time.deltaTime;
         //Debug.DrawLine(transform.position, transform.position + dir * 100, Color.red);
         dir.y = y;
         cc.Move(dir);
 
-        //Choco();
+        Choco();
         #region memo
         //-------------------------------------------------------------------------------------------------------------
         //print("현상태: " + i);
@@ -117,6 +156,7 @@ public class KH_AttackEnemy : MonoBehaviour
 
             if (other.gameObject.name.Contains("ChocoContainer"))
             {
+                //다른 캐릭로 바꾼다..?
                 i = 0;
             }
         }
@@ -126,14 +166,19 @@ public class KH_AttackEnemy : MonoBehaviour
         {
             if (other.gameObject.tag == "Choco")
             {
+                print("초코먹음");
                 isChoco = other.gameObject;
-                startChocoPos = isChoco.transform.position;
+                startChocoPos = other.gameObject.transform.position;
+                //startChocoPos = isChoco.transform.position;
             }
         }
-        else
+        if (isChoco != null)
         {
+            print("초코먹방중");
+            //if (other.gameObject.tag =="ChocoContainer")
             if (other.gameObject.name.Contains("ChocoContainer"))
             {
+                print("초코야미야미야미야미");
                 chocoContainer[chocoCount].SetActive(true);
                 chocoCount++;
                 Destroy(isChoco.gameObject);
@@ -143,7 +188,7 @@ public class KH_AttackEnemy : MonoBehaviour
 
         if (other.gameObject.tag == "JumpZone")
         {
-            print("JJJ");
+            //print("JJJ");
             isJumpZone = true;
             isJump = true;
         }
@@ -178,7 +223,7 @@ public class KH_AttackEnemy : MonoBehaviour
     {
         if (cc.isGrounded)
         {
-            print("땅");
+            //print("땅");
             yVelocity = 0;
             //jumpCount = 0;
 
@@ -186,7 +231,7 @@ public class KH_AttackEnemy : MonoBehaviour
         
         if (isJumpZone)
         {
-            print("뛰어");
+            //print("뛰어");
             yVelocity = jumpZonePower;
             //jumpCount++;
             isJumpZone = false;
