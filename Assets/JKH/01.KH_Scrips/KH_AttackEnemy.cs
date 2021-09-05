@@ -10,47 +10,57 @@ public class KH_AttackEnemy : MonoBehaviour
     //public float gravity = 7f;
     //public Vector3 dir;
     public GameObject[] enemyStart; //enemy 배열(4개)
+    int[] numbers= new int[4];
+    public int num1;
+    public int num2;
     //public List<GameObject> Enemies;
     public Transform[] pos;
     
     Vector3 dir;
     public float speed = 5;
-    int i;    
+    int i;
+    int k;
     public float gravity = 1;
     bool isJump = false;
     CharacterController cc;
     // Start is called before the first frame update
     void Start()
     {
-        Numshuffle();
+        shuffle();
+        print(numbers);
+
         i = 0;
         cc = GetComponent<CharacterController>();
         startEnemyPos = transform.position;
         //print(enemyStart.Length);
     }
-
-    void Numshuffle()
+    void shuffle()
     {
-        for(int k = 0; k < 3; k++)
+        for(int j=0; i < 10; i++)
         {
-            int rand1 = Random.Range(0, enemyStart.Length);
-            int rand2 = Random.Range(0, enemyStart.Length);
-            swap(rand1, rand2);
+            int nums1 = Random.Range(0, numbers.Length);
+            int nums2 = Random.Range(0, numbers.Length);
+
+            Swap(num1, num2);
         }
         
     }
 
-    void swap(int m, int n)
+    void Swap(int m,int n)
     {
-        GameObject temp = enemyStart[m];
-        enemyStart[m] = enemyStart[n];
-        enemyStart[n] = temp;
+        int temp = numbers[m];
+        numbers[m] = numbers[n];
+        numbers[n] = temp;
     }
+
+    
     public float jumpForwardSpeed = 10;
     float localSpeed;
     // Update is called once per frame
     void Update()
     {
+        shuffle();
+
         //print("애너미 수:"+ Enemies);
         if (cc.isGrounded)
         {
