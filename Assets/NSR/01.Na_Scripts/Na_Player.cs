@@ -228,10 +228,6 @@ public class Na_Player : MonoBehaviour
     }
 
 
-   
-
-
-
     // 무기를 바꾸고 싶다.
     // 필요속성 : 무기 배열
     public GameObject[] weapons;
@@ -242,7 +238,7 @@ public class Na_Player : MonoBehaviour
     {
         if (isJump || isDodge) return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (weaponIdx == 1)
             {

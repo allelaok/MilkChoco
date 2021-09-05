@@ -37,6 +37,8 @@ public class KH_EnemyHP : MonoBehaviour
             // get Compomponent
             int i = KH_GameManager.instance.i;
             KH_GameManager.instance.enemyStart[i].SetActive(false);
+
+
         }
     }
 
