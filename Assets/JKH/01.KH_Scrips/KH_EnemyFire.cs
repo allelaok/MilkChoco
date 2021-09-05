@@ -20,7 +20,8 @@ public class KH_EnemyFire : MonoBehaviour
     public float fireTime = 0.1f; //연사속도
     public GameObject LineRay; //총알발사라인(임시)
     public Animator animator;
-    
+    BoxCollider bc;
+    Rigidbody rb;
     
     //CharacterController cc; //이동하는거 안씀 아직.ㅎ
     // Start is called before the first frame update
@@ -38,14 +39,20 @@ public class KH_EnemyFire : MonoBehaviour
     EnemyState m_state= EnemyState.Idle;
     void Start()
     {
-        //cc = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
+        bc = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            OnDamageProcess(transform.forward * -1);
+        }
+
         //enemyShot();
-        //print("현재 상태: " + m_state);
+        print("현재 상태: " + m_state);
 
         switch (m_state)
         {
@@ -74,6 +81,8 @@ public class KH_EnemyFire : MonoBehaviour
 
     private void Idle()
     {
+        animator.SetTrigger("isIdle");
+
         currTime += Time.deltaTime;
         if (currTime > IdleDelayTime)
         {
@@ -104,19 +113,23 @@ public class KH_EnemyFire : MonoBehaviour
         //2. 거리가 일정이하가 되면 웨이포인트를 전환한다.
         //3. 오브젝트의 방향을 돌리고 두번째 웨이포인트를 향해 이동한다.
         //4. 거리가 일정 이하가 되면 웨이포인트를 전환한다.
+        animator.SetTrigger("isWalk");
 
-        animator.SetBool("Move", true);
 
         var distance2 = Vector3.Distance(gameObject.transform.position, currentWayPoint.position);
         //Debug.Log(distance2);
         if (Vector3.Distance(gameObject.transform.position, wayPoint1.position) <= 1f)
         {
+            m_state = EnemyState.Idle;
+            
+            
             //Debug.Log("2");
             currentWayPoint = wayPoint2;
         }
 
         if(Vector3.Distance(gameObject.transform.position, wayPoint2.position) <= 1f)
         {
+            m_state = EnemyState.Idle;
             //Debug.Log("1");
             currentWayPoint = wayPoint1;
         }
@@ -149,7 +162,7 @@ public class KH_EnemyFire : MonoBehaviour
         {
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
-            animator.SetBool("Move", false);
+            
         }
     }
     //임시
@@ -157,6 +170,7 @@ public class KH_EnemyFire : MonoBehaviour
     private void Detect()
 
     {
+        animator.SetTrigger("isIdle");
         //print("Detect");
         Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
@@ -170,6 +184,7 @@ public class KH_EnemyFire : MonoBehaviour
             if (hitInfo.transform.gameObject.tag == "Player")
             {
                 m_state = EnemyState.Attack;
+                
             }
         }
 
@@ -178,7 +193,7 @@ public class KH_EnemyFire : MonoBehaviour
         if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
         {
             
-            m_state = EnemyState.Move; //이러면 Move로 넘어간다
+            m_state = EnemyState.Idle; //이러면 Move로 넘어간다
         }
 
         ////Ray를 발사시켜서 어딘가에 부딪혔다면
@@ -241,15 +256,84 @@ public class KH_EnemyFire : MonoBehaviour
         }
 
     }
+    bool isKnockBackFinish = false;
+    float isDamagedTime = 2;
 
     private void Damage()
     {
-        throw new NotImplementedException();
+        //만약 넉백상태라면
+       if (isKnockBackFinish == false)
+        {
+            transform.position = Vector3.Lerp(transform.position, knockbackPos, knockbackSpeed * Time.deltaTime);
+            float distance = Vector3.Distance(transform.position, knockbackPos);
+
+            if (distance < 0.1f)
+            {
+               
+                transform.position = knockbackPos;
+                isKnockBackFinish = true;
+
+            }
+            //넉백상태가 끝나면
+            if (isKnockBackFinish)
+            {
+                currTime += Time.deltaTime;
+                if (currTime > isDamagedTime)
+                {
+                    m_state = EnemyState.Idle;
+                    currTime = 0;
+                   
+                }
+            }
+        }
+
     }
+
+    public float knockbackSpeed = 10;
+    Vector3 knockbackPos;
+    float maxHp = 5;
+    public void OnDamageProcess(Vector3 shootDirection)
+    {
+        maxHp--;
+
+        if (maxHp <= 0)
+        {
+            m_state = EnemyState.Die;
+            
+            animator.SetTrigger("Die");
+        }
+        else
+        {
+            shootDirection.y = 0;
+            knockbackPos = transform.position + shootDirection * 1;
+            m_state = EnemyState.Damage;
+            animator.SetTrigger("isDamaged");
+            isKnockBackFinish = false;
+        }
+    }
+
+    public float downSpeed = 2;
 
     private void Die()
     {
-        throw new NotImplementedException();
+        currTime += Time.deltaTime;
+        if (currTime > 2)
+        {
+            
+            this.gameObject.GetComponent<Rigidbody>().detectCollisions = false;
+            bc.enabled = false;
+            Vector3 vt = Vector3.down * downSpeed * Time.deltaTime;
+            Vector3 Po = transform.position;
+            Vector3 P = Po + vt;
+            transform.position = P;
+            currTime = 0;
+
+            if (P.y <= -1 )
+            {
+                Destroy(gameObject);
+            }
+
+        }
     }
 
     void enemyShot()
