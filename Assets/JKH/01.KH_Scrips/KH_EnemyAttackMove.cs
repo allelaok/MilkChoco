@@ -105,7 +105,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         dir *= localSpeed * Time.deltaTime;
         //Debug.DrawLine(transform.position, transform.position + dir * 100, Color.red);
         dir.y = y;
-        cc.Move(dir);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거수정한다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        cc.Move(dir*Time.deltaTime);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거수정한다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotSpeed * Time.deltaTime); //몸통트는 부분
         Choco();
 

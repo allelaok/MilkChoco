@@ -30,13 +30,14 @@ public class KH_GameManager : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        enemyStart[numbers[3]].SetActive(true);
         shuffle(); //처음에 배열 무작위로 섞는다
         print(numbers[0]); //순서확인
         print(numbers[1]);
         print(numbers[2]);
         print(numbers[3]);
 
-        enemyStart[numbers[i]].SetActive(true);
+        //enemyStart[numbers[i]].SetActive(true);
         //i++;
     }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1059,9 +1059,9 @@ MonoBehaviour:
   - {fileID: 1945386582}
   - {fileID: 274368266}
   - {fileID: 790916069}
-  speed: 5
-  gravity: 1
-  jumpForwardSpeed: 10
+  speed: 250
+  gravity: 9
+  jumpForwardSpeed: 80
   chocoPos: {fileID: 157000341}
   chocoContainer:
   - {fileID: 1137087133}
@@ -1070,7 +1070,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 15
+  jumpZonePower: 22
   rotSpeed: 2
   aimingPoint: {fileID: 1183130215}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
@@ -1698,7 +1698,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331123683}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.3, y: -19.82, z: -94.6}
+  m_LocalPosition: {x: -16, y: -19.82, z: -95.18}
   m_LocalScale: {x: 0.32367, y: 0.32367, z: 0.32367}
   m_Children: []
   m_Father: {fileID: 1955963449}
@@ -1869,7 +1869,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352073440}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.67, y: 1.35, z: 66.11}
+  m_LocalPosition: {x: 16.89, y: 1.35, z: 66.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1023154409}
@@ -2231,7 +2231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396001466}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.27, y: -19.8, z: -100.56}
+  m_LocalPosition: {x: -18.6, y: -19.8, z: -102.6}
   m_LocalScale: {x: 0.32367, y: 0.32367, z: 0.32367}
   m_Children: []
   m_Father: {fileID: 1955963449}
@@ -4016,7 +4016,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650684192}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.27, y: -19.8, z: -100.56}
+  m_LocalPosition: {x: -18.8, y: -18.6, z: -102.3}
   m_LocalScale: {x: 0.32367, y: 0.32367, z: 0.32367}
   m_Children: []
   m_Father: {fileID: 594618846}
@@ -5165,9 +5165,9 @@ MonoBehaviour:
   - {fileID: 1696547646}
   - {fileID: 1208853925}
   - {fileID: 1722419310}
-  speed: 5
-  gravity: 1
-  jumpForwardSpeed: 10
+  speed: 250
+  gravity: 9
+  jumpForwardSpeed: 80
   chocoPos: {fileID: 1452266579}
   chocoContainer:
   - {fileID: 1137087133}
@@ -5176,7 +5176,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 15
+  jumpZonePower: 22
   rotSpeed: 2
   aimingPoint: {fileID: 515136908}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
@@ -5269,7 +5269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827135163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.2, y: 0, z: 51.9}
+  m_LocalPosition: {x: -13.2, y: -1, z: 51.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 917437130}
@@ -6834,7 +6834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053509095}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4, y: 0, z: 82.2}
+  m_LocalPosition: {x: -1.4, y: -1, z: 82.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 917437130}
@@ -6976,7 +6976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069157157}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.91, y: -19.8, z: -56.72}
+  m_LocalPosition: {x: -19.3, y: -19.8, z: -53.3}
   m_LocalScale: {x: 0.32367, y: 0.32367, z: 0.32367}
   m_Children: []
   m_Father: {fileID: 1955963449}
@@ -8890,7 +8890,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366089973}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 0, z: 100.4}
+  m_LocalPosition: {x: 1.9, y: -1, z: 100.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 917437130}
@@ -9401,7 +9401,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430707062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43.6, y: -39.6, z: 134.1}
+  m_LocalPosition: {x: 30.99, y: -39.6, z: 130.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1631696962}
@@ -9997,7 +9997,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530402286}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.3, y: -39.6, z: 122.3}
+  m_LocalPosition: {x: 38.1, y: -39.717, z: 114.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1631696962}
@@ -10829,7 +10829,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662970914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.7, y: 0.53, z: 73.5}
+  m_LocalPosition: {x: 38, y: 0.53, z: 93.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1631696962}
@@ -11554,7 +11554,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761473445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: -19.8, z: -64.2}
+  m_LocalPosition: {x: -14.3, y: -19.8, z: -62.8}
   m_LocalScale: {x: 0.32367, y: 0.32367, z: 0.32367}
   m_Children: []
   m_Father: {fileID: 1955963449}
@@ -11656,9 +11656,9 @@ MonoBehaviour:
   - {fileID: 874921529}
   - {fileID: 164674814}
   - {fileID: 1803429106}
-  speed: 5
-  gravity: 1
-  jumpForwardSpeed: 10
+  speed: 200
+  gravity: 9
+  jumpForwardSpeed: 80
   chocoPos: {fileID: 1416326845}
   chocoContainer:
   - {fileID: 1137087133}
@@ -11667,7 +11667,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 15
+  jumpZonePower: 22
   rotSpeed: 2
   aimingPoint: {fileID: 2017856536}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
@@ -11715,7 +11715,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773598232}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1, y: 0, z: 29.7}
+  m_LocalPosition: {x: 2.1, y: -1, z: 29.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 917437130}
@@ -12156,7 +12156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848250579}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.39, y: -0.35, z: -113.17}
+  m_LocalPosition: {x: -18.29, y: -0.35, z: -114}
   m_LocalScale: {x: 0.32367, y: 0.32367, z: 0.32367}
   m_Children: []
   m_Father: {fileID: 594618846}
@@ -12201,7 +12201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850072081}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.3, y: -19.82, z: -94.6}
+  m_LocalPosition: {x: -15, y: -19.82, z: -94.6}
   m_LocalScale: {x: 0.32367, y: 0.32367, z: 0.32367}
   m_Children: []
   m_Father: {fileID: 594618846}
@@ -14582,9 +14582,9 @@ MonoBehaviour:
   - {fileID: 1662970915}
   - {fileID: 542854015}
   - {fileID: 1954860476}
-  speed: 5
-  gravity: 1
-  jumpForwardSpeed: 10
+  speed: 250
+  gravity: 9
+  jumpForwardSpeed: 43
   chocoPos: {fileID: 351148931}
   chocoContainer:
   - {fileID: 1137087133}
@@ -14593,7 +14593,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 15
+  jumpZonePower: 22
   rotSpeed: 2
   aimingPoint: {fileID: 1343058833}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
