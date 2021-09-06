@@ -90,7 +90,7 @@ public class KH_AttackEnemy : MonoBehaviour
         dir *= localSpeed * Time.deltaTime;
         //Debug.DrawLine(transform.position, transform.position + dir * 100, Color.red);
         dir.y = y;
-        cc.Move(dir);
+        cc.Move(dir);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거수정한다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
         Choco();
         #region memo

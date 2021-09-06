@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class KH_AttackModeEnemy : MonoBehaviour
 {
+
+    // ----------------이 거 버 림----------------
     public Transform posLeft;
     public Transform posRight;
     public Transform posMid;

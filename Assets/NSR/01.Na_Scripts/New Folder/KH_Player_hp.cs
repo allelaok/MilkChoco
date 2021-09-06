@@ -39,9 +39,9 @@ public class KH_Player_hp : MonoBehaviour
             }
             gameObject.SetActive(false);
             currTIme += Time.deltaTime;
-            if (currTIme > bornTime)
+            if (currTIme > bornTime) //쿨타임 10초
             {
-                gameObject.SetActive(false);
+                gameObject.SetActive(true);
                 //다른스크립트에서 이거 state바꾼다.
             }
             
