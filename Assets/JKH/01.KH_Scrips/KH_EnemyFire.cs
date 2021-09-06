@@ -17,7 +17,7 @@ public class KH_EnemyFire : MonoBehaviour
     public GameObject pos2;
     public float rotSpeed = 2;
     public Transform aimingPoint; //발사포인트
-    public float fireTime = 0.1f; //연사속도
+    public float fireTime = 2; //연사속도
     public GameObject LineRay; //총알발사라인(임시)
     public Animator animator;
     BoxCollider bc;
@@ -176,8 +176,8 @@ public class KH_EnemyFire : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
             rotSpeed * Time.deltaTime); //몸을돌린다
         Ray ray = new Ray();    //레이 생성
-        ray.origin = aimingPoint.transform.position;    //레이 위치 
-        ray.direction = aimingPoint.transform.forward;  //레이 방향
+        ray.origin = firePos.transform.position;    //레이 위치 
+        ray.direction = transform.forward;  //레이 방향
         RaycastHit hitInfo; //레이닿은변수 가져오기
         if (Physics.Raycast(ray, out hitInfo, 100))
         {
@@ -203,10 +203,29 @@ public class KH_EnemyFire : MonoBehaviour
         //}
 
     }
+    float attackDelayTime = 2;
 
     private void Attack()
     {
-        Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
+
+
+
+        Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
+        float distance = dir.magnitude; //거리 계산
+        if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
+        {
+
+            m_state = EnemyState.Move; //이러면 Move로 넘어간다
+        }
+
+        currTime += Time.deltaTime;
+        animator.SetTrigger("isAttackDelay");
+        if (currTime < fireTime)
+            return;
+
+        
+
+            Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
             rotSpeed * Time.deltaTime); //몸을돌린다
 
@@ -223,53 +242,56 @@ public class KH_EnemyFire : MonoBehaviour
 
             if (hitInfo.transform.gameObject.tag == "Player")
             {
+                animator.SetTrigger("isAttack");
 
-                currTime += Time.deltaTime;
-                if (currTime > fireTime)
-                {
-                    GameObject line = Instantiate(LineRay);  
-                    lr = line.GetComponent<LineRenderer>();
-                    lr.SetPosition(0, transform.position);  
-                    lr.SetPosition(1, hitInfo.point);   
-                    Destroy(line, 0.1f);
-                    hitInfo.transform.gameObject.GetComponent<KH_Player_hp>().Damaged(.5f);
-                    currTime = 0;
-                }
+                GameObject line = Instantiate(LineRay);
+                lr = line.GetComponent<LineRenderer>();
+                lr.SetPosition(0, firePos.transform.position);
+                lr.SetPosition(1, hitInfo.point);
+
+                Destroy(line, 0.1f);
+                hitInfo.transform.gameObject.GetComponent<KH_Player_hp>().Damaged(.5f);
+                currTime = 0f;
 
             }
 
-            else
-            {
-                currTime = fireTime;
-            }
+            //else
+            //{
+            //    currTime = fireTime;
+            //}
 
             if (lr != null)
                 lr.SetPosition(1, hitInfo.point);   
         }
 
-        Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
-        float distance = dir.magnitude; //거리 계산
-        if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
-        {
-
-            m_state = EnemyState.Move; //이러면 Move로 넘어간다
-        }
 
     }
     bool isKnockBackFinish = false;
     float isDamagedTime = 2;
 
+    void OnHit()
+    {
+
+        // 애니메이션 타이밍에 맞게 총을 쏘고싶다.
+        // 애니메이션 타이밍
+        
+        // 총을 쏜다.
+       
+    }
+
+
+
     private void Damage()
     {
         //만약 넉백상태라면
-       if (isKnockBackFinish == false)
+        if (isKnockBackFinish == false)
         {
             transform.position = Vector3.Lerp(transform.position, knockbackPos, knockbackSpeed * Time.deltaTime);
             float distance = Vector3.Distance(transform.position, knockbackPos);
 
             if (distance < 0.1f)
             {
-               
+
                 transform.position = knockbackPos;
                 isKnockBackFinish = true;
 
@@ -282,12 +304,13 @@ public class KH_EnemyFire : MonoBehaviour
                 {
                     m_state = EnemyState.Idle;
                     currTime = 0;
-                   
+
                 }
             }
         }
-
     }
+
+        
 
     public float knockbackSpeed = 10;
     Vector3 knockbackPos;
@@ -296,12 +319,23 @@ public class KH_EnemyFire : MonoBehaviour
     {
         maxHp--;
 
+        //if (m_state == EnemyState.Die)
+        //{
+        //    return;
+        //}
+        //// 코루틴을 종료하고 싶다.
+        //StopAllCoroutines();
+
+
         if (maxHp <= 0)
         {
             m_state = EnemyState.Die;
             
             animator.SetTrigger("Die");
+            
         }
+
+
         else
         {
             shootDirection.y = 0;
