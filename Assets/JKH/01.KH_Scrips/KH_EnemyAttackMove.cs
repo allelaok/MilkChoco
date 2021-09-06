@@ -106,7 +106,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //Debug.DrawLine(transform.position, transform.position + dir * 100, Color.red);
         dir.y = y;
         cc.Move(dir);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거수정한다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotSpeed * Time.deltaTime); //몸통트는 부분
         Choco();
 
 
@@ -242,8 +242,10 @@ public class KH_EnemyAttackMove : MonoBehaviour
         Ray ray = new Ray();    //레이 생성
         ray.origin = aimingPoint.transform.position;    //레이 위치 
         ray.direction = aimingPoint.transform.forward;  //레이 방향
+
+        print("레이발사");
         RaycastHit hitInfo; //레이닿은변수 가져오기
-        if (Physics.Raycast(ray, out hitInfo, 100))
+        if (Physics.Raycast(ray, out hitInfo, 1000))
         {
             if (hitInfo.transform.gameObject.tag == "Player")
             {

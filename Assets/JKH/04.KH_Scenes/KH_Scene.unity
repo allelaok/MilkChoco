@@ -851,7 +851,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 919042702}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &143319098
 GameObject:
@@ -998,16 +998,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172896129}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.35, z: 76.38}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 330480303}
   - {fileID: 414878479}
   - {fileID: 157000341}
+  - {fileID: 1183130215}
   m_Father: {fileID: 1164886754}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &172896131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,9 +1018,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 172896129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff49187ac461c75448e8774e63831351, type: 3}
+  m_Script: {fileID: 11500000, guid: 9147fa53f307fcb4ea913ac30bae4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdleDelayTime: 2
+  target: {fileID: 352073440}
+  attackRange: 15
   yVelocity: 0
   pos:
   - {fileID: 594618846}
@@ -1055,9 +1059,9 @@ MonoBehaviour:
   - {fileID: 1945386582}
   - {fileID: 274368266}
   - {fileID: 790916069}
-  speed: 7
+  speed: 5
   gravity: 1
-  jumpForwardSpeed: 12
+  jumpForwardSpeed: 10
   chocoPos: {fileID: 157000341}
   chocoContainer:
   - {fileID: 1137087133}
@@ -1066,7 +1070,11 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 1.05
+  jumpZonePower: 15
+  rotSpeed: 2
+  aimingPoint: {fileID: 1183130215}
+  LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
+  fireTime: 0.1
 --- !u!143 &172896132
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1768,7 +1776,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8812584345772856176}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352073440
 GameObject:
@@ -1866,7 +1874,7 @@ Transform:
   m_Children:
   - {fileID: 1023154409}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &352073445
 MonoBehaviour:
@@ -1939,7 +1947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &372581266
 Transform:
   m_ObjectHideFlags: 0
@@ -1954,7 +1962,7 @@ Transform:
   - {fileID: 919042702}
   - {fileID: 1957282780}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374233147
 GameObject:
@@ -2162,7 +2170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &390029102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2196,7 +2204,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &396001466
 GameObject:
@@ -3089,6 +3097,36 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &515136907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515136908}
+  m_Layer: 0
+  m_Name: GunEg (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &515136908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515136907}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.343, y: 0.24000001, z: 0.5099945}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 821671215}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &523651339
 GameObject:
   m_ObjectHideFlags: 0
@@ -4226,7 +4264,7 @@ RectTransform:
   m_Children:
   - {fileID: 2107778083}
   m_Father: {fileID: 919042702}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4923,7 +4961,7 @@ Transform:
   - {fileID: 1691007161}
   - {fileID: 1307543302}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &803495544
 GameObject:
@@ -5075,16 +5113,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821671214}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.35, z: 76.38}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 218764529}
   - {fileID: 374233148}
   - {fileID: 1452266579}
+  - {fileID: 515136908}
   m_Father: {fileID: 964877105}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &821671216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5094,9 +5133,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 821671214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff49187ac461c75448e8774e63831351, type: 3}
+  m_Script: {fileID: 11500000, guid: 9147fa53f307fcb4ea913ac30bae4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdleDelayTime: 2
+  target: {fileID: 352073440}
+  attackRange: 15
   yVelocity: 0
   pos:
   - {fileID: 917437130}
@@ -5123,9 +5165,9 @@ MonoBehaviour:
   - {fileID: 1696547646}
   - {fileID: 1208853925}
   - {fileID: 1722419310}
-  speed: 7
+  speed: 5
   gravity: 1
-  jumpForwardSpeed: 10.5
+  jumpForwardSpeed: 10
   chocoPos: {fileID: 1452266579}
   chocoContainer:
   - {fileID: 1137087133}
@@ -5134,7 +5176,11 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 1.4
+  jumpZonePower: 15
+  rotSpeed: 2
+  aimingPoint: {fileID: 515136908}
+  LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
+  fireTime: 0.1
 --- !u!143 &821671217
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5587,7 +5633,7 @@ RectTransform:
   m_Children:
   - {fileID: 1221109520}
   m_Father: {fileID: 8812584345772856176}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6070,17 +6116,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919042701}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.35, z: 76.38}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
+  - {fileID: 1616442945}
   - {fileID: 970996522}
   - {fileID: 708420229}
   - {fileID: 133474874}
-  - {fileID: 1616442945}
   m_Father: {fileID: 372581266}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &919042703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6252,7 +6298,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: cae3f9537776dea41855a724b56dd2c9, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cae3f9537776dea41855a724b56dd2c9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7834,6 +7880,36 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1183130214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1183130215}
+  m_Layer: 0
+  m_Name: GunEg (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1183130215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183130214}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.343, y: 0.24000001, z: 0.5099945}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 172896130}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1208853924
 GameObject:
   m_ObjectHideFlags: 0
@@ -8584,6 +8660,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1343058832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1343058833}
+  m_Layer: 0
+  m_Name: GunEg (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1343058833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343058832}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.343, y: 0.24000001, z: 0.5099945}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 8812584345772856176}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1348683460
 GameObject:
   m_ObjectHideFlags: 0
@@ -10333,12 +10439,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616442944}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.63, y: -0.7, z: -0.08}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.343, y: 0.24, z: 0.51}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 919042702}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1624071430
 GameObject:
@@ -11493,16 +11599,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762416439}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.35, z: 76.38}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1629521478}
   - {fileID: 1783378828}
   - {fileID: 1416326845}
+  - {fileID: 2017856536}
   m_Father: {fileID: 1072933225}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1762416441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11512,9 +11619,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1762416439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff49187ac461c75448e8774e63831351, type: 3}
+  m_Script: {fileID: 11500000, guid: 9147fa53f307fcb4ea913ac30bae4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdleDelayTime: 2
+  target: {fileID: 352073440}
+  attackRange: 15
   yVelocity: 0
   pos:
   - {fileID: 1955963449}
@@ -11546,9 +11656,9 @@ MonoBehaviour:
   - {fileID: 874921529}
   - {fileID: 164674814}
   - {fileID: 1803429106}
-  speed: 7
+  speed: 5
   gravity: 1
-  jumpForwardSpeed: 12
+  jumpForwardSpeed: 10
   chocoPos: {fileID: 1416326845}
   chocoContainer:
   - {fileID: 1137087133}
@@ -11557,7 +11667,11 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 0.99
+  jumpZonePower: 15
+  rotSpeed: 2
+  aimingPoint: {fileID: 2017856536}
+  LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
+  fireTime: 0.1
 --- !u!143 &1762416442
 CharacterController:
   m_ObjectHideFlags: 0
@@ -13031,6 +13145,36 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2017856535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2017856536}
+  m_Layer: 0
+  m_Name: GunEg (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2017856536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017856535}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.343, y: 0.24000001, z: 0.5099945}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 1762416440}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2022625266
 GameObject:
   m_ObjectHideFlags: 0
@@ -13914,7 +14058,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: cae3f9537776dea41855a724b56dd2c9, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cae3f9537776dea41855a724b56dd2c9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14414,9 +14558,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6947262525080991943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff49187ac461c75448e8774e63831351, type: 3}
+  m_Script: {fileID: 11500000, guid: 9147fa53f307fcb4ea913ac30bae4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdleDelayTime: 2
+  target: {fileID: 352073440}
+  attackRange: 15
   yVelocity: 0
   pos:
   - {fileID: 1631696962}
@@ -14435,9 +14582,9 @@ MonoBehaviour:
   - {fileID: 1662970915}
   - {fileID: 542854015}
   - {fileID: 1954860476}
-  speed: 7
+  speed: 5
   gravity: 1
-  jumpForwardSpeed: 12
+  jumpForwardSpeed: 10
   chocoPos: {fileID: 351148931}
   chocoContainer:
   - {fileID: 1137087133}
@@ -14446,7 +14593,11 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 1.35
+  jumpZonePower: 15
+  rotSpeed: 2
+  aimingPoint: {fileID: 1343058833}
+  LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
+  fireTime: 0.1
 --- !u!224 &6998333630475261934
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14670,13 +14821,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6947262525080991943}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.35, z: 76.38}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
+  - {fileID: 1343058833}
   - {fileID: 505967235}
   - {fileID: 860837055}
   - {fileID: 351148931}
   m_Father: {fileID: 1974329041}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
