@@ -22,7 +22,9 @@ public class Na_Character : MonoBehaviour
         if(transform.forward == Vector3.forward)
         {
             anim.SetBool("isWalk", true);
-            transform.localScale = new Vector3(1, 1, 1) * 1.3f;
+            //transform.localScale = new Vector3(1, 1, 1) * 1.3f;
+            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1) * 1.3f, 2 * Time.deltaTime);
+
         }
         else
         {

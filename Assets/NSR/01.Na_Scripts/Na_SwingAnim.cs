@@ -8,5 +8,4 @@ public class Na_SwingAnim : MonoBehaviour
     {
         Na_Player.instace.SwingAttack();
     }
-
 }
