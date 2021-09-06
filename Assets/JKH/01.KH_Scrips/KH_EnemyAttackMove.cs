@@ -271,6 +271,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     private void Attack()
     {
+        print("공격중");
         Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
             rotSpeed * Time.deltaTime); //몸을돌린다
