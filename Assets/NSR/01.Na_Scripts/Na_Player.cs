@@ -420,20 +420,6 @@ public class Na_Player : MonoBehaviour
                 {
                     if(weaponIdx == 0)
                     {
-                        //GameObject line = Instantiate(LineF);
-                        //lr = line.GetComponent<LineRenderer>();
-                        //lr.SetPosition(0, Gun.transform.position);
-                        //lr.SetPosition(1, hitInfo.point);
-                        //Destroy(line, 0.1f);
-
-                        //AudioSource audio = GetComponent<AudioSource>();
-                        //audio.Play();
-
-                        //myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
-
-                        //fireCount--;
-                        //enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
-
                         Shot();
                     }
                     else
