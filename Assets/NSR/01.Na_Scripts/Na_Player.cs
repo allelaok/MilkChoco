@@ -46,7 +46,7 @@ public class Na_Player : MonoBehaviour
         //  현재 hp 를 최대 hp로 초기화
         currHP = maxHP;
 
-        fireCurrTime = fireTime - 0.5f;
+        fireCurrTime = fireTime;
         fireCount = maxFire;
 
         speed -= weight;
@@ -60,7 +60,7 @@ public class Na_Player : MonoBehaviour
 
         y = transform.localEulerAngles.y;
 
-        Hats[Na_Center.instance.chIdx].SetActive(true);
+        Hats[Na_Center.instance.chNum].SetActive(true);
 
         line.SetActive(false);
 
@@ -69,6 +69,7 @@ public class Na_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (isDie)
         {
             Respawn();
@@ -412,6 +413,8 @@ public class Na_Player : MonoBehaviour
             {
                 enemy = hitInfo.transform.gameObject;
 
+                anim.SetBool("isShot", true);
+
                 fireCurrTime += Time.deltaTime;
                 if (fireCurrTime > fireTime)
                 {
@@ -427,11 +430,11 @@ public class Na_Player : MonoBehaviour
                         //audio.Play();
 
                         //myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
-                        
+
                         //fireCount--;
                         //enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
 
-                        anim.SetTrigger("doShot");
+                        Shot();
                     }
                     else
                     {
@@ -442,10 +445,13 @@ public class Na_Player : MonoBehaviour
             }
             else
             {
+                anim.SetBool("isShot", false);
+                line.SetActive(false);
+
                 fireCurrTime += Time.deltaTime;
                 if (fireCurrTime > 0.1f)
                 {
-                    fireCurrTime = fireTime - 0.5f;
+                    fireCurrTime = fireTime;
                 }
             }
 
@@ -467,7 +473,7 @@ public class Na_Player : MonoBehaviour
         fireCount--;
         enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
 
-        Invoke("ShotOut", 0.2f);
+        //Invoke("ShotOut", 0.2f);
     }
 
     void ShotOut()
