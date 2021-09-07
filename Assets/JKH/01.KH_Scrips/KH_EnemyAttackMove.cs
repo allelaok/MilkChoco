@@ -57,6 +57,8 @@ public class KH_EnemyAttackMove : MonoBehaviour
     }
 
 
+
+
     float currTime;
     private void Idle()
     {
@@ -106,7 +108,11 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //Debug.DrawLine(transform.position, transform.position + dir * 100, Color.red);
         dir.y = y;
         cc.Move(dir);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거수정한다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotSpeed * Time.deltaTime); //몸통트는 부분
+        Vector3 rotDir = dir;
+        rotDir.y = 0;
+        
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), rotSpeed * Time.deltaTime); //몸통트는 부분
         Choco();
 
 
@@ -125,7 +131,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     public Transform chocoPos;
     GameObject isChoco;
     public GameObject[] chocoContainer;
-    int chocoCount;
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -162,8 +168,8 @@ public class KH_EnemyAttackMove : MonoBehaviour
             if (other.gameObject.name.Contains("ChocoContainer"))
             {
                 print("초코야미야미야미야미");
-                chocoContainer[chocoCount].SetActive(true);
-                chocoCount++;
+                chocoContainer[KH_GameManager.instance.chocoCount].SetActive(true);
+                KH_GameManager.instance.chocoCount++;
                 Destroy(isChoco.gameObject);
                 isChoco = null;
 
@@ -196,7 +202,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         if (isChoco != null)
             isChoco.transform.position = chocoPos.position;
 
-        if (chocoCount == 4)
+        if (KH_GameManager.instance.chocoCount == 4)
         {
             print("chocoMax");
         }

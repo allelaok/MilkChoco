@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KH_GameManager : MonoBehaviour
 {
+    public int chocoCount;
     public static KH_GameManager instance;
 
     private void Awake()
