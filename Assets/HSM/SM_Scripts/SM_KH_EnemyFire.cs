@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//************방 어 형 적 군************
-public class KH_EnemyFire : MonoBehaviour
+public class SM_KH_EnemyFire : MonoBehaviour
 {
     float currTime;
     float gunDuration = 0.2f; //총 공속
@@ -17,12 +15,12 @@ public class KH_EnemyFire : MonoBehaviour
     public GameObject pos2;
     public float rotSpeed = 2;
     public Transform aimingPoint; //발사포인트
-    public float fireTime = 2; //연사속도
+    public float fireTime = 0.1f; //연사속도
     public GameObject LineRay; //총알발사라인(임시)
     public Animator animator;
     BoxCollider bc;
     Rigidbody rb;
-    
+
     //CharacterController cc; //이동하는거 안씀 아직.ㅎ
     // Start is called before the first frame update
 
@@ -36,7 +34,7 @@ public class KH_EnemyFire : MonoBehaviour
         Damage, //피격 당했을때
         Die //죽는다
     }
-    EnemyState m_state= EnemyState.Idle;
+    EnemyState m_state = EnemyState.Idle;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -77,7 +75,7 @@ public class KH_EnemyFire : MonoBehaviour
         }
     }
 
-    public float IdleDelayTime = 2.0f;    
+    public float IdleDelayTime = 2.0f;
 
     private void Idle()
     {
@@ -121,13 +119,13 @@ public class KH_EnemyFire : MonoBehaviour
         if (Vector3.Distance(gameObject.transform.position, wayPoint1.position) <= 1f)
         {
             m_state = EnemyState.Idle;
-            
-            
+
+
             //Debug.Log("2");
             currentWayPoint = wayPoint2;
         }
 
-        if(Vector3.Distance(gameObject.transform.position, wayPoint2.position) <= 1f)
+        if (Vector3.Distance(gameObject.transform.position, wayPoint2.position) <= 1f)
         {
             m_state = EnemyState.Idle;
             //Debug.Log("1");
@@ -162,7 +160,7 @@ public class KH_EnemyFire : MonoBehaviour
         {
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
-            
+
         }
     }
     //임시
@@ -184,7 +182,7 @@ public class KH_EnemyFire : MonoBehaviour
             if (hitInfo.transform.gameObject.tag == "Player")
             {
                 m_state = EnemyState.Attack;
-                
+
             }
         }
 
@@ -192,7 +190,7 @@ public class KH_EnemyFire : MonoBehaviour
         float distance = dir.magnitude; //거리 계산
         if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
         {
-            
+
             m_state = EnemyState.Idle; //이러면 Move로 넘어간다
         }
 
@@ -203,7 +201,7 @@ public class KH_EnemyFire : MonoBehaviour
         //}
 
     }
-    //float attackDelayTime = 2;
+    
 
     private void Attack()
     {
@@ -223,9 +221,9 @@ public class KH_EnemyFire : MonoBehaviour
         if (currTime < fireTime)
             return;
 
-        
 
-            Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
+
+        Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
             rotSpeed * Time.deltaTime); //몸을돌린다
 
@@ -250,7 +248,7 @@ public class KH_EnemyFire : MonoBehaviour
                 lr.SetPosition(1, hitInfo.point);
 
                 Destroy(line, 0.1f);
-                hitInfo.transform.gameObject.GetComponent<KH_Player_hp>().Damaged(.5f);
+                hitInfo.transform.gameObject.GetComponent<SM_KH_Player_hp>().Damaged(.5f);
                 currTime = 0f;
 
             }
@@ -261,7 +259,7 @@ public class KH_EnemyFire : MonoBehaviour
             //}
 
             if (lr != null)
-                lr.SetPosition(1, hitInfo.point);   
+                lr.SetPosition(1, hitInfo.point);
         }
 
 
@@ -274,9 +272,9 @@ public class KH_EnemyFire : MonoBehaviour
 
         // 애니메이션 타이밍에 맞게 총을 쏘고싶다.
         // 애니메이션 타이밍
-        
+
         // 총을 쏜다.
-       
+
     }
 
 
@@ -310,7 +308,7 @@ public class KH_EnemyFire : MonoBehaviour
         }
     }
 
-        
+
 
     public float knockbackSpeed = 10;
     Vector3 knockbackPos;
@@ -330,9 +328,9 @@ public class KH_EnemyFire : MonoBehaviour
         if (maxHp <= 0)
         {
             m_state = EnemyState.Die;
-            
+
             animator.SetTrigger("Die");
-            
+
         }
 
 
@@ -353,7 +351,7 @@ public class KH_EnemyFire : MonoBehaviour
         currTime += Time.deltaTime;
         if (currTime > 2)
         {
-            
+
             this.gameObject.GetComponent<Rigidbody>().detectCollisions = false;
             bc.enabled = false;
             Vector3 vt = Vector3.down * downSpeed * Time.deltaTime;
@@ -362,7 +360,7 @@ public class KH_EnemyFire : MonoBehaviour
             transform.position = P;
             currTime = 0;
 
-            if (P.y <= -1 )
+            if (P.y <= -1)
             {
                 Destroy(gameObject);
             }
@@ -395,7 +393,7 @@ public class KH_EnemyFire : MonoBehaviour
     {
         Vector3 dir = target.transform.position - transform.position; //P-E
         float distance = dir.magnitude; //P-E거리
-        if (distance<AttackRange) //만약 player가 사정거리 안에 들어왔다면?
+        if (distance < AttackRange) //만약 player가 사정거리 안에 들어왔다면?
         {
             //몸을 그방향으로 꺾는다 
             Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향
