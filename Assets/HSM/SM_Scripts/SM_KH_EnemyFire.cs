@@ -54,6 +54,7 @@ public class SM_KH_EnemyFire : MonoBehaviour
 
         switch (m_state)
         {
+           
             case EnemyState.Idle:
                 Idle();
                 break;
@@ -64,10 +65,10 @@ public class SM_KH_EnemyFire : MonoBehaviour
                 Detect();
                 break;
             case EnemyState.Attack:
-                Attack();
+                //Attack();
                 break;
             case EnemyState.Damage:
-                Damage();
+                //Damage();
                 break;
             case EnemyState.Die:
                 Die();
@@ -79,8 +80,8 @@ public class SM_KH_EnemyFire : MonoBehaviour
 
     private void Idle()
     {
-        animator.SetTrigger("isIdle");
-
+        //animator.SetTrigger("isIdle");
+        
         currTime += Time.deltaTime;
         if (currTime > IdleDelayTime)
         {
@@ -182,7 +183,7 @@ public class SM_KH_EnemyFire : MonoBehaviour
             if (hitInfo.transform.gameObject.tag == "Player")
             {
                 m_state = EnemyState.Attack;
-
+                animator.SetTrigger("isAttack");
             }
         }
 
@@ -201,9 +202,9 @@ public class SM_KH_EnemyFire : MonoBehaviour
         //}
 
     }
-    
-
-    private void Attack()
+    bool isAttack = false;
+    public RaycastHit hitInfo;
+    public void Attack()
     {
 
 
@@ -216,10 +217,10 @@ public class SM_KH_EnemyFire : MonoBehaviour
             m_state = EnemyState.Move; //이러면 Move로 넘어간다
         }
 
-        currTime += Time.deltaTime;
-        animator.SetTrigger("isAttackDelay");
-        if (currTime < fireTime)
-            return;
+        //currTime += Time.deltaTime;
+        //animator.SetTrigger("isAttackDelay");
+        //if (currTime < fireTime)
+        //    return;
 
 
 
@@ -231,16 +232,21 @@ public class SM_KH_EnemyFire : MonoBehaviour
         ray.origin = aimingPoint.position;
         ray.direction = aimingPoint.forward;
 
-        RaycastHit hitInfo;
+       
 
         if (Physics.Raycast(ray, out hitInfo, 100))
         {
             LineRenderer lr = null;
 
 
-            if (hitInfo.transform.gameObject.tag == "Player")
+            if (hitInfo.transform.gameObject.tag == "Player" )
             {
-                animator.SetTrigger("isAttack");
+                //print("나 맞았어!!!");
+                //if(isAttack == false)
+                //{
+                //    animator.SetTrigger("isAttack");
+                //    isAttack = true;
+                //} 
 
                 GameObject line = Instantiate(LineRay);
                 lr = line.GetComponent<LineRenderer>();
@@ -264,6 +270,8 @@ public class SM_KH_EnemyFire : MonoBehaviour
 
 
     }
+
+
     bool isKnockBackFinish = false;
     float isDamagedTime = 2;
 
@@ -338,7 +346,7 @@ public class SM_KH_EnemyFire : MonoBehaviour
         {
             shootDirection.y = 0;
             knockbackPos = transform.position + shootDirection * 1;
-            m_state = EnemyState.Damage;
+            m_state = EnemyState.Idle;
             animator.SetTrigger("isDamaged");
             isKnockBackFinish = false;
         }
