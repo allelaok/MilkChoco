@@ -203,7 +203,7 @@ public class KH_EnemyFire : MonoBehaviour
         //}
 
     }
-    float attackDelayTime = 2;
+    //float attackDelayTime = 2;
 
     private void Attack()
     {
