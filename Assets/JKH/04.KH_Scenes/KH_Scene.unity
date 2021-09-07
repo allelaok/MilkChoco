@@ -1059,9 +1059,9 @@ MonoBehaviour:
   - {fileID: 1945386582}
   - {fileID: 274368266}
   - {fileID: 790916069}
-  speed: 250
-  gravity: 9
-  jumpForwardSpeed: 80
+  speed: 6
+  gravity: 0.1
+  jumpForwardSpeed: 5
   chocoPos: {fileID: 157000341}
   chocoContainer:
   - {fileID: 1137087133}
@@ -1070,7 +1070,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 22
+  jumpZonePower: 0.15
   rotSpeed: 2
   aimingPoint: {fileID: 1183130215}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
@@ -5165,9 +5165,9 @@ MonoBehaviour:
   - {fileID: 1696547646}
   - {fileID: 1208853925}
   - {fileID: 1722419310}
-  speed: 250
-  gravity: 9
-  jumpForwardSpeed: 80
+  speed: 6
+  gravity: 0.1
+  jumpForwardSpeed: 5
   chocoPos: {fileID: 1452266579}
   chocoContainer:
   - {fileID: 1137087133}
@@ -5176,7 +5176,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 22
+  jumpZonePower: 0.15
   rotSpeed: 2
   aimingPoint: {fileID: 515136908}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
@@ -5224,7 +5224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823091717}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.6, y: 0.27, z: 246.5}
+  m_LocalPosition: {x: 41.7, y: 0.27, z: 246.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1631696962}
@@ -11656,9 +11656,9 @@ MonoBehaviour:
   - {fileID: 874921529}
   - {fileID: 164674814}
   - {fileID: 1803429106}
-  speed: 200
-  gravity: 9
-  jumpForwardSpeed: 80
+  speed: 6
+  gravity: 0.1
+  jumpForwardSpeed: 5
   chocoPos: {fileID: 1416326845}
   chocoContainer:
   - {fileID: 1137087133}
@@ -11667,7 +11667,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 22
+  jumpZonePower: 0.14
   rotSpeed: 2
   aimingPoint: {fileID: 2017856536}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
@@ -14593,7 +14593,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 0.18
+  jumpZonePower: 0.15
   rotSpeed: 2
   aimingPoint: {fileID: 1343058833}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
