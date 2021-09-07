@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14582,9 +14582,9 @@ MonoBehaviour:
   - {fileID: 1662970915}
   - {fileID: 542854015}
   - {fileID: 1954860476}
-  speed: 250
-  gravity: 9
-  jumpForwardSpeed: 43
+  speed: 6
+  gravity: 0.1
+  jumpForwardSpeed: 5
   chocoPos: {fileID: 351148931}
   chocoContainer:
   - {fileID: 1137087133}
@@ -14593,7 +14593,7 @@ MonoBehaviour:
   - {fileID: 2085993965}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 22
+  jumpZonePower: 0.18
   rotSpeed: 2
   aimingPoint: {fileID: 1343058833}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
