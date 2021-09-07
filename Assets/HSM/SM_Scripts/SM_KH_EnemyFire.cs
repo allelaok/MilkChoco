@@ -201,7 +201,7 @@ public class SM_KH_EnemyFire : MonoBehaviour
         //}
 
     }
-    float attackDelayTime = 2;
+    
 
     private void Attack()
     {
