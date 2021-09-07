@@ -5,25 +5,23 @@ using UnityEngine;
 public class Na_Center : MonoBehaviour
 {
     public static Na_Center instance;
-
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(instance);
         }
         else
         {
-            Destroy(gameObject);          
+            Destroy(gameObject);
+            DontDestroyOnLoad(instance);
         }
     }
 
     public float rotSpeed = 200f;
     float y;
 
-    
-    public int chIdx;
+    public int chNum;
 
     // Start is called before the first frame update
     void Start()
@@ -48,19 +46,16 @@ public class Na_Center : MonoBehaviour
             float tmp = y;
             if(tmp % 20 < 10)
             {
-                chIdx = (int)tmp / 20;
+                chNum = (int)tmp / 20;
                 y = tmp - (tmp % 20);
             }
             else
             {
-                chIdx = (int)tmp / 20 + 1;
+                chNum = (int)tmp / 20 + 1;
                 y = tmp + 20 - (tmp % 20);
-            }
-            
+            }           
             
         }
-
-
         transform.localEulerAngles = new Vector3(0, y, 0);
     }
 }
