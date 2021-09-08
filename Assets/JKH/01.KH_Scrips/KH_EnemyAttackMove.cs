@@ -10,7 +10,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     Vector3 startEnemyPos;
 
     public float IdleDelayTime = 2.0f;
-
+    
     enum EnemyState
     {
         Idle, //Æò½Ã -> Move
@@ -31,32 +31,48 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     EnemyState m_state = EnemyState.Idle;
     // Update is called once per frame
+
+    bool doJump;
     void Update()
     {
+        print(m_state);
         switch (m_state)
         {
             case EnemyState.Idle:
                 Idle();
+                doJump = false;
                 break;
             case EnemyState.Move:
-                Move();
+
+                doJump = true;
                 break;
             case EnemyState.Detect:
                 Detect();
+                doJump = false;
                 break;
             case EnemyState.Attack:
                 Attack();
+                doJump = false;
                 break;
             case EnemyState.Damage:
                 Damage();
+                doJump = false;
                 break;
             case EnemyState.Die:
                 Die();
+                doJump = false;
                 break;
         }
     }
 
-
+    
+    private void FixedUpdate()
+    {
+        if (doJump)
+        {
+            Move();
+        }
+    }
 
 
     float currTime;

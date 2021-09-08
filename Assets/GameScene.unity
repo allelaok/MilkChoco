@@ -1484,6 +1484,7 @@ GameObject:
   - component: {fileID: 172896130}
   - component: {fileID: 172896132}
   - component: {fileID: 172896131}
+  - component: {fileID: 172896133}
   m_Layer: 0
   m_Name: Na_Enemy
   m_TagString: Enemy
@@ -1593,6 +1594,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.2, z: 0.2}
+--- !u!114 &172896133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172896129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c906ba222fc6849b0c286ac353c623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  hpUI: {fileID: 2122512492}
 --- !u!1 &190760000
 GameObject:
   m_ObjectHideFlags: 0
@@ -3437,10 +3452,12 @@ MonoBehaviour:
   - {fileID: 1164886753}
   - {fileID: 964877104}
   - {fileID: 1072933224}
+  numbers: 00000000010000000200000003000000
   num1: 0
   num2: 0
   i: 0
   isChoco: 0
+  isDie: 0
 --- !u!4 &390029103
 Transform:
   m_ObjectHideFlags: 0
@@ -5552,7 +5569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &546839291
 Transform:
   m_ObjectHideFlags: 0
@@ -7361,7 +7378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &775851313
 Transform:
   m_ObjectHideFlags: 0
@@ -7699,7 +7716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &803495545
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7907,6 +7924,7 @@ GameObject:
   - component: {fileID: 821671215}
   - component: {fileID: 821671217}
   - component: {fileID: 821671216}
+  - component: {fileID: 821671218}
   m_Layer: 0
   m_Name: Na_Enemy
   m_TagString: Enemy
@@ -8007,6 +8025,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.2, z: 0.2}
+--- !u!114 &821671218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821671214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c906ba222fc6849b0c286ac353c623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  hpUI: {fileID: 426534068}
 --- !u!1 &823091717
 GameObject:
   m_ObjectHideFlags: 0
@@ -13619,7 +13651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1440593390
 Transform:
   m_ObjectHideFlags: 0
@@ -14149,7 +14181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1483221554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17291,6 +17323,7 @@ GameObject:
   - component: {fileID: 1762416440}
   - component: {fileID: 1762416442}
   - component: {fileID: 1762416441}
+  - component: {fileID: 1762416443}
   m_Layer: 0
   m_Name: Na_Enemy
   m_TagString: Enemy
@@ -17396,6 +17429,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.2, z: 0.2}
+--- !u!114 &1762416443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762416439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c906ba222fc6849b0c286ac353c623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  hpUI: {fileID: 1554953108}
 --- !u!1 &1773598232
 GameObject:
   m_ObjectHideFlags: 0
@@ -20285,7 +20332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2093297541
 Transform:
   m_ObjectHideFlags: 0
@@ -21876,6 +21923,7 @@ GameObject:
   - component: {fileID: 8812584345772856176}
   - component: {fileID: 3143561901431332244}
   - component: {fileID: 6947262525080991944}
+  - component: {fileID: 6947262525080991945}
   m_Layer: 0
   m_Name: Na_Enemy
   m_TagString: Enemy
@@ -21932,6 +21980,20 @@ MonoBehaviour:
   aimingPoint: {fileID: 1343058833}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
   fireTime: 0.1
+--- !u!114 &6947262525080991945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6947262525080991943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c906ba222fc6849b0c286ac353c623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  hpUI: {fileID: 1221109523}
 --- !u!1 &6951442246900779706
 GameObject:
   m_ObjectHideFlags: 0

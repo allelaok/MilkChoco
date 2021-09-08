@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KH_EnemyHP : MonoBehaviour
 {
-    float respawnTime = 3;
+    //float respawnTime = 3;
     //ÇöÀç HP
     float currHP;
     // Max HP
