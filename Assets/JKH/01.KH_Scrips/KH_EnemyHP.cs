@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class KH_EnemyHP : MonoBehaviour
 {
-    float respawnTime = 10
-;    //현재 HP
+    float respawnTime = 3;
+    //현재 HP
     float currHP;
     // Max HP
     public float maxHP = 100;
@@ -36,15 +36,19 @@ public class KH_EnemyHP : MonoBehaviour
         //만약에 현재 HP가 0보다 같거나 작으면
         if (currHP <= 0)
         {
+            int[] numbers = KH_GameManager.instance.numbers;
             int i = KH_GameManager.instance.i;
-            KH_GameManager.instance.enemyStart[i].SetActive(false);
+            KH_GameManager.instance.enemyStart[numbers[i]].SetActive(false);
             currTime += Time.deltaTime;
+            print("현재시간: " + currTime);
             if (currTime > respawnTime)
             {
-                KH_GameManager.instance.enemyStart[i].SetActive(true);
+                KH_GameManager.instance.enemyStart[numbers[i]].SetActive(true);
+                currTime = 0;
+                currHP = maxHP;
             }
-            currTime = 0;
-            currHP = maxHP;
+            
+            
             
             // instance로만든다
             // get Compomponent

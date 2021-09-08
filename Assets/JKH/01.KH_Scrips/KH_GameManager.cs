@@ -22,7 +22,7 @@ public class KH_GameManager : MonoBehaviour
 
     //Shuffle, Swap을 위한 필요속성
     public GameObject[] enemyStart; //enemy 배열(4개)
-    int[] numbers = { 0, 1, 2, 3 }; //순서 
+    public int[] numbers = { 0, 1, 2, 3 }; //순서 
     public int num1;
     public int num2;
     public int i = 0;
