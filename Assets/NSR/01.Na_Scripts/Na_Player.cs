@@ -68,8 +68,7 @@ public class Na_Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {     
         if (isDie)
         {
             Respawn();
@@ -81,7 +80,6 @@ public class Na_Player : MonoBehaviour
                 anim.SetTrigger("doIdle");
                 currTime = 0;
             }
-
         }
         else
         {
@@ -98,15 +96,14 @@ public class Na_Player : MonoBehaviour
 
     }
 
-
-
-    // 플레이어 W, S, A, D 로 이동하고 싶다.
-    // 필요속성 : 속도, CharacterController, 방향
+    // 플레이어 W, S, A, D 로 이동하고 싶다.   
+    # region 필요속성 : 속도, CharacterController, 방향    
     [HideInInspector]
     public float speed = 7f;
     CharacterController cc;
     [HideInInspector]
-    public Vector3 dir;   
+    public Vector3 dir;
+    #endregion
     void Move()
     {
       
@@ -134,7 +131,7 @@ public class Na_Player : MonoBehaviour
 
 
     // 플레이어 스페이스바로 1단 점프하고 싶다.
-    // 필요속성 : 점프파워, 중력, y속도, 점프횟수, 최대 점프 가능 횟수
+    #region 필요속성 : 점프파워, 중력, y속도, 점프횟수, 최대 점프 가능 횟수
     float jumpPower = 3f;
     float yVelocity;
     float gravity = 7f;
@@ -143,6 +140,7 @@ public class Na_Player : MonoBehaviour
     bool isJumpZone;
     float jumpZonePower = 8f;
     bool isJump;
+    #endregion
     void Jump(out float dirY)
     {
 
@@ -182,6 +180,7 @@ public class Na_Player : MonoBehaviour
     }
 
     // LeftShift 를 누르면 슬라이딩 하고싶다.
+    #region
     [HideInInspector]
     public bool isDodge;
     int dodgeCount;
@@ -190,6 +189,7 @@ public class Na_Player : MonoBehaviour
     [HideInInspector]
     public float dodgeCoolTime = 10;
     Vector3 dodgeVecor;
+    #endregion
     void Dodge(ref float v)
     {
 
@@ -218,13 +218,13 @@ public class Na_Player : MonoBehaviour
             }
         }
     }
-
     void DodgeOut()
     {
         speed *= 0.5f;
         isDodge = false;
     }
 
+    // 마우스를 움직이면 회전하고 싶다
     public float rotSpeed = 2000f;
     float y;
     void Rotate()
@@ -239,13 +239,14 @@ public class Na_Player : MonoBehaviour
 
 
     // 무기를 바꾸고 싶다.
-    // 필요속성 : 무기 배열
+    #region 필요속성 : 무기 배열
     public GameObject[] weapons;
     int weaponIdx;
     bool isSwap;
+    #endregion
     void Swap()
     {
-        if (isJump || isDodge) return;
+        if (isDodge) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -268,14 +269,13 @@ public class Na_Player : MonoBehaviour
             isSwap = true;
         }     
     }
-
     void SwapOut()
     {
         isSwap = false;
     }
 
     // Damage 를 받으면 hp를 깎고 싶다.
-    // 필요속성 : 현재hp, 최대hp, hpUI, damage
+    #region 필요속성 : 현재hp, 최대hp, hpUI, damage
     float currHP;
     [HideInInspector]
     public float maxHP = 100;
@@ -283,6 +283,7 @@ public class Na_Player : MonoBehaviour
     public GameObject damage;
     [HideInInspector]
     public bool isDie;
+    #endregion
     public void Damaged(float damage)
     {
         if (isDie) return;
@@ -297,7 +298,6 @@ public class Na_Player : MonoBehaviour
             anim.SetTrigger("doDie");
         }
     }
-
     void ColorA()
     {
         iTween.ColorTo(damage, iTween.Hash(
@@ -317,9 +317,8 @@ public class Na_Player : MonoBehaviour
     }
 
 
-    //플레이어를 리스폰 하고싶다. 
-    //우유가 있다면 우유도
-    // 필요속성 : 플레이어 처음 위치, 우유, 우유 처음 위치, 현재시간, 리스폰 시간
+    //플레이어를 리스폰 하고싶다. 우유가 있다면 우유도
+    #region 필요속성 : 플레이어 처음 위치, 우유, 우유 처음 위치, 현재시간, 리스폰 시간
     Vector3 startMilkPos;
     public Transform startPos;
     float currTime;
@@ -329,6 +328,7 @@ public class Na_Player : MonoBehaviour
     public Transform milkPos;
     GameObject isMilk;
     public Text dieCount;
+    #endregion
     public void Respawn()
     {
         reCurrTime += Time.deltaTime;
@@ -352,37 +352,12 @@ public class Na_Player : MonoBehaviour
         }
     }
 
-
-
     // 에너미 공격
+    #region 무기 변수
     [HideInInspector]
     public int maxFire = 20;
-    int fireCount;
     [HideInInspector]
     public float reloadTime = 3;
-    float reloadCurrTime;
-    Text bulletCountUI;
-    void Attack()
-    {
-        if (isSwap) return;
-
-        if (fireCount > 0)
-        {
-            // 자동 발사
-            Fire();
-            bulletCountUI.text = "총알개수 : " + fireCount;
-        }
-        else
-        {
-            bulletCountUI.text = "장전중...";
-            Reload();
-        }
-        Scope();
-    }
-
-    // 필요속성 : 에임포인트, 세기, 사거리, 반동, 무게, 슛라인, 재장전, 조준경, 총알개수 등    
-    public Transform aimingPoint;
-    public GameObject line;
     [HideInInspector]
     public float firePower = 10f;
     [HideInInspector]
@@ -391,17 +366,32 @@ public class Na_Player : MonoBehaviour
     public float crossroad = 30;
     [HideInInspector]
     public float reboundPower = 0.2f;
-    float reboundTime = 30f;
     [HideInInspector]
     public float weight = 1;
+    [HideInInspector]
+    public float scope = 50;
+    #endregion
+    #region 필요속성 : 에임포인트, 세기, 사거리, 반동, 무게, 슛라인, 재장전, 조준경, 총알개수 등    
+    int fireCount;   
+    float reloadCurrTime;
+    Text bulletCountUI;
+    public Transform aimingPoint;
+    public GameObject line;   
+    float reboundTime = 30f;    
     public Transform myCamera;
     [HideInInspector]
     public GameObject enemy;
     float fireCurrTime;
     public GameObject Gun;
     RaycastHit hitInfo;
-    void Fire()
+    LineRenderer lr;
+    #endregion
+    void Attack()
     {
+        if (isSwap) return;
+
+        Scope();
+
         // 반동 후 원래 위치로
         myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, new Vector3(0, 6, -15), Time.deltaTime * reboundTime);
         //LineRenderer lr = null;
@@ -422,12 +412,24 @@ public class Na_Player : MonoBehaviour
                 fireCurrTime += Time.deltaTime;
                 if (fireCurrTime > fireTime)
                 {
+                    // 원거리
                     if(weaponIdx == 0)
                     {
-                        Shot();
+                        if (fireCount > 0)
+                        {
+                            Shot();
+                            bulletCountUI.text = "총알개수 : " + fireCount;
+                        }
+                        else
+                        {
+                            bulletCountUI.text = "장전중...";
+                            Reload();
+                        }
                     }
+                    // 근거리
                     else
                     {
+                        bulletCountUI.text = "...";
                         anim.SetTrigger("doSwing");
                     }
                     fireCurrTime = 0;
@@ -450,7 +452,6 @@ public class Na_Player : MonoBehaviour
         }
     }
 
-    LineRenderer lr;
     public void Shot()
     {
         line.SetActive(true);
@@ -465,7 +466,6 @@ public class Na_Player : MonoBehaviour
 
         //Invoke("ShotOut", 0.2f);
     }
-
     void ShotOut()
     {
         line.SetActive(false);
@@ -481,8 +481,7 @@ public class Na_Player : MonoBehaviour
             reloadCurrTime = 0;
         }
     }
-    [HideInInspector]
-    public float scope = 50;
+   
     int i = 5;
     void Scope()
     {
@@ -508,15 +507,12 @@ public class Na_Player : MonoBehaviour
             camRot.rotSpeed += scope * i;
         }
     }
-
-
     // 단거리 무기 공격
     public void SwingAttack()
     {
         enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
     }
-
-    
+   
 
     // 우유를 먹고 milkContainer 에 넣고싶다.
     public GameObject[] milkContainer;
