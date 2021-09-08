@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SM_Enemy_Hp : MonoBehaviour
 {
     float currHP;
-    // Max HP
+    
     public float maxHP = 100;
 
     public Image hpUI;
