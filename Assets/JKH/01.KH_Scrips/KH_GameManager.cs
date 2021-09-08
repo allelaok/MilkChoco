@@ -27,6 +27,9 @@ public class KH_GameManager : MonoBehaviour
     public int num2;
     public int i = 0;
 
+    float currTime;
+    float respawnTime = 5f;
+
 
     // Start is called before the first frame update
     public void Start()
@@ -65,6 +68,7 @@ public class KH_GameManager : MonoBehaviour
     }
 
     public bool isChoco;
+    public bool isDie;
     // Update is called once per frame
     void Update()
     {
@@ -81,6 +85,20 @@ public class KH_GameManager : MonoBehaviour
             //초코컨테이너에다가 초코를 채운다
             //만약 초코카운트가 3이된다면?
             //END Scene을 뽑는다.
+        }
+
+        if (isDie)
+        {
+            enemyStart[numbers[i]].SetActive(false);
+            currTime += Time.deltaTime;
+            print("현재시간: " + currTime);
+            if (currTime > respawnTime)
+            {
+                enemyStart[numbers[i]].SetActive(true);
+                isDie = false;
+                currTime = 0;
+                
+            }
         }
     }
 }
