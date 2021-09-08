@@ -52,6 +52,14 @@ public class Na_Player : MonoBehaviour
         speed -= weight;
 
         bulletCountUI = GameObject.Find("BulletCount").GetComponent<Text>();
+        milkCntUI = GameObject.Find("MilkCount").GetComponent<Text>();
+        dieCountUI = GameObject.Find("DieCount").GetComponent<Text>();
+        damage = GameObject.Find("Damage");
+        hpUI = GameObject.Find("PlayerHp").GetComponent<Image>();
+        startPos = GameObject.Find("PlayerPos");
+        milkPos = GameObject.Find("PlayerMilkPos");
+        aimingPoint = GameObject.Find("AimingPoint");
+        weaponPos = GameObject.Find("WeaponPos");
 
         // damage 투명도 으로
         iTween.ColorTo(damage, iTween.Hash("a", 0f, "time", 0f));
@@ -68,15 +76,17 @@ public class Na_Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {     
+    {
+
+        print(fireTime);
+
         if (isDie)
         {
             Respawn();
-            //transform.position = startPos.position;
             currTime += Time.deltaTime;
             if (currTime > respawnTime - 1)
             {
-                transform.position = startPos.position;
+                transform.position = startPos.transform.position;
                 anim.SetTrigger("doIdle");
                 currTime = 0;
             }
@@ -225,7 +235,7 @@ public class Na_Player : MonoBehaviour
     }
 
     // 마우스를 움직이면 회전하고 싶다
-    public float rotSpeed = 2000f;
+    public float rotSpeed = 500;
     float y;
     void Rotate()
     {
@@ -253,12 +263,20 @@ public class Na_Player : MonoBehaviour
             if (weaponIdx == 1)
             {
                 weapons[0].SetActive(true);
+                firePower = 5;
+                fireTime = 0.2f;
+                crossroad = 30;
+                weight = 2;
                 weapons[1].SetActive(false);
                 weaponIdx = 0;
             }
             else if (weaponIdx == 0)
             {
                 weapons[0].SetActive(false);
+                firePower = 20;
+                fireTime = 1;
+                crossroad = 10;
+                weight = 0;
                 weapons[1].SetActive(true);
                 weaponIdx = 1;
             }
@@ -279,8 +297,8 @@ public class Na_Player : MonoBehaviour
     float currHP;
     [HideInInspector]
     public float maxHP = 100;
-    public Image hpUI;
-    public GameObject damage;
+    Image hpUI;
+    GameObject damage;
     [HideInInspector]
     public bool isDie;
     #endregion
@@ -320,20 +338,20 @@ public class Na_Player : MonoBehaviour
     //플레이어를 리스폰 하고싶다. 우유가 있다면 우유도
     #region 필요속성 : 플레이어 처음 위치, 우유, 우유 처음 위치, 현재시간, 리스폰 시간
     Vector3 startMilkPos;
-    public Transform startPos;
+    GameObject startPos;
     float currTime;
     [HideInInspector]
     float respawnTime = 10f;
     float reCurrTime;
-    public Transform milkPos;
+    GameObject milkPos;
     GameObject isMilk;
-    public Text dieCount;
+    Text dieCountUI;
     #endregion
     public void Respawn()
     {
         reCurrTime += Time.deltaTime;
         int count = 10 - (int)reCurrTime;
-        dieCount.text = "" + count;
+        dieCountUI.text = "" + count;
         if (reCurrTime > respawnTime)
         {
             //  현재 hp 를 최대 hp로 초기화
@@ -361,7 +379,7 @@ public class Na_Player : MonoBehaviour
     [HideInInspector]
     public float firePower = 10f;
     [HideInInspector]
-    public float fireTime = 0.2f;
+    public float fireTime = 1f;
     [HideInInspector]
     public float crossroad = 30;
     [HideInInspector]
@@ -375,14 +393,14 @@ public class Na_Player : MonoBehaviour
     int fireCount;   
     float reloadCurrTime;
     Text bulletCountUI;
-    public Transform aimingPoint;
+    GameObject aimingPoint;
     public GameObject line;   
     float reboundTime = 30f;    
     public Transform myCamera;
     [HideInInspector]
     public GameObject enemy;
     float fireCurrTime;
-    public GameObject weaponPos;
+    GameObject weaponPos;
     RaycastHit hitInfo;
     LineRenderer lr;
     #endregion
@@ -397,8 +415,8 @@ public class Na_Player : MonoBehaviour
         //LineRenderer lr = null;
 
         Ray ray = new Ray();
-        ray.origin = aimingPoint.position;
-        ray.direction = aimingPoint.forward;
+        ray.origin = aimingPoint.transform.position;
+        ray.direction = aimingPoint.transform.forward;
         
         if (Physics.Raycast(ray, out hitInfo, crossroad))
         {
@@ -407,7 +425,8 @@ public class Na_Player : MonoBehaviour
             {
                 enemy = hitInfo.transform.gameObject;
 
-                anim.SetBool("isShot", true);
+                if (weaponIdx == 0)
+                    anim.SetBool("isShot", true);
 
                 fireCurrTime += Time.deltaTime;
                 if (fireCurrTime > fireTime)
@@ -453,7 +472,7 @@ public class Na_Player : MonoBehaviour
     }
 
     // 원거리 무기 공격
-    void Shot()
+    public void Shot()
     {
         line.SetActive(true);
 
@@ -463,12 +482,12 @@ public class Na_Player : MonoBehaviour
         myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
         fireCount--;
-        enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
+        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
     }
     // 단거리 무기 공격
     public void SwingAttack()
     {
-        enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
+        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
     }
 
     void Reload()
@@ -512,12 +531,12 @@ public class Na_Player : MonoBehaviour
     // 우유를 먹고 milkContainer 에 넣고싶다.
     public GameObject[] milkContainer;
     int milkCount;
-    public Text milkCntUI;
+    Text milkCntUI;
     void Milk()
     {
         milkCntUI.text = milkCount + "/4";
         if (isMilk != null)
-            isMilk.transform.position = milkPos.position;
+            isMilk.transform.position = milkPos.transform.position;
 
         if (milkCount == 4)
         {
@@ -565,5 +584,4 @@ public class Na_Player : MonoBehaviour
             isDie = true;
         }
     } 
-
 }
