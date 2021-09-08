@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//************방 어 형 적 군************
-public class KH_EnemyFire : MonoBehaviour
+public class SM_KH_EnemyFire : MonoBehaviour
 {
     float currTime;
     float gunDuration = 0.2f; //총 공속
@@ -17,12 +15,12 @@ public class KH_EnemyFire : MonoBehaviour
     public GameObject pos2;
     public float rotSpeed = 2;
     public Transform aimingPoint; //발사포인트
-    public float fireTime = 2; //연사속도
+    public float fireTime = 0.1f; //연사속도
     public GameObject LineRay; //총알발사라인(임시)
     public Animator animator;
     BoxCollider bc;
     Rigidbody rb;
-    
+
     //CharacterController cc; //이동하는거 안씀 아직.ㅎ
     // Start is called before the first frame update
 
@@ -36,7 +34,7 @@ public class KH_EnemyFire : MonoBehaviour
         Damage, //피격 당했을때
         Die //죽는다
     }
-    EnemyState m_state= EnemyState.Idle;
+    EnemyState m_state = EnemyState.Idle;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -56,6 +54,7 @@ public class KH_EnemyFire : MonoBehaviour
 
         switch (m_state)
         {
+           
             case EnemyState.Idle:
                 Idle();
                 break;
@@ -66,23 +65,23 @@ public class KH_EnemyFire : MonoBehaviour
                 Detect();
                 break;
             case EnemyState.Attack:
-                Attack();
+                //Attack();
                 break;
-            case EnemyState.Damage:
-                Damage();
-                break;
+            //case EnemyState.Damage:
+            //    Damage();
+            //    break;
             case EnemyState.Die:
                 Die();
                 break;
         }
     }
 
-    public float IdleDelayTime = 2.0f;    
+    public float IdleDelayTime = 2.0f;
 
     private void Idle()
     {
-        animator.SetTrigger("isIdle");
-
+        //animator.SetTrigger("isIdle");
+        
         currTime += Time.deltaTime;
         if (currTime > IdleDelayTime)
         {
@@ -121,13 +120,13 @@ public class KH_EnemyFire : MonoBehaviour
         if (Vector3.Distance(gameObject.transform.position, wayPoint1.position) <= 1f)
         {
             m_state = EnemyState.Idle;
-            
-            
+
+
             //Debug.Log("2");
             currentWayPoint = wayPoint2;
         }
 
-        if(Vector3.Distance(gameObject.transform.position, wayPoint2.position) <= 1f)
+        if (Vector3.Distance(gameObject.transform.position, wayPoint2.position) <= 1f)
         {
             m_state = EnemyState.Idle;
             //Debug.Log("1");
@@ -140,19 +139,6 @@ public class KH_EnemyFire : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(wayPointDir), rotSpeed * Time.deltaTime); //pos1쪽으로 몸을돌린다
         transform.position += wayPointDir * EnemySpeed * Time.deltaTime; //pos1방향으로이동한다\
 
-        //if (EnemyPos1Distance > EnemyPos2Distance)
-        //{
-        //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirToPos1),
-        //        rotSpeed * Time.deltaTime); //pos1쪽으로 몸을돌린다
-        //    transform.position += dirToPos1 * EnemySpeed * Time.deltaTime; //pos1방향으로이동한다
-        //}
-        //else
-        //{
-        //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirToPos2),
-        //        rotSpeed * Time.deltaTime);
-        //    transform.position += dirToPos2 * EnemySpeed * Time.deltaTime;
-
-        //}
 
 
         //만약 player가 범위안으로 들어온다면?        
@@ -162,11 +148,10 @@ public class KH_EnemyFire : MonoBehaviour
         {
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
-            
+
         }
     }
-    //임시
-    //int layer = 1 << LayerMask.NameToLayer("");
+    
     private void Detect()
 
     {
@@ -184,7 +169,7 @@ public class KH_EnemyFire : MonoBehaviour
             if (hitInfo.transform.gameObject.tag == "Player")
             {
                 m_state = EnemyState.Attack;
-                
+                animator.SetTrigger("isAttack");
             }
         }
 
@@ -192,20 +177,16 @@ public class KH_EnemyFire : MonoBehaviour
         float distance = dir.magnitude; //거리 계산
         if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
         {
-            
+
             m_state = EnemyState.Idle; //이러면 Move로 넘어간다
         }
 
-        ////Ray를 발사시켜서 어딘가에 부딪혔다면
-        //if (Physics.Raycast(ray, out hitInfo, 100, layer))
-        //{
-
-        //}
+      
 
     }
-    //float attackDelayTime = 2;
-
-    private void Attack()
+    bool isAttack = false;
+    public RaycastHit hitInfo;
+    public void Attack()
     {
 
 
@@ -218,14 +199,7 @@ public class KH_EnemyFire : MonoBehaviour
             m_state = EnemyState.Move; //이러면 Move로 넘어간다
         }
 
-        currTime += Time.deltaTime;
-        animator.SetTrigger("isAttackDelay");
-        if (currTime < fireTime)
-            return;
-
-        
-
-            Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
+        Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
             rotSpeed * Time.deltaTime); //몸을돌린다
 
@@ -233,85 +207,40 @@ public class KH_EnemyFire : MonoBehaviour
         ray.origin = aimingPoint.position;
         ray.direction = aimingPoint.forward;
 
-        RaycastHit hitInfo;
+       
 
         if (Physics.Raycast(ray, out hitInfo, 100))
         {
             LineRenderer lr = null;
 
 
-            if (hitInfo.transform.gameObject.tag == "Player")
+            if (hitInfo.transform.gameObject.tag == "Player" )
             {
-                animator.SetTrigger("isAttack");
-
+               
                 GameObject line = Instantiate(LineRay);
                 lr = line.GetComponent<LineRenderer>();
                 lr.SetPosition(0, firePos.transform.position);
                 lr.SetPosition(1, hitInfo.point);
 
                 Destroy(line, 0.1f);
-                hitInfo.transform.gameObject.GetComponent<KH_Player_hp>().Damaged(.5f);
+                hitInfo.transform.gameObject.GetComponent<SM_KH_Player_hp>().Damaged(.5f);
                 currTime = 0f;
 
             }
 
-            //else
-            //{
-            //    currTime = fireTime;
-            //}
-
+          
             if (lr != null)
-                lr.SetPosition(1, hitInfo.point);   
+                lr.SetPosition(1, hitInfo.point);
         }
 
 
     }
+
+
     bool isKnockBackFinish = false;
-    float isDamagedTime = 2;
+    
 
-    void OnHit()
-    {
-
-        // 애니메이션 타이밍에 맞게 총을 쏘고싶다.
-        // 애니메이션 타이밍
-        
-        // 총을 쏜다.
-       
-    }
-
-
-
-    private void Damage()
-    {
-        //만약 넉백상태라면
-        if (isKnockBackFinish == false)
-        {
-            transform.position = Vector3.Lerp(transform.position, knockbackPos, knockbackSpeed * Time.deltaTime);
-            float distance = Vector3.Distance(transform.position, knockbackPos);
-
-            if (distance < 0.1f)
-            {
-
-                transform.position = knockbackPos;
-                isKnockBackFinish = true;
-
-            }
-            //넉백상태가 끝나면
-            if (isKnockBackFinish)
-            {
-                currTime += Time.deltaTime;
-                if (currTime > isDamagedTime)
-                {
-                    m_state = EnemyState.Idle;
-                    currTime = 0;
-
-                }
-            }
-        }
-    }
-
-        
-
+ 
     public float knockbackSpeed = 10;
     Vector3 knockbackPos;
     float maxHp = 5;
@@ -319,20 +248,12 @@ public class KH_EnemyFire : MonoBehaviour
     {
         maxHp--;
 
-        //if (m_state == EnemyState.Die)
-        //{
-        //    return;
-        //}
-        //// 코루틴을 종료하고 싶다.
-        //StopAllCoroutines();
-
-
         if (maxHp <= 0)
         {
             m_state = EnemyState.Die;
-            
+
             animator.SetTrigger("Die");
-            
+
         }
 
 
@@ -340,7 +261,7 @@ public class KH_EnemyFire : MonoBehaviour
         {
             shootDirection.y = 0;
             knockbackPos = transform.position + shootDirection * 1;
-            m_state = EnemyState.Damage;
+            m_state = EnemyState.Idle;
             animator.SetTrigger("isDamaged");
             isKnockBackFinish = false;
         }
@@ -353,7 +274,7 @@ public class KH_EnemyFire : MonoBehaviour
         currTime += Time.deltaTime;
         if (currTime > 2)
         {
-            
+
             this.gameObject.GetComponent<Rigidbody>().detectCollisions = false;
             bc.enabled = false;
             Vector3 vt = Vector3.down * downSpeed * Time.deltaTime;
@@ -362,7 +283,7 @@ public class KH_EnemyFire : MonoBehaviour
             transform.position = P;
             currTime = 0;
 
-            if (P.y <= -1 )
+            if (P.y <= -1)
             {
                 Destroy(gameObject);
             }
@@ -395,7 +316,7 @@ public class KH_EnemyFire : MonoBehaviour
     {
         Vector3 dir = target.transform.position - transform.position; //P-E
         float distance = dir.magnitude; //P-E거리
-        if (distance<AttackRange) //만약 player가 사정거리 안에 들어왔다면?
+        if (distance < AttackRange) //만약 player가 사정거리 안에 들어왔다면?
         {
             //몸을 그방향으로 꺾는다 
             Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향
@@ -413,13 +334,7 @@ public class KH_EnemyFire : MonoBehaviour
         }
 
 
-        //만약 일정범위안에a 적군을 인식한다면(거리로? ray로? 벽어떻게하뮤ㅠㅠ) 
-        //정찰을 멈춘다(공격모드)
-        //몸과 총구를 상대방쪽으로 꺾는다
-        //레이가 상대방에게 닿은다면? (벽 안뚫리게 해야함)
-        //총을 발사한다 (위에코드)
-        //만약 일정범위 밖에 있다면 
-        //원상태(정찰모드)로 바꾼다
+       
     }
 
 
@@ -432,20 +347,6 @@ public class KH_EnemyFire : MonoBehaviour
 
     void justMemo()
     {
-        //Enemy가 정찰하다가 player위치에 반응하고 총구를 플레이어를 향한다음 쏜다 
-
-        //에너미가 일정구간을 정찰한다 (정찰모드) //navi
-        //- 방향 두개찍고 와리가리 치기
-        //만약 일정범위안에a 적군을 인식한다면(거리로? ray로? 벽어떻게하뮤ㅠㅠ) 
-        //정찰을 멈춘다(공격모드)
-        //몸과 총구를 상대방쪽으로 꺾는다
-        //레이가 상대방에게 닿은다면? (벽 안뚫리게 해야함)
-        //총을 발사한다 (위에코드)
-        //만약 일정범위 밖에 있다면 
-        //원상태(정찰모드)로 바꾼다
-
-        //-------------------------------------------
-        //그냥 레이로 인식하게 할 수는 없을까? ㅠ
-
+        
     }
 }
