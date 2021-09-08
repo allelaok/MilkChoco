@@ -35,7 +35,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     bool doJump;
     void Update()
     {
-        print(m_state);
+        //print(m_state);
         switch (m_state)
         {
             case EnemyState.Idle:
