@@ -6,6 +6,7 @@ public class KH_GameManager : MonoBehaviour
 {
     public int chocoCount;
     public static KH_GameManager instance;
+    public GameObject respawnPos;
 
     private void Awake()
     {
@@ -89,6 +90,12 @@ public class KH_GameManager : MonoBehaviour
 
         if (isDie)
         {
+            //리스폰한다
+            //원위치시킨다(좌표찍어줌)
+            //Move함수에 i값 0 으로 초기화한다
+            //이것만 하면 되는데 진짜 위에걸 모르곘네
+            
+
             enemyStart[numbers[i]].SetActive(false);
             currTime += Time.deltaTime;
             print("현재시간: " + currTime);
