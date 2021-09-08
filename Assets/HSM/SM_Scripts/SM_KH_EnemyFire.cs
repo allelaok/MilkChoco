@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SM_KH_EnemyFire : MonoBehaviour
 {
+    public static SM_KH_EnemyFire instace;
+
     float currTime;
     float gunDuration = 0.2f; //ÃÑ °ø¼Ó
     float EnemySpeed = 4.0f;
@@ -44,6 +46,9 @@ public class SM_KH_EnemyFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+           
+
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             OnDamageProcess(transform.forward * -1);
