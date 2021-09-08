@@ -36,19 +36,20 @@ public class KH_EnemyHP : MonoBehaviour
         //만약에 현재 HP가 0보다 같거나 작으면
         if (currHP <= 0)
         {
-            int i = KH_GameManager.instance.i;
-            KH_GameManager.instance.enemyStart[i].SetActive(false);
-            currTime += Time.deltaTime;
-            if (currTime > respawnTime)
-            {
-                KH_GameManager.instance.enemyStart[i].SetActive(true);
-            }
-            currTime = 0;
+            //int i = KH_GameManager.instance.i;
+            //KH_GameManager.instance.enemyStart[i].SetActive(false);
+            //currTime += Time.deltaTime;
+            //if (currTime > respawnTime)
+            //{
+            //    KH_GameManager.instance.enemyStart[i].SetActive(true);
+            //}
+            //currTime = 0;
             currHP = maxHP;
-            
+            KH_GameManager.instance.isDie = true;
+
             // instance로만든다
             // get Compomponent
-            
+
         }
     }
 
