@@ -78,6 +78,7 @@ public class Na_Player : MonoBehaviour
             if (currTime > respawnTime - 1)
             {
                 transform.position = startPos.position;
+                anim.SetTrigger("doIdle");
                 currTime = 0;
             }
 
@@ -131,6 +132,7 @@ public class Na_Player : MonoBehaviour
         
     }
 
+
     // 플레이어 스페이스바로 1단 점프하고 싶다.
     // 필요속성 : 점프파워, 중력, y속도, 점프횟수, 최대 점프 가능 횟수
     float jumpPower = 3f;
@@ -150,8 +152,8 @@ public class Na_Player : MonoBehaviour
             yVelocity = 0;
             jumpCount = 0;
             anim.SetBool("isJump", false);
-            isJump = false;
-
+            anim.SetBool("isDown", false);
+            isJump = false;          
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -292,6 +294,7 @@ public class Na_Player : MonoBehaviour
         {          
             //Camera.main.transform.position = enemyCamPos.transform.position;
             isDie = true;
+            anim.SetTrigger("doDie");
         }
     }
 
@@ -339,6 +342,7 @@ public class Na_Player : MonoBehaviour
             reCurrTime = 0;
             count = 0;
             isDie = false;
+            
 
         }
         if (isMilk != null)
@@ -530,7 +534,6 @@ public class Na_Player : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (isMilk == null)
@@ -556,11 +559,13 @@ public class Na_Player : MonoBehaviour
         if (other.gameObject.tag == "JumpZone")
         {
             isJumpZone = true;
+            anim.SetBool("isDown", true);
         }
 
         if (other.gameObject.name.Contains("FallZone"))
         {
             jumpCount++;
+            anim.SetBool("isDown", true);
         }
 
         // DestroyZone 과 부딪히면 죽이고 싶다.
