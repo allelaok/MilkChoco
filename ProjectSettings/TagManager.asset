@@ -6,13 +6,11 @@ TagManager:
   tags:
   - FxTemporaire
   - Enemy
-  - SM_JumpZone
   - Milk
   - Choco
   - Pos
   - JumpZone
   - ChocoContainer
-  - Jump
   - SM_Enemy
   layers:
   - Default
