@@ -452,7 +452,8 @@ public class Na_Player : MonoBehaviour
         }
     }
 
-    public void Shot()
+    // 원거리 무기 공격
+    void Shot()
     {
         line.SetActive(true);
 
@@ -462,6 +463,11 @@ public class Na_Player : MonoBehaviour
         myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
         fireCount--;
+        enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
+    }
+    // 단거리 무기 공격
+    public void SwingAttack()
+    {
         enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
     }
 
@@ -500,11 +506,6 @@ public class Na_Player : MonoBehaviour
             Na_Rotate camRot = cam.GetComponent<Na_Rotate>();
             camRot.rotSpeed += scope * i;
         }
-    }
-    // 단거리 무기 공격
-    public void SwingAttack()
-    {
-        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
     }
    
 
