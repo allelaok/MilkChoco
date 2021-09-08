@@ -91,7 +91,7 @@ public class Na_Player : MonoBehaviour
         }
 
         lr = line.GetComponent<LineRenderer>();
-        lr.SetPosition(0, Gun.transform.position);
+        lr.SetPosition(0, weaponPos.transform.position);
         lr.SetPosition(1, hitInfo.point);
 
     }
@@ -382,7 +382,7 @@ public class Na_Player : MonoBehaviour
     [HideInInspector]
     public GameObject enemy;
     float fireCurrTime;
-    public GameObject Gun;
+    public GameObject weaponPos;
     RaycastHit hitInfo;
     LineRenderer lr;
     #endregion
@@ -462,13 +462,7 @@ public class Na_Player : MonoBehaviour
         myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
         fireCount--;
-        //enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
-
-        //Invoke("ShotOut", 0.2f);
-    }
-    void ShotOut()
-    {
-        line.SetActive(false);
+        enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
     }
 
     void Reload()
