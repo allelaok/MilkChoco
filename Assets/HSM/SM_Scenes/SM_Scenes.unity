@@ -5094,6 +5094,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8328217961459843106, guid: ad2a5c527284c6842a3f1dab00c5143e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328217961459843106, guid: ad2a5c527284c6842a3f1dab00c5143e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328217961537120997, guid: ad2a5c527284c6842a3f1dab00c5143e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328217961537120997, guid: ad2a5c527284c6842a3f1dab00c5143e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.53
+      objectReference: {fileID: 0}
     - target: {fileID: 8328217961558495130, guid: ad2a5c527284c6842a3f1dab00c5143e, type: 3}
       propertyPath: m_Name
       value: SM_KH_Player
