@@ -21,7 +21,7 @@ public class EnemyTest : MonoBehaviour
         currTime += Time.deltaTime;
         if(currTime > time)
         {
-            Na_Player.instace.Damaged(10, camPos);
+            Na_Player.instace.Damaged(10);
             currTime = 0;
         }
     }

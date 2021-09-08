@@ -281,7 +281,7 @@ public class Na_Player : MonoBehaviour
     public GameObject damage;
     [HideInInspector]
     public bool isDie;
-    public void Damaged(float damage, GameObject enemyCamPos)
+    public void Damaged(float damage)
     {
         if (isDie) return;
         currHP -= damage; //HP감소한다
@@ -457,7 +457,7 @@ public class Na_Player : MonoBehaviour
         myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
         fireCount--;
-        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+        //enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
 
         //Invoke("ShotOut", 0.2f);
     }
