@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class SM_Enemy_A : MonoBehaviour
 {
-    
+    //피격 함수 만들자.
 
     Animator anim;
 
@@ -134,6 +134,7 @@ public class SM_Enemy_A : MonoBehaviour
     bool isAttackToWalk = false;
     private void Attack()
     {
+       
         // Move 로 상태 전환 해야 할때
         if (isAttackToWalk)
         {
@@ -145,6 +146,7 @@ public class SM_Enemy_A : MonoBehaviour
 
                 m_state = EnemyState.Move;
                 anim.SetTrigger("isWalk");
+                Na_Player.instace.Damaged(0);
             }
             return;
         }
@@ -262,7 +264,7 @@ public class SM_Enemy_A : MonoBehaviour
             IsKnockbackFinish = false;
             currentTime = 0;
 
-
+            Damage();
         }
     }
 

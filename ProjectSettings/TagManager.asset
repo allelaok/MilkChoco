@@ -12,6 +12,8 @@ TagManager:
   - Pos
   - JumpZone
   - ChocoContainer
+  - Jump
+  - SM_Enemy
   layers:
   - Default
   - TransparentFX

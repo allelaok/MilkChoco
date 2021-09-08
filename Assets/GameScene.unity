@@ -1133,28 +1133,13 @@ GameObject:
   - component: {fileID: 200080153}
   - component: {fileID: 200080152}
   - component: {fileID: 200080151}
-  - component: {fileID: 200080150}
   m_Layer: 0
   m_Name: SM_Enemy A (7)
-  m_TagString: Enemy
+  m_TagString: SM_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &200080150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200080149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72198e6547390a34c8345379e3fee5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 816415898}
 --- !u!114 &200080151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,10 +1153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   speed: 3
   rotSpeed: 5
-  detectRange: 0
+  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -1995,28 +1980,13 @@ GameObject:
   - component: {fileID: 364406408}
   - component: {fileID: 364406407}
   - component: {fileID: 364406406}
-  - component: {fileID: 364406405}
   m_Layer: 0
   m_Name: SM_Enemy A (1)
-  m_TagString: Enemy
+  m_TagString: SM_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &364406405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364406404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72198e6547390a34c8345379e3fee5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 429361229}
 --- !u!114 &364406406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2030,10 +2000,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   speed: 3
   rotSpeed: 5
-  detectRange: 0
+  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -2590,28 +2560,13 @@ GameObject:
   - component: {fileID: 434410181}
   - component: {fileID: 434410180}
   - component: {fileID: 434410179}
-  - component: {fileID: 434410178}
   m_Layer: 0
   m_Name: SM_Enemy A (2)
-  m_TagString: Enemy
+  m_TagString: SM_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &434410178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 434410177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72198e6547390a34c8345379e3fee5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 514761883}
 --- !u!114 &434410179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2625,10 +2580,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   speed: 3
   rotSpeed: 5
-  detectRange: 0
+  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -3362,28 +3317,13 @@ GameObject:
   - component: {fileID: 519713069}
   - component: {fileID: 519713068}
   - component: {fileID: 519713067}
-  - component: {fileID: 519713066}
   m_Layer: 0
   m_Name: SM_Enemy A (4)
-  m_TagString: Enemy
+  m_TagString: SM_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &519713066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519713065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72198e6547390a34c8345379e3fee5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 1975113775}
 --- !u!114 &519713067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3397,10 +3337,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   speed: 3
   rotSpeed: 5
-  detectRange: 0
+  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -3921,28 +3861,13 @@ GameObject:
   - component: {fileID: 628871693}
   - component: {fileID: 628871692}
   - component: {fileID: 628871691}
-  - component: {fileID: 628871690}
   m_Layer: 0
   m_Name: SM_Enemy A (5)
-  m_TagString: Enemy
+  m_TagString: SM_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &628871690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628871689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72198e6547390a34c8345379e3fee5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 1622866595}
 --- !u!114 &628871691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3956,10 +3881,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   speed: 3
   rotSpeed: 5
-  detectRange: 0
+  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -5194,6 +5119,8 @@ MonoBehaviour:
   wayPoint1: {fileID: 1440593390}
   wayPoint2: {fileID: 2093297541}
   currentWayPoint: {fileID: 1440593390}
+  knockbackSpeed: 10
+  downSpeed: 2
   AttackRange: 15
 --- !u!114 &803495550
 MonoBehaviour:
@@ -5342,28 +5269,13 @@ GameObject:
   - component: {fileID: 827053696}
   - component: {fileID: 827053695}
   - component: {fileID: 827053694}
-  - component: {fileID: 827053693}
   m_Layer: 0
   m_Name: SM_Enemy A (3)
-  m_TagString: Enemy
+  m_TagString: SM_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &827053693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 827053692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72198e6547390a34c8345379e3fee5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 456109939}
 --- !u!114 &827053694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5377,10 +5289,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   speed: 3
   rotSpeed: 5
-  detectRange: 0
+  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -7982,6 +7894,11 @@ Transform:
   m_Father: {fileID: 541818592}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1320892369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8855588824458320782, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
+  m_PrefabInstance: {fileID: 6619113450317097634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1327887005
 GameObject:
   m_ObjectHideFlags: 0
@@ -8492,28 +8409,13 @@ GameObject:
   - component: {fileID: 1398024948}
   - component: {fileID: 1398024947}
   - component: {fileID: 1398024946}
-  - component: {fileID: 1398024945}
   m_Layer: 0
   m_Name: SM_Enemy A (6)
-  m_TagString: Enemy
+  m_TagString: SM_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1398024945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398024944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72198e6547390a34c8345379e3fee5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 1378553988}
 --- !u!114 &1398024946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8527,10 +8429,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   speed: 3
   rotSpeed: 5
-  detectRange: 0
+  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -9091,6 +8993,8 @@ MonoBehaviour:
   wayPoint1: {fileID: 546839291}
   wayPoint2: {fileID: 775851313}
   currentWayPoint: {fileID: 546839291}
+  knockbackSpeed: 10
+  downSpeed: 2
   AttackRange: 15
 --- !u!65 &1483221556
 BoxCollider:
@@ -13105,10 +13009,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   speed: 3
   rotSpeed: 5
-  detectRange: 0
+  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -14288,28 +14192,13 @@ GameObject:
   - component: {fileID: 6396806757019777128}
   - component: {fileID: 7153247305233384998}
   - component: {fileID: 584205697529619535}
-  - component: {fileID: 7168585290310017500}
   m_Layer: 0
   m_Name: SM_Enemy A
-  m_TagString: Enemy
+  m_TagString: SM_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7168585290310017500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7168585290310017499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72198e6547390a34c8345379e3fee5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 1968464688}
 --- !u!4 &7256590379760186726
 Transform:
   m_ObjectHideFlags: 0
