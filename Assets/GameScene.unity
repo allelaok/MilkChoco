@@ -1522,7 +1522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleDelayTime: 2
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   attackRange: 15
   yVelocity: 0
   pos:
@@ -1560,7 +1560,7 @@ MonoBehaviour:
   - {fileID: 274368266}
   - {fileID: 790916069}
   speed: 6
-  gravity: 0.1
+  gravity: 0.44
   jumpForwardSpeed: 5
   chocoPos: {fileID: 157000341}
   chocoContainer:
@@ -1570,7 +1570,7 @@ MonoBehaviour:
   - {fileID: 0}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 0.15
+  jumpZonePower: 0.69
   rotSpeed: 2
   aimingPoint: {fileID: 1183130215}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
@@ -7945,7 +7945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleDelayTime: 2
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   attackRange: 15
   yVelocity: 0
   pos:
@@ -7974,7 +7974,7 @@ MonoBehaviour:
   - {fileID: 1208853925}
   - {fileID: 1722419310}
   speed: 6
-  gravity: 0.1
+  gravity: 0.44
   jumpForwardSpeed: 5
   chocoPos: {fileID: 1452266579}
   chocoContainer:
@@ -7984,7 +7984,7 @@ MonoBehaviour:
   - {fileID: 0}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 0.15
+  jumpZonePower: 0.69
   rotSpeed: 2
   aimingPoint: {fileID: 515136908}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
@@ -17329,7 +17329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleDelayTime: 2
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   attackRange: 15
   yVelocity: 0
   pos:
@@ -17363,7 +17363,7 @@ MonoBehaviour:
   - {fileID: 164674814}
   - {fileID: 1803429106}
   speed: 6
-  gravity: 0.1
+  gravity: 0.44
   jumpForwardSpeed: 5
   chocoPos: {fileID: 1416326845}
   chocoContainer:
@@ -17373,7 +17373,7 @@ MonoBehaviour:
   - {fileID: 0}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 0.14
+  jumpZonePower: 0.69
   rotSpeed: 2
   aimingPoint: {fileID: 2017856536}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
@@ -21896,7 +21896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleDelayTime: 2
-  target: {fileID: 0}
+  target: {fileID: 1320892369}
   attackRange: 15
   yVelocity: 0
   pos:
@@ -21917,8 +21917,8 @@ MonoBehaviour:
   - {fileID: 1516030950}
   - {fileID: 83588625}
   speed: 6
-  gravity: 0.1
-  jumpForwardSpeed: 5
+  gravity: 0.44
+  jumpForwardSpeed: 4
   chocoPos: {fileID: 351148931}
   chocoContainer:
   - {fileID: 0}
@@ -21927,7 +21927,7 @@ MonoBehaviour:
   - {fileID: 0}
   jumpCount: 0
   MaxJumpCount: 1
-  jumpZonePower: 0.15
+  jumpZonePower: 0.69
   rotSpeed: 2
   aimingPoint: {fileID: 1343058833}
   LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
