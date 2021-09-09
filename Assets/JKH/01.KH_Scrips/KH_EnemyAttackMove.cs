@@ -124,7 +124,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         {
         }
         dir = pos[i + 1].position - transform.position;
-        print(i);
+        //print(i);
         dir.Normalize();
         dir.y = 0;
         float y = 0;
