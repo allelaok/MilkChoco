@@ -11,7 +11,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     public float IdleDelayTime = 2.0f;
 
-
+    Animator anim;
 
     enum EnemyState
     {
@@ -28,6 +28,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     {
         //i = 0;
         cc = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
         //startEnemyPos = transform.position;
     }
 
@@ -86,10 +87,14 @@ public class KH_EnemyAttackMove : MonoBehaviour
     float currTime;
     private void Idle()
     {
+
         currTime += Time.deltaTime;
         if (currTime > IdleDelayTime)
         {
+            //anim.SetTrigger("isIdle");
+            //anim.SetTrigger("isWalk");
             m_state = EnemyState.Move;
+            anim.SetTrigger("isWalk");
             currTime = 0;
         }
     }
@@ -111,6 +116,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     bool canDetect; //@@@@@@@@@
     private void Move()
     {
+
         //attack enemy 스크립트 가져와서 넣는다
         if (cc.isGrounded)
         {
@@ -136,11 +142,13 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //Debug.DrawLine(transform.position, transform.position + dir * 100, Color.red);
         dir.y = y;
         cc.Move(dir);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거수정한다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
         Vector3 rotDir = dir;
         rotDir.y = 0;
 
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), rotSpeed * Time.deltaTime); //몸통트는 부분
+        //anim.SetTrigger("isWalk");
         Choco();
 
 
@@ -149,7 +157,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //만약 player가 범위안으로 들어온다면?
         Vector3 Pdir = target.transform.position - transform.position; //Pdir 로 수정
         float distance = Pdir.magnitude;
-        if (distance < attackRange&& canDetect==true)
+        if (distance < attackRange && canDetect == true)
         {
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
@@ -286,6 +294,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             if (hitInfo.transform.gameObject.tag == "Player")
             {
                 m_state = EnemyState.Attack;
+                anim.SetTrigger("isAttack");
             }
         }
 

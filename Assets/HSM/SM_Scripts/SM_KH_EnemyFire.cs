@@ -55,7 +55,7 @@ public class SM_KH_EnemyFire : MonoBehaviour
         }
 
         //enemyShot();
-        print("현재 상태: " + m_state);
+        //print("현재 상태: " + m_state);
 
         switch (m_state)
         {
