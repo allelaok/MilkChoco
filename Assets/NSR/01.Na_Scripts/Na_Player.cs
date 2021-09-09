@@ -14,7 +14,7 @@ using UnityEngine.SceneManagement;
 // 에너미에 에임을 맞추면 공격하고싶다.
 // 플레이어 애니메이션을 넣어주고 싶다.
 // 무기를 바꾸고 싶다.
-// 캐릭터 idex 를 받아서 모자를 쓰고싶다.
+// 캐릭터 index 를 받아서 모자를 쓰고싶다.
 
 public class Na_Player : MonoBehaviour
 {
@@ -60,6 +60,7 @@ public class Na_Player : MonoBehaviour
         milkPos = GameObject.Find("PlayerMilkPos");
         aimingPoint = GameObject.Find("AimingPoint");
         weaponPos = GameObject.Find("WeaponPos");
+        DodgeUI = GameObject.Find("Dodge").GetComponent<Image>();
 
         // damage 투명도 으로
         iTween.ColorTo(damage, iTween.Hash("a", 0f, "time", 0f));
@@ -71,9 +72,9 @@ public class Na_Player : MonoBehaviour
         Hats[Na_Center.instance.chNum].SetActive(true);
 
         line.SetActive(false);
-
     }
 
+    public bool isDontRot;
     // Update is called once per frame
     void Update()
     {
@@ -87,8 +88,11 @@ public class Na_Player : MonoBehaviour
             currTime += Time.deltaTime;
             if (currTime > respawnTime - 1)
             {
+                isDontRot = true;
                 anim.SetTrigger("doIdle");
                 transform.position = startPos.transform.position;
+                transform.forward = new Vector3(0, 0, 1);
+                y = 0;
                 currTime = 0;
             }
         }
@@ -96,14 +100,14 @@ public class Na_Player : MonoBehaviour
         {
             Move();            
             Milk();
-            Attack();
-            Swap();
+            if (!isSwap || !isDodge)
+                Attack();
+            if(!isDodge)
+                Swap();
             Rotate();
         }
 
-        lr = line.GetComponent<LineRenderer>();
-        lr.SetPosition(0, weaponPos.transform.position);
-        lr.SetPosition(1, hitInfo.point);
+        
 
     }
 
@@ -200,32 +204,37 @@ public class Na_Player : MonoBehaviour
     [HideInInspector]
     public float dodgeCoolTime = 10;
     Vector3 dodgeVecor;
+    Image DodgeUI;
     #endregion
     void Dodge(ref float v)
-    {
-
-        if (dodgeCount < MaxDodgeCount)
+    {   
+        if (!isSwap)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && cc.isGrounded)
+
+            if (dodgeCount < MaxDodgeCount)
             {
-                dodgeVecor = dir;
-                speed *= 2;
-                anim.SetTrigger("doDodge");
-                isDodge = true;
-                Invoke("DodgeOut", 1.5f);
-                dodgeCount++;
-                v = 1;
+                if (Input.GetKeyDown(KeyCode.LeftShift) && cc.isGrounded)
+                {
+                    dodgeVecor = dir;
+                    speed *= 2;
+                    anim.SetTrigger("doDodge");
+                    isDodge = true;
+                    Invoke("DodgeOut", 0.5f);
+                    dodgeCount++;
+                    v = 1;
 
 
+                }
             }
-        }
-        else
-        {
-            currDodgeTime += Time.deltaTime;
-            if (currDodgeTime > dodgeCoolTime)
+            else
             {
-                dodgeCount = 0;
-                currDodgeTime = 0;
+                DodgeUI.fillAmount = currDodgeTime / dodgeCoolTime;
+                currDodgeTime += Time.deltaTime;
+                if (currDodgeTime > dodgeCoolTime)
+                {
+                    dodgeCount = 0;
+                    currDodgeTime = 0;
+                }
             }
         }
     }
@@ -312,6 +321,7 @@ public class Na_Player : MonoBehaviour
         if (currHP <= 0) //currHp가 0이라면 
         {          
             isDie = true;
+            doDieAnim = true;
         }
     }
     void ColorA()
@@ -344,19 +354,20 @@ public class Na_Player : MonoBehaviour
     GameObject milkPos;
     GameObject isMilk;
     Text dieCountUI;
+    public bool doDieAnim;
     #endregion
     public void Respawn()
     {
-        reCurrTime += Time.deltaTime;
-
-        if(reCurrTime <= 0.1)
+        
+        if (doDieAnim)
+        {
             anim.SetTrigger("doDie");
-        //Invoke("DieOut", 1.5f);
+            doDieAnim = false;
+        }
 
+        reCurrTime += Time.deltaTime;      
         int count = 10 - (int)reCurrTime;
         dieCountUI.text = "" + count;
-
-
 
         if (reCurrTime > respawnTime)
         {
@@ -364,9 +375,8 @@ public class Na_Player : MonoBehaviour
             currHP = maxHP;            
             //enemyCam = null;
             reCurrTime = 0;
-            count = 0;
+            count = 0;            
             isDie = false;
-            
 
         }
         if (isMilk != null)
@@ -376,10 +386,6 @@ public class Na_Player : MonoBehaviour
         }
     }
 
-    void DieOut()
-    {
-        anim.SetBool("isDie", false);
-    }
 
     // 에너미 공격
     #region 무기 변수
@@ -417,7 +423,7 @@ public class Na_Player : MonoBehaviour
     #endregion
     void Attack()
     {
-        if (isSwap || isDodge) return;
+        
 
         Scope();
 
@@ -430,6 +436,7 @@ public class Na_Player : MonoBehaviour
             else
             {
                 bulletCountUI.text = "장전중...";
+                doReloadAnim = true;
                 Reload();
             }
         }
@@ -439,7 +446,7 @@ public class Na_Player : MonoBehaviour
         }
 
         // 반동 후 원래 위치로
-        myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, new Vector3(0, 6, -15), Time.deltaTime * reboundTime);
+        myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, aimingPoint.transform.localPosition, Time.deltaTime * reboundTime);
         //LineRenderer lr = null;
 
         Ray ray = new Ray();
@@ -489,6 +496,10 @@ public class Na_Player : MonoBehaviour
 
             //if (lr != null)
             //    lr.SetPosition(1, hitInfo.point);
+
+            lr = line.GetComponent<LineRenderer>();
+            lr.SetPosition(0, weaponPos.transform.position);
+            lr.SetPosition(1, hitInfo.point);
         }
     }
 
@@ -527,16 +538,18 @@ public class Na_Player : MonoBehaviour
     }
 
     bool isReload;
+    bool doReloadAnim;
     void Reload()
     {
-
+        
         reloadCurrTime += Time.deltaTime;
 
         isReload = true;
-        //anim.SetBool("isReload", true);
-        if (reloadCurrTime <= 0.1)
-            //anim.SetBool("isReload", false);
+        if (doReloadAnim)
+        {
             anim.SetTrigger("doReload");
+            doReloadAnim = false;
+        }
 
         
         if (reloadCurrTime > reloadTime)
@@ -629,6 +642,7 @@ public class Na_Player : MonoBehaviour
         if (other.gameObject.name.Contains("DestroyZone"))
         {
             isDie = true;
+            doDieAnim = true;
         }
     } 
 }
