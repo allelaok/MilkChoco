@@ -108,12 +108,15 @@ public class KH_EnemyAttackMove : MonoBehaviour
     public float jumpForwardSpeed = 10;
     float localSpeed;
     bool isJumpZone;
+    bool canDetect;
     private void Move()
     {
         //attack enemy 스크립트 가져와서 넣는다
         if (cc.isGrounded)
         {
             //i++;
+            //print("땅에있다");
+            //canDetect = true; //점프할때 Detect못하게한다.
             isJump = false;
             localSpeed = speed;
         }
@@ -145,7 +148,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //만약 player가 범위안으로 들어온다면?
         Vector3 Pdir = target.transform.position - transform.position; //Pdir 로 수정
         float distance = Pdir.magnitude;
-        if (distance < attackRange)
+        if (distance < attackRange|| canDetect==true)
         {
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
@@ -243,7 +246,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             //print("땅");
             yVelocity = 0;
             //jumpCount = 0;
-
+            canDetect = true;
         }
 
         if (isJumpZone)
@@ -254,6 +257,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             isJumpZone = false;
             localSpeed = jumpForwardSpeed;
             //yVelocity -= gravity * Time.deltaTime;
+            canDetect = false;
         }
 
         yVelocity -= gravity * Time.deltaTime;
@@ -303,7 +307,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     private void Attack()
     {
-        print("공격중");
+        //print("공격중");
         Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
             rotSpeed * Time.deltaTime); //몸을돌린다
