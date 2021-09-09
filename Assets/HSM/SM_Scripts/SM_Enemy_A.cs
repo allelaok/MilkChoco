@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class SM_Enemy_A : MonoBehaviour
 {
     //피격 함수 만들자.
+    public static SM_Enemy_A instance;
+
 
     Animator anim;
 
@@ -35,7 +37,7 @@ public class SM_Enemy_A : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cc = GetComponent<CharacterController>();
+        //cc = GetComponent<CharacterController>();
     //    rand_dir.x = Random.Range(-1.0f, 1.0f);
     //    rand_dir.y = Random.Range(-1.0f, 1.0f);
     }
@@ -43,7 +45,7 @@ public class SM_Enemy_A : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //print("현재상태 : " + m_state);
+        print("현재상태 : " + m_state);
         
         // 피격 테스트
         if(Input.GetKeyDown(KeyCode.K))
@@ -104,16 +106,17 @@ public class SM_Enemy_A : MonoBehaviour
     private void Move()
     {
         // 타겟으로 이동
-        Vector3 dir = target.transform.position - transform.position;
+        Vector3 dir = target.transform.position - transform.position;
         dir.Normalize();
-        dir.y = 0;
+        //dir.y = 0;
 
-        // 2. P = PO + vt
-        cc.SimpleMove(dir * speed);
-        dir.y = 0;
+        //// 2. P = PO + vt
+        //cc.SimpleMove(dir * speed);
+        //dir.y = 0;
 
         // 타겟으로 부드럽게 회전해서 이동
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotSpeed * Time.deltaTime);
+        transform.position += dir * speed * Time.deltaTime;
 
         //공격범위 안에 들어가면 상태를 공격으로 전환
         float distance = Vector3.Distance(target.transform.position, transform.position);
@@ -146,7 +149,7 @@ public class SM_Enemy_A : MonoBehaviour
 
                 m_state = EnemyState.Move;
                 anim.SetTrigger("isWalk");
-                Na_Player.instace.Damaged(0);
+                Na_Player.instace.Damaged(20);
             }
             return;
         }
@@ -190,11 +193,10 @@ public class SM_Enemy_A : MonoBehaviour
         }
     }
     bool IsKnockbackFinish = false;
-    float elaspedDamagedTime = 2;
+    float elaspedDamagedTime = 0.5f;
 
     private void Damage()
     {
-        // 넉잭 중이라면
         if (IsKnockbackFinish == false)
         {
             transform.position = Vector3.Lerp(transform.position, knockbackPos, knockbackSpeed * Time.deltaTime);
@@ -212,16 +214,19 @@ public class SM_Enemy_A : MonoBehaviour
         }
 
         // 2. 피격 대기 시간만큼 기다리고 싶다.
-        if (IsKnockbackFinish)
+        if (IsKnockbackFinish == true)
         {
             currentTime += Time.deltaTime;
             if (currentTime > elaspedDamagedTime)
             {
-                currentTime = 0;
                 m_state = EnemyState.Idle;
+                currentTime = 0;
+               
             }
         }
         
+
+
     }
     public float damageDelayTime = 2;
     public float knockbackSpeed = 10;
@@ -255,16 +260,17 @@ public class SM_Enemy_A : MonoBehaviour
         else
         {
             
+
             shootDirection.y = 0;
             // 넉백
             // P = P0 + vt;
-            knockbackPos = transform.position + shootDirection * 5;
+            knockbackPos = transform.position + shootDirection * 2;
             m_state = EnemyState.Damage;
             anim.SetTrigger("Damage");
             IsKnockbackFinish = false;
             currentTime = 0;
+            
 
-            Damage();
         }
     }
 

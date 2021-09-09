@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SM_KH_EnemyFire : MonoBehaviour
 {
+    public static SM_KH_EnemyFire instace;
+
     float currTime;
     float gunDuration = 0.2f; //ÃÑ °ø¼Ó
     float EnemySpeed = 4.0f;
@@ -44,6 +46,9 @@ public class SM_KH_EnemyFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+           
+
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             OnDamageProcess(transform.forward * -1);
@@ -80,8 +85,8 @@ public class SM_KH_EnemyFire : MonoBehaviour
 
     private void Idle()
     {
-        //animator.SetTrigger("isIdle");
-        
+        animator.SetTrigger("isIdle");
+
         currTime += Time.deltaTime;
         if (currTime > IdleDelayTime)
         {
@@ -243,7 +248,7 @@ public class SM_KH_EnemyFire : MonoBehaviour
  
     public float knockbackSpeed = 10;
     Vector3 knockbackPos;
-    float maxHp = 5;
+    float maxHp = 100;
     public void OnDamageProcess(Vector3 shootDirection)
     {
         maxHp--;
