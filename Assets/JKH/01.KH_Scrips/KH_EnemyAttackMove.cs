@@ -302,8 +302,10 @@ public class KH_EnemyAttackMove : MonoBehaviour
         float distance = dir.magnitude; //거리 계산
         if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
         {
-
+            anim.SetTrigger("isWalk");
             m_state = EnemyState.Move; //이러면 Move로 넘어간다
+            
+            //anim.SetTrigger("isWalk");
         }
 
 
