@@ -503,12 +503,27 @@ public class Na_Player : MonoBehaviour
         myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
         fireCount--;
-        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+        if (enemy.gameObject.name.Contains("SM"))
+        {
+            enemy.GetComponent<SM_Enemy_Hp>().Damaged(firePower);
+        }
+        else if (enemy.gameObject.name.Contains("KH"))
+        {
+            enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
+        }
+        
     }
     // 단거리 무기 공격
     public void SwingAttack()
     {
-        enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
+        if (enemy.gameObject.name.Contains("SM"))
+        {
+            enemy.GetComponent<SM_Enemy_Hp>().Damaged(firePower);
+        }
+        else if (enemy.gameObject.name.Contains("Na"))
+        {
+            enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
+        }
     }
 
     bool isReload;
@@ -566,7 +581,7 @@ public class Na_Player : MonoBehaviour
     Text milkCntUI;
     void Milk()
     {
-        milkCntUI.text = milkCount + "/4";
+        milkCntUI.text = milkCount + "";
         if (isMilk != null)
             isMilk.transform.position = milkPos.transform.position;
 
