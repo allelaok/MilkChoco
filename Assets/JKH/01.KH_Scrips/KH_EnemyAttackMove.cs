@@ -108,7 +108,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     public float jumpForwardSpeed = 10;
     float localSpeed;
     bool isJumpZone;
-    bool canDetect;
+    bool canDetect; //@@@@@@@@@
     private void Move()
     {
         //attack enemy 스크립트 가져와서 넣는다
@@ -124,6 +124,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         {
         }
         dir = pos[i + 1].position - transform.position;
+        print(i);
         dir.Normalize();
         dir.y = 0;
         float y = 0;
@@ -148,7 +149,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //만약 player가 범위안으로 들어온다면?
         Vector3 Pdir = target.transform.position - transform.position; //Pdir 로 수정
         float distance = Pdir.magnitude;
-        if (distance < attackRange|| canDetect==true)
+        if (distance < attackRange&& canDetect==true)
         {
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
@@ -217,6 +218,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             //print("JJJ");
             isJumpZone = true;
             isJump = true;
+            canDetect = false;
         }
 
     }

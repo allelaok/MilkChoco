@@ -6,7 +6,7 @@ public class KH_GameManager : MonoBehaviour
 {
     public int chocoCount;
     public static KH_GameManager instance;
-    public GameObject respawnPos;
+    //public GameObject respawnPos;
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class KH_GameManager : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        //enemyStart[numbers[3]].SetActive(true);
+        //enemyStart[numbers[0]].SetActive(true);
         shuffle(); //처음에 배열 무작위로 섞는다
         print(numbers[0]); //순서확인
         print(numbers[1]);
