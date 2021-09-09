@@ -7,9 +7,11 @@ public class KH_EnemyAttackMove : MonoBehaviour
 {
     //----
     Vector3 startChocoPos;
-    Vector3 startEnemyPos;
+    public GameObject startEnemyPos;
 
     public float IdleDelayTime = 2.0f;
+
+
 
     enum EnemyState
     {
@@ -24,39 +26,61 @@ public class KH_EnemyAttackMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        i = 0;
+        //i = 0;
         cc = GetComponent<CharacterController>();
-        startEnemyPos = transform.position;
+        //startEnemyPos = transform.position;
+    }
+
+    private void OnEnable()
+    {
+        i = 0;
+        transform.position = startEnemyPos.transform.position;
     }
 
     EnemyState m_state = EnemyState.Idle;
     // Update is called once per frame
+
+    bool doJump;
     void Update()
     {
+        //print(m_state);
         switch (m_state)
         {
             case EnemyState.Idle:
                 Idle();
+                doJump = false;
                 break;
             case EnemyState.Move:
-                Move();
+
+                doJump = true;
                 break;
             case EnemyState.Detect:
                 Detect();
+                doJump = false;
                 break;
             case EnemyState.Attack:
                 Attack();
+                doJump = false;
                 break;
             case EnemyState.Damage:
                 Damage();
+                doJump = false;
                 break;
             case EnemyState.Die:
                 Die();
+                doJump = false;
                 break;
         }
     }
 
 
+    private void FixedUpdate()
+    {
+        if (doJump)
+        {
+            Move();
+        }
+    }
 
 
     float currTime;
@@ -77,19 +101,22 @@ public class KH_EnemyAttackMove : MonoBehaviour
     public Transform[] pos; // 좌표
     Vector3 dir;
     public float speed = 5;
-    int i;    
+    int i;
     public float gravity = 1;
     bool isJump = false;
     CharacterController cc;
     public float jumpForwardSpeed = 10;
     float localSpeed;
     bool isJumpZone;
+    bool canDetect; //@@@@@@@@@
     private void Move()
     {
         //attack enemy 스크립트 가져와서 넣는다
         if (cc.isGrounded)
         {
             //i++;
+            //print("땅에있다");
+            //canDetect = true; //점프할때 Detect못하게한다.
             isJump = false;
             localSpeed = speed;
         }
@@ -97,6 +124,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         {
         }
         dir = pos[i + 1].position - transform.position;
+        print(i);
         dir.Normalize();
         dir.y = 0;
         float y = 0;
@@ -110,7 +138,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         cc.Move(dir);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거수정한다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         Vector3 rotDir = dir;
         rotDir.y = 0;
-        
+
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), rotSpeed * Time.deltaTime); //몸통트는 부분
         Choco();
@@ -121,17 +149,17 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //만약 player가 범위안으로 들어온다면?
         Vector3 Pdir = target.transform.position - transform.position; //Pdir 로 수정
         float distance = Pdir.magnitude;
-        if (distance < attackRange)
+        if (distance < attackRange&& canDetect==true)
         {
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
-            
+
         }
     }
     public Transform chocoPos;
     GameObject isChoco;
     public GameObject[] chocoContainer;
-    
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -184,12 +212,13 @@ public class KH_EnemyAttackMove : MonoBehaviour
             }
         }
 
-        
+
         if (other.gameObject.tag == "JumpZone")
         {
             //print("JJJ");
             isJumpZone = true;
             isJump = true;
+            canDetect = false;
         }
 
     }
@@ -210,7 +239,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     // 필요속성 : 점프횟수, 최대 점프 가능 횟수
     public int jumpCount;
-    public int MaxJumpCount = 1;    
+    public int MaxJumpCount = 1;
     public float jumpZonePower = 15f;
     public void Jump(out float dirY)
     {
@@ -219,7 +248,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             //print("땅");
             yVelocity = 0;
             //jumpCount = 0;
-
+            canDetect = true;
         }
 
         if (isJumpZone)
@@ -230,6 +259,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             isJumpZone = false;
             localSpeed = jumpForwardSpeed;
             //yVelocity -= gravity * Time.deltaTime;
+            canDetect = false;
         }
 
         yVelocity -= gravity * Time.deltaTime;
@@ -267,7 +297,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             m_state = EnemyState.Move; //이러면 Move로 넘어간다
         }
 
-        
+
 
     }
 
@@ -279,7 +309,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     private void Attack()
     {
-        print("공격중");
+        //print("공격중");
         Vector3 dirE = target.transform.position - transform.position; //에너미가 바라보는방향으로
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dirE),
             rotSpeed * Time.deltaTime); //몸을돌린다

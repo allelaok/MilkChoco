@@ -6,6 +6,7 @@ public class KH_GameManager : MonoBehaviour
 {
     public int chocoCount;
     public static KH_GameManager instance;
+    //public GameObject respawnPos;
 
     private void Awake()
     {
@@ -22,16 +23,19 @@ public class KH_GameManager : MonoBehaviour
 
     //Shuffle, Swap을 위한 필요속성
     public GameObject[] enemyStart; //enemy 배열(4개)
-    int[] numbers = { 0, 1, 2, 3 }; //순서 
+    public int[] numbers = { 0, 1, 2, 3 }; //순서 
     public int num1;
     public int num2;
     public int i = 0;
+
+    float currTime;
+    float respawnTime = 5f;
 
 
     // Start is called before the first frame update
     public void Start()
     {
-        //enemyStart[numbers[3]].SetActive(true);
+        //enemyStart[numbers[0]].SetActive(true);
         shuffle(); //처음에 배열 무작위로 섞는다
         print(numbers[0]); //순서확인
         print(numbers[1]);
@@ -86,16 +90,22 @@ public class KH_GameManager : MonoBehaviour
 
         if (isDie)
         {
-            enemyStart[i].SetActive(false);
+            //리스폰한다
+            //원위치시킨다(좌표찍어줌)
+            //Move함수에 i값 0 으로 초기화한다
+            //이것만 하면 되는데 진짜 위에걸 모르곘네
+            
+
+            enemyStart[numbers[i]].SetActive(false);
             currTime += Time.deltaTime;
+            print("현재시간: " + currTime);
             if (currTime > respawnTime)
             {
-                enemyStart[i].SetActive(true);
+                enemyStart[numbers[i]].SetActive(true);
                 isDie = false;
+                currTime = 0;
+                
             }
-            currTime = 0;
         }
     }
-    float currTime;
-    float respawnTime = 10;
 }

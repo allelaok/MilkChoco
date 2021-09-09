@@ -1219,7 +1219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &180147464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8082,7 +8082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1169779873
 Transform:
   m_ObjectHideFlags: 0
@@ -10184,7 +10184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1526468662
 Transform:
   m_ObjectHideFlags: 0
@@ -14984,10 +14984,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5034029594066754138}
     - target: {fileID: 4382725184423335094, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-      propertyPath: GunPos
-      value: 
-      objectReference: {fileID: 6619113450317097635}
-    - target: {fileID: 4382725184423335094, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: startPos
       value: 
       objectReference: {fileID: 1449000428}
@@ -14995,10 +14991,6 @@ PrefabInstance:
       propertyPath: milkCntUI
       value: 
       objectReference: {fileID: 6619113451843494645}
-    - target: {fileID: 4382725184423335094, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-      propertyPath: weaponPos
-      value: 
-      objectReference: {fileID: 6619113450317097635}
     - target: {fileID: 4382725184423335094, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: milkContainer.Array.size
       value: 4
@@ -15025,11 +15017,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
---- !u!1 &6619113450317097635 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3543437407987338254, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
-  m_PrefabInstance: {fileID: 6619113450317097634}
-  m_PrefabAsset: {fileID: 0}
 --- !u!222 &6619113450902893860
 CanvasRenderer:
   m_ObjectHideFlags: 0
