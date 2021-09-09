@@ -94,7 +94,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             //anim.SetTrigger("isIdle");
             //anim.SetTrigger("isWalk");
             m_state = EnemyState.Move;
-            anim.SetTrigger("isWalk");
+            anim.SetBool("IsMove", true);
             currTime = 0;
         }
     }
@@ -159,8 +159,10 @@ public class KH_EnemyAttackMove : MonoBehaviour
         float distance = Pdir.magnitude;
         if (distance < attackRange && canDetect == true)
         {
+            anim.SetBool("IsMove", false);
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
+            anim.SetBool("IsAttack", true);
 
         }
     }
@@ -257,10 +259,15 @@ public class KH_EnemyAttackMove : MonoBehaviour
             yVelocity = 0;
             //jumpCount = 0;
             canDetect = true;
+            anim.SetBool("IsLand", true);
+            //anim.SetBool("IsLand", false);
+            //anim.SetBool("IsMove", true);
         }
 
         if (isJumpZone)
         {
+            anim.SetBool("IsJump", true);
+            anim.SetBool("IsLand", true);
             //print("뛰어");
             yVelocity = jumpZonePower;
             //jumpCount++;
@@ -294,15 +301,19 @@ public class KH_EnemyAttackMove : MonoBehaviour
             if (hitInfo.transform.gameObject.tag == "Player")
             {
                 m_state = EnemyState.Attack;
-                anim.SetTrigger("isAttack");
+                //anim.SetTrigger("isAttack");
+                anim.SetBool("IsAttack", true);
             }
         }
 
         Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
         float distance = dir.magnitude; //거리 계산
         if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
+
         {
-            anim.SetTrigger("isWalk");
+            anim.SetBool("IsAttack", false);
+            anim.SetBool("IsMove", true);
+            //anim.SetTrigger("isWalk");
             m_state = EnemyState.Move; //이러면 Move로 넘어간다
             
             //anim.SetTrigger("isWalk");
