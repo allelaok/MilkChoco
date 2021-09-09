@@ -374,7 +374,7 @@ public class Na_Player : MonoBehaviour
     #region 무기 변수
     [HideInInspector]
     public int maxFire = 20;
-    [HideInInspector]
+    //[HideInInspector]
     public float reloadTime = 3;
     [HideInInspector]
     public float firePower = 10f;
@@ -406,9 +406,26 @@ public class Na_Player : MonoBehaviour
     #endregion
     void Attack()
     {
-        if (isSwap) return;
+        if (isSwap || isDodge) return;
 
         Scope();
+
+        if (weaponIdx == 0)
+        {
+            if (fireCount > 0)
+            {
+                bulletCountUI.text = "총알개수 : " + fireCount;
+            }
+            else
+            {
+                bulletCountUI.text = "장전중...";
+                Reload();
+            }
+        }
+        else
+        {
+            bulletCountUI.text = "...";
+        }
 
         // 반동 후 원래 위치로
         myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, new Vector3(0, 6, -15), Time.deltaTime * reboundTime);
@@ -426,7 +443,8 @@ public class Na_Player : MonoBehaviour
                 enemy = hitInfo.transform.gameObject;
 
                 if (weaponIdx == 0)
-                    anim.SetBool("isShot", true);
+                    if (fireCount > 0)
+                        anim.SetBool("isShot", true);
 
                 fireCurrTime += Time.deltaTime;
                 if (fireCurrTime > fireTime)
@@ -434,17 +452,9 @@ public class Na_Player : MonoBehaviour
                     // 원거리
                     if(weaponIdx == 0)
                     {
-                        if (fireCount > 0)
-                        {
+                        if (fireCount > 0)  
                             Shot();
-                            bulletCountUI.text = "총알개수 : " + fireCount;
-                        }
-                        else
-                        {
-                            bulletCountUI.text = "장전중...";
-                            Reload();
-                        }
-                    }
+                    }                  
                     // 근거리
                     else
                     {
@@ -490,11 +500,22 @@ public class Na_Player : MonoBehaviour
         enemy.GetComponent<Na_Enemy_hp>().Damaged(firePower);
     }
 
+    bool isReload;
     void Reload()
     {
+
         reloadCurrTime += Time.deltaTime;
+
+        isReload = true;
+        //anim.SetBool("isReload", true);
+        if (reloadCurrTime <= 0.1)
+            //anim.SetBool("isReload", false);
+            anim.SetTrigger("doReload");
+
+        
         if (reloadCurrTime > reloadTime)
         {
+            
             fireCount = maxFire;
             currTime = fireTime;
             reloadCurrTime = 0;

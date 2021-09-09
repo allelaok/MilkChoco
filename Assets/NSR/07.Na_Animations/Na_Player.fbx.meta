@@ -524,21 +524,21 @@ ModelImporter:
       - path: Bone_Body/Bone_Shoulder_R/Bone_Arm_R/RightHand
         weight: 1
       - path: Bone_Leg_L
-        weight: 1
+        weight: 0
       - path: Bone_Leg_L/Bone_Foot_L
-        weight: 1
+        weight: 0
       - path: Bone_Leg_L/Bone_Foot_L/Bone_Foot_L_end
-        weight: 1
+        weight: 0
       - path: Bone_Leg_L/Bone_Foot_L/RightFoot
-        weight: 1
+        weight: 0
       - path: Bone_Leg_R
-        weight: 1
+        weight: 0
       - path: Bone_Leg_R/Bone_Foot_R
-        weight: 1
+        weight: 0
       - path: Bone_Leg_R/Bone_Foot_R/Bone_Foot_R_end
-        weight: 1
+        weight: 0
       - path: Bone_Leg_R/Bone_Foot_R/LeftFoot
-        weight: 1
+        weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
