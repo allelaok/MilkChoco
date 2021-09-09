@@ -241,7 +241,7 @@ public class Na_Player : MonoBehaviour
     {
         float h = Input.GetAxis("Mouse X");
 
-        if (isDie || isDodge) return;
+        //if (isDie || isDodge) return;
         y += h * rotSpeed * Time.deltaTime;
 
         transform.localEulerAngles = new Vector3(0, y, 0);
