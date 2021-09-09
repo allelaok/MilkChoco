@@ -68,9 +68,9 @@ public class SM_Enemy_A : MonoBehaviour
                 Attack();
                 break;
 
-            //case EnemyState.Damage:
-            //    Damage();
-            //    break;
+            case EnemyState.Damage:
+                Damage();
+                break;
 
             case EnemyState.Die:
                 Die();
@@ -193,13 +193,40 @@ public class SM_Enemy_A : MonoBehaviour
         }
     }
     bool IsKnockbackFinish = false;
-    float elaspedDamagedTime = 2;
+    float elaspedDamagedTime = 0.5f;
 
     private void Damage()
     {
-        // 넉잭 중이라면
+        if (IsKnockbackFinish == false)
+        {
+            transform.position = Vector3.Lerp(transform.position, knockbackPos, knockbackSpeed * Time.deltaTime);
+            // 피격을 받는 도중에는 피격 애니메이션을 보여주고 싶다.
+            float distance = Vector3.Distance(transform.position, knockbackPos);
+
+
+            // 1. 넉백이 끝나면
+            if (distance < 0.1f)
+            {
+                transform.position = knockbackPos;
+                IsKnockbackFinish = true;
+                
+            }
+        }
+
+        // 2. 피격 대기 시간만큼 기다리고 싶다.
+        if (IsKnockbackFinish == true)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime > elaspedDamagedTime)
+            {
+                m_state = EnemyState.Idle;
+                currentTime = 0;
+               
+            }
+        }
         
-        
+
+
     }
     public float damageDelayTime = 2;
     public float knockbackSpeed = 10;
@@ -233,41 +260,17 @@ public class SM_Enemy_A : MonoBehaviour
         else
         {
             
+
             shootDirection.y = 0;
             // 넉백
             // P = P0 + vt;
-            knockbackPos = transform.position + shootDirection * 5;
+            knockbackPos = transform.position + shootDirection * 2;
             m_state = EnemyState.Damage;
             anim.SetTrigger("Damage");
             IsKnockbackFinish = false;
             currentTime = 0;
+            
 
-            if (IsKnockbackFinish == false)
-            {
-                transform.position = Vector3.Lerp(transform.position, knockbackPos, knockbackSpeed * Time.deltaTime);
-                // 피격을 받는 도중에는 피격 애니메이션을 보여주고 싶다.
-                float distance = Vector3.Distance(transform.position, knockbackPos);
-
-
-                // 1. 넉백이 끝나면
-                if (distance < 0.1f)
-                {
-                    transform.position = knockbackPos;
-                    IsKnockbackFinish = true;
-
-                }
-            }
-
-            // 2. 피격 대기 시간만큼 기다리고 싶다.
-            if (IsKnockbackFinish)
-            {
-                currentTime += Time.deltaTime;
-                if (currentTime > elaspedDamagedTime)
-                {
-                    currentTime = 0;
-                    m_state = EnemyState.Idle;
-                }
-            }
         }
     }
 
