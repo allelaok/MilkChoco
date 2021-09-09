@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/NSR/09.Na_Scenes/NSR_Scene.unity
     guid: 1cf9b3bfd204b4146a4d83bacb10d222
+  - enabled: 1
+    path: Assets/NSR/09.Na_Scenes/Na_LoseScene.unity
+    guid: 6f41b00513be56f418d7e024fad4687c
   m_configObjects: {}

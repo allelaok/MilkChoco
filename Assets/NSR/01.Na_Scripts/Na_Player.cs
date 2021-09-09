@@ -82,12 +82,13 @@ public class Na_Player : MonoBehaviour
 
         if (isDie)
         {
+            
             Respawn();
             currTime += Time.deltaTime;
             if (currTime > respawnTime - 1)
             {
-                transform.position = startPos.transform.position;
                 anim.SetTrigger("doIdle");
+                transform.position = startPos.transform.position;
                 currTime = 0;
             }
         }
@@ -256,7 +257,6 @@ public class Na_Player : MonoBehaviour
     #endregion
     void Swap()
     {
-        if (isDodge) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -311,9 +311,7 @@ public class Na_Player : MonoBehaviour
 
         if (currHP <= 0) //currHp가 0이라면 
         {          
-            //Camera.main.transform.position = enemyCamPos.transform.position;
             isDie = true;
-            anim.SetTrigger("doDie");
         }
     }
     void ColorA()
@@ -350,8 +348,16 @@ public class Na_Player : MonoBehaviour
     public void Respawn()
     {
         reCurrTime += Time.deltaTime;
+
+        if(reCurrTime <= 0.1)
+            anim.SetTrigger("doDie");
+        //Invoke("DieOut", 1.5f);
+
         int count = 10 - (int)reCurrTime;
         dieCountUI.text = "" + count;
+
+
+
         if (reCurrTime > respawnTime)
         {
             //  현재 hp 를 최대 hp로 초기화
@@ -370,11 +376,16 @@ public class Na_Player : MonoBehaviour
         }
     }
 
+    void DieOut()
+    {
+        anim.SetBool("isDie", false);
+    }
+
     // 에너미 공격
     #region 무기 변수
     [HideInInspector]
     public int maxFire = 20;
-    //[HideInInspector]
+    [HideInInspector]
     public float reloadTime = 3;
     [HideInInspector]
     public float firePower = 10f;
