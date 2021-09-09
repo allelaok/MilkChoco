@@ -1522,6 +1522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9147fa53f307fcb4ea913ac30bae4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startEnemyPos: {fileID: 594618845}
   IdleDelayTime: 2
   target: {fileID: 1320892369}
   attackRange: 15
@@ -3447,6 +3448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chocoCount: 0
+  respawnPos: {fileID: 0}
   enemyStart:
   - {fileID: 1974329040}
   - {fileID: 1164886753}
@@ -7962,6 +7964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9147fa53f307fcb4ea913ac30bae4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startEnemyPos: {fileID: 917437129}
   IdleDelayTime: 2
   target: {fileID: 1320892369}
   attackRange: 15
@@ -15712,7 +15715,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1631696962
 Transform:
   m_ObjectHideFlags: 0
@@ -17361,6 +17364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9147fa53f307fcb4ea913ac30bae4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startEnemyPos: {fileID: 1955963448}
   IdleDelayTime: 2
   target: {fileID: 1320892369}
   attackRange: 15
@@ -21943,6 +21947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9147fa53f307fcb4ea913ac30bae4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startEnemyPos: {fileID: 629905604}
   IdleDelayTime: 2
   target: {fileID: 1320892369}
   attackRange: 15

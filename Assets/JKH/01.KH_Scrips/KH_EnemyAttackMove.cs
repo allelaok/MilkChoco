@@ -7,10 +7,12 @@ public class KH_EnemyAttackMove : MonoBehaviour
 {
     //----
     Vector3 startChocoPos;
-    Vector3 startEnemyPos;
+    public GameObject startEnemyPos;
 
     public float IdleDelayTime = 2.0f;
-    
+
+
+
     enum EnemyState
     {
         Idle, //평시 -> Move
@@ -24,9 +26,15 @@ public class KH_EnemyAttackMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        i = 0;
+        //i = 0;
         cc = GetComponent<CharacterController>();
-        startEnemyPos = transform.position;
+        //startEnemyPos = transform.position;
+    }
+
+    private void OnEnable()
+    {
+        i = 0;
+        transform.position = startEnemyPos.transform.position;
     }
 
     EnemyState m_state = EnemyState.Idle;
@@ -65,7 +73,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         }
     }
 
-    
+
     private void FixedUpdate()
     {
         if (doJump)
@@ -93,7 +101,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     public Transform[] pos; // 좌표
     Vector3 dir;
     public float speed = 5;
-    int i;    
+    int i;
     public float gravity = 1;
     bool isJump = false;
     CharacterController cc;
@@ -126,7 +134,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         cc.Move(dir);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거수정한다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         Vector3 rotDir = dir;
         rotDir.y = 0;
-        
+
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), rotSpeed * Time.deltaTime); //몸통트는 부분
         Choco();
@@ -141,13 +149,13 @@ public class KH_EnemyAttackMove : MonoBehaviour
         {
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
-            
+
         }
     }
     public Transform chocoPos;
     GameObject isChoco;
     public GameObject[] chocoContainer;
-    
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -200,7 +208,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             }
         }
 
-        
+
         if (other.gameObject.tag == "JumpZone")
         {
             //print("JJJ");
@@ -226,7 +234,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     // 필요속성 : 점프횟수, 최대 점프 가능 횟수
     public int jumpCount;
-    public int MaxJumpCount = 1;    
+    public int MaxJumpCount = 1;
     public float jumpZonePower = 15f;
     public void Jump(out float dirY)
     {
@@ -283,7 +291,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             m_state = EnemyState.Move; //이러면 Move로 넘어간다
         }
 
-        
+
 
     }
 
