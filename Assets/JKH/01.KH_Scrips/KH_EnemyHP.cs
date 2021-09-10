@@ -49,13 +49,11 @@ public class KH_EnemyHP : MonoBehaviour
             //    currTime = 0;
             //    currHP = maxHP;
             //}
-            KH_GameManager.instance.isDie = true;
-            currTime += Time.deltaTime;
-            if (currTime > 2.5f)
-            {
-                currHP = maxHP;
+            KH_GameManager.instance.isDie = true;          
+            
+            currHP = maxHP;
 
-            }
+           
 
 
             // instance로만든다

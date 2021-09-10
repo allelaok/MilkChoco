@@ -97,11 +97,11 @@ public class KH_GameManager : MonoBehaviour
             //Move함수에 i값 0 으로 초기화한다
             //이것만 하면 되는데 진짜 위에걸 모르곘네
 
-            A_currTime += Time.deltaTime;
-            if (A_currTime > ATime)
-            {
-                GetComponent<KH_EnemyAttackMove>().DieAnim();
-            }
+            //A_currTime += Time.deltaTime;
+            //if (A_currTime > ATime)
+            //{
+            //    GetComponent<KH_EnemyAttackMove>().DieAnim();
+            //}
 
             enemyStart[numbers[i]].SetActive(false);
             currTime += Time.deltaTime;
