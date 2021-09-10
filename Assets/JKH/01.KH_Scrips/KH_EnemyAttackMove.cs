@@ -251,11 +251,12 @@ public class KH_EnemyAttackMove : MonoBehaviour
     {
         if (cc.isGrounded)
         {
+            anim.SetBool("IsJump", false);
             //print("¶¥");
             yVelocity = 0;
             //jumpCount = 0;
             canDetect = true;
-            anim.SetBool("IsJump", false);
+            
         }
 
         if (isJumpZone)
