@@ -35,9 +35,11 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     private void OnEnable()
     {
+        transform.position = startEnemyPos.transform.position;
         doMove = false;
         i = 0;
         transform.position = startEnemyPos.transform.position;
+
     }
 
     EnemyState m_state = EnemyState.Idle;
