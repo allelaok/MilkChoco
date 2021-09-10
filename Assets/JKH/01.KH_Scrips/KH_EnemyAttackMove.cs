@@ -255,6 +255,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             yVelocity = 0;
             //jumpCount = 0;
             canDetect = true;
+            anim.SetBool("IsJump", false);
         }
 
         if (isJumpZone)
@@ -266,6 +267,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             localSpeed = jumpForwardSpeed;
             //yVelocity -= gravity * Time.deltaTime;
             canDetect = false;
+            anim.SetBool("IsJump", true);
         }
 
         yVelocity -= gravity * Time.deltaTime;
