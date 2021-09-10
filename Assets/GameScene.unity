@@ -12588,7 +12588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9147fa53f307fcb4ea913ac30bae4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEnemyPos: {fileID: 1374643333}
+  startEnemyPos: {fileID: 1996177749}
   IdleDelayTime: 2
   target: {fileID: 2395509835499630892}
   attackRange: 15
