@@ -429,10 +429,11 @@ public class Na_Player : MonoBehaviour
     {
         
 
-        Scope();
+      
 
         if (weaponIdx == 0)
         {
+            Scope();
             if (fireCount > 0)
             {
                 bulletCountUI.text = "ÃÑ¾Ë°³¼ö : " + fireCount;
@@ -574,7 +575,7 @@ public class Na_Player : MonoBehaviour
         }
     }
    
-    int i = 5;
+    int i = 8;
     public GameObject scopeUI;
     public GameObject apUI;
     void Scope()
@@ -584,10 +585,12 @@ public class Na_Player : MonoBehaviour
             Camera.main.fieldOfView -= scope;
             reboundTime += scope;
             reboundPower += scope * 0.02f;
+            
             rotSpeed -= scope * i;
             GameObject cam = GameObject.Find("CameraHinge");
             Na_Rotate camRot =  cam.GetComponent<Na_Rotate>();
             camRot.rotSpeed -= scope * i;
+
             scopeUI.SetActive(true);
             apUI.SetActive(false);
         }

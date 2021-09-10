@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     float currTime;
     int playTimeS = 59;
-    int playTimeM = 04;
+    int playTimeM = 4;
     
     // Start is called before the first frame update
     void Start()
