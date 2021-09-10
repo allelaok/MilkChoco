@@ -32,13 +32,19 @@ public class KH_EnemyAttackMove : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //startEnemyPos = transform.position;
     }
+    private void OnEnable()
+    {
+        transform.position = startEnemyPos.transform.position;
+        doMove = false;
+        i = 0;
+    }
 
     private void OnDisable()
     {
         transform.position = startEnemyPos.transform.position;
         doMove = false;
         i = 0;
-        transform.position = startEnemyPos.transform.position;
+        //transform.position = startEnemyPos.transform.position;
 
     }
 
