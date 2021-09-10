@@ -11,6 +11,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     public float IdleDelayTime = 2.0f;
 
+    Animator anim;
 
 
     enum EnemyState
@@ -28,6 +29,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     {
         //i = 0;
         cc = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
         //startEnemyPos = transform.position;
     }
 
@@ -91,6 +93,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         {
             m_state = EnemyState.Move;
             currTime = 0;
+            anim.SetBool("IsMove", true);
         }
     }
 
@@ -151,8 +154,11 @@ public class KH_EnemyAttackMove : MonoBehaviour
         float distance = Pdir.magnitude;
         if (distance < attackRange&& canDetect==true)
         {
+            anim.SetBool("IsMove", false);
+            anim.SetBool("IsMove", false);
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
+            anim.SetBool("IsAttack", true);
 
         }
     }
@@ -293,7 +299,8 @@ public class KH_EnemyAttackMove : MonoBehaviour
         float distance = dir.magnitude; //거리 계산
         if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
         {
-
+            anim.SetBool("IsAttack", false);
+            anim.SetBool("IsMove", true);
             m_state = EnemyState.Move; //이러면 Move로 넘어간다
         }
 
@@ -355,7 +362,8 @@ public class KH_EnemyAttackMove : MonoBehaviour
         float distance = dir.magnitude; //거리 계산
         if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
         {
-
+            anim.SetBool("IsAttack", false);
+            anim.SetBool("IsMove", true);
             m_state = EnemyState.Move; //이러면 Move로 넘어간다
         }
 
@@ -369,5 +377,9 @@ public class KH_EnemyAttackMove : MonoBehaviour
     private void Die()
     {
         throw new NotImplementedException();
+    }
+    public void DieAnim()
+    {
+        anim.SetBool("IsDie", true);
     }
 }
