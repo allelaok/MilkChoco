@@ -61,6 +61,10 @@ public class Na_Player : MonoBehaviour
         aimingPoint = GameObject.Find("AimingPoint");
         weaponPos = GameObject.Find("WeaponPos");
         DodgeUI = GameObject.Find("Dodge").GetComponent<Image>();
+        //scopeUI = GameObject.Find("Scope");
+        //apUI = GameObject.Find("Ap");
+
+        scopeUI.SetActive(false);
 
         // damage 투명도 으로
         iTween.ColorTo(damage, iTween.Hash("a", 0f, "time", 0f));
@@ -216,7 +220,7 @@ public class Na_Player : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.LeftShift) && cc.isGrounded)
                 {
                     dodgeVecor = dir;
-                    speed *= 2;
+                    speed *= 4;
                     anim.SetTrigger("doDodge");
                     isDodge = true;
                     Invoke("DodgeOut", 0.5f);
@@ -240,7 +244,7 @@ public class Na_Player : MonoBehaviour
     }
     void DodgeOut()
     {
-        speed *= 0.5f;
+        speed *= 0.25f;
         isDodge = false;
     }
 
@@ -274,7 +278,7 @@ public class Na_Player : MonoBehaviour
                 weapons[0].SetActive(true);
                 firePower = 5;
                 fireTime = 0.2f;
-                crossroad = 30;
+                crossroad = 200;
                 weight = 2;
                 weapons[1].SetActive(false);
                 weaponIdx = 0;
@@ -284,7 +288,7 @@ public class Na_Player : MonoBehaviour
                 weapons[0].SetActive(false);
                 firePower = 20;
                 fireTime = 1;
-                crossroad = 10;
+                crossroad = 15;
                 weight = 0;
                 weapons[1].SetActive(true);
                 weaponIdx = 1;
@@ -397,8 +401,8 @@ public class Na_Player : MonoBehaviour
     public float firePower = 10f;
     [HideInInspector]
     public float fireTime = 1f;
-    [HideInInspector]
-    public float crossroad = 30;
+    //[HideInInspector]
+    public float crossroad = 100;
     [HideInInspector]
     public float reboundPower = 0.2f;
     [HideInInspector]
@@ -436,6 +440,7 @@ public class Na_Player : MonoBehaviour
             else
             {
                 bulletCountUI.text = "장전중...";
+                line.SetActive(false);
                 doReloadAnim = true;
                 Reload();
             }
@@ -476,7 +481,7 @@ public class Na_Player : MonoBehaviour
                     // 근거리
                     else
                     {
-                        bulletCountUI.text = "...";
+                        
                         anim.SetTrigger("doSwing");
                     }
                     fireCurrTime = 0;
@@ -522,7 +527,11 @@ public class Na_Player : MonoBehaviour
         {
             enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
         }
-        
+        else if (enemy.gameObject.name.Contains("KH"))
+        {
+            enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
+        }
+
     }
     // 단거리 무기 공격
     public void SwingAttack()
@@ -532,6 +541,10 @@ public class Na_Player : MonoBehaviour
             enemy.GetComponent<SM_Enemy_Hp>().Damaged(firePower);
         }
         else if (enemy.gameObject.name.Contains("Na"))
+        {
+            enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
+        }
+        else if (enemy.gameObject.name.Contains("KH"))
         {
             enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
         }
@@ -562,6 +575,8 @@ public class Na_Player : MonoBehaviour
     }
    
     int i = 5;
+    public GameObject scopeUI;
+    public GameObject apUI;
     void Scope()
     {
         if (Input.GetMouseButtonDown(1))
@@ -573,6 +588,8 @@ public class Na_Player : MonoBehaviour
             GameObject cam = GameObject.Find("CameraHinge");
             Na_Rotate camRot =  cam.GetComponent<Na_Rotate>();
             camRot.rotSpeed -= scope * i;
+            scopeUI.SetActive(true);
+            apUI.SetActive(false);
         }
 
         if (Input.GetMouseButtonUp(1))
@@ -584,6 +601,8 @@ public class Na_Player : MonoBehaviour
             GameObject cam = GameObject.Find("CameraHinge");
             Na_Rotate camRot = cam.GetComponent<Na_Rotate>();
             camRot.rotSpeed += scope * i;
+            scopeUI.SetActive(false);
+            apUI.SetActive(true);
         }
     }
    
