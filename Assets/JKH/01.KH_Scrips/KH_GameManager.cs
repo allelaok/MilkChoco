@@ -30,7 +30,7 @@ public class KH_GameManager : MonoBehaviour
 
     float currTime;
     float A_currTime;
-    float respawnTime = 10f;
+    float respawnTime = 4;
     float ATime;
 
 

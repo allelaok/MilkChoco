@@ -33,16 +33,19 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //startEnemyPos = transform.position;
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
+        transform.position = startEnemyPos.transform.position;
+        doMove = false;
         i = 0;
         transform.position = startEnemyPos.transform.position;
+
     }
 
     EnemyState m_state = EnemyState.Idle;
     // Update is called once per frame
 
-    bool doJump;
+    bool doMove;
     void Update()
     {
         //print(m_state);
@@ -50,27 +53,27 @@ public class KH_EnemyAttackMove : MonoBehaviour
         {
             case EnemyState.Idle:
                 Idle();
-                doJump = false;
+                doMove = false;
                 break;
             case EnemyState.Move:
 
-                doJump = true;
+                doMove = true;
                 break;
             case EnemyState.Detect:
                 Detect();
-                doJump = false;
+                doMove = false;
                 break;
             case EnemyState.Attack:
                 Attack();
-                doJump = false;
+                doMove = false;
                 break;
             case EnemyState.Damage:
                 Damage();
-                doJump = false;
+                doMove = false;
                 break;
             case EnemyState.Die:
                 Die();
-                doJump = false;
+                doMove = false;
                 break;
         }
     }
@@ -78,7 +81,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (doJump)
+        if (doMove)
         {
             Move();
         }
