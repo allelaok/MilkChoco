@@ -33,7 +33,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //startEnemyPos = transform.position;
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
         transform.position = startEnemyPos.transform.position;
         doMove = false;
