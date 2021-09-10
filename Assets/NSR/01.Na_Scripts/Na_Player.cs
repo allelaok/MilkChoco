@@ -518,7 +518,7 @@ public class Na_Player : MonoBehaviour
         {
             enemy.GetComponent<SM_Enemy_Hp>().Damaged(firePower);
         }
-        else if (enemy.gameObject.name.Contains("KH"))
+        else if (enemy.gameObject.name.Contains("Na"))
         {
             enemy.GetComponent<KH_EnemyHP>().Damaged(firePower);
         }
