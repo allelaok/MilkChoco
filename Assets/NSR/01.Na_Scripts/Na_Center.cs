@@ -23,6 +23,8 @@ public class Na_Center : MonoBehaviour
 
     public int chNum;
 
+    public int[] chStat = new int[4];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +46,7 @@ public class Na_Center : MonoBehaviour
         {
 
             float tmp = y;
-            if(tmp % 20 < 10)
+            if (tmp % 20 < 10)
             {
                 chNum = (int)tmp / 20;
                 y = tmp - (tmp % 20);
@@ -53,9 +55,48 @@ public class Na_Center : MonoBehaviour
             {
                 chNum = (int)tmp / 20 + 1;
                 y = tmp + 20 - (tmp % 20);
-            }           
-            
+            }
+
         }
         transform.localEulerAngles = new Vector3(0, y, 0);
+
+
+
+        switch (chNum)
+        {
+            case 0:
+                chStat = new int[] { 100, 100, 100, 100 };
+                break;
+            case 1:
+                chStat = new int[] { 200, 50, 200, 50 };
+                break;
+            case 2:
+                chStat = new int[] { 200, 90, 90, 30 };
+                break;
+            case 3:
+                chStat = new int[] { 200, 90, 90, 30 };
+                break;
+            case 4:
+                chStat = new int[] { 200, 90, 90, 30 };
+                break;
+            case 5:
+                chStat = new int[] { 200, 90, 90, 30 };
+                break;
+            case 6:
+                chStat = new int[] { 200, 90, 90, 30 };
+                break;
+            case 7:
+                chStat = new int[] { 200, 90, 90, 30 };
+                break;
+            case 8:
+                chStat = new int[] { 200, 90, 90, 30 };
+                break;
+            case 9:
+                chStat = new int[] { 200, 90, 90, 30 };
+                break;
+        }
     }
 }
+
+   
+

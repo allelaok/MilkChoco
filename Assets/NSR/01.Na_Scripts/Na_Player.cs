@@ -40,11 +40,20 @@ public class Na_Player : MonoBehaviour
 
     public GameObject[] Hats;
 
+
     // Start is called before the first frame update
     void Start()
     {
+        maxHP = Na_Center.instance.chStat[0];
+        longFirePower = longFirePower * Na_Center.instance.chStat[1] * 0.01f;
+        ShortFirePower = ShortFirePower * Na_Center.instance.chStat[1] * 0.01f;
+        jumpPower = jumpPower * Na_Center.instance.chStat[2] * 0.01f;
+        speed = speed * Na_Center.instance.chStat[3] * 0.01f;
+        
         //  현재 hp 를 최대 hp로 초기화
         currHP = maxHP;
+
+        firePower = longFirePower;
 
         fireCurrTime = fireTime;
         fireCount = maxFire;
@@ -81,10 +90,7 @@ public class Na_Player : MonoBehaviour
     public bool isDontRot;
     // Update is called once per frame
     void Update()
-    {
-
-        print(fireTime);
-
+    {       
         if (isDie)
         {
             
@@ -276,7 +282,7 @@ public class Na_Player : MonoBehaviour
             if (weaponIdx == 1)
             {
                 weapons[0].SetActive(true);
-                firePower = 5;
+                firePower = longFirePower;
                 fireTime = 0.2f;
                 crossroad = 200;
                 weight = 2;
@@ -286,7 +292,7 @@ public class Na_Player : MonoBehaviour
             else if (weaponIdx == 0)
             {
                 weapons[0].SetActive(false);
-                firePower = 20;
+                firePower = ShortFirePower;
                 fireTime = 1;
                 crossroad = 15;
                 weight = 0;
@@ -309,7 +315,7 @@ public class Na_Player : MonoBehaviour
     #region 필요속성 : 현재hp, 최대hp, hpUI, damage
     float currHP;
     [HideInInspector]
-    public float maxHP = 100;
+    public float maxHP;
     Image hpUI;
     GameObject damage;
     [HideInInspector]
@@ -398,7 +404,9 @@ public class Na_Player : MonoBehaviour
     [HideInInspector]
     public float reloadTime = 3;
     [HideInInspector]
-    public float firePower = 10f;
+    float firePower;
+    float longFirePower = 5;
+    float ShortFirePower = 20;
     [HideInInspector]
     public float fireTime = 1f;
     //[HideInInspector]
