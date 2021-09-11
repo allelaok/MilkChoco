@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class KH_GameManager : MonoBehaviour
 {
     public int chocoCount;
     public static KH_GameManager instance;
+
+    Text ChocoCountUI;
     //public GameObject respawnPos;
 
     private void Awake()
@@ -33,7 +37,7 @@ public class KH_GameManager : MonoBehaviour
     float respawnTime = 4;
     float ATime;
 
-
+    //Text ChocoCountUI;
     // Start is called before the first frame update
     public void Start()
     {
@@ -46,6 +50,9 @@ public class KH_GameManager : MonoBehaviour
 
         enemyStart[numbers[i]].SetActive(true);
         //i++;
+
+        
+        ChocoCountUI = GameObject.Find("ChocoCnt").GetComponent<Text>();
     }
 
     void shuffle()
@@ -115,6 +122,10 @@ public class KH_GameManager : MonoBehaviour
             }
         }
 
-
+        ChocoCountUI.text = chocoCount + "";
+        if(chocoCount == 4)
+        {
+            print("³¡");
+        }
     }
 }
