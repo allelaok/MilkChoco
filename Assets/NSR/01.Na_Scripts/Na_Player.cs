@@ -40,7 +40,6 @@ public class Na_Player : MonoBehaviour
 
     public GameObject[] Hats;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -208,20 +207,19 @@ public class Na_Player : MonoBehaviour
     #region
     [HideInInspector]
     public bool isDodge;
-    int dodgeCount;
-    int MaxDodgeCount = 1;
     float currDodgeTime;
     [HideInInspector]
     public float dodgeCoolTime = 10;
     Vector3 dodgeVecor;
     Image DodgeUI;
+    bool canDodge = true;
     #endregion
     void Dodge(ref float v)
     {   
         if (!isSwap)
         {
 
-            if (dodgeCount < MaxDodgeCount)
+            if (canDodge)
             {
                 if (Input.GetKeyDown(KeyCode.LeftShift) && cc.isGrounded)
                 {
@@ -229,11 +227,9 @@ public class Na_Player : MonoBehaviour
                     speed *= 4;
                     anim.SetTrigger("doDodge");
                     isDodge = true;
-                    Invoke("DodgeOut", 0.5f);
-                    dodgeCount++;
+                    canDodge = false;
+                    Invoke("DodgeOut", 0.5f);                  
                     v = 1;
-
-
                 }
             }
             else
@@ -242,7 +238,7 @@ public class Na_Player : MonoBehaviour
                 currDodgeTime += Time.deltaTime;
                 if (currDodgeTime > dodgeCoolTime)
                 {
-                    dodgeCount = 0;
+                    canDodge = true;
                     currDodgeTime = 0;
                 }
             }
