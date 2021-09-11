@@ -12,6 +12,7 @@ TagManager:
   - JumpZone
   - ChocoContainer
   - SM_Enemy
+  - Button
   layers:
   - Default
   - TransparentFX
