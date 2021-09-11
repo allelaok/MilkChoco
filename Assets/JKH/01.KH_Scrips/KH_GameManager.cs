@@ -83,7 +83,7 @@ public class KH_GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeUIs();
+        //timeUIs();
 
         if (isChoco)
         {
