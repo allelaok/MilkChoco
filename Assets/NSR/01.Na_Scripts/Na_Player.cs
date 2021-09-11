@@ -37,11 +37,8 @@ public class Na_Player : MonoBehaviour
     }
 
     Animator anim;
-
     public GameObject[] Hats;
-
-    AudioSource audioSource;
-    
+    AudioSource audioSource;  
     public AudioClip[] clip;
    
     // Start is called before the first frame update
@@ -122,6 +119,11 @@ public class Na_Player : MonoBehaviour
             if(!isDodge)
                 Swap();
             Rotate();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                anim.SetTrigger("doThrow");
+            }
         }
 
         
@@ -331,6 +333,9 @@ public class Na_Player : MonoBehaviour
         isSwap = false;
     }
 
+
+
+
     // Damage 를 받으면 hp를 깎고 싶다.
     #region 필요속성 : 현재hp, 최대hp, hpUI, damage
     float currHP;
@@ -371,7 +376,6 @@ public class Na_Player : MonoBehaviour
           "time", 0.5f
            ));
     }
-
 
     //플레이어를 리스폰 하고싶다. 우유가 있다면 우유도
     #region 필요속성 : 플레이어 처음 위치, 우유, 우유 처음 위치, 현재시간, 리스폰 시간
@@ -455,10 +459,6 @@ public class Na_Player : MonoBehaviour
     #endregion
     void Attack()
     {
-        
-
-      
-
         if (weaponIdx == 0)
         {
             Scope();
@@ -536,7 +536,6 @@ public class Na_Player : MonoBehaviour
             lr.SetPosition(1, hitInfo.point);
         }
     }
-
 
     // 원거리 무기 공격
     public void Shot()
