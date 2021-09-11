@@ -8,6 +8,7 @@ public class KH_GameManager : MonoBehaviour
 {
     public int chocoCount;
     public static KH_GameManager instance;
+    public GameObject timeUI;
 
     Text ChocoCountUI;
     //public GameObject respawnPos;
@@ -82,6 +83,8 @@ public class KH_GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timeUIs();
+
         if (isChoco)
         {
             enemyStart[numbers[i]].SetActive(false);
@@ -127,5 +130,32 @@ public class KH_GameManager : MonoBehaviour
         {
             print("³¡");
         }
+    }
+
+    public void timeUIs()
+    {
+        currTime += Time.deltaTime;
+        if (currTime > 1f)
+        {
+            //itween
+            iTween.ScaleTo(timeUI, iTween.Hash(
+                "x", 1,
+                "y", 1,
+                "z", 1,
+                "time", 0.5f,
+                "easetype", iTween.EaseType.easeInOutBack
+
+                ));
+            iTween.ScaleTo(timeUI, iTween.Hash(
+                "x", 1.2,
+                "y", 1.2,
+                "z", 1.2,
+                "time", 0.5f,
+                "delay", 0.5f,
+                "easetype", iTween.EaseType.easeInOutBack
+                ));
+            currTime = 0;
+        }
+
     }
 }

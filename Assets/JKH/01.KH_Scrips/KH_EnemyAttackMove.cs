@@ -12,6 +12,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     public float IdleDelayTime = 2.0f;
 
     Animator anim;
+    
 
 
     enum EnemyState
@@ -54,6 +55,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     bool doMove;
     void Update()
     {
+        
         //print(m_state);
         switch (m_state)
         {
@@ -394,4 +396,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
     {
         anim.SetBool("IsDie", true);
     }
+
+    
 }
+
