@@ -40,9 +40,15 @@ public class Na_Player : MonoBehaviour
 
     public GameObject[] Hats;
 
+    AudioSource audioSource;
+    
+    public AudioClip[] clip;
+   
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         maxHP = Na_Center.instance.chStat[0];
         longFirePower = longFirePower * Na_Center.instance.chStat[1] * 0.01f;
         ShortFirePower = ShortFirePower * Na_Center.instance.chStat[1] * 0.01f;
@@ -71,6 +77,7 @@ public class Na_Player : MonoBehaviour
         DodgeUI = GameObject.Find("Dodge").GetComponent<Image>();
         //scopeUI = GameObject.Find("Scope");
         //apUI = GameObject.Find("Ap");
+        
 
         scopeUI.SetActive(false);
 
@@ -84,6 +91,7 @@ public class Na_Player : MonoBehaviour
         Hats[Na_Center.instance.chNum].SetActive(true);
 
         line.SetActive(false);
+        runSound.SetActive(false);
     }
 
     public bool isDontRot;
@@ -127,6 +135,7 @@ public class Na_Player : MonoBehaviour
     CharacterController cc;
     [HideInInspector]
     public Vector3 dir;
+    public GameObject runSound;
     #endregion
     void Move()
     {
@@ -148,6 +157,16 @@ public class Na_Player : MonoBehaviour
         Jump(out dir.y);
 
         anim.SetBool("isWalk", dirH + dirV != Vector3.zero);
+
+        if(dirH + dirV == Vector3.zero || isJump)
+        {
+            runSound.SetActive(false);
+        }
+        else
+        {
+            runSound.SetActive(true);
+        }
+
        
         cc.Move(dir * speed * Time.deltaTime);
         
@@ -168,7 +187,7 @@ public class Na_Player : MonoBehaviour
     void Jump(out float dirY)
     {
 
-        isJump = true;
+        
         if (cc.isGrounded)
         {
             yVelocity = 0;
@@ -182,16 +201,20 @@ public class Na_Player : MonoBehaviour
         {
             if (jumpCount < MaxJumpCount)
             {
+                isJump = true;
                 anim.SetBool("isJump", true);
                 anim.SetTrigger("doJump");
+                audioSource.PlayOneShot(clip[1]);
                 yVelocity = jumpPower;
                 jumpCount++;
             }
         }
         if (isJumpZone)
         {
+            isJump = true;
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
+            audioSource.PlayOneShot(clip[1]);
             yVelocity = jumpZonePower;
             jumpCount++;
             isJumpZone = false;
@@ -240,6 +263,7 @@ public class Na_Player : MonoBehaviour
                 {
                     canDodge = true;
                     currDodgeTime = 0;
+                    audioSource.PlayOneShot(clip[2]);
                 }
             }
         }
@@ -513,13 +537,12 @@ public class Na_Player : MonoBehaviour
         }
     }
 
+
     // 원거리 무기 공격
     public void Shot()
     {
         line.SetActive(true);
-
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.Play();
+        audioSource.PlayOneShot(clip[0]);
 
         myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
