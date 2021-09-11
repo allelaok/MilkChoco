@@ -14,6 +14,14 @@ public class SM_Enemy_A : MonoBehaviour
     Rigidbody rb;
     BoxCollider bc;
 
+    Transform myTransform = null;
+
+    public Vector3 direction;
+    public Vector3 default_direction;
+    public float default_velocity;
+    public float velocity;
+
+
     //열거형
     enum EnemyState
     {
@@ -38,13 +46,34 @@ public class SM_Enemy_A : MonoBehaviour
     void Start()
     {
         //cc = GetComponent<CharacterController>();
-    //    rand_dir.x = Random.Range(-1.0f, 1.0f);
-    //    rand_dir.y = Random.Range(-1.0f, 1.0f);
+        
+        //랜덤이동1
+        //default_direction.x = Random.Range(-1.0f, 1.0f);
+        //default_direction.y = Random.Range(-1.0f, 1.0f);
+        //default_velocity = 0.1f;
+
+        //랜덤이동2
+        //myTransform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //랜덤이동1
+        //velocity = 0.0f;
+        //this.transform.position = new Vector3(transform.position.x + (default_direction.x * default_velocity),
+        //                                           transform.position.y + (default_direction.y * default_velocity),
+        //                                           transform.position.z);
+
+        //랜덤이동2
+        //Vector3 waypoint = speed * Vector3.forward * Time.deltaTime;
+        //myTransform.Translate(waypoint);
+
+        //if (myTransform.position.y <= -10.0f)
+        //{
+        //    myTransform.position = new Vector3(Random.Range(-10.0f, 10.0f), 10.0f, 0.0f);
+
+        //}
         print("현재상태 : " + m_state);
         
         // 피격 테스트
@@ -80,7 +109,7 @@ public class SM_Enemy_A : MonoBehaviour
 
     
     public GameObject target;
-    public float speed;
+    public float speed = 5;
     CharacterController cc;
     public float rotSpeed = 5;
 
@@ -105,8 +134,11 @@ public class SM_Enemy_A : MonoBehaviour
 
     private void Move()
     {
+        
+
         // 타겟으로 이동
         Vector3 dir = target.transform.position - transform.position;
+        dir.y = 0;
         dir.Normalize();
         //dir.y = 0;
 
@@ -119,15 +151,25 @@ public class SM_Enemy_A : MonoBehaviour
         transform.position += dir * speed * Time.deltaTime;
 
         //공격범위 안에 들어가면 상태를 공격으로 전환
-        float distance = Vector3.Distance(target.transform.position, transform.position);
-        if (distance +1 < attackRange)
-        {
-            m_state = EnemyState.Attack;
-            currentTime = attackDelayTime;
-        }
+        
+
+        //float distance = Vector3.Distance(target.transform.position, transform.position);
+        //if (distance +1 < attackRange)
+        //{
+        //    m_state = EnemyState.Attack;
+        //    currentTime = attackDelayTime;
+        //}
     }
 
-    public float attackDelayTime = 2;
+    private void OnCollisionEnter(Collision other)
+    {
+        if( other.gameObject.tag == "Player")
+
+        m_state = EnemyState.Attack;
+        currentTime = attackDelayTime;
+    }
+
+    public float attackDelayTime = 2;
     public float attackRange = 2;
 
 

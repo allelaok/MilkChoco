@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class SM_Enemy_Hp : MonoBehaviour
 {
     float currHP;
@@ -11,9 +12,16 @@ public class SM_Enemy_Hp : MonoBehaviour
 
     public Image hpUI;
 
+    Animation anim;
+
+    private void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
+        
         //현재 HP를 Max HP로
         currHP = maxHP;
     }

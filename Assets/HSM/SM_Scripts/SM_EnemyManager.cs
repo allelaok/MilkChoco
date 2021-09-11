@@ -19,7 +19,7 @@ public class SM_EnemyManager : MonoBehaviour
     public GameObject enemyFactory;
 
     // 필요속성 : 오브젝트풀, 풀크기
-    public int enemyPoolSize = 20;
+    public int enemyPoolSize = 10;
     //public GameObject[] enemyPool;
     //[System.NonSerialized]
     [HideInInspector]
