@@ -486,7 +486,7 @@ public class Na_Player : MonoBehaviour
             Scope();
             if (fireCount > 0)
             {
-                bulletCountUI.text = "ÃÑ¾Ë°³¼ö : " + fireCount;
+                bulletCountUI.text = fireCount + " / " + maxFire;
             }
             else
             {
