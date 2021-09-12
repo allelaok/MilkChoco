@@ -138,15 +138,8 @@ public class Na_Player : MonoBehaviour
             if(!isDodge)
                 Swap();
             Rotate();
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                anim.SetTrigger("doThrow");
-            }
+  
         }
-
-        
-
     }
 
     // 플레이어 W, S, A, D 로 이동하고 싶다.   
@@ -179,7 +172,7 @@ public class Na_Player : MonoBehaviour
 
         anim.SetBool("isWalk", dirH + dirV != Vector3.zero);
 
-        if(dirH + dirV == Vector3.zero || isJump)
+        if(dirH + dirV == Vector3.zero || isJump || isDodge || isFall)
         {
             runSound.SetActive(false);
         }
@@ -215,7 +208,8 @@ public class Na_Player : MonoBehaviour
             jumpCount = 0;
             anim.SetBool("isJump", false);
             anim.SetBool("isDown", false);
-            isJump = false;          
+            isJump = false;
+            isFall = false;
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -270,9 +264,10 @@ public class Na_Player : MonoBehaviour
                     dodgeVecor = dir;
                     speed *= 4;
                     anim.SetTrigger("doDodge");
+                    Invoke("DodgeEnd", 0.4f);
+                    Invoke("DodgeOut", 1.1f);
                     isDodge = true;
-                    canDodge = false;
-                    Invoke("DodgeOut", 0.5f);                  
+                    canDodge = false;                 
                     v = 1;
                     audioSource.PlayOneShot(clip[(int)of.dodge]);
                 }
@@ -290,9 +285,13 @@ public class Na_Player : MonoBehaviour
             }
         }
     }
-    void DodgeOut()
+    public void DodgeEnd()
     {
-        speed *= 0.25f;
+        speed *= 0.25f;        
+    }
+
+    public void DodgeOut()
+    {
         isDodge = false;
     }
 
@@ -481,16 +480,21 @@ public class Na_Player : MonoBehaviour
     #endregion
     void Attack()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            anim.SetTrigger("doThrow");
+        }
+
         if (weaponIdx == 0)
         {
             Scope();
             if (fireCount > 0)
             {
-                bulletCountUI.text = "총알개수 : " + fireCount;
+                bulletCountUI.text = fireCount + " / " + maxFire;
             }
             else
             {
-                bulletCountUI.text = "장전중...";
+                bulletCountUI.text = "장전중";
                 //audioSource.PlayOneShot(clip[(int)of.reload]);
                 line.SetActive(false);
                 
@@ -671,6 +675,7 @@ public class Na_Player : MonoBehaviour
         }
     }
 
+    bool isFall;
     private void OnTriggerEnter(Collider other)
     {
         if (isMilk == null)
@@ -703,6 +708,7 @@ public class Na_Player : MonoBehaviour
 
         if (other.gameObject.name.Contains("FallZone"))
         {
+            isFall = true;
             jumpCount++;
             anim.SetBool("isDown", true);
         }
