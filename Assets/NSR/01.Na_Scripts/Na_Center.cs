@@ -23,6 +23,7 @@ public class Na_Center : MonoBehaviour
 
     public int chNum;
 
+    [HideInInspector]
     public int[] chStat = new int[4];
 
     // Start is called before the first frame update
@@ -68,31 +69,31 @@ public class Na_Center : MonoBehaviour
                 chStat = new int[] { 100, 100, 100, 100 };
                 break;
             case 1:
-                chStat = new int[] { 200, 50, 200, 50 };
+                chStat = new int[] { 100, 100, 100, 100 };
                 break;
             case 2:
-                chStat = new int[] { 200, 90, 90, 30 };
+                chStat = new int[] { 100, 100, 100, 100 };
                 break;
             case 3:
-                chStat = new int[] { 200, 90, 90, 30 };
+                chStat = new int[] { 100, 100, 100, 100 };
                 break;
             case 4:
-                chStat = new int[] { 200, 90, 90, 30 };
+                chStat = new int[] { 100, 100, 100, 100 };
                 break;
             case 5:
-                chStat = new int[] { 200, 90, 90, 30 };
+                chStat = new int[] { 100, 100, 100, 100 };
                 break;
             case 6:
-                chStat = new int[] { 200, 90, 90, 30 };
+                chStat = new int[] { 100, 100, 100, 100 };
                 break;
             case 7:
-                chStat = new int[] { 200, 90, 90, 30 };
+                chStat = new int[] { 100, 100, 100, 100 };
                 break;
             case 8:
-                chStat = new int[] { 200, 90, 90, 30 };
+                chStat = new int[] { 100, 100, 100, 100 };
                 break;
             case 9:
-                chStat = new int[] { 200, 90, 90, 30 };
+                chStat = new int[] { 100, 100, 100, 100 };
                 break;
         }
     }
