@@ -112,7 +112,7 @@ public class KH_GameManager : MonoBehaviour
             //{
             //    GetComponent<KH_EnemyAttackMove>().DieAnim();
             //}
-
+            //GetComponent<KH_EnemyAttackMove>().DieAnim();
             enemyStart[numbers[i]].SetActive(false);
             currTime += Time.deltaTime;
             print("현재시간: " + currTime);
