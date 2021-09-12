@@ -134,9 +134,10 @@ public class SM_Enemy_A : MonoBehaviour
 
     private void Move()
     {
-        
 
-        // 타겟으로 이동
+
+        // 타겟으로 이동
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         Vector3 dir = target.transform.position - transform.position;
         dir.y = 0;
         dir.Normalize();

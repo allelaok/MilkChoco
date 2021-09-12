@@ -16,7 +16,7 @@ public class SM_Enemy_Hp : MonoBehaviour
 
     private void Awake()
     {
-        
+        gameObject.SetActive(true);
     }
     // Start is called before the first frame update
     void Start()
@@ -44,7 +44,11 @@ public class SM_Enemy_Hp : MonoBehaviour
         if (currHP <= 0)
         {
             //나를 파괴하자
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+
+            SM_EnemyRespawn.instance.isDie = true;
+            currHP = maxHP;
+
 
         }
     }
