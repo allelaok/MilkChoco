@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Na_Grenade1 : MonoBehaviour
 {
     public GameObject grenade;
     public GameObject effect;
@@ -30,24 +30,24 @@ public class NewBehaviourScript : MonoBehaviour
 
         RaycastHit[] rays = Physics.SphereCastAll(transform.position, 5, Vector3.up, 0, LayerMask.GetMask("Enemy"));
 
-        foreach(RaycastHit hitObj in rays)
+        foreach (RaycastHit hitObj in rays)
         {
             if (hitObj.transform.name.Contains("SM"))
             {
-                hitObj.transform.GetComponent<SM_Enemy_Hp>().Damaged(20);
+                hitObj.transform.GetComponent<SM_Enemy_Hp>().Damaged(1);
             }
             else if (hitObj.transform.name.Contains("Na"))
             {
-                hitObj.transform.GetComponent<KH_EnemyHP>().Damaged(20);
+                hitObj.transform.GetComponent<KH_EnemyHP>().Damaged(1);
             }
             else if (hitObj.transform.name.Contains("KH"))
             {
-                hitObj.transform.GetComponent<SM_Enemy_Hp>().Damaged(20);
+                hitObj.transform.GetComponent<SM_Enemy_Hp>().Damaged(1);
             }
 
         }
 
-       
-        
+
+
     }
 }

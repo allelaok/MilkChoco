@@ -19136,8 +19136,15 @@ MonoBehaviour:
   - {fileID: 1774422083}
   - {fileID: 212850621}
   clip:
-  - {fileID: 8300000, guid: f1fb1c5f73b74476a8044d93a7c2c6bd, type: 3}
   - {fileID: 8300000, guid: a0437470db72c2f4cbc7843dc242df6f, type: 3}
+  - {fileID: 8300000, guid: 9cc4c0323927d2e479ad4e26defebca6, type: 3}
+  - {fileID: 8300000, guid: 46d11748cf7ab6141a35d76519f30768, type: 3}
+  - {fileID: 8300000, guid: 505f5021614232a48844313a43cfde7d, type: 3}
+  - {fileID: 8300000, guid: d6c0ac783694f584296494e3178b2e2c, type: 3}
+  - {fileID: 8300000, guid: f1fb1c5f73b74476a8044d93a7c2c6bd, type: 3}
+  - {fileID: 8300000, guid: e33fe006be7bde34bb7c5ea17c586665, type: 3}
+  - {fileID: 8300000, guid: 86c92c8024b048c48a23092627743777, type: 3}
+  - {fileID: 8300000, guid: 6fbc95dab484b414ab3dde2ba955abf7, type: 3}
   - {fileID: 8300000, guid: 4b65f7e274949f842bb96d0724833966, type: 3}
   isDontRot: 0
   speed: 7
@@ -19169,6 +19176,7 @@ MonoBehaviour:
   - {fileID: 120629074}
   - {fileID: 1789721152}
   - {fileID: 1153306177}
+  milkWin: 0
 --- !u!1001 &7707630459973704834
 PrefabInstance:
   m_ObjectHideFlags: 0

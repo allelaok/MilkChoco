@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6150129969218277187}
   - component: {fileID: 8425178807875274768}
   - component: {fileID: 1129992656}
-  - component: {fileID: 5786672703242419197}
+  - component: {fileID: 1744912327546100032}
   m_Layer: 7
   m_Name: Na_Grenade
   m_TagString: Untagged
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c942ad019d7c846a355c4272f20b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5786672703242419197
+--- !u!114 &1744912327546100032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1038177776725162335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6715a1e9ee785148a58cf17dae50297, type: 3}
+  m_Script: {fileID: 11500000, guid: 15d2171c3dfb36b4a9d88ab5a7527cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   grenade: {fileID: 3492254618772499808}

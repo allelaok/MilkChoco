@@ -40,7 +40,23 @@ public class Na_Player : MonoBehaviour
     public GameObject[] Hats;
     AudioSource audioSource;  
     public AudioClip[] clip;
-   
+
+    enum of
+    {
+        jump, 
+        dodge, 
+        swap,          
+        die, 
+        respawn,
+        rifle, 
+        reload, 
+        milk, 
+        milkcontainer,
+        cooltime,
+        win
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,6 +105,8 @@ public class Na_Player : MonoBehaviour
 
         line.SetActive(false);
         runSound.SetActive(false);
+
+        audioSource.PlayOneShot(clip[(int)of.respawn]);
     }
 
     public bool isDontRot;
@@ -107,6 +125,7 @@ public class Na_Player : MonoBehaviour
                 transform.position = startPos.transform.position;
                 transform.forward = new Vector3(0, 0, 1);
                 y = 0;
+                audioSource.PlayOneShot(clip[(int)of.respawn]);
                 currTime = 0;
             }
         }
@@ -206,7 +225,7 @@ public class Na_Player : MonoBehaviour
                 isJump = true;
                 anim.SetBool("isJump", true);
                 anim.SetTrigger("doJump");
-                audioSource.PlayOneShot(clip[1]);
+                audioSource.PlayOneShot(clip[(int)of.jump]);
                 yVelocity = jumpPower;
                 jumpCount++;
             }
@@ -216,7 +235,7 @@ public class Na_Player : MonoBehaviour
             isJump = true;
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
-            audioSource.PlayOneShot(clip[1]);
+            audioSource.PlayOneShot(clip[(int)of.jump]);
             yVelocity = jumpZonePower;
             jumpCount++;
             isJumpZone = false;
@@ -255,6 +274,7 @@ public class Na_Player : MonoBehaviour
                     canDodge = false;
                     Invoke("DodgeOut", 0.5f);                  
                     v = 1;
+                    audioSource.PlayOneShot(clip[(int)of.dodge]);
                 }
             }
             else
@@ -265,7 +285,7 @@ public class Na_Player : MonoBehaviour
                 {
                     canDodge = true;
                     currDodgeTime = 0;
-                    audioSource.PlayOneShot(clip[2]);
+                    audioSource.PlayOneShot(clip[(int)of.cooltime]);
                 }
             }
         }
@@ -324,6 +344,7 @@ public class Na_Player : MonoBehaviour
 
             anim.SetTrigger("doSwap");
             Invoke("SwapOut", 0.4f);
+            audioSource.PlayOneShot(clip[(int)of.swap]);
 
             isSwap = true;
         }     
@@ -357,6 +378,7 @@ public class Na_Player : MonoBehaviour
         {          
             isDie = true;
             doDieAnim = true;
+            audioSource.PlayOneShot(clip[(int)of.die]);
         }
     }
     void ColorA()
@@ -426,7 +448,7 @@ public class Na_Player : MonoBehaviour
     [HideInInspector]
     public int maxFire = 20;
     [HideInInspector]
-    public float reloadTime = 3;
+    float reloadTime = 3;
     [HideInInspector]
     float firePower;
     float longFirePower = 5;
@@ -469,8 +491,9 @@ public class Na_Player : MonoBehaviour
             else
             {
                 bulletCountUI.text = "ÀåÀüÁß...";
+                //audioSource.PlayOneShot(clip[(int)of.reload]);
                 line.SetActive(false);
-                doReloadAnim = true;
+                
                 Reload();
             }
         }
@@ -541,7 +564,7 @@ public class Na_Player : MonoBehaviour
     public void Shot()
     {
         line.SetActive(true);
-        audioSource.PlayOneShot(clip[0]);
+        audioSource.PlayOneShot(clip[(int)of.rifle]);
 
         myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
@@ -578,23 +601,19 @@ public class Na_Player : MonoBehaviour
     }
 
     bool isReload;
-    bool doReloadAnim;
     void Reload()
     {
-        
-        reloadCurrTime += Time.deltaTime;
-
-        isReload = true;
-        if (doReloadAnim)
+        if(reloadCurrTime == 0)
         {
             anim.SetTrigger("doReload");
-            doReloadAnim = false;
+            audioSource.PlayOneShot(clip[(int)of.reload]);
         }
 
-        
+        reloadCurrTime += Time.deltaTime;
+        isReload = true;
+
         if (reloadCurrTime > reloadTime)
-        {
-            
+        {           
             fireCount = maxFire;
             currTime = fireTime;
             reloadCurrTime = 0;
@@ -660,6 +679,7 @@ public class Na_Player : MonoBehaviour
             {
                 isMilk = other.gameObject;
                 startMilkPos = other.gameObject.transform.position;
+                audioSource.PlayOneShot(clip[(int)of.milk]);
             }
         }
         else
@@ -669,6 +689,7 @@ public class Na_Player : MonoBehaviour
                 milkContainer[milkCount].SetActive(true);
                 milkCount++;
                 Destroy(isMilk.gameObject);
+                audioSource.PlayOneShot(clip[(int)of.milkcontainer]);
                 isMilk = null;
             }
         }
