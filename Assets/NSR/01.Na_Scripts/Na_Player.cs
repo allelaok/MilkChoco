@@ -91,6 +91,7 @@ public class Na_Player : MonoBehaviour
         aimingPoint = GameObject.Find("AimingPoint");
         weaponPos = GameObject.Find("WeaponPos");
         DodgeUI = GameObject.Find("Dodge").GetComponent<Image>();
+        bombAnim = bombObj.GetComponent<Animator>();
 
         scopeUI.SetActive(false);
 
@@ -365,6 +366,10 @@ public class Na_Player : MonoBehaviour
     GameObject damage;
     [HideInInspector]
     public bool isDie;
+    public GameObject playerObj;
+    public GameObject bombObj;
+    Animator bombAnim;
+    
     #endregion
     public void Damaged(float damage)
     {
@@ -377,7 +382,8 @@ public class Na_Player : MonoBehaviour
         {          
             isDie = true;
             doDieAnim = true;
-            audioSource.PlayOneShot(clip[(int)of.die]);
+            
+            
         }
     }
     void ColorA()
@@ -417,17 +423,29 @@ public class Na_Player : MonoBehaviour
     #endregion
     public void Respawn()
     {
-        
+        bombObj.SetActive(true);
+
         if (doDieAnim)
         {
+            audioSource.PlayOneShot(clip[(int)of.die]);
             anim.SetTrigger("doDie");
+            bombAnim.SetTrigger("doDie");
             doDieAnim = false;
         }
 
         reCurrTime += Time.deltaTime;      
         int count = (int)respawnTime - (int)reCurrTime;
-        dieCnt.text = count.ToString();
-        dieCntBG.text = count.ToString();
+
+        if (count == 0)
+        {
+            dieCnt.text = "";
+            dieCntBG.text = "";
+        }
+        else
+        {
+            dieCnt.text = count.ToString();
+            dieCntBG.text = count.ToString();
+        }
 
         if (before - count > 1)
         {
@@ -436,15 +454,20 @@ public class Na_Player : MonoBehaviour
             before -= 1;
         }
 
+        if (reCurrTime >= 0.7f)
+        {
+            bombObj.SetActive(false);
+        }
+
         if (reCurrTime >= respawnTime)
         {
             //  현재 hp 를 최대 hp로 초기화
-            currHP = maxHP;            
+            currHP = maxHP;
             //enemyCam = null;
             reCurrTime = 0;
-            count = 0;            
+            count = 0;
+            
             isDie = false;
-
         }
         if (isMilk != null)
         {
@@ -453,31 +476,6 @@ public class Na_Player : MonoBehaviour
         }
     }
 
-    void CountdownUp()
-    {
-        iTween.ScaleTo(dieCountUI, iTween.Hash(
-          "x", 1,
-          "y", 1,
-          "z", 1,
-          "time", 0f,
-          "easetype",
-          iTween.EaseType.easeInOutBack,
-          "oncompletetarget", gameObject,
-          "oncomplete", "AfterCountdown"
-      ));
-    }
-
-    void AfterCountdown()
-    {
-        iTween.ScaleTo(dieCountUI, iTween.Hash(
-          "x", 0,
-          "y", 0,
-          "z", 0,
-          "time", 1f,
-          "easetype",
-          iTween.EaseType.easeInOutBack
-      ));
-    }
 
     void CountdownBGUp()
     {
@@ -781,6 +779,7 @@ public class Na_Player : MonoBehaviour
         {
             isDie = true;
             doDieAnim = true;
+
         }
     }
 
