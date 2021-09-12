@@ -1199,6 +1199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startEnemyPos: {fileID: 594618845}
   IdleDelayTime: 2
+  timeUI: {fileID: 0}
   target: {fileID: 2395509835499630892}
   attackRange: 15
   yVelocity: 0
@@ -4060,6 +4061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chocoCount: 0
+  timeUI: {fileID: 261757690}
   enemyStart:
   - {fileID: 800269048}
   - {fileID: 1164886753}
@@ -7296,6 +7298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startEnemyPos: {fileID: 917437129}
   IdleDelayTime: 2
+  timeUI: {fileID: 0}
   target: {fileID: 2395509835499630892}
   attackRange: 15
   yVelocity: 0
@@ -11354,6 +11357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startEnemyPos: {fileID: 1996177749}
   IdleDelayTime: 2
+  timeUI: {fileID: 0}
   target: {fileID: 2395509835499630892}
   attackRange: 15
   yVelocity: 0
@@ -14321,6 +14325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startEnemyPos: {fileID: 1955963448}
   IdleDelayTime: 2
+  timeUI: {fileID: 0}
   target: {fileID: 2395509835499630892}
   attackRange: 15
   yVelocity: 0
