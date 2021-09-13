@@ -555,7 +555,7 @@ public class Na_Player : MonoBehaviour
             }
             else
             {
-                bulletCountUI.text = "¿Â¿¸¡ﬂ";
+                bulletCountUI.text = "..";
                 //audioSource.PlayOneShot(clip[(int)of.reload]);
                 line.SetActive(false);
                 
