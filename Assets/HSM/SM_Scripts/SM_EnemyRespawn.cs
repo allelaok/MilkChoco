@@ -28,7 +28,7 @@ public class SM_EnemyRespawn : MonoBehaviour
             if (currenTime > reSpawnTime)
             {
 
-                
+                GameObject enemy = Instantiate(respawnPoint);
                 enemy.transform.position = transform.position;
                 isDie = false;
                 currenTime = 0;
