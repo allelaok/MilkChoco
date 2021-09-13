@@ -158,4 +158,19 @@ public class KH_GameManager : MonoBehaviour
         }
 
     }
+
+    public GameObject Gun;
+    public GameObject Hammer;
+
+    public void GunToHammer()
+    {
+        Gun.SetActive(false);
+        Hammer.SetActive(true);
+    }
+    
+    public void HammerToGun()
+    {
+        Hammer.SetActive(false);
+        Gun.SetActive(true);
+    }
 }
