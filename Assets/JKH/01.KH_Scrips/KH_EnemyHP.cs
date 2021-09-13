@@ -39,7 +39,7 @@ public class KH_EnemyHP : MonoBehaviour
             //int[] numbers = KH_GameManager.instance.numbers;
             //int i = KH_GameManager.instance.i;
             //KH_GameManager.instance.enemyStart[numbers[i]].SetActive(false);
-            //currTime += Time.deltaTime;
+            currTime += Time.deltaTime;
             //print("현재시간: " + currTime);
 
 
@@ -49,9 +49,16 @@ public class KH_EnemyHP : MonoBehaviour
             //    currTime = 0;
             //    currHP = maxHP;
             //}
-            KH_GameManager.instance.isDie = true;          
+            GetComponent<KH_EnemyAttackMove>().DieAnim(); 
+            if (currTime > 2)
+            {
+                KH_GameManager.instance.isDie = true;
+                currHP = maxHP;
+            }
             
-            currHP = maxHP;
+                     
+            
+            
 
            
 

@@ -68,6 +68,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
                 doMove = true;
                 break;
             case EnemyState.Detect:
+                
                 Detect();
                 doMove = false;
                 break;
@@ -163,7 +164,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //만약 player가 범위안으로 들어온다면?
         Vector3 Pdir = target.transform.position - transform.position; //Pdir 로 수정
         float distance = Pdir.magnitude;
-        if (distance < attackRange&& canDetect==true)
+        if (distance < attackRange&& canDetect==true || (Na_Player.instace.isDie))
         {
             anim.SetBool("IsMove", false);
             anim.SetBool("IsMove", false);
@@ -300,6 +301,18 @@ public class KH_EnemyAttackMove : MonoBehaviour
         ray.direction = aimingPoint.transform.forward;  //레이 방향
 
         print("레이발사");
+        
+
+        Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
+        float distance = dir.magnitude; //거리 계산
+        if (distance > attackRange|| (Na_Player.instace.isDie) ) //만약 거리가 에너미의 공격 범위보다 길다?
+        {
+            anim.SetBool("IsAttack", false);
+            anim.SetBool("IsMove", true);
+            m_state = EnemyState.Move; //이러면 Move로 넘어간다
+            
+        }
+
         RaycastHit hitInfo; //레이닿은변수 가져오기
         if (Physics.Raycast(ray, out hitInfo, 1000))
         {
@@ -307,15 +320,6 @@ public class KH_EnemyAttackMove : MonoBehaviour
             {
                 m_state = EnemyState.Attack;
             }
-        }
-
-        Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
-        float distance = dir.magnitude; //거리 계산
-        if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
-        {
-            anim.SetBool("IsAttack", false);
-            anim.SetBool("IsMove", true);
-            m_state = EnemyState.Move; //이러면 Move로 넘어간다
         }
 
 
@@ -357,7 +361,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
                     lr.SetPosition(0, transform.position);
                     lr.SetPosition(1, hitInfo.point);
                     Destroy(line, 0.1f);
-                    hitInfo.transform.gameObject.GetComponent<Na_Player>().Damaged(.5f);
+                    hitInfo.transform.gameObject.GetComponent<Na_Player>().Damaged(10f);
                     currTime = 0;
                 }
 
