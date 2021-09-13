@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class KH_StartSceneM : MonoBehaviour
 {
-    public GameObject StartButton;
+    public GameObject Manual;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,11 @@ public class KH_StartSceneM : MonoBehaviour
     }
     public void OnClickStart()
     {
-        SceneManager.LoadScene("KH_Scene");
+        Manual.SetActive(true);
+    }
+
+    public void OnClickStartOff()
+    {
+        Manual.SetActive(false);
     }
 }
