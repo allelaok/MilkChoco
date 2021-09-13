@@ -131,7 +131,7 @@ public class KH_GameManager : MonoBehaviour
         {
             print("끝");
         }
-
+        //Na_Player.instace.weaponIdx 멀리 돌아간 KH
         Na_Player weapon = GameObject.Find("Na_Player").GetComponent<Na_Player>();
         if (weapon.weaponIdx == 0)
         {
