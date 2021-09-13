@@ -321,7 +321,7 @@ public class Na_Player : MonoBehaviour
     // 무기를 바꾸고 싶다.
     #region 필요속성 : 무기 배열
     public GameObject[] weapons;
-    int weaponIdx;
+    public int weaponIdx;
     bool isSwap;
     #endregion
     void Swap()
@@ -561,20 +561,23 @@ public class Na_Player : MonoBehaviour
         if (weaponIdx == 0)
         {
             Scope();
+
+            
+            bulletCountUI.text = fireCount.ToString();
+
             if (fireCount > 0)
             {
-                bulletCountUI.text = fireCount + " / " + maxFire;
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    reloadCurrTime = 0;
+                    Reload();
+                }
             }
             else
-            {
-                bulletCountUI.text = "..";
-                //audioSource.PlayOneShot(clip[(int)of.reload]);
-                line.SetActive(false);
-                fire.SetActive(false);
-                
+            { 
                 Reload();
             }
-        }
+        }      
         else
         {
             bulletCountUI.text = "...";
@@ -699,7 +702,12 @@ public class Na_Player : MonoBehaviour
     bool isReload;
     void Reload()
     {
-        if(reloadCurrTime == 0)
+        bulletCountUI.text = "..";
+        //audioSource.PlayOneShot(clip[(int)of.reload]);
+        line.SetActive(false);
+        fire.SetActive(false);
+
+        if (reloadCurrTime == 0)
         {
             anim.SetTrigger("doReload");
             audioSource.PlayOneShot(clip[(int)of.reload]);
@@ -712,6 +720,7 @@ public class Na_Player : MonoBehaviour
         {           
             fireCount = maxFire;
             currTime = fireTime;
+            isReload = false;
             reloadCurrTime = 0;
         }
     }
