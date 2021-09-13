@@ -164,7 +164,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //만약 player가 범위안으로 들어온다면?
         Vector3 Pdir = target.transform.position - transform.position; //Pdir 로 수정
         float distance = Pdir.magnitude;
-        if (distance < attackRange&& canDetect==true || (Na_Player.instace.isDie))
+        if (distance < attackRange&& canDetect==true )
         {
             anim.SetBool("IsMove", false);
             anim.SetBool("IsMove", false);
@@ -378,7 +378,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
         Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
         float distance = dir.magnitude; //거리 계산
-        if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
+        if (distance > attackRange|| (Na_Player.instace.isDie)) //만약 거리가 에너미의 공격 범위보다 길다?
         {
             anim.SetBool("IsAttack", false);
             anim.SetBool("IsMove", true);

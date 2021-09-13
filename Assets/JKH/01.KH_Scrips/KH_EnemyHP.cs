@@ -49,8 +49,8 @@ public class KH_EnemyHP : MonoBehaviour
             //    currTime = 0;
             //    currHP = maxHP;
             //}
-            GetComponent<KH_EnemyAttackMove>().DieAnim(); 
-            if (currTime > 2)
+            //GetComponent<KH_EnemyAttackMove>().DieAnim(); 
+            //if (currTime > 2)
             {
                 KH_GameManager.instance.isDie = true;
                 currHP = maxHP;
