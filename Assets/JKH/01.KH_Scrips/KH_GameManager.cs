@@ -29,7 +29,9 @@ public class KH_GameManager : MonoBehaviour
     public int i = 0;
 
     float currTime;
-    float respawnTime = 5f;
+    float A_currTime;
+    float respawnTime = 4;
+    float ATime;
 
 
     // Start is called before the first frame update
@@ -94,7 +96,12 @@ public class KH_GameManager : MonoBehaviour
             //원위치시킨다(좌표찍어줌)
             //Move함수에 i값 0 으로 초기화한다
             //이것만 하면 되는데 진짜 위에걸 모르곘네
-            
+
+            //A_currTime += Time.deltaTime;
+            //if (A_currTime > ATime)
+            //{
+            //    GetComponent<KH_EnemyAttackMove>().DieAnim();
+            //}
 
             enemyStart[numbers[i]].SetActive(false);
             currTime += Time.deltaTime;

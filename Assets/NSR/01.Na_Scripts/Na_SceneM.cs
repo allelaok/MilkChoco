@@ -20,6 +20,6 @@ public class Na_SceneM : MonoBehaviour
 
     public void GameScene()
     {
-        SceneManager.LoadScene("NSR_Scene");
+        SceneManager.LoadScene("GameScene");
     }
 }

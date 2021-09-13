@@ -22,7 +22,17 @@ public class Na_Rotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Na_Player.instace.isDie) return;
+        if (Na_Player.instace.isDie)
+        {
+            if (Na_Player.instace.isDontRot)
+            {
+                transform.forward = new Vector3(0, 0, 0);
+                x = 0;
+                Na_Player.instace.isDontRot = false;
+            }
+            return;
+        }
+
 
         float h = Input.GetAxis("Mouse X");
         float v = Input.GetAxis("Mouse Y");

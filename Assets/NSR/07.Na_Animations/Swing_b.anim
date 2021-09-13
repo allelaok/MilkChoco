@@ -1046,4 +1046,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.46161786
+    functionName: SwingAttack
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 55653abd9e713e94c85e2b47f2759803, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
