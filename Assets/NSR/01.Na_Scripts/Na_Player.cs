@@ -56,8 +56,6 @@ public class Na_Player : MonoBehaviour
         win
     }
 
-
-    // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -92,6 +90,7 @@ public class Na_Player : MonoBehaviour
         weaponPos = GameObject.Find("WeaponPos");
         DodgeUI = GameObject.Find("Dodge").GetComponent<Image>();
         bombAnim = bombObj.GetComponent<Animator>();
+        fire = GameObject.Find("Na_Fire");
 
         scopeUI.SetActive(false);
 
@@ -105,9 +104,18 @@ public class Na_Player : MonoBehaviour
         Hats[Na_Center.instance.chNum].SetActive(true);
 
         line.SetActive(false);
+        fire.SetActive(false);
         runSound.SetActive(false);
 
         audioSource.PlayOneShot(clip[(int)of.respawn]);
+
+        for(int i = 0; i < 20; i++)
+        {
+            GameObject shell = Instantiate(shellF);
+            shells.Add(shell);
+            shell.SetActive(false);
+
+        }
     }
 
     public bool isDontRot;
@@ -355,8 +363,6 @@ public class Na_Player : MonoBehaviour
     }
 
 
-
-
     // Damage 를 받으면 hp를 깎고 싶다.
     #region 필요속성 : 현재hp, 최대hp, hpUI, damage
     float currHP;
@@ -538,9 +544,15 @@ public class Na_Player : MonoBehaviour
     GameObject weaponPos;
     RaycastHit hitInfo;
     LineRenderer lr;
+    GameObject fire;
+    List<GameObject> shells = new List<GameObject>();
+    public GameObject shellF;
+    List<GameObject> Activeshells = new List<GameObject>();
     #endregion
     void Attack()
     {
+       
+
         if (Input.GetMouseButtonDown(0))
         {
             anim.SetTrigger("doThrow");
@@ -558,6 +570,7 @@ public class Na_Player : MonoBehaviour
                 bulletCountUI.text = "..";
                 //audioSource.PlayOneShot(clip[(int)of.reload]);
                 line.SetActive(false);
+                fire.SetActive(false);
                 
                 Reload();
             }
@@ -608,6 +621,7 @@ public class Na_Player : MonoBehaviour
             {
                 anim.SetBool("isShot", false);
                 line.SetActive(false);
+                fire.SetActive(false);
 
                 fireCurrTime += Time.deltaTime;
                 if (fireCurrTime > 0.1f)
@@ -629,6 +643,15 @@ public class Na_Player : MonoBehaviour
     public void Shot()
     {
         line.SetActive(true);
+        fire.SetActive(true);
+
+        shells[0].transform.position = weaponPos.transform.position;
+        shells[0].SetActive(true);
+        Activeshells.Add(shells[0]);
+        shells.RemoveAt(0);
+
+        Invoke("ShellDestroy", 1f);
+
         audioSource.PlayOneShot(clip[(int)of.rifle]);
 
         myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
@@ -648,6 +671,14 @@ public class Na_Player : MonoBehaviour
         }
 
     }
+
+    void ShellDestroy()
+    {
+        Activeshells[0].SetActive(false);
+        shells.Add(Activeshells[0]);
+        Activeshells.RemoveAt(0);
+    }
+
     // 단거리 무기 공격
     public void SwingAttack()
     {
