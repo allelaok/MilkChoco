@@ -89,6 +89,7 @@ public class Na_Player : MonoBehaviour
         aimingPoint = GameObject.Find("AimingPoint");
         weaponPos = GameObject.Find("WeaponPos");
         DodgeUI = GameObject.Find("Dodge").GetComponent<Image>();
+        grenadeUI = GameObject.Find("Grenade").GetComponent<Image>();
         bombAnim = bombObj.GetComponent<Animator>();
         fire = GameObject.Find("Na_Fire");
 
@@ -121,10 +122,9 @@ public class Na_Player : MonoBehaviour
     public bool isDontRot;
     // Update is called once per frame
     void Update()
-    {       
+    {
         if (isDie)
-        {
-            
+        { 
             Respawn();
             currTime += Time.deltaTime;
             if (currTime > respawnTime - 1)
@@ -142,9 +142,9 @@ public class Na_Player : MonoBehaviour
         {
             Move();            
             Milk();
-            if (!isSwap || !isDodge)
+            if (!isSwap || !isDodge || !isReload)
                 Attack();
-            if(!isDodge)
+            if(!isDodge || !isReload)
                 Swap();
             Rotate();
   
@@ -548,35 +548,36 @@ public class Na_Player : MonoBehaviour
     List<GameObject> shells = new List<GameObject>();
     public GameObject shellF;
     List<GameObject> Activeshells = new List<GameObject>();
+    bool doReload;
     #endregion
     void Attack()
     {
-       
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            anim.SetTrigger("doThrow");
-        }
+        Grenade();
 
         if (weaponIdx == 0)
         {
             Scope();
 
-            
-            bulletCountUI.text = fireCount.ToString();
-
-            if (fireCount > 0)
+            if (doReload)
+            {
+                Reload();
+                
+            }
+            else if (fireCount > 0)
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    reloadCurrTime = 0;
-                    Reload();
+                    doReload = true;
                 }
+
+                bulletCountUI.text = fireCount.ToString();
+
             }
             else
-            { 
+            {
                 Reload();
             }
+            
         }      
         else
         {
@@ -639,6 +640,32 @@ public class Na_Player : MonoBehaviour
             lr = line.GetComponent<LineRenderer>();
             lr.SetPosition(0, weaponPos.transform.position);
             lr.SetPosition(1, hitInfo.point);
+        }
+    }
+
+    float grenadeTime;
+    bool canGrenade = true;
+    Image grenadeUI;
+    void Grenade()
+    {
+        if (canGrenade)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                anim.SetTrigger("doThrow");
+                grenadeTime = 0;
+                canGrenade = false;
+            }            
+        }
+        else
+        {
+            grenadeTime += Time.deltaTime;
+            grenadeUI.fillAmount = grenadeTime / 10;
+            if (grenadeTime > 10f)
+            {
+                canGrenade = true;
+                
+            }
         }
     }
 
@@ -721,6 +748,7 @@ public class Na_Player : MonoBehaviour
             fireCount = maxFire;
             currTime = fireTime;
             isReload = false;
+            doReload = false;
             reloadCurrTime = 0;
         }
     }
