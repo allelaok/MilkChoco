@@ -12,6 +12,8 @@ public class KH_EnemyAttackMove : MonoBehaviour
     public float IdleDelayTime = 2.0f;
 
     Animator anim;
+    
+
 
     enum EnemyState
     {
@@ -31,45 +33,56 @@ public class KH_EnemyAttackMove : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         //startEnemyPos = transform.position;
     }
-
     private void OnEnable()
     {
-        i = 0;
         transform.position = startEnemyPos.transform.position;
+        doMove = false;
+        i = 0;
+    }
+
+    private void OnDisable()
+    {
+        transform.position = startEnemyPos.transform.position;
+        doMove = false;
+        i = 0;
+        //transform.position = startEnemyPos.transform.position;
+
     }
 
     EnemyState m_state = EnemyState.Idle;
     // Update is called once per frame
 
-    bool doJump;
+    bool doMove;
     void Update()
     {
+        
         //print(m_state);
         switch (m_state)
         {
             case EnemyState.Idle:
                 Idle();
-                doJump = false;
+                doMove = false;
                 break;
             case EnemyState.Move:
 
-                doJump = true;
+                doMove = true;
                 break;
             case EnemyState.Detect:
+                
                 Detect();
-                doJump = false;
+                doMove = false;
                 break;
             case EnemyState.Attack:
                 Attack();
-                doJump = false;
+                doMove = false;
                 break;
             case EnemyState.Damage:
                 Damage();
-                doJump = false;
+                doMove = false;
                 break;
             case EnemyState.Die:
                 Die();
-                doJump = false;
+                doMove = false;
                 break;
         }
     }
@@ -77,7 +90,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (doJump)
+        if (doMove)
         {
             Move();
         }
@@ -87,15 +100,12 @@ public class KH_EnemyAttackMove : MonoBehaviour
     float currTime;
     private void Idle()
     {
-
         currTime += Time.deltaTime;
         if (currTime > IdleDelayTime)
         {
-            //anim.SetTrigger("isIdle");
-            //anim.SetTrigger("isWalk");
             m_state = EnemyState.Move;
-            anim.SetTrigger("isWalk");
             currTime = 0;
+            anim.SetBool("IsMove", true);
         }
     }
 
@@ -116,7 +126,6 @@ public class KH_EnemyAttackMove : MonoBehaviour
     bool canDetect; //@@@@@@@@@
     private void Move()
     {
-
         //attack enemy 스크립트 가져와서 넣는다
         if (cc.isGrounded)
         {
@@ -130,7 +139,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
         {
         }
         dir = pos[i + 1].position - transform.position;
-        print(i);
+        //print(i);
         dir.Normalize();
         dir.y = 0;
         float y = 0;
@@ -142,13 +151,11 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //Debug.DrawLine(transform.position, transform.position + dir * 100, Color.red);
         dir.y = y;
         cc.Move(dir);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거수정한다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
         Vector3 rotDir = dir;
         rotDir.y = 0;
 
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), rotSpeed * Time.deltaTime); //몸통트는 부분
-        //anim.SetTrigger("isWalk");
         Choco();
 
 
@@ -157,10 +164,13 @@ public class KH_EnemyAttackMove : MonoBehaviour
         //만약 player가 범위안으로 들어온다면?
         Vector3 Pdir = target.transform.position - transform.position; //Pdir 로 수정
         float distance = Pdir.magnitude;
-        if (distance < attackRange && canDetect == true)
+        if (distance < attackRange&& canDetect==true || (Na_Player.instace.isDie))
         {
+            anim.SetBool("IsMove", false);
+            anim.SetBool("IsMove", false);
             //Detect로 넘어간다
             m_state = EnemyState.Detect;
+            anim.SetBool("IsAttack", true);
 
         }
     }
@@ -253,10 +263,12 @@ public class KH_EnemyAttackMove : MonoBehaviour
     {
         if (cc.isGrounded)
         {
+            anim.SetBool("IsJump", false);
             //print("땅");
             yVelocity = 0;
             //jumpCount = 0;
             canDetect = true;
+            
         }
 
         if (isJumpZone)
@@ -268,6 +280,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
             localSpeed = jumpForwardSpeed;
             //yVelocity -= gravity * Time.deltaTime;
             canDetect = false;
+            anim.SetBool("IsJump", true);
         }
 
         yVelocity -= gravity * Time.deltaTime;
@@ -288,22 +301,25 @@ public class KH_EnemyAttackMove : MonoBehaviour
         ray.direction = aimingPoint.transform.forward;  //레이 방향
 
         print("레이발사");
+        
+
+        Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
+        float distance = dir.magnitude; //거리 계산
+        if (distance > attackRange|| (Na_Player.instace.isDie) ) //만약 거리가 에너미의 공격 범위보다 길다?
+        {
+            anim.SetBool("IsAttack", false);
+            anim.SetBool("IsMove", true);
+            m_state = EnemyState.Move; //이러면 Move로 넘어간다
+            
+        }
+
         RaycastHit hitInfo; //레이닿은변수 가져오기
         if (Physics.Raycast(ray, out hitInfo, 1000))
         {
             if (hitInfo.transform.gameObject.tag == "Player")
             {
                 m_state = EnemyState.Attack;
-                anim.SetTrigger("isAttack");
             }
-        }
-
-        Vector3 dir = target.transform.position - transform.position; //나와 Target(Player) 간의 방향 계산
-        float distance = dir.magnitude; //거리 계산
-        if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
-        {
-
-            m_state = EnemyState.Move; //이러면 Move로 넘어간다
         }
 
 
@@ -345,7 +361,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
                     lr.SetPosition(0, transform.position);
                     lr.SetPosition(1, hitInfo.point);
                     Destroy(line, 0.1f);
-                    hitInfo.transform.gameObject.GetComponent<Na_Player>().Damaged(.5f);
+                    hitInfo.transform.gameObject.GetComponent<Na_Player>().Damaged(10f);
                     currTime = 0;
                 }
 
@@ -364,7 +380,8 @@ public class KH_EnemyAttackMove : MonoBehaviour
         float distance = dir.magnitude; //거리 계산
         if (distance > attackRange) //만약 거리가 에너미의 공격 범위보다 길다?
         {
-
+            anim.SetBool("IsAttack", false);
+            anim.SetBool("IsMove", true);
             m_state = EnemyState.Move; //이러면 Move로 넘어간다
         }
 
@@ -379,4 +396,11 @@ public class KH_EnemyAttackMove : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+    public void DieAnim()
+    {
+        anim.SetBool("IsDie", true);
+    }
+
+    
 }
+

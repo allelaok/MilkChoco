@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class KH_GameManager : MonoBehaviour
 {
     public int chocoCount;
     public static KH_GameManager instance;
+    public GameObject timeUI;
+
+    Text ChocoCountUI;
     //public GameObject respawnPos;
 
     private void Awake()
@@ -33,19 +38,22 @@ public class KH_GameManager : MonoBehaviour
     float respawnTime = 4;
     float ATime;
 
-
+    //Text ChocoCountUI;
     // Start is called before the first frame update
     public void Start()
     {
-        enemyStart[numbers[0]].SetActive(true);
+        //enemyStart[numbers[3]].SetActive(true);
         shuffle(); //처음에 배열 무작위로 섞는다
         print(numbers[0]); //순서확인
         print(numbers[1]);
         print(numbers[2]);
         print(numbers[3]);
 
-        //enemyStart[numbers[i]].SetActive(true);
+        enemyStart[numbers[i]].SetActive(true);
         //i++;
+
+        
+        ChocoCountUI = GameObject.Find("ChocoCnt").GetComponent<Text>();
     }
 
     void shuffle()
@@ -75,6 +83,8 @@ public class KH_GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //timeUIs();
+
         if (isChoco)
         {
             enemyStart[numbers[i]].SetActive(false);
@@ -102,7 +112,7 @@ public class KH_GameManager : MonoBehaviour
             //{
             //    GetComponent<KH_EnemyAttackMove>().DieAnim();
             //}
-
+            //GetComponent<KH_EnemyAttackMove>().DieAnim();
             enemyStart[numbers[i]].SetActive(false);
             currTime += Time.deltaTime;
             print("현재시간: " + currTime);
@@ -114,5 +124,38 @@ public class KH_GameManager : MonoBehaviour
                 
             }
         }
+
+        ChocoCountUI.text = chocoCount + "";
+        if(chocoCount == 4)
+        {
+            print("끝");
+        }
+    }
+
+    public void timeUIs()
+    {
+        currTime += Time.deltaTime;
+        if (currTime > 1f)
+        {
+            //itween
+            iTween.ScaleTo(timeUI, iTween.Hash(
+                "x", 1,
+                "y", 1,
+                "z", 1,
+                "time", 0.5f,
+                "easetype", iTween.EaseType.easeInOutBack
+
+                ));
+            iTween.ScaleTo(timeUI, iTween.Hash(
+                "x", 1.2,
+                "y", 1.2,
+                "z", 1.2,
+                "time", 0.5f,
+                "delay", 0.5f,
+                "easetype", iTween.EaseType.easeInOutBack
+                ));
+            currTime = 0;
+        }
+
     }
 }

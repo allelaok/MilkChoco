@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Na_Center : MonoBehaviour
 {
@@ -23,6 +24,13 @@ public class Na_Center : MonoBehaviour
 
     public int chNum;
 
+    [HideInInspector]
+    public int[] chStat = new int[4];
+
+    public Text nameUI;
+    public Text[] statUI;
+    public Image[] statBarUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +52,7 @@ public class Na_Center : MonoBehaviour
         {
 
             float tmp = y;
-            if(tmp % 20 < 10)
+            if (tmp % 20 < 10)
             {
                 chNum = (int)tmp / 20;
                 y = tmp - (tmp % 20);
@@ -54,8 +62,72 @@ public class Na_Center : MonoBehaviour
                 chNum = (int)tmp / 20 + 1;
                 y = tmp + 20 - (tmp % 20);
             }           
-            
+
         }
         transform.localEulerAngles = new Vector3(0, y, 0);
+
+
+
+        switch (chNum)
+        {
+            case 0:
+                chStat = new int[] { 150, 80, 80, 80 };
+                nameUI.text = "Ludo";
+                StatUI();
+                break;
+            case 1:
+                chStat = new int[] { 200, 80, 60, 60 };
+                nameUI.text = "Viking";
+                StatUI();
+                break;
+            case 2:
+                chStat = new int[] { 130, 70, 90, 100 };
+                nameUI.text = "Sombrero";
+                StatUI();
+                break;
+            case 3:
+                chStat = new int[] { 150, 70, 90,90 };
+                nameUI.text = "Shower";
+                StatUI();
+                break;
+            case 4:
+                chStat = new int[] { 180, 90,80, 90};
+                nameUI.text = "Mastache";
+                StatUI();
+                break;
+            case 5:
+                chStat = new int[] { 190, 100, 80, 70 };
+                nameUI.text = "Miner";
+                StatUI();
+                break;
+            case 6:
+                chStat = new int[] { 150, 90, 100, 80 };
+                nameUI.text = "Magician";
+                StatUI();
+                break;
+            case 7:
+                chStat = new int[] { 120, 90, 80, 100 };
+                nameUI.text = "Crown";
+                StatUI();
+                break;
+            case 8:
+                chStat = new int[] { 110, 100, 80, 100 };
+                nameUI.text = "Cowboy";
+                StatUI();
+                break;
+        }
+    }
+
+    void StatUI()
+    {
+        for (int i = 0; i < chStat.Length; i++)
+        {
+            statUI[i].text = "" + chStat[i];
+            statBarUI[i].fillAmount = chStat[i] * 0.01f;
+        }
+        statBarUI[0].fillAmount = chStat[0] * 0.005f;
     }
 }
+
+   
+

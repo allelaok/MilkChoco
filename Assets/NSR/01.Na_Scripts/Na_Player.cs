@@ -37,14 +37,41 @@ public class Na_Player : MonoBehaviour
     }
 
     Animator anim;
-
     public GameObject[] Hats;
+    AudioSource audioSource;  
+    public AudioClip[] clip;
+
+    enum of
+    {
+        jump, 
+        dodge, 
+        swap,          
+        die, 
+        respawn,
+        rifle, 
+        reload, 
+        milk, 
+        milkcontainer,
+        cooltime,
+        win
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
+        maxHP = Na_Center.instance.chStat[0];
+        longFirePower = longFirePower * Na_Center.instance.chStat[1] * 0.01f;
+        ShortFirePower = ShortFirePower * Na_Center.instance.chStat[1] * 0.01f;
+        jumpPower = jumpPower * Na_Center.instance.chStat[2] * 0.01f;
+        speed = speed * Na_Center.instance.chStat[3] * 0.01f;
+        
         //  현재 hp 를 최대 hp로 초기화
         currHP = maxHP;
+
+        firePower = longFirePower;
 
         fireCurrTime = fireTime;
         fireCount = maxFire;
@@ -53,7 +80,10 @@ public class Na_Player : MonoBehaviour
 
         bulletCountUI = GameObject.Find("BulletCount").GetComponent<Text>();
         milkCntUI = GameObject.Find("MilkCount").GetComponent<Text>();
-        dieCountUI = GameObject.Find("DieCount").GetComponent<Text>();
+        dieCountUI = GameObject.Find("DieCount");
+        dieCountBGUI = GameObject.Find("DieCountBG");
+        dieCnt = dieCountUI.GetComponent<Text>();
+        dieCntBG = dieCountBGUI.GetComponent<Text>();
         damage = GameObject.Find("Damage");
         hpUI = GameObject.Find("PlayerHp").GetComponent<Image>();
         startPos = GameObject.Find("PlayerPos");
@@ -61,8 +91,7 @@ public class Na_Player : MonoBehaviour
         aimingPoint = GameObject.Find("AimingPoint");
         weaponPos = GameObject.Find("WeaponPos");
         DodgeUI = GameObject.Find("Dodge").GetComponent<Image>();
-        //scopeUI = GameObject.Find("Scope");
-        //apUI = GameObject.Find("Ap");
+        bombAnim = bombObj.GetComponent<Animator>();
 
         scopeUI.SetActive(false);
 
@@ -76,15 +105,15 @@ public class Na_Player : MonoBehaviour
         Hats[Na_Center.instance.chNum].SetActive(true);
 
         line.SetActive(false);
+        runSound.SetActive(false);
+
+        audioSource.PlayOneShot(clip[(int)of.respawn]);
     }
 
     public bool isDontRot;
     // Update is called once per frame
     void Update()
-    {
-
-        print(fireTime);
-
+    {       
         if (isDie)
         {
             
@@ -97,6 +126,7 @@ public class Na_Player : MonoBehaviour
                 transform.position = startPos.transform.position;
                 transform.forward = new Vector3(0, 0, 1);
                 y = 0;
+                audioSource.PlayOneShot(clip[(int)of.respawn]);
                 currTime = 0;
             }
         }
@@ -109,10 +139,8 @@ public class Na_Player : MonoBehaviour
             if(!isDodge)
                 Swap();
             Rotate();
+  
         }
-
-        
-
     }
 
     // 플레이어 W, S, A, D 로 이동하고 싶다.   
@@ -122,6 +150,7 @@ public class Na_Player : MonoBehaviour
     CharacterController cc;
     [HideInInspector]
     public Vector3 dir;
+    public GameObject runSound;
     #endregion
     void Move()
     {
@@ -143,6 +172,16 @@ public class Na_Player : MonoBehaviour
         Jump(out dir.y);
 
         anim.SetBool("isWalk", dirH + dirV != Vector3.zero);
+
+        if(dirH + dirV == Vector3.zero || isJump || isDodge || isFall)
+        {
+            runSound.SetActive(false);
+        }
+        else
+        {
+            runSound.SetActive(true);
+        }
+
        
         cc.Move(dir * speed * Time.deltaTime);
         
@@ -163,30 +202,35 @@ public class Na_Player : MonoBehaviour
     void Jump(out float dirY)
     {
 
-        isJump = true;
+        
         if (cc.isGrounded)
         {
             yVelocity = 0;
             jumpCount = 0;
             anim.SetBool("isJump", false);
             anim.SetBool("isDown", false);
-            isJump = false;          
+            isJump = false;
+            isFall = false;
         }
 
         if (Input.GetButtonDown("Jump"))
         {
             if (jumpCount < MaxJumpCount)
             {
+                isJump = true;
                 anim.SetBool("isJump", true);
                 anim.SetTrigger("doJump");
+                audioSource.PlayOneShot(clip[(int)of.jump]);
                 yVelocity = jumpPower;
                 jumpCount++;
             }
         }
         if (isJumpZone)
         {
+            isJump = true;
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
+            audioSource.PlayOneShot(clip[(int)of.jump]);
             yVelocity = jumpZonePower;
             jumpCount++;
             isJumpZone = false;
@@ -202,32 +246,31 @@ public class Na_Player : MonoBehaviour
     #region
     [HideInInspector]
     public bool isDodge;
-    int dodgeCount;
-    int MaxDodgeCount = 1;
     float currDodgeTime;
     [HideInInspector]
     public float dodgeCoolTime = 10;
     Vector3 dodgeVecor;
     Image DodgeUI;
+    bool canDodge = true;
     #endregion
     void Dodge(ref float v)
     {   
         if (!isSwap)
         {
 
-            if (dodgeCount < MaxDodgeCount)
+            if (canDodge)
             {
                 if (Input.GetKeyDown(KeyCode.LeftShift) && cc.isGrounded)
                 {
                     dodgeVecor = dir;
                     speed *= 4;
                     anim.SetTrigger("doDodge");
+                    Invoke("DodgeEnd", 0.4f);
+                    Invoke("DodgeOut", 1.1f);
                     isDodge = true;
-                    Invoke("DodgeOut", 0.5f);
-                    dodgeCount++;
+                    canDodge = false;                 
                     v = 1;
-
-
+                    audioSource.PlayOneShot(clip[(int)of.dodge]);
                 }
             }
             else
@@ -236,15 +279,20 @@ public class Na_Player : MonoBehaviour
                 currDodgeTime += Time.deltaTime;
                 if (currDodgeTime > dodgeCoolTime)
                 {
-                    dodgeCount = 0;
+                    canDodge = true;
                     currDodgeTime = 0;
+                    audioSource.PlayOneShot(clip[(int)of.cooltime]);
                 }
             }
         }
     }
-    void DodgeOut()
+    public void DodgeEnd()
     {
-        speed *= 0.25f;
+        speed *= 0.25f;        
+    }
+
+    public void DodgeOut()
+    {
         isDodge = false;
     }
 
@@ -276,7 +324,7 @@ public class Na_Player : MonoBehaviour
             if (weaponIdx == 1)
             {
                 weapons[0].SetActive(true);
-                firePower = 5;
+                firePower = longFirePower;
                 fireTime = 0.2f;
                 crossroad = 200;
                 weight = 2;
@@ -286,7 +334,7 @@ public class Na_Player : MonoBehaviour
             else if (weaponIdx == 0)
             {
                 weapons[0].SetActive(false);
-                firePower = 20;
+                firePower = ShortFirePower;
                 fireTime = 1;
                 crossroad = 15;
                 weight = 0;
@@ -296,6 +344,7 @@ public class Na_Player : MonoBehaviour
 
             anim.SetTrigger("doSwap");
             Invoke("SwapOut", 0.4f);
+            audioSource.PlayOneShot(clip[(int)of.swap]);
 
             isSwap = true;
         }     
@@ -305,15 +354,22 @@ public class Na_Player : MonoBehaviour
         isSwap = false;
     }
 
+
+
+
     // Damage 를 받으면 hp를 깎고 싶다.
     #region 필요속성 : 현재hp, 최대hp, hpUI, damage
     float currHP;
     [HideInInspector]
-    public float maxHP = 100;
+    public float maxHP;
     Image hpUI;
     GameObject damage;
     [HideInInspector]
     public bool isDie;
+    public GameObject playerObj;
+    public GameObject bombObj;
+    Animator bombAnim;
+    
     #endregion
     public void Damaged(float damage)
     {
@@ -326,6 +382,8 @@ public class Na_Player : MonoBehaviour
         {          
             isDie = true;
             doDieAnim = true;
+            
+            
         }
     }
     void ColorA()
@@ -346,7 +404,6 @@ public class Na_Player : MonoBehaviour
            ));
     }
 
-
     //플레이어를 리스폰 하고싶다. 우유가 있다면 우유도
     #region 필요속성 : 플레이어 처음 위치, 우유, 우유 처음 위치, 현재시간, 리스폰 시간
     Vector3 startMilkPos;
@@ -357,31 +414,60 @@ public class Na_Player : MonoBehaviour
     float reCurrTime;
     GameObject milkPos;
     GameObject isMilk;
-    Text dieCountUI;
+    GameObject dieCountUI;
+    GameObject dieCountBGUI;
+    Text dieCnt;
+    Text dieCntBG;
     public bool doDieAnim;
+    int before = 11;
     #endregion
     public void Respawn()
     {
-        
+        bombObj.SetActive(true);
+
         if (doDieAnim)
         {
+            audioSource.PlayOneShot(clip[(int)of.die]);
             anim.SetTrigger("doDie");
+            bombAnim.SetTrigger("doDie");
             doDieAnim = false;
         }
 
         reCurrTime += Time.deltaTime;      
-        int count = 10 - (int)reCurrTime;
-        dieCountUI.text = "" + count;
+        int count = (int)respawnTime - (int)reCurrTime;
 
-        if (reCurrTime > respawnTime)
+        if (count == 0)
+        {
+            dieCnt.text = "";
+            dieCntBG.text = "";
+        }
+        else
+        {
+            dieCnt.text = count.ToString();
+            dieCntBG.text = count.ToString();
+        }
+
+        if (before - count > 1)
+        {
+            //CountdownUp();
+            CountdownBGUp();
+            before -= 1;
+        }
+
+        if (reCurrTime >= 0.7f)
+        {
+            bombObj.SetActive(false);
+        }
+
+        if (reCurrTime >= respawnTime)
         {
             //  현재 hp 를 최대 hp로 초기화
-            currHP = maxHP;            
+            currHP = maxHP;
             //enemyCam = null;
             reCurrTime = 0;
-            count = 0;            
+            count = 0;
+            
             isDie = false;
-
         }
         if (isMilk != null)
         {
@@ -391,14 +477,42 @@ public class Na_Player : MonoBehaviour
     }
 
 
+    void CountdownBGUp()
+    {
+        iTween.ScaleTo(dieCountBGUI, iTween.Hash(
+          "x", 1,
+          "y", 1,
+          "z", 1,
+          "time", 0f,
+          "easetype",
+          iTween.EaseType.easeInOutBack,
+          "oncompletetarget", gameObject,
+          "oncomplete", "AfterCountBGdown"
+      ));
+    }
+
+    void AfterCountBGdown()
+    {
+        iTween.ScaleTo(dieCountBGUI, iTween.Hash(
+          "x", 0,
+          "y", 0,
+          "z", 0,
+          "time", 1f,
+          "easetype",
+          iTween.EaseType.easeInOutBack
+      ));
+    }
+
     // 에너미 공격
     #region 무기 변수
     [HideInInspector]
     public int maxFire = 20;
     [HideInInspector]
-    public float reloadTime = 3;
+    float reloadTime = 3;
     [HideInInspector]
-    public float firePower = 10f;
+    float firePower;
+    float longFirePower = 5;
+    float ShortFirePower = 20;
     [HideInInspector]
     public float fireTime = 1f;
     //[HideInInspector]
@@ -427,22 +541,24 @@ public class Na_Player : MonoBehaviour
     #endregion
     void Attack()
     {
-        
-
-      
+        if (Input.GetMouseButtonDown(0))
+        {
+            anim.SetTrigger("doThrow");
+        }
 
         if (weaponIdx == 0)
         {
             Scope();
             if (fireCount > 0)
             {
-                bulletCountUI.text = "총알개수 : " + fireCount;
+                bulletCountUI.text = fireCount + " / " + maxFire;
             }
             else
             {
-                bulletCountUI.text = "장전중...";
+                bulletCountUI.text = "..";
+                //audioSource.PlayOneShot(clip[(int)of.reload]);
                 line.SetActive(false);
-                doReloadAnim = true;
+                
                 Reload();
             }
         }
@@ -513,9 +629,7 @@ public class Na_Player : MonoBehaviour
     public void Shot()
     {
         line.SetActive(true);
-
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.Play();
+        audioSource.PlayOneShot(clip[(int)of.rifle]);
 
         myCamera.Translate(new Vector3(-1, 1, 0) * reboundPower);
 
@@ -552,23 +666,19 @@ public class Na_Player : MonoBehaviour
     }
 
     bool isReload;
-    bool doReloadAnim;
     void Reload()
     {
-        
-        reloadCurrTime += Time.deltaTime;
-
-        isReload = true;
-        if (doReloadAnim)
+        if(reloadCurrTime == 0)
         {
             anim.SetTrigger("doReload");
-            doReloadAnim = false;
+            audioSource.PlayOneShot(clip[(int)of.reload]);
         }
 
-        
+        reloadCurrTime += Time.deltaTime;
+        isReload = true;
+
         if (reloadCurrTime > reloadTime)
-        {
-            
+        {           
             fireCount = maxFire;
             currTime = fireTime;
             reloadCurrTime = 0;
@@ -626,6 +736,7 @@ public class Na_Player : MonoBehaviour
         }
     }
 
+    bool isFall;
     private void OnTriggerEnter(Collider other)
     {
         if (isMilk == null)
@@ -634,6 +745,7 @@ public class Na_Player : MonoBehaviour
             {
                 isMilk = other.gameObject;
                 startMilkPos = other.gameObject.transform.position;
+                audioSource.PlayOneShot(clip[(int)of.milk]);
             }
         }
         else
@@ -643,6 +755,7 @@ public class Na_Player : MonoBehaviour
                 milkContainer[milkCount].SetActive(true);
                 milkCount++;
                 Destroy(isMilk.gameObject);
+                audioSource.PlayOneShot(clip[(int)of.milkcontainer]);
                 isMilk = null;
             }
         }
@@ -656,6 +769,7 @@ public class Na_Player : MonoBehaviour
 
         if (other.gameObject.name.Contains("FallZone"))
         {
+            isFall = true;
             jumpCount++;
             anim.SetBool("isDown", true);
         }
@@ -665,6 +779,9 @@ public class Na_Player : MonoBehaviour
         {
             isDie = true;
             doDieAnim = true;
+
         }
-    } 
+    }
+
+    
 }
