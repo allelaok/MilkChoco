@@ -19,7 +19,7 @@ public class SM_EnemyManager : MonoBehaviour
     public GameObject enemyFactory;
 
     // 필요속성 : 오브젝트풀, 풀크기
-    public int enemyPoolSize = 20;
+    public int enemyPoolSize = 10;
     //public GameObject[] enemyPool;
     //[System.NonSerialized]
     [HideInInspector]
@@ -74,16 +74,29 @@ public class SM_EnemyManager : MonoBehaviour
             // 만약 풀에 적이 있다면
             if (enemyPool.Count > 0)
             {
-                GameObject enemy = enemyPool[0];
-                //활성화 시키자
-                enemy.SetActive(true);
-                // 4. 배치.
-                int index = Random.Range(0, spawnpoints.Length);
-                enemy.transform.position = spawnpoints[index].position;
-                currentTime = 0;
-                enemyPool.RemoveAt(0);
-            }
-        }
+                //GameObject enemy = enemyPool[0];
+                ////활성화 시키자
+                //enemy.SetActive(true);
+                //// 4. 배치.
+                int index = Random.Range(0, enemyPoolSize);
+                //enemy.transform.position = spawnpoints[index].position;
+                //currentTime = 0;
+                //enemyPool.RemoveAt(0);
 
+                GameObject enemy = enemyPool[index];
+                // 비활성화 되어있는 녀석을
+                if (enemy.activeSelf == false)
+                {
+                    //활성화 시키자
+                    enemy.SetActive(true);
+                    // 3. 배치
+                    enemy.transform.position = enemyPool[index].transform.position;
+                    currentTime = 0;
+
+
+                }
+            }
+
+        }
     }
 }

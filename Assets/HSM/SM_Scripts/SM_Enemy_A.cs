@@ -45,7 +45,7 @@ public class SM_Enemy_A : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("현재상태 : " + m_state);
+        //print("현재상태 : " + m_state);
         
         // 피격 테스트
         if(Input.GetKeyDown(KeyCode.K))
@@ -163,7 +163,7 @@ public class SM_Enemy_A : MonoBehaviour
             anim.SetTrigger("isAttack");
             currentTime = 0;
             isAttackCheck = true;
-            print("Attack");
+            //print("Attack");
         }
         // 공격애니메이션이 진행중
         if (isAttackCheck)
