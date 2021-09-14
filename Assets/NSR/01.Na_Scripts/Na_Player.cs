@@ -804,7 +804,7 @@ public class Na_Player : MonoBehaviour
         }
     }
 
-    bool isFall;
+    public bool isFall;
     private void OnTriggerEnter(Collider other)
     {
         if (isMilk == null)
