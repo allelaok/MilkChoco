@@ -530,14 +530,14 @@ RectTransform:
   m_GameObject: {fileID: 87844242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.73637706, y: 0.73637706, z: 0.73637706}
+  m_LocalScale: {x: 0.83733433, y: 0.83733433, z: 0.83733433}
   m_Children: []
   m_Father: {fileID: 622762896}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0}
+  m_AnchoredPosition: {x: -0.00013633, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &87844244
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6d7cfe88a9e8cb74983582699bac2a09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d1ea9e88ff0def4b8aae33e0a547c71, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5094,14 +5094,14 @@ RectTransform:
   m_GameObject: {fileID: 513785386}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.73637706, y: 0.73637706, z: 0.73637706}
+  m_LocalScale: {x: 0.83733433, y: 0.83733433, z: 0.83733433}
   m_Children: []
   m_Father: {fileID: 622762896}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0.000075299, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &513785388
@@ -5117,14 +5117,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7719473, g: 0.9811321, b: 0.7887118, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6d7cfe88a9e8cb74983582699bac2a09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d1ea9e88ff0def4b8aae33e0a547c71, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6113,7 +6113,7 @@ GameObject:
   - component: {fileID: 622762898}
   - component: {fileID: 622762897}
   m_Layer: 5
-  m_Name: RrenadeBg
+  m_Name: GrenadeBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11016,7 +11016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 74cdca22603e6914f937ff0c9368e95f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 74cdca22603e6914f937ff0c9368e95f, type: 3}
       propertyPath: m_RootOrder
