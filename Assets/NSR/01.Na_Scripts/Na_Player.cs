@@ -41,6 +41,7 @@ public class Na_Player : MonoBehaviour
     AudioSource audioSource;  
     public AudioClip[] clip;
 
+    GameObject ReloadUI;
     enum of
     {
         jump, 
@@ -92,6 +93,7 @@ public class Na_Player : MonoBehaviour
         grenadeUI = GameObject.Find("Grenade").GetComponent<Image>();
         bombAnim = bombObj.GetComponent<Animator>();
         fire = GameObject.Find("Na_Fire");
+        ReloadUI = GameObject.Find("Reload");
 
         scopeUI.SetActive(false);
 
