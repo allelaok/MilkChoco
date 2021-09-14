@@ -17,14 +17,12 @@ public class SM_ResultManager : MonoBehaviour
     void Start()
     {
         iTween.ScaleTo(Result, iTween.Hash(
-            "x", 0.8,
-            "y", 0.8,
-            "z", 0.8,
+            "x", 1,
+            "y", 1,
+            "z", 1,
             "time", 0.5f,
-            //"easytype", iTween.EaseType.easeOutBounce,
-            //"oncompletetarget", gameObject,            
-            //"oncomplete", "OnCompleteAni",
-            "delay", 4
+            "easytype", iTween.EaseType.easeOutBounce
+           
             ));
 
         //다시하기 버튼 크기 0 -> 1
