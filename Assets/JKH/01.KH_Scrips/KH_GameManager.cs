@@ -9,6 +9,7 @@ public class KH_GameManager : MonoBehaviour
     public int chocoCount;
     public static KH_GameManager instance;
     public GameObject timeUI;
+    
 
     Text ChocoCountUI;
     //public GameObject respawnPos;
@@ -130,6 +131,19 @@ public class KH_GameManager : MonoBehaviour
         {
             print("끝");
         }
+        //Na_Player.instace.weaponIdx 멀리 돌아간 KH
+        Na_Player weapon = GameObject.Find("Na_Player").GetComponent<Na_Player>();
+        if (weapon.weaponIdx == 0)
+        {
+            HammerToGun();
+        }
+
+        if(weapon.weaponIdx == 1)
+        {
+            
+            GunToHammer();
+        }
+
     }
 
     public void timeUIs()
@@ -173,4 +187,5 @@ public class KH_GameManager : MonoBehaviour
         Hammer.SetActive(false);
         Gun.SetActive(true);
     }
+    
 }
