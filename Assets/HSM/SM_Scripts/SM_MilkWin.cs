@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SM_ResultWin : MonoBehaviour
+public class SM_MilkWin : MonoBehaviour
 {
     Animator anim;
 

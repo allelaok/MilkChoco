@@ -1233,20 +1233,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667844991}
   m_CullTransparentMesh: 1
---- !u!114 &1787170922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6947262523702467033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72198e6547390a34c8345379e3fee5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  hpUI: {fileID: 290979957}
 --- !u!1 &1815945654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402d4d06d592ee14f8e5b7e87f8cc44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MilkWin: {fileID: 1304125293}
+  Result: {fileID: 1304125293}
   retryBt: {fileID: 1667844991}
   mainBt: {fileID: 184653395}
 --- !u!4 &1956755686
@@ -2007,8 +1993,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8812584344323043950}
   - component: {fileID: 3143561900860292234}
-  - component: {fileID: 1787170922}
-  - component: {fileID: 6947262523702467034}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -2016,18 +2000,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6947262523702467034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6947262523702467033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2243b4d03223fd4429a00cceb6c65112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7850263519913761242
 GameObject:
   m_ObjectHideFlags: 0

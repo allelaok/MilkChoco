@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class SM_ResultManager : MonoBehaviour
 {
 
-    public GameObject MilkWin;
+    public GameObject Result;
 
     public GameObject retryBt;
 
@@ -16,14 +16,15 @@ public class SM_ResultManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        iTween.ScaleTo(MilkWin, iTween.Hash(
+        iTween.ScaleTo(Result, iTween.Hash(
             "x", 0.8,
             "y", 0.8,
             "z", 0.8,
             "time", 0.5f,
-            "easytype", iTween.EaseType.easeOutBounce,
-            "oncompletetarget", gameObject,
-            "oncomplete", "OnCompleteAni"
+            //"easytype", iTween.EaseType.easeOutBounce,
+            //"oncompletetarget", gameObject,            
+            //"oncomplete", "OnCompleteAni",
+            "delay", 4
             ));
 
         //다시하기 버튼 크기 0 -> 1
