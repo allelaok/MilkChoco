@@ -11,9 +11,19 @@ public class SM_EnemyRespawn : MonoBehaviour
     float reSpawnTime = 3;
     float currenTime;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
+
         isDie = false;
     }
     public  bool isLive;
