@@ -42,6 +42,7 @@ public class Na_Player : MonoBehaviour
     public AudioClip[] clip;
 
     GameObject ReloadUI;
+    GameObject ReloadBgUI;
     enum of
     {
         jump, 
@@ -94,8 +95,12 @@ public class Na_Player : MonoBehaviour
         bombAnim = bombObj.GetComponent<Animator>();
         fire = GameObject.Find("Na_Fire");
         ReloadUI = GameObject.Find("Reload");
+        ReloadBgUI = GameObject.Find("ReloadBg");
 
         scopeUI.SetActive(false);
+        ReloadUI.SetActive(false);
+        ReloadBgUI.SetActive(false);
+        fire.SetActive(false);
 
         // damage 투명도 으로
         iTween.ColorTo(damage, iTween.Hash("a", 0f, "time", 0f));
@@ -516,7 +521,7 @@ public class Na_Player : MonoBehaviour
     [HideInInspector]
     public int maxFire = 20;
     [HideInInspector]
-    float reloadTime = 3;
+    float reloadTime = 2;
     [HideInInspector]
     float firePower;
     float longFirePower = 5;
@@ -735,6 +740,8 @@ public class Na_Player : MonoBehaviour
         //audioSource.PlayOneShot(clip[(int)of.reload]);
         line.SetActive(false);
         fire.SetActive(false);
+        ReloadUI.SetActive(true);
+        ReloadBgUI.SetActive(true);
 
         if (reloadCurrTime == 0)
         {
@@ -744,9 +751,12 @@ public class Na_Player : MonoBehaviour
 
         reloadCurrTime += Time.deltaTime;
         isReload = true;
+ 
 
         if (reloadCurrTime > reloadTime)
-        {           
+        {
+            ReloadUI.SetActive(false);
+            ReloadBgUI.SetActive(false);
             fireCount = maxFire;
             currTime = fireTime;
             isReload = false;
