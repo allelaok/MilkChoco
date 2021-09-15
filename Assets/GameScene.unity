@@ -27556,6 +27556,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 86c92c8024b048c48a23092627743777, type: 3}
   - {fileID: 8300000, guid: 6fbc95dab484b414ab3dde2ba955abf7, type: 3}
   - {fileID: 8300000, guid: 4b65f7e274949f842bb96d0724833966, type: 3}
+  - {fileID: 8300000, guid: 400ecfc63a4bc194cbbf8f7b244d3f22, type: 3}
+  - {fileID: 8300000, guid: da285d991368b63469ec8218af305c66, type: 3}
   isDontRot: 0
   speed: 7
   dir: {x: 0, y: 0, z: 0}

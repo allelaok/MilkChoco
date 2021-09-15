@@ -55,7 +55,8 @@ public class Na_Player : MonoBehaviour
         milk, 
         milkcontainer,
         cooltime,
-        win
+        grenade,
+        grenadeBomb
     }
 
     void Start()
@@ -660,6 +661,7 @@ public class Na_Player : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 anim.SetTrigger("doThrow");
+                audioSource.PlayOneShot(clip[(int)of.grenade]);
                 grenadeTime = 0;
                 canGrenade = false;
             }            
