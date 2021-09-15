@@ -13,6 +13,7 @@ TagManager:
   - ChocoContainer
   - SM_Enemy
   - Button
+  - FakePos
   layers:
   - Default
   - TransparentFX

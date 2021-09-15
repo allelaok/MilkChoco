@@ -180,9 +180,9 @@ public class KH_FakeEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Pos")
+        if (other.gameObject.tag == "FakePos")
         {
-            if (other.gameObject.tag == "Pos")
+            if (other.gameObject.tag == "FakePos")
             {
                 i++;
             }
@@ -196,34 +196,34 @@ public class KH_FakeEnemy : MonoBehaviour
         }
         //===========
 
-        if (isChoco == null)
-        {
-            if (other.gameObject.tag == "Choco")
-            {
-                print("초코먹음");
-                isChoco = other.gameObject;
-                startChocoPos = other.gameObject.transform.position;
-                //startChocoPos = isChoco.transform.position;
-            }
-        }
-        if (isChoco != null)
+        //if (isChoco == null)
+        //{
+        //    if (other.gameObject.tag == "Choco")
+        //    {
+        //        print("초코먹음");
+        //        isChoco = other.gameObject;
+        //        startChocoPos = other.gameObject.transform.position;
+        //        //startChocoPos = isChoco.transform.position;
+        //    }
+        //}
+        //if (isChoco != null)
         {
             print("초코먹방중");
             //if (other.gameObject.tag =="ChocoContainer")
             if (other.gameObject.name.Contains("ChocoContainer"))
             {
-                print("초코야미야미야미야미");
-                chocoContainer[KH_GameManager.instance.chocoCount].SetActive(true);
-                KH_GameManager.instance.chocoCount++;
-                Destroy(isChoco.gameObject);
-                isChoco = null;
+                //print("초코야미야미야미야미");
+                //chocoContainer[KH_GameManager.instance.chocoCount].SetActive(true);
+                //KH_GameManager.instance.chocoCount++;
+                //Destroy(isChoco.gameObject);
+                //isChoco = null;
 
                 //먹으면 해당 enemy getactive false 하고 그다음 enemy 실행한다 i++
                 //int i = KH_GameManager.instance.i;
                 //KH_GameManager.instance.enemyStart[i].SetActive(false);
                 //KH_GameManager.instance.i++;
                 //KH_GameManager.instance.enemyStart[i].SetActive(true);
-                KH_GameManager.instance.isChoco = true;
+                KH_FakeManager.instance.isChoco = true;
 
                 //그리고 만약에 다 채운다면 패배 Scene꺼낸다...
             }
