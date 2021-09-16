@@ -208,7 +208,7 @@ public class KH_FakeEnemy : MonoBehaviour
         //}
         //if (isChoco != null)
         {
-            print("檬内冈规吝");
+            //print("檬内冈规吝");
             //if (other.gameObject.tag =="ChocoContainer")
             if (other.gameObject.name.Contains("ChocoContainer"))
             {
