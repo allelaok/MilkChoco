@@ -90,7 +90,7 @@ public class KH_GameManager : MonoBehaviour
         {
             enemyStart[numbers[i]].SetActive(false);
             i++;
-            if (i == 3)
+            if (i == 4)
             {
                 print("끝"); //여기다 씬 넣어야하나
             }

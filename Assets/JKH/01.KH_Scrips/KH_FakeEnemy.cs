@@ -36,14 +36,14 @@ public class KH_FakeEnemy : MonoBehaviour
     {
         transform.position = startEnemyPos.transform.position;
         doMove = false;
-        i = 0;
+        k = 0;
     }
 
     private void OnDisable()
     {
         transform.position = startEnemyPos.transform.position;
         doMove = false;
-        i = 0;
+        k = 0;
         //transform.position = startEnemyPos.transform.position;
 
     }
@@ -115,7 +115,7 @@ public class KH_FakeEnemy : MonoBehaviour
     public Transform[] pos; // ÁÂÇ¥
     Vector3 dir;
     public float speed = 5;
-    int i;
+    int k;
     public float gravity = 1;
     bool isJump = false;
     CharacterController cc;
@@ -137,7 +137,7 @@ public class KH_FakeEnemy : MonoBehaviour
         else
         {
         }
-        dir = pos[i + 1].position - transform.position;
+        dir = pos[k + 1].position - transform.position;
         //print(i);
         dir.Normalize();
         dir.y = 0;
@@ -184,14 +184,14 @@ public class KH_FakeEnemy : MonoBehaviour
         {
             if (other.gameObject.tag == "FakePos")
             {
-                i++;
+                k++;
             }
 
 
             if (other.gameObject.name.Contains("ChocoContainer"))
             {
                 //´Ù¸¥ Ä³¸¯·Î ¹Ù²Û´Ù..?
-                i = 0;
+                k = 0;
             }
         }
         //===========

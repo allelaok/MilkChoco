@@ -30,7 +30,7 @@ public class KH_FakeManager : MonoBehaviour
     public int[] numbers = { 0, 1, 2, 3, 4, 5, 6, 7}; //순서 
     public int num1;
     public int num2;
-    public int i = 0;
+    public int k = 0;
 
     float currTime;
     float A_currTime;
@@ -43,12 +43,12 @@ public class KH_FakeManager : MonoBehaviour
     {
         //enemyStart[numbers[3]].SetActive(true);
         shuffle(); //처음에 배열 무작위로 섞는다
-        print(numbers[0]); //순서확인
-        print(numbers[1]);
-        print(numbers[2]);
-        print(numbers[3]);
+        print("k="+numbers[0]); //순서확인
+        print("k=" + numbers[1]);
+        print("k=" + numbers[2]);
+        print("k=" + numbers[3]);
 
-        enemyStart[numbers[i]].SetActive(true);
+        enemyStart[numbers[k]].SetActive(true);
         //i++;
 
 
@@ -86,9 +86,9 @@ public class KH_FakeManager : MonoBehaviour
 
         if (isChoco)
         {
-            enemyStart[numbers[i]].SetActive(false);
-            i++;
-            enemyStart[numbers[i]].SetActive(true);
+            enemyStart[numbers[k]].SetActive(false);
+            k++;
+            enemyStart[numbers[k]].SetActive(true);
             isChoco = false;
 
 
@@ -112,12 +112,12 @@ public class KH_FakeManager : MonoBehaviour
             //    GetComponent<KH_EnemyAttackMove>().DieAnim();
             //}
             //GetComponent<KH_EnemyAttackMove>().DieAnim();
-            enemyStart[numbers[i]].SetActive(false);
+            enemyStart[numbers[k]].SetActive(false);
             currTime += Time.deltaTime;
             print("현재시간: " + currTime);
             if (currTime > respawnTime)
             {
-                enemyStart[numbers[i]].SetActive(true);
+                enemyStart[numbers[k]].SetActive(true);
                 isDie = false;
                 currTime = 0;
 
