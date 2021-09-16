@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class SM_EnemyRespawn : MonoBehaviour
 {
-    public static SM_EnemyRespawn instance;
+    //public static SM_EnemyRespawn instance;
 
     //public GameObject respawnPoint;
     public GameObject enemy;
     float reSpawnTime = 3;
     float currenTime=0;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
+    //private void Awake() ΩÃ±€≈œ ªË¡¶
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //}
 
 
     // Start is called before the first frame update
