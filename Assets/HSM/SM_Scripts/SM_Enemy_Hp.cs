@@ -45,7 +45,7 @@ public class SM_Enemy_Hp : MonoBehaviour
         {
             //나를 파괴하자
             //gameObject.SetActive(false);
-            SM_EnemyRespawn Enemy =GameObject.Find("SM_Manager").GetComponent<SM_EnemyRespawn>();
+            SM_EnemyRespawn Enemy =GameObject.Find("SM_Manager").GetComponent<SM_EnemyRespawn>(); //여기부분 일괄수정?
             Enemy.isDie = true;
             currHP = maxHP;
             hpUI.fillAmount = 1;
