@@ -130,6 +130,7 @@ public class KH_GameManager : MonoBehaviour
         if(chocoCount == 4)
         {
             print("끝");
+            //SceneManager.LoadScene(""); @@@@@@@@@@@ 성공씬넣는다...
         }
         //Na_Player.instace.weaponIdx 멀리 돌아간 KH
         Na_Player weapon = GameObject.Find("Na_Player").GetComponent<Na_Player>();
