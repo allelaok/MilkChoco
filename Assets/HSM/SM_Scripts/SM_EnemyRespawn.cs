@@ -6,10 +6,10 @@ public class SM_EnemyRespawn : MonoBehaviour
 {
     public static SM_EnemyRespawn instance;
 
-    public GameObject respawnPoint;
+    //public GameObject respawnPoint;
     public GameObject enemy;
     float reSpawnTime = 3;
-    float currenTime;
+    float currenTime=0;
 
     private void Awake()
     {
@@ -23,8 +23,8 @@ public class SM_EnemyRespawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject enemy = Instantiate(respawnPoint);
-        enemy.transform.position = transform.position;
+        enemy.SetActive(true);
+        //enemy.transform.position = respawnPoint.transform.position;
         isDie = false;
         currenTime = 0;
         isDie = false;
@@ -37,14 +37,17 @@ public class SM_EnemyRespawn : MonoBehaviour
     {
         if (isDie == true)
         {
+            
+            enemy.SetActive(false);
             currenTime += Time.deltaTime;
+            print(currenTime);
             if (currenTime > reSpawnTime)
             {
-
-                GameObject enemy = Instantiate(respawnPoint);
-                enemy.transform.position = transform.position;
+                enemy.SetActive(true);
+                //enemy.transform.position = transform.position;
                 isDie = false;
                 currenTime = 0;
+                
 
             }
         }

@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class SM_Enemy_A : MonoBehaviour
 {
     //피격 함수 만들자.
-    public static SM_Enemy_A instance;
+    //public static SM_Enemy_A instance;
 
-
+    public GameObject enemyPos;
     Animator anim;
 
     Rigidbody rb;
@@ -25,6 +25,11 @@ public class SM_Enemy_A : MonoBehaviour
     }
 
     EnemyState m_state = EnemyState.Idle;
+
+    private void OnEnable()
+    {
+        transform.position = enemyPos.transform.position;
+    }
 
     private void Awake()
     {
