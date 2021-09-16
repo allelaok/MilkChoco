@@ -60,12 +60,12 @@ public class SM_ResultManager : MonoBehaviour
     public   void OnClickRetry()
     {
         //GameScene으로 전환
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Characters");
     }
 
     public void OnClickMain()
     {
         //GameScene으로 전환
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("MainScene");
     }
 }

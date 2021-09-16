@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4479735, g: 0.49797815, b: 0.5754974, a: 1}
+  m_IndirectSpecularColor: {r: 0.447973, g: 0.49797732, b: 0.57549614, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 10913685}
   m_Layer: 0
-  m_Name: Cake1
+  m_Name: Cake3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,7 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 329807047}
   m_Layer: 0
-  m_Name: Cake
+  m_Name: Cake2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1402,7 +1402,7 @@ GameObject:
   - component: {fileID: 1163631939}
   - component: {fileID: 1163631938}
   m_Layer: 0
-  m_Name: Plate
+  m_Name: Plate2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2125,7 +2125,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bd15a0e02fd2da3429874eee95059636, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2162,13 +2162,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577260714}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.632, z: 30.4}
-  m_LocalScale: {x: 177.97807, y: 98.16772, z: 98.16772}
+  m_LocalRotation: {x: 0.13304928, y: -0, z: -0, w: 0.99110943}
+  m_LocalPosition: {x: 0.0468, y: -3.6952, z: 36.3894}
+  m_LocalScale: {x: 75.7288, y: 46.871902, z: 98.16772}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.292, y: 0, z: 0}
 --- !u!1 &1694954928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,7 +2180,7 @@ GameObject:
   - component: {fileID: 1694954929}
   - component: {fileID: 1694954930}
   m_Layer: 0
-  m_Name: Cake2
+  m_Name: Cake4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4479735, g: 0.49797815, b: 0.5754974, a: 1}
+  m_IndirectSpecularColor: {r: 0.447973, g: 0.49797732, b: 0.57549614, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -886,7 +886,7 @@ GameObject:
   - component: {fileID: 1166033361}
   - component: {fileID: 1166033362}
   m_Layer: 0
-  m_Name: Bread2
+  m_Name: Bread1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -900,7 +900,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166033356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6118549, y: 2.46, z: -11.06}
+  m_LocalPosition: {x: -1.6118549, y: 2.38, z: -11.06}
   m_LocalScale: {x: 7.19, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 1938923575}
@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: -20, y: 0}
   m_UseGraphicAlpha: 1
 --- !u!1 &1318296360
@@ -1404,7 +1404,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c9eb89adf4f83ec4594c6d6338b5e327, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1441,13 +1441,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815945654}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.632, z: 30.4}
-  m_LocalScale: {x: 177.97807, y: 98.16772, z: 98.16772}
+  m_LocalRotation: {x: 0.13304928, y: -0, z: -0, w: 0.99110943}
+  m_LocalPosition: {x: 0.0468, y: -3.6952, z: 36.3894}
+  m_LocalScale: {x: 75.7288, y: 46.871902, z: 98.16772}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.292, y: 0, z: 0}
 --- !u!224 &1831990689
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1633,7 +1633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1938923575}
   m_Layer: 0
-  m_Name: Cake
+  m_Name: Cake1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2617,7 +2617,7 @@ GameObject:
   - component: {fileID: 6569685621713439497}
   - component: {fileID: 6560019611945034741}
   m_Layer: 0
-  m_Name: Plate
+  m_Name: Plate1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
