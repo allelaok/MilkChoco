@@ -76,12 +76,12 @@ public class Na_Center : MonoBehaviour
                 StatUI();
                 break;
             case 1:
-                chStat = new int[] { 200, 80, 60, 60 };
+                chStat = new int[] { 200, 80, 75, 75 };
                 nameUI.text = "Viking";
                 StatUI();
                 break;
             case 2:
-                chStat = new int[] { 130, 70, 90, 100 };
+                chStat = new int[] { 140, 70, 90, 100 };
                 nameUI.text = "Sombrero";
                 StatUI();
                 break;
@@ -96,7 +96,7 @@ public class Na_Center : MonoBehaviour
                 StatUI();
                 break;
             case 5:
-                chStat = new int[] { 190, 100, 80, 70 };
+                chStat = new int[] { 190, 100, 80, 75 };
                 nameUI.text = "Miner";
                 StatUI();
                 break;
