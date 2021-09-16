@@ -571,7 +571,7 @@ public class Na_Player : MonoBehaviour
                 Reload();
                 
             }
-            else if (fireCount > 0)
+            else if (fireCount > 0 && fireCount < maxFire)
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
@@ -581,7 +581,7 @@ public class Na_Player : MonoBehaviour
                 bulletCountUI.text = fireCount.ToString();
 
             }
-            else
+            else if(fireCount <= 0)
             {
                 Reload();
             }
@@ -669,8 +669,8 @@ public class Na_Player : MonoBehaviour
         else
         {
             grenadeTime += Time.deltaTime;
-            grenadeUI.fillAmount = grenadeTime / 10;
-            if (grenadeTime > 10f)
+            grenadeUI.fillAmount = grenadeTime / 3;
+            if (grenadeTime > 3f)
             {
                 canGrenade = true;
                 
