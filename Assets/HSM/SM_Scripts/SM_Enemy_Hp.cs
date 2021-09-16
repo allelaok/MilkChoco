@@ -44,11 +44,13 @@ public class SM_Enemy_Hp : MonoBehaviour
         if (currHP <= 0)
         {
             //나를 파괴하자
-            gameObject.SetActive(false);
-
-            SM_EnemyRespawn.instance.isDie = true;
+            //gameObject.SetActive(false);
+            SM_EnemyRespawn Enemy =GameObject.Find("SM_Manager").GetComponent<SM_EnemyRespawn>();
+            Enemy.isDie = true;
             currHP = maxHP;
-
+            hpUI.fillAmount = 1;
+            
+            
 
         }
     }
