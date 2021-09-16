@@ -143,6 +143,8 @@ public class Na_Player : MonoBehaviour
                 transform.forward = new Vector3(0, 0, 1);
                 y = 0;
                 audioSource.PlayOneShot(clip[(int)of.respawn]);
+                playerObj.SetActive(true);
+                dieIMG.SetActive(false);
                 currTime = 0;
             }
         }
@@ -490,6 +492,14 @@ public class Na_Player : MonoBehaviour
         }
     }
 
+    public GameObject dieIMG;
+    public void DieIMG()
+    {
+        playerObj.SetActive(false);
+        dieIMG.SetActive(true);
+
+    }
+
 
     void CountdownBGUp()
     {
@@ -738,7 +748,7 @@ public class Na_Player : MonoBehaviour
     bool isReload;
     void Reload()
     {
-        bulletCountUI.text = "..";
+        
         //audioSource.PlayOneShot(clip[(int)of.reload]);
         line.SetActive(false);
         fire.SetActive(false);
@@ -747,6 +757,7 @@ public class Na_Player : MonoBehaviour
 
         if (reloadCurrTime == 0)
         {
+            bulletCountUI.text = "..";
             anim.SetTrigger("doReload");
             audioSource.PlayOneShot(clip[(int)of.reload]);
         }
@@ -759,6 +770,7 @@ public class Na_Player : MonoBehaviour
         {
             ReloadUI.SetActive(false);
             ReloadBgUI.SetActive(false);
+            bulletCountUI.text = maxFire.ToString();
             fireCount = maxFire;
             currTime = fireTime;
             isReload = false;

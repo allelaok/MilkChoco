@@ -254,7 +254,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.6027793
+        functionName: DieIMG
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: f757006610292f84eafaf9211a55518e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
