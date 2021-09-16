@@ -36,9 +36,13 @@ public class Na_ReloadTime : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnEnable()
     {
-        reload.fillAmount = 0.1f;
         currTime = 0;
     }
+
+    //private void OnDisable()
+    //{
+    //    currTime = 0;
+    //}
 }
