@@ -36,7 +36,7 @@ public class KH_GameManager : MonoBehaviour
 
     float currTime;
     float A_currTime;
-    float respawnTime = 4;
+    float respawnTime = 10;
     float ATime;
 
     //Text ChocoCountUI;
