@@ -40,9 +40,7 @@ public class Na_Player : MonoBehaviour
     public GameObject[] Hats;
     AudioSource audioSource;  
     public AudioClip[] clip;
-
-    GameObject ReloadUI;
-    GameObject ReloadBgUI;
+  
     enum of
     {
         jump, 
@@ -150,21 +148,23 @@ public class Na_Player : MonoBehaviour
         }
         else
         {
-            Move();            
+            Move();
             Milk();
-            if (!isSwap || !isDodge || !isReload)
+            if (!isSwap && !isDodge)
                 Attack();
-            if(!isDodge || !isReload)
+            if(!isDodge && !isReload)
                 Swap();
             Rotate();
   
         }
+        print("장전중 : " + isReload);
     }
+
 
     // 플레이어 W, S, A, D 로 이동하고 싶다.   
     # region 필요속성 : 속도, CharacterController, 방향    
     [HideInInspector]
-    public float speed = 7f;
+    public float speed = 10f;
     CharacterController cc;
     [HideInInspector]
     public Vector3 dir;
@@ -200,27 +200,26 @@ public class Na_Player : MonoBehaviour
             runSound.SetActive(true);
         }
 
-       
+
         cc.Move(dir * speed * Time.deltaTime);
-        
+
     }
 
 
     // 플레이어 스페이스바로 1단 점프하고 싶다.
     #region 필요속성 : 점프파워, 중력, y속도, 점프횟수, 최대 점프 가능 횟수
-    float jumpPower = 3f;
+    float jumpPower = 5f;
     float yVelocity;
     float gravity = 7f;
     int jumpCount;
     int MaxJumpCount = 1;
     bool isJumpZone;
-    float jumpZonePower = 8f;
+    float jumpZonePower = 9f;
     bool isJump;
     #endregion
     void Jump(out float dirY)
     {
-
-        
+  
         if (cc.isGrounded)
         {
             yVelocity = 0;
@@ -535,8 +534,8 @@ public class Na_Player : MonoBehaviour
     float reloadTime = 2;
     [HideInInspector]
     float firePower;
-    float longFirePower = 5;
-    float ShortFirePower = 20;
+    float longFirePower = 10;
+    float ShortFirePower = 35;
     [HideInInspector]
     public float fireTime = 1f;
     //[HideInInspector]
@@ -588,7 +587,7 @@ public class Na_Player : MonoBehaviour
                     doReload = true;
                 }
 
-                bulletCountUI.text = fireCount.ToString();
+                bulletCountUI.text = fireCount + " / " + maxFire;
 
             }
             else if(fireCount <= 0)
@@ -605,59 +604,62 @@ public class Na_Player : MonoBehaviour
         // 반동 후 원래 위치로
         myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, aimingPoint.transform.localPosition, Time.deltaTime * reboundTime);
         //LineRenderer lr = null;
-
-        Ray ray = new Ray();
-        ray.origin = aimingPoint.transform.position;
-        ray.direction = aimingPoint.transform.forward;
-        
-        if (Physics.Raycast(ray, out hitInfo, crossroad))
+        if (!isReload)
         {
 
-            if (hitInfo.transform.gameObject.tag == "Enemy")
+            Ray ray = new Ray();
+            ray.origin = aimingPoint.transform.position;
+            ray.direction = aimingPoint.transform.forward;
+
+            if (Physics.Raycast(ray, out hitInfo, crossroad))
             {
-                enemy = hitInfo.transform.gameObject;
 
-                if (weaponIdx == 0)
-                    if (fireCount > 0)
-                        anim.SetBool("isShot", true);
-
-                fireCurrTime += Time.deltaTime;
-                if (fireCurrTime > fireTime)
+                if (hitInfo.transform.gameObject.tag == "Enemy")
                 {
-                    // 원거리
-                    if(weaponIdx == 0)
+                    enemy = hitInfo.transform.gameObject;
+
+                    if (weaponIdx == 0)
+                        if (fireCount > 0)
+                            anim.SetBool("isShot", true);
+
+                    fireCurrTime += Time.deltaTime;
+                    if (fireCurrTime > fireTime)
                     {
-                        if (fireCount > 0)  
-                            Shot();
-                    }                  
-                    // 근거리
-                    else
-                    {
-                        
-                        anim.SetTrigger("doSwing");
+                        // 원거리
+                        if (weaponIdx == 0)
+                        {
+                            if (fireCount > 0)
+                                Shot();
+                        }
+                        // 근거리
+                        else
+                        {
+
+                            anim.SetTrigger("doSwing");
+                        }
+                        fireCurrTime = 0;
                     }
-                    fireCurrTime = 0;
                 }
-            }
-            else
-            {
-                anim.SetBool("isShot", false);
-                line.SetActive(false);
-                fire.SetActive(false);
-
-                fireCurrTime += Time.deltaTime;
-                if (fireCurrTime > 0.1f)
+                else
                 {
-                    fireCurrTime = fireTime;
+                    anim.SetBool("isShot", false);
+                    line.SetActive(false);
+                    fire.SetActive(false);
+
+                    fireCurrTime += Time.deltaTime;
+                    if (fireCurrTime > 0.1f)
+                    {
+                        fireCurrTime = fireTime;
+                    }
                 }
+
+                //if (lr != null)
+                //    lr.SetPosition(1, hitInfo.point);
+
+                lr = line.GetComponent<LineRenderer>();
+                lr.SetPosition(0, weaponPos.transform.position);
+                lr.SetPosition(1, hitInfo.point);
             }
-
-            //if (lr != null)
-            //    lr.SetPosition(1, hitInfo.point);
-
-            lr = line.GetComponent<LineRenderer>();
-            lr.SetPosition(0, weaponPos.transform.position);
-            lr.SetPosition(1, hitInfo.point);
         }
     }
 
@@ -666,7 +668,7 @@ public class Na_Player : MonoBehaviour
     Image grenadeUI;
     void Grenade()
     {
-        if (canGrenade)
+        if (canGrenade && !isReload)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -746,6 +748,8 @@ public class Na_Player : MonoBehaviour
     }
 
     bool isReload;
+    GameObject ReloadUI;
+    GameObject ReloadBgUI;
     void Reload()
     {
         
@@ -757,7 +761,7 @@ public class Na_Player : MonoBehaviour
 
         if (reloadCurrTime == 0)
         {
-            bulletCountUI.text = "..";
+            bulletCountUI.text = "...";
             anim.SetTrigger("doReload");
             audioSource.PlayOneShot(clip[(int)of.reload]);
         }
@@ -770,7 +774,7 @@ public class Na_Player : MonoBehaviour
         {
             ReloadUI.SetActive(false);
             ReloadBgUI.SetActive(false);
-            bulletCountUI.text = maxFire.ToString();
+            bulletCountUI.text = maxFire + " / " + maxFire;
             fireCount = maxFire;
             currTime = fireTime;
             isReload = false;
@@ -876,6 +880,4 @@ public class Na_Player : MonoBehaviour
 
         }
     }
-
-    
 }
