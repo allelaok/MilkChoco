@@ -8,7 +8,7 @@ public class SM_EnemyRespawn : MonoBehaviour
 
     //public GameObject respawnPoint;
     public GameObject enemy;
-    float reSpawnTime = 3;
+    float reSpawnTime = 12;
     float currenTime = 0;
 
     //private void Awake() ΩÃ±€≈œ ªË¡¶
