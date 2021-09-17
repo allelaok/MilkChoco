@@ -7,11 +7,8 @@ public class SM_Enemy_A : MonoBehaviour
 {
     //피격 함수 만들자.
     //public static SM_Enemy_A instance;
-
-    public GameObject enemyPos;
     Animator anim;
 
-    Rigidbody rb;
     BoxCollider bc;
 
     //열거형
@@ -26,25 +23,14 @@ public class SM_Enemy_A : MonoBehaviour
 
     EnemyState m_state = EnemyState.Idle;
 
-    private void OnEnable()
-    {
-        transform.position = enemyPos.transform.position;
-    }
-
-    private void Awake()
-    {
-        anim = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody>();
-        bc = GetComponent<BoxCollider>();
-    }
-
     public Vector3 rand_dir;
+
     // Start is called before the first frame update
     void Start()
     {
-        //cc = GetComponent<CharacterController>();
-    //    rand_dir.x = Random.Range(-1.0f, 1.0f);
-    //    rand_dir.y = Random.Range(-1.0f, 1.0f);
+        anim = GetComponentInChildren<Animator>();
+        bc = GetComponent<BoxCollider>();
+        target = GameObject.Find("Na_Player");
     }
 
     // Update is called once per frame
@@ -86,7 +72,6 @@ public class SM_Enemy_A : MonoBehaviour
     
     public GameObject target;
     public float speed;
-    CharacterController cc;
     public float rotSpeed = 5;
 
     //필요속성 : 공격범위

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class SM_Enemy_Hp : MonoBehaviour
+public class SM_Enemy_HP1 : MonoBehaviour
 {
     float currHP;
-    
+
     public float maxHP = 100;
 
     public Image hpUI;
@@ -21,7 +20,7 @@ public class SM_Enemy_Hp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         //현재 HP를 Max HP로
         currHP = maxHP;
     }
@@ -45,12 +44,12 @@ public class SM_Enemy_Hp : MonoBehaviour
         {
             //나를 파괴하자
             //gameObject.SetActive(false);
-            SM_EnemyRespawn Enemy =GameObject.Find("SM_Manager").GetComponent<SM_EnemyRespawn>(); //여기부분 일괄수정?
+            SM_EnemyRespawn Enemy = GameObject.Find("SM_Manager_1").GetComponent<SM_EnemyRespawn>(); //여기부분 일괄수정?
             Enemy.isDie = true;
             currHP = maxHP;
             hpUI.fillAmount = 1;
-            
-            
+
+
 
         }
     }

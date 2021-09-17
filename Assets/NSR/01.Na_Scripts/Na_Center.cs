@@ -19,7 +19,7 @@ public class Na_Center : MonoBehaviour
         }
     }
 
-    public float rotSpeed = 200f;
+    public float rotSpeed = 10;
     float y;
 
     public int chNum;
@@ -40,15 +40,12 @@ public class Na_Center : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxis("Mouse X");
+        float h = Input.GetAxis("Horizontal");
 
-
-        if (Input.GetMouseButton(0))
-            y -= h * rotSpeed * Time.deltaTime;
-
+        y += h * rotSpeed * Time.deltaTime;
         y = Mathf.Clamp(y, 0, 160);
 
-        if (Input.GetMouseButtonUp(0))
+        if (h == 0)
         {
 
             float tmp = y;
@@ -64,6 +61,7 @@ public class Na_Center : MonoBehaviour
             }           
 
         }
+
         transform.localEulerAngles = new Vector3(0, y, 0);
 
 

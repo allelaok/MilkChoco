@@ -34,15 +34,15 @@ public class Na_Grenade1 : MonoBehaviour
         {
             if (hitObj.transform.name.Contains("SM"))
             {
-                hitObj.transform.GetComponent<SM_Enemy_Hp>().Damaged(1);
+                hitObj.transform.GetComponent<SM_Enemy_Hp>().Damaged(0.1f);
             }
             else if (hitObj.transform.name.Contains("Na"))
             {
-                hitObj.transform.GetComponent<KH_EnemyHP>().Damaged(1);
+                hitObj.transform.GetComponent<KH_EnemyHP>().Damaged(0.1f);
             }
             else if (hitObj.transform.name.Contains("KH"))
             {
-                hitObj.transform.GetComponent<SM_Enemy_Hp>().Damaged(1);
+                hitObj.transform.GetComponent<SM_Enemy_Hp>().Damaged(0.1f);
             }
 
         }

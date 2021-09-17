@@ -36,7 +36,7 @@ public class KH_GameManager : MonoBehaviour
 
     float currTime;
     float A_currTime;
-    float respawnTime = 4;
+    float respawnTime = 10;
     float ATime;
 
     //Text ChocoCountUI;
@@ -90,8 +90,13 @@ public class KH_GameManager : MonoBehaviour
         {
             enemyStart[numbers[i]].SetActive(false);
             i++;
+            if (i == 4)
+            {
+                print("끝"); //여기다 씬 넣어야하나
+            }
             enemyStart[numbers[i]].SetActive(true);
             isChoco = false;
+
 
 
             //초코 컨테이너 계속 채워야한다
