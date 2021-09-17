@@ -5,7 +5,7 @@ using UnityEngine;
 public class SM_Enemy_M : MonoBehaviour
 {
     public GameObject enemy;
-    public GameObject respawnPoints;
+    public GameObject respawnPoint;
     SM_Enemy_Hp hpScript;
 
     float currTime;
@@ -14,7 +14,7 @@ public class SM_Enemy_M : MonoBehaviour
     void Start()
     {
         hpScript = GetComponentInChildren<SM_Enemy_Hp>();
-        enemy.transform.position = respawnPoints.transform.position;
+        enemy.transform.position = respawnPoint.transform.position;
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class SM_Enemy_M : MonoBehaviour
             currTime += Time.deltaTime;
             if(currTime > respawnTime)
             {
-                enemy.transform.position = respawnPoints.transform.position;
+                enemy.transform.position = respawnPoint.transform.position;
                 enemy.SetActive(true);
                 hpScript.isDie = false;
                 currTime = 0;

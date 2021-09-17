@@ -286,4 +286,12 @@ public class SM_Enemy_A : MonoBehaviour
 
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name.Contains("FallZone"))
+        {
+            transform.position = GetComponentInParent<SM_Enemy_M>().respawnPoint.transform.position;
+        }
+    }
 }
