@@ -79,6 +79,7 @@ public class Na_Player : MonoBehaviour
 
         bulletCountUI = GameObject.Find("BulletCount").GetComponent<Text>();
         milkCntUI = GameObject.Find("MilkCount").GetComponent<Text>();
+        milkCnyIMG = GameObject.Find("MilkCountIMG").GetComponent<Image>();
         dieCountUI = GameObject.Find("DieCount");
         dieCountBGUI = GameObject.Find("DieCountBG");
         dieCnt = dieCountUI.GetComponent<Text>();
@@ -822,9 +823,11 @@ public class Na_Player : MonoBehaviour
     public GameObject[] milkContainer;
     int milkCount;
     Text milkCntUI;
+    Image milkCnyIMG;
     void Milk()
     {
         milkCntUI.text = milkCount + "";
+        milkCnyIMG.fillAmount = milkCount / 4;
         if (isMilk != null)
             isMilk.transform.position = milkPos.transform.position;
 
