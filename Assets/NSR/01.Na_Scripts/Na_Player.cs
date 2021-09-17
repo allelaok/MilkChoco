@@ -100,7 +100,6 @@ public class Na_Player : MonoBehaviour
         scopeUI.SetActive(false);
         ReloadUI.SetActive(false);
         ReloadBgUI.SetActive(false);
-        fire.SetActive(false);
 
         // damage 투명도 으로
         iTween.ColorTo(damage, iTween.Hash("a", 0f, "time", 0f));
@@ -350,9 +349,13 @@ public class Na_Player : MonoBehaviour
             }
             else if (weaponIdx == 0)
             {
-                weapons[0].SetActive(false);
+                fire.SetActive(false);
+                line.SetActive(false);
+                anim.SetBool("isShot", false);
                 firePower = ShortFirePower;
+                weapons[0].SetActive(false);
                 fireTime = 1;
+                fireCurrTime = fireTime;
                 crossroad = 15;
                 weight = 0;
                 weapons[1].SetActive(true);
@@ -605,7 +608,7 @@ public class Na_Player : MonoBehaviour
         // 반동 후 원래 위치로
         myCamera.localPosition = Vector3.Lerp(myCamera.localPosition, aimingPoint.transform.localPosition, Time.deltaTime * reboundTime);
         //LineRenderer lr = null;
-        if (!isReload)
+        if (!isReload && !isSwap)
         {
 
             Ray ray = new Ray();
@@ -634,8 +637,7 @@ public class Na_Player : MonoBehaviour
                         }
                         // 근거리
                         else
-                        {
-
+                        {                          
                             anim.SetTrigger("doSwing");
                         }
                         fireCurrTime = 0;
