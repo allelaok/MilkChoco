@@ -11,29 +11,26 @@ public class SM_StartScene : MonoBehaviour
 {
     PlayableDirector pd;
 
-    public GameObject gameStart;
+    public GameObject sceneSkip;
 
-    public GameObject gameExit;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         pd = GetComponent<PlayableDirector>();
     }
-
+    public void OnClickButton()
+    {
+        pd.time = 20;
+    }
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetButtonDown("Fire1"))
-        {
-            pd.time = 20;
-        }
+       
+
+
         
-
-        //void OnClickButton()
-        //{
-
-        //}
 
         //void OnClickButton()
         //{
