@@ -93,6 +93,7 @@ public class KH_GameManager : MonoBehaviour
             if (i == 2)
             {
                 print("끝"); //여기다 씬 넣어야하나
+                SceneManager.LoadScene("SM_ResultSceneLose");
             }
             enemyStart[numbers[i]].SetActive(true);
             isChoco = false;
