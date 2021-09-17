@@ -36,4 +36,8 @@ public class KH_StartSceneM : MonoBehaviour
     {
         Application.Quit();
     }
+    public void OnClickCharacterScene()
+    {
+        SceneManager.LoadScene("Characters");
+    }
 }
