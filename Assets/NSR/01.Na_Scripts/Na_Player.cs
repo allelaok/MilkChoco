@@ -829,7 +829,7 @@ public class Na_Player : MonoBehaviour
 
         if (milkCount == 2)
         {
-            SceneManager.LoadScene("Na_EndScene");
+            SceneManager.LoadScene("SM_ResultSceneWin");
         }
     }
 
