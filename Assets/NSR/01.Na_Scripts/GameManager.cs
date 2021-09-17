@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
         if (playTimeS == 0 && playTimeM == 0)
         {
-            SceneManager.LoadScene("Na_LoseScene");
+            SceneManager.LoadScene("SM_ResultSceneLose");
         }
     }
 

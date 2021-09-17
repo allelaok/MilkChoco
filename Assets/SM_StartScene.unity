@@ -7855,7 +7855,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1545347437}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1809759515}
+        m_TargetAssemblyTypeName: Na_StartBtn, Assembly-CSharp
+        m_MethodName: StartBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1545347437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7976,8 +7988,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556303953}
-  m_LocalRotation: {x: 0.26651883, y: -0.84760076, z: 0.2665188, w: 0.29724896}
-  m_LocalPosition: {x: 11.53, y: 2.3999996, z: 68.1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.55, y: 2.3000002, z: 84.17125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9283,6 +9295,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 226470231553881133, guid: fe0d0732d6c78c44ab98dc898e06e1ca, type: 3}
   m_PrefabInstance: {fileID: 4839369393192569389}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1809759514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1809759516}
+  - component: {fileID: 1809759515}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1809759515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809759514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e83a3ed9b77284db501fee5b9a3cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1809759516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809759514}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1823019259
 GameObject:
   m_ObjectHideFlags: 0
@@ -12021,7 +12076,6 @@ GameObject:
   - component: {fileID: 7039085729776242546}
   - component: {fileID: 7039085729776242547}
   - component: {fileID: 7039085729776242544}
-  - component: {fileID: 7039085729776242548}
   - component: {fileID: 1679760500}
   m_Layer: 0
   m_Name: Enemy2
@@ -12079,35 +12133,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7039085729776242548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7039085729776242545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf41167dcce32e747a71261fa2f6fb08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletFactory: {fileID: 3171132558250303571, guid: a1ebcc35e0f207f4a933bb553b8a2da8, type: 3}
-  firePos: {fileID: 7039085730695400045}
-  target: {fileID: 0}
-  pos1: {fileID: 0}
-  pos2: {fileID: 0}
-  rotSpeed: 10
-  aimingPoint: {fileID: 7039085730695400044}
-  fireTime: 0.1
-  LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
-  animator: {fileID: 0}
-  IdleDelayTime: 2
-  wayPoint1: {fileID: 0}
-  wayPoint2: {fileID: 0}
-  currentWayPoint: {fileID: 0}
-  knockbackSpeed: 10
-  downSpeed: 2
-  AttackRange: 15
 --- !u!4 &7039085729776242549
 Transform:
   m_ObjectHideFlags: 0
@@ -12149,7 +12174,6 @@ GameObject:
   - component: {fileID: 7039085730049414914}
   - component: {fileID: 7039085730049414915}
   - component: {fileID: 7039085730049414912}
-  - component: {fileID: 7039085730049414916}
   - component: {fileID: 366429188}
   m_Layer: 0
   m_Name: Enemy1
@@ -12207,35 +12231,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7039085730049414916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7039085730049414913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf41167dcce32e747a71261fa2f6fb08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletFactory: {fileID: 3171132558250303571, guid: a1ebcc35e0f207f4a933bb553b8a2da8, type: 3}
-  firePos: {fileID: 7039085729331712541}
-  target: {fileID: 0}
-  pos1: {fileID: 0}
-  pos2: {fileID: 0}
-  rotSpeed: 10
-  aimingPoint: {fileID: 7039085729331712540}
-  fireTime: 0.1
-  LineRay: {fileID: 2138221835935680758, guid: 122540ed31d6f5643b471b64612a473b, type: 3}
-  animator: {fileID: 0}
-  IdleDelayTime: 2
-  wayPoint1: {fileID: 0}
-  wayPoint2: {fileID: 0}
-  currentWayPoint: {fileID: 0}
-  knockbackSpeed: 10
-  downSpeed: 2
-  AttackRange: 15
 --- !u!4 &7039085730049414917
 Transform:
   m_ObjectHideFlags: 0
