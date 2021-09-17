@@ -70,7 +70,7 @@ public class SM_Enemy_A : MonoBehaviour
     }
 
     
-    public GameObject target;
+    GameObject target;
     public float speed;
     public float rotSpeed = 5;
 
@@ -79,11 +79,12 @@ public class SM_Enemy_A : MonoBehaviour
 
 
 
-    public float detectRange;
+    float detectRange = 10;
     float currentTime;
     private void Idle()
     {
         m_state = EnemyState.Idle;
+        anim.SetTrigger("doIdle");
 
         float distance = Vector3.Distance(target.transform.position, transform.position);
         if (distance < detectRange)
@@ -91,6 +92,7 @@ public class SM_Enemy_A : MonoBehaviour
             m_state = EnemyState.Move;
             anim.SetTrigger("isWalk");
         }
+
     }
 
     private void Move()
@@ -115,6 +117,10 @@ public class SM_Enemy_A : MonoBehaviour
             m_state = EnemyState.Attack;
             currentTime = attackDelayTime;
         }
+        if(distance >= detectRange)
+        {
+            m_state = EnemyState.Idle;
+        }
     }
 
     public float attackDelayTime = 2;
@@ -135,11 +141,11 @@ public class SM_Enemy_A : MonoBehaviour
             currentTime += Time.deltaTime;
             if(currentTime > 2)
             {
-                isAttackToWalk = false;
 
                 m_state = EnemyState.Move;
                 anim.SetTrigger("isWalk");
                 Na_Player.instace.Damaged(10);
+                isAttackToWalk = false;
             }
             return;
         }

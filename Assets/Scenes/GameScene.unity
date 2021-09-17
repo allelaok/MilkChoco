@@ -6465,10 +6465,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
   speed: 10
   rotSpeed: 5
-  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -8229,10 +8227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
   speed: 10
   rotSpeed: 5
-  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
@@ -29572,10 +29568,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rand_dir: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
   speed: 10
   rotSpeed: 5
-  detectRange: 50
   attackDelayTime: 2
   attackRange: 2
   damageDelayTime: 2
