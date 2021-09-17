@@ -12770,7 +12770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d63dda1807bc94eb33a60effa75346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: 500
+  rotSpeed: 50
   chNum: 0
   chStat: 00000000000000000000000000000000
   nameUI: {fileID: 2077293493}
