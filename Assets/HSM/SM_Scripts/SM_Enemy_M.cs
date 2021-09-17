@@ -9,7 +9,7 @@ public class SM_Enemy_M : MonoBehaviour
     SM_Enemy_Hp hpScript;
 
     float currTime;
-    float respawnTime = 5;
+    float respawnTime = 10;
     // Start is called before the first frame update
     void Start()
     {
