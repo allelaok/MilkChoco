@@ -43,4 +43,9 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Na_LoseScene");
         }
     }
+
+    public void ExitBt()
+    {
+        SceneManager.LoadScene("Characters");
+    }
 }
