@@ -27,4 +27,17 @@ public class KH_StartSceneM : MonoBehaviour
     {
         Manual.SetActive(false);
     }
+
+    public void OnClickGameStart()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+    public void OnClickGameExit()
+    {
+        Application.Quit();
+    }
+    public void OnClickCharacterScene()
+    {
+        SceneManager.LoadScene("Characters");
+    }
 }
