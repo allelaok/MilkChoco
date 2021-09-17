@@ -64,7 +64,8 @@ public class Na_Player : MonoBehaviour
         maxHP = Na_Center.instance.chStat[0];
         longFirePower = longFirePower * Na_Center.instance.chStat[1] * 0.01f;
         ShortFirePower = ShortFirePower * Na_Center.instance.chStat[1] * 0.01f;
-        jumpPower = jumpPower * Na_Center.instance.chStat[2] * 0.01f;
+        jumpPower = jumpPower * Na_Center.instance.chStat[2] * 0.01f / (Na_Center.instance.chStat[3] * 0.01f);
+        jumpZonePower = jumpZonePower / (Na_Center.instance.chStat[3] * 0.01f);
         speed = speed * Na_Center.instance.chStat[3] * 0.01f;
         
         //  현재 hp 를 최대 hp로 초기화
@@ -207,13 +208,13 @@ public class Na_Player : MonoBehaviour
 
     // 플레이어 스페이스바로 1단 점프하고 싶다.
     #region 필요속성 : 점프파워, 중력, y속도, 점프횟수, 최대 점프 가능 횟수
-    float jumpPower = 5f;
+    float jumpPower = 3f;
     float yVelocity;
     float gravity = 7f;
     int jumpCount;
     int MaxJumpCount = 1;
     bool isJumpZone;
-    float jumpZonePower = 9f;
+    float jumpZonePower = 6f;
     bool isJump;
     #endregion
     void Jump(out float dirY)
