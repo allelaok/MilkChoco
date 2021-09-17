@@ -163,7 +163,6 @@ public class Na_Player : MonoBehaviour
 
     // 플레이어 W, S, A, D 로 이동하고 싶다.   
     # region 필요속성 : 속도, CharacterController, 방향    
-    [HideInInspector]
     public float speed = 10f;
     CharacterController cc;
     [HideInInspector]
@@ -828,7 +827,7 @@ public class Na_Player : MonoBehaviour
         if (isMilk != null)
             isMilk.transform.position = milkPos.transform.position;
 
-        if (milkCount == 4)
+        if (milkCount == 2)
         {
             SceneManager.LoadScene("Na_EndScene");
         }

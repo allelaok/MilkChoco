@@ -1226,7 +1226,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 400ecfc63a4bc194cbbf8f7b244d3f22, type: 3}
   - {fileID: 8300000, guid: da285d991368b63469ec8218af305c66, type: 3}
   isDontRot: 0
-  speed: 7
+  speed: 10
   dir: {x: 0, y: 0, z: 0}
   runSound: {fileID: 5837305030907589155}
   isDodge: 0
