@@ -66,6 +66,6 @@ public class SM_ResultManager : MonoBehaviour
     public void OnClickMain()
     {
         //GameScene으로 전환
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("StartScene");
     }
 }
