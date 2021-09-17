@@ -90,7 +90,7 @@ public class KH_GameManager : MonoBehaviour
         {
             enemyStart[numbers[i]].SetActive(false);
             i++;
-            if (i == 4)
+            if (i == 2)
             {
                 print("끝"); //여기다 씬 넣어야하나
             }
@@ -134,7 +134,7 @@ public class KH_GameManager : MonoBehaviour
         ChocoCountUI.text = chocoCount + "";
         if(chocoCount == 4)
         {
-            print("끝");
+            //print("끝");
             //SceneManager.LoadScene(""); @@@@@@@@@@@ 성공씬넣는다...
         }
         //Na_Player.instace.weaponIdx 멀리 돌아간 KH
