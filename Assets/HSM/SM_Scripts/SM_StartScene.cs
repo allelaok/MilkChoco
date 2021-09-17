@@ -28,7 +28,10 @@ public class SM_StartScene : MonoBehaviour
     void Update()
     {
        
-
+        if(pd.time == 200)
+        {
+            pd.time = 20;
+        }
 
         
 
