@@ -139,7 +139,7 @@ public class SM_Enemy_A : MonoBehaviour
 
                 m_state = EnemyState.Move;
                 anim.SetTrigger("isWalk");
-                Na_Player.instace.Damaged(20);
+                Na_Player.instace.Damaged(10);
             }
             return;
         }

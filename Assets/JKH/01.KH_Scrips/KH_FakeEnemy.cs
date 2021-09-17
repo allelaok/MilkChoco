@@ -360,7 +360,7 @@ public class KH_FakeEnemy : MonoBehaviour
                     lr.SetPosition(0, transform.position);
                     lr.SetPosition(1, hitInfo.point);
                     Destroy(line, 0.1f);
-                    hitInfo.transform.gameObject.GetComponent<Na_Player>().Damaged(10f);
+                    hitInfo.transform.gameObject.GetComponent<Na_Player>().Damaged(5f);
                     currTime = 0;
                 }
 
