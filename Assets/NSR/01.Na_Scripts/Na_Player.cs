@@ -481,6 +481,7 @@ public class Na_Player : MonoBehaviour
             //enemyCam = null;
             reCurrTime = 0;
             count = 0;
+            before = 11;
             
             isDie = false;
         }
