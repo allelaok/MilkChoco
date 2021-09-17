@@ -132,6 +132,10 @@ public class Na_Player : MonoBehaviour
         if (isDie)
         { 
             Respawn();
+            grenadeTime = 3;
+            grenadeUI.fillAmount = grenadeTime / 3;
+            dodgeCoolTime = 10;
+            DodgeUI.fillAmount = 1;
             currTime += Time.deltaTime;
             if (currTime > respawnTime - 1)
             {
@@ -487,6 +491,7 @@ public class Na_Player : MonoBehaviour
             reCurrTime = 0;
             count = 0;
             before = 11;
+            
             
             isDie = false;
         }
