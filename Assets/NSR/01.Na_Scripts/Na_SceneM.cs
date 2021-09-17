@@ -10,4 +10,9 @@ public class Na_SceneM : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
+
+    public void Exit()
+    {
+        SceneManager.LoadScene("SM_StartScene");
+    }
 }

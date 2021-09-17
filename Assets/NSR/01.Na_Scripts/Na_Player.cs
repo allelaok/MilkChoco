@@ -135,6 +135,7 @@ public class Na_Player : MonoBehaviour
             currTime += Time.deltaTime;
             if (currTime > respawnTime - 1)
             {
+                currHP = maxHP;
                 isDontRot = true;
                 anim.SetTrigger("doIdle");
                 transform.position = startPos.transform.position;
@@ -157,6 +158,7 @@ public class Na_Player : MonoBehaviour
             Rotate();
   
         }
+        hpUI.fillAmount = currHP / maxHP;
         print("¿Â¿¸¡ﬂ : " + isReload);
     }
 
