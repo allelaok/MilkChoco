@@ -358,7 +358,7 @@ public class KH_EnemyAttackMove : MonoBehaviour
                 {
                     GameObject line = Instantiate(LineRay);
                     lr = line.GetComponent<LineRenderer>();
-                    lr.SetPosition(0, transform.position);
+                    lr.SetPosition(0, aimingPoint.position);
                     lr.SetPosition(1, hitInfo.point);
                     Destroy(line, 0.1f);
                     hitInfo.transform.gameObject.GetComponent<Na_Player>().Damaged(10f);
